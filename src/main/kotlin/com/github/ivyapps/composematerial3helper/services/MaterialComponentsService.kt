@@ -13,7 +13,8 @@ class MaterialComponentsService(project: Project) {
             group("Buttons") {
                 component(
                     name = "Elevated Button",
-                    url = "https://m3.material.io/components/buttons/guidelines#4e89da4d-a8fa-4e20-bb8d-b8a93eff3e3e",
+                    guidelines = "https://m3.material.io/components/buttons/guidelines#4e89da4d-a8fa-4e20-bb8d-b8a93eff3e3e",
+                    spec = "https://m3.material.io/components/buttons/specs#2a19e853-d5dc-46a2-8ef4-1d954c9dcefa",
                     description = """
                         Elevated buttons are essentially filled tonal buttons with a shadow. 
                         To prevent shadow creep, only use them when absolutely necessary, 
@@ -29,12 +30,12 @@ class MaterialComponentsService(project: Project) {
                         ) { 
                             Text("Elevated Button") 
                         }
-                    """.trimIndent()
+                    """.trimIndent(),
                 )
 
                 component(
                     name = "Filled Button",
-                    url = "https://m3.material.io/components/buttons/guidelines#9ecffdb3-ef29-47e7-8d5d-f78b404fcafe",
+                    guidelines = "https://m3.material.io/components/buttons/guidelines#9ecffdb3-ef29-47e7-8d5d-f78b404fcafe",
                     description = """
                         Filled buttons have the most visual impact after the FAB, 
                         and should be used for important, final actions that complete a flow, 
@@ -55,7 +56,7 @@ class MaterialComponentsService(project: Project) {
 
                 component(
                     name = "Filled Tonal Button",
-                    url = "https://m3.material.io/components/buttons/guidelines#07a1577b-aaf5-4824-a698-03526421058b",
+                    guidelines = "https://m3.material.io/components/buttons/guidelines#07a1577b-aaf5-4824-a698-03526421058b",
                     description = """
                         A filled tonal button is an alternative middle ground between filled and outlined
                          buttons. They’re useful in contexts where a lower-priority button 
@@ -77,7 +78,7 @@ class MaterialComponentsService(project: Project) {
 
                 component(
                     name = "Outlined Button",
-                    url = "https://m3.material.io/components/buttons/guidelines#3742b09f-c224-43e0-a83e-541bd29d0f05",
+                    guidelines = "https://m3.material.io/components/buttons/guidelines#3742b09f-c224-43e0-a83e-541bd29d0f05",
                     description = """
                         Outlined buttons are medium-emphasis buttons. They contain actions that are important, but aren’t the primary action in an app.
 
@@ -98,7 +99,7 @@ class MaterialComponentsService(project: Project) {
 
                 component(
                     name = "Text Button",
-                    url = "https://m3.material.io/components/buttons/guidelines#c9bcbc0b-ee05-45ad-8e80-e814ae919fbb",
+                    guidelines = "https://m3.material.io/components/buttons/guidelines#c9bcbc0b-ee05-45ad-8e80-e814ae919fbb",
                     description = """
                         Text buttons are used for the lowest priority actions, especially when presenting multiple options.
 
@@ -121,7 +122,7 @@ class MaterialComponentsService(project: Project) {
             group("Navigation") {
                 component(
                     name = "Filled Button",
-                    url = "https://google.com",
+                    guidelines = "https://google.com",
                     screenshot = "screenshot1",
                     code = """
                         fun button() {
@@ -132,7 +133,7 @@ class MaterialComponentsService(project: Project) {
 
                 component(
                     name = "Outlined Button",
-                    url = "https://google.com",
+                    guidelines = "https://google.com",
                     screenshot = "screenshot1",
                     code = """
                         fun button() {
@@ -158,18 +159,21 @@ class MaterialComponentsService(project: Project) {
 
     private fun MutableList<MaterialComponent>.component(
         name: String,
-        url: String,
+        guidelines: String,
+        spec: String = guidelines,
         description: String? = null,
         screenshot: String,
         code: String,
+        hasLargeScreenshot: Boolean = false,
     ) {
         add(
             MaterialComponent(
                 name = name,
                 description = description,
-                url = url,
+                guidelinesUrl = guidelines,
+                specUrl = spec,
                 screenshot = screenshot,
-                enlargedScreenshot = screenshot, //"${screenshot}_large",
+                enlargedScreenshot = if (hasLargeScreenshot) "${screenshot}_large" else screenshot,
                 codeSample = code
             )
         )

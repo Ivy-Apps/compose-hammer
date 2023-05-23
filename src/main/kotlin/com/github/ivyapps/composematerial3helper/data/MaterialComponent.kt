@@ -8,7 +8,8 @@ data class MaterialComponentsGroup(
 data class MaterialComponent(
     val name: String,
     val description: String?,
-    val url: String,
+    val guidelinesUrl: String,
+    val specUrl: String,
     val screenshot: String,
     val enlargedScreenshot: String,
     val codeSample: String,

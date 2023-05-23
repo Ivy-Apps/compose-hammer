@@ -13,7 +13,6 @@ import com.intellij.ui.dsl.builder.Panel
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.builder.text
 import java.awt.Component
-import java.awt.Dimension
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 import java.awt.event.MouseEvent
@@ -106,7 +105,11 @@ class MaterialComponentsUi(private val toolWindow: ToolWindow) {
             label = JLabel(ImageIcon(component.enlargedScreenshot.toImagePath()))
         ) {}
         row {
-            browserLink("Material3 website", component.url)
+            browserLink("Guidelines", component.guidelinesUrl)
+            browserLink("Spec", component.specUrl)
+        }
+        row {
+            label("${component.name} implementation").bold()
         }
         var textArea: JBTextArea? = null
         row {
