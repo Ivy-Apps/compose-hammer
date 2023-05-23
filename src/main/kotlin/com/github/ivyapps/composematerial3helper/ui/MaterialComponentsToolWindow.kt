@@ -55,31 +55,45 @@ class MaterialComponentsUi(private val toolWindow: ToolWindow) {
     }
 
     private fun menuUi() = panel {
-        for (component in service.materialComponents) {
-            menuItemUi(component)
-            row { }.cell()
+        for (group in service.content) {
+            collapsibleGroup(
+                title = group.title,
+                indent = true
+            ) {
+                group.components.forEach { component ->
+                    componentUi(component)
+                }
+            }.apply {
+                expanded = true
+            }
         }
     }
 
-    private fun Panel.menuItemUi(component: MaterialComponent) {
-        row(
-            label = JLabel(ImageIcon(component.screenshot.toImagePath())).apply {
-                addOnClickListener {
+    private fun Panel.componentUi(component: MaterialComponent) {
+        group(indent = false) {
+            row(
+                label = JLabel(ImageIcon(component.screenshot.toImagePath())).apply {
+                    addOnClickListener {
+                        navigateToComponent(component)
+                    }
+                }
+            ) {}
+            row {
+                text(component.name).applyToComponent {
+                    addOnClickListener {
+                        navigateToComponent(component)
+                    }
+                }.bold()
+                button("View") {
                     navigateToComponent(component)
                 }
             }
-        ) {}
-        row {
-            text(component.name).applyToComponent {
-                addOnClickListener {
-                    navigateToComponent(component)
+            if (component.description != null) {
+                row {
+                    label(component.description)
                 }
-            }.bold()
-            button("View") {
-                navigateToComponent(component)
             }
         }
-        row { }.cell()
     }
 
     private fun detailsUi(component: MaterialComponent): JPanel = panel {
