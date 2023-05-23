@@ -102,6 +102,7 @@ class MaterialComponentsUi(private val toolWindow: ToolWindow) {
         ) {}
         row {
             label("\"${component.name}\" implementation").bold()
+            browserLink("Material3 website", component.url)
         }
         var textArea: JBTextArea? = null
         row {
@@ -113,15 +114,18 @@ class MaterialComponentsUi(private val toolWindow: ToolWindow) {
             button("Back") {
                 navigateToMenu()
             }
-            var copyCounter = 1
+            var copyCounter = 0
             var copiedLabel: JLabel? = null
             button("Copy") {
                 copyToClipboard(textArea?.text ?: component.codeSample)
                 copyCounter++
                 copiedLabel?.isVisible = true
-                copiedLabel?.updateUI()
+                if (copyCounter > 1) {
+                    copiedLabel?.text = "Copied to clipboard! (version $copyCounter)"
+                    copiedLabel?.updateUI()
+                }
             }
-            label("Copied to clipboard! ${if (copyCounter > 1) "(version $copyCounter)" else ""}")
+            label("Copied to clipboard!")
                 .applyToComponent {
                     isVisible = false
                     copiedLabel = this

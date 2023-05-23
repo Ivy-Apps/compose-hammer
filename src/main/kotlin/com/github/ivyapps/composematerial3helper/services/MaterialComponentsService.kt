@@ -13,6 +13,7 @@ class MaterialComponentsService(project: Project) {
             group("Buttons") {
                 component(
                     name = "Filled Button",
+                    url = "https://google.com",
                     description = "Button used for primary CTAs.",
                     screenshot = "screenshot1",
                     code = """
@@ -24,6 +25,7 @@ class MaterialComponentsService(project: Project) {
 
                 component(
                     name = "Outlined Button",
+                    url = "https://google.com",
                     screenshot = "screenshot1",
                     code = """
                         fun button() {
@@ -36,6 +38,7 @@ class MaterialComponentsService(project: Project) {
             group("Navigation") {
                 component(
                     name = "Filled Button",
+                    url = "https://google.com",
                     screenshot = "screenshot1",
                     code = """
                         fun button() {
@@ -46,6 +49,7 @@ class MaterialComponentsService(project: Project) {
 
                 component(
                     name = "Outlined Button",
+                    url = "https://google.com",
                     screenshot = "screenshot1",
                     code = """
                         fun button() {
@@ -71,6 +75,7 @@ class MaterialComponentsService(project: Project) {
 
     private fun MutableList<MaterialComponent>.component(
         name: String,
+        url: String,
         description: String? = null,
         screenshot: String,
         code: String,
@@ -79,6 +84,7 @@ class MaterialComponentsService(project: Project) {
             MaterialComponent(
                 name = name,
                 description = description,
+                url = url,
                 screenshot = screenshot,
                 enlargedScreenshot = "${screenshot}_large",
                 codeSample = code
