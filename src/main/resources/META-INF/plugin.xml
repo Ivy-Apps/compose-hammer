@@ -10,7 +10,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow factoryClass="com.github.ivyapps.composematerial3helper.ui.MaterialComponentsWindowFactory"
-                    id="Compose Material3"
+                    id="Compose Material3 UI"
                     anchor="right"
                     largeStripeAnchor="right"
                     doNotActivateOnStart="false"

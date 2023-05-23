@@ -7,64 +7,123 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.profile.codeInspection.ui.addScrollPaneIfNecessary
-import com.intellij.ui.components.panels.VerticalLayout
+import com.intellij.ui.components.JBTextArea
 import com.intellij.ui.content.ContentFactory
-import java.awt.BorderLayout
-import java.awt.GridLayout
-import java.awt.event.MouseAdapter
+import com.intellij.ui.dsl.builder.Panel
+import com.intellij.ui.dsl.builder.panel
+import com.intellij.ui.dsl.builder.text
+import java.awt.Component
+import java.awt.Toolkit
+import java.awt.datatransfer.StringSelection
 import java.awt.event.MouseEvent
+import java.awt.event.MouseListener
 import java.net.URL
-import javax.swing.*
+import javax.swing.ImageIcon
+import javax.swing.JLabel
+import javax.swing.JPanel
 
 class MaterialComponentsWindowFactory : ToolWindowFactory {
     private val contentFactory = ContentFactory.SERVICE.getInstance()
 
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
-        val materialComponentsWindow = MaterialComponentsWindow(toolWindow)
-        val content = contentFactory.createContent(
-            materialComponentsWindow.content,
-            "Compose Material3 Helper",
-            false
-        )
-        toolWindow.contentManager.addContent(content)
+        val ui = MaterialComponentsUi(toolWindow)
+        ui.navigateToMenu()
     }
 
     override fun shouldBeAvailable(project: Project) = true
 }
 
-class MaterialComponentsWindow(toolWindow: ToolWindow) {
+
+class MaterialComponentsUi(private val toolWindow: ToolWindow) {
+    private val contentFactory = ContentFactory.SERVICE.getInstance()
     private val service = toolWindow.project.service<MaterialComponentsService>()
 
-    val content = addScrollPaneIfNecessary(menuUi())
+    fun navigateToMenu() {
+        toolWindow.contentManager.removeAllContents(true)
+        toolWindow.contentManager.addContent(
+            contentFactory.createContent(
+                addScrollPaneIfNecessary(menuUi()),
+                "M3 Components",
+                false,
+            )
+        )
+    }
 
-    private fun menuUi(): JPanel {
-        return JPanel(GridLayout(0, 2, 10, 10)).apply {
-            for (component in service.materialComponents) {
-                add(
-                    JPanel(VerticalLayout(0, SwingConstants.CENTER)).apply {
-                        add(JLabel(ImageIcon(component.screenshot.toImagePath())))
-                        add(JLabel(component.name))
+    fun navigateToComponent(component: MaterialComponent) {
+        toolWindow.contentManager.removeAllContents(false)
+        toolWindow.contentManager.addContent(
+            contentFactory.createContent(detailsUi(component), component.name, false)
+        )
+    }
 
-                        addMouseListener(object : MouseAdapter() {
-                            override fun mouseClicked(e: MouseEvent?) {
-                                content.removeAll()
-                                content.add(detailsUi(component))
-                                content.updateUI()
-                            }
-                        })
-                    }
-                )
-            }
+    private fun menuUi() = panel {
+        for (component in service.materialComponents) {
+            menuItemUi(component)
+            row { }.cell()
         }
     }
 
-    fun detailsUi(component: MaterialComponent): JPanel {
-        return JPanel(BorderLayout()).apply {
-            add(JLabel(ImageIcon(component.enlargedScreenshot.toImagePath())), BorderLayout.CENTER)
-            add(JTextArea(component.codeSample).apply { isEditable = false }, BorderLayout.PAGE_END)
+    private fun Panel.menuItemUi(component: MaterialComponent) {
+        row(
+            label = JLabel(ImageIcon(component.screenshot.toImagePath())).apply {
+                addOnClickListener {
+                    navigateToComponent(component)
+                }
+            }
+        ) {}
+        row {
+            text(component.name).applyToComponent {
+                addOnClickListener {
+                    navigateToComponent(component)
+                }
+            }.bold()
+            button("View") {
+                navigateToComponent(component)
+            }
+        }
+        row { }.cell()
+    }
+
+    private fun detailsUi(component: MaterialComponent): JPanel = panel {
+        row(
+            label = JLabel(ImageIcon(component.enlargedScreenshot.toImagePath()))
+        ) {}
+        row {
+            label("\"${component.name}\" implementation").bold()
+        }
+        var textArea: JBTextArea? = null
+        row {
+            textArea().applyToComponent {
+                textArea = this
+            }.text(component.codeSample)
+        }
+        row {
+            button("Back") {
+                navigateToMenu()
+            }
+            var copyCounter = 1
+            var copiedLabel: JLabel? = null
+            button("Copy") {
+                copyToClipboard(textArea?.text ?: component.codeSample)
+                copyCounter++
+                copiedLabel?.isVisible = true
+                copiedLabel?.updateUI()
+            }
+            label("Copied to clipboard! ${if (copyCounter > 1) "(version $copyCounter)" else ""}")
+                .applyToComponent {
+                    isVisible = false
+                    copiedLabel = this
+                }
         }
     }
 }
+
+fun copyToClipboard(content: String) {
+    val selection = StringSelection(content)
+    val clipboard = Toolkit.getDefaultToolkit().systemClipboard
+    clipboard.setContents(selection, selection)
+}
+
 
 fun String.toImagePath(): URL {
     val fullPath = "/images/$this.png"
@@ -73,4 +132,20 @@ fun String.toImagePath(): URL {
         "Couldn't find an image for '$fullPath'"
     }
     return resource
+}
+
+fun Component.addOnClickListener(onClick: () -> Unit) {
+    addMouseListener(object : MouseListener {
+        override fun mouseClicked(p0: MouseEvent?) {
+            onClick()
+        }
+
+        override fun mousePressed(p0: MouseEvent?) {}
+
+        override fun mouseReleased(p0: MouseEvent?) {}
+
+        override fun mouseEntered(p0: MouseEvent?) {}
+
+        override fun mouseExited(p0: MouseEvent?) {}
+    })
 }
