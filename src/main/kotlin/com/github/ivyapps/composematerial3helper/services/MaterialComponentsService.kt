@@ -12,7 +12,7 @@ class MaterialComponentsService(project: Project) {
         buildList {
             group("Buttons") {
                 component(
-                    name  = "Elevated Button",
+                    name = "Elevated Button",
                     url = "https://m3.material.io/components/buttons/guidelines#4e89da4d-a8fa-4e20-bb8d-b8a93eff3e3e",
                     description = """
                         Elevated buttons are essentially filled tonal buttons with a shadow. 
@@ -24,12 +24,16 @@ class MaterialComponentsService(project: Project) {
                         //import androidx.compose.material3.ElevatedButton
                         //import androidx.compose.material3.Text
 
-                        ElevatedButton(onClick = { /* Do something! */ }) { Text("Elevated Button") }
+                        ElevatedButton(
+                            onClick = { /* Do something! */ }
+                        ) { 
+                            Text("Elevated Button") 
+                        }
                     """.trimIndent()
                 )
 
                 component(
-                    name  = "Filled Button",
+                    name = "Filled Button",
                     url = "https://m3.material.io/components/buttons/guidelines#9ecffdb3-ef29-47e7-8d5d-f78b404fcafe",
                     description = """
                         Filled buttons have the most visual impact after the FAB, 
@@ -41,12 +45,16 @@ class MaterialComponentsService(project: Project) {
                         //import androidx.compose.material3.Button
                         //import androidx.compose.material3.Text
 
-                        Button(onClick = { /* Do something! */ }) { Text("Button") }
+                        Button(
+                            onClick = { /* Do something! */ }
+                        ) { 
+                            Text("Button") 
+                        }
                     """.trimIndent()
                 )
 
                 component(
-                    name  = "Filled Tonal Button",
+                    name = "Filled Tonal Button",
                     url = "https://m3.material.io/components/buttons/guidelines#07a1577b-aaf5-4824-a698-03526421058b",
                     description = """
                         A filled tonal button is an alternative middle ground between filled and outlined
@@ -59,12 +67,16 @@ class MaterialComponentsService(project: Project) {
                         //import androidx.compose.material3.FilledTonalButton
                         //import androidx.compose.material3.Text
 
-                        FilledTonalButton(onClick = { /* Do something! */ }) { Text("Filled Tonal Button") }
+                        FilledTonalButton(
+                            onClick = { /* Do something! */ }
+                        ) { 
+                            Text("Filled Tonal Button") 
+                        }
                     """.trimIndent()
                 )
 
                 component(
-                    name  = "Outlined Button",
+                    name = "Outlined Button",
                     url = "https://m3.material.io/components/buttons/guidelines#3742b09f-c224-43e0-a83e-541bd29d0f05",
                     description = """
                         Outlined buttons are medium-emphasis buttons. They contain actions that are important, but aren’t the primary action in an app.
@@ -76,12 +88,16 @@ class MaterialComponentsService(project: Project) {
                         //import androidx.compose.material3.OutlinedButton
                         //import androidx.compose.material3.Text
 
-                        OutlinedButton(onClick = { /* Do something! */ }) { Text("Outlined Button") }
+                        OutlinedButton(
+                            onClick = { /* Do something! */ }
+                        ) { 
+                            Text("Outlined Button") 
+                        }
                     """.trimIndent()
                 )
 
                 component(
-                    name  = "Text Button",
+                    name = "Text Button",
                     url = "https://m3.material.io/components/buttons/guidelines#c9bcbc0b-ee05-45ad-8e80-e814ae919fbb",
                     description = """
                         Text buttons are used for the lowest priority actions, especially when presenting multiple options.
@@ -93,7 +109,11 @@ class MaterialComponentsService(project: Project) {
                         //import androidx.compose.material3.Text
                         //import androidx.compose.material3.TextButton
 
-                        TextButton(onClick = { /* Do something! */ }) { Text("Text Button") }
+                        TextButton(
+                            onClick = { /* Do something! */ }
+                        ) { 
+                            Text("Text Button")
+                        }
                     """.trimIndent()
                 )
             }
@@ -149,7 +169,7 @@ class MaterialComponentsService(project: Project) {
                 description = description,
                 url = url,
                 screenshot = screenshot,
-                enlargedScreenshot = "${screenshot}_large",
+                enlargedScreenshot = screenshot, //"${screenshot}_large",
                 codeSample = code
             )
         )
