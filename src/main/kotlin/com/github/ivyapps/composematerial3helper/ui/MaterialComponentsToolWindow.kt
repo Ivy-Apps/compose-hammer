@@ -23,8 +23,6 @@ import javax.swing.JLabel
 import javax.swing.JPanel
 
 class MaterialComponentsWindowFactory : ToolWindowFactory {
-    private val contentFactory = ContentFactory.SERVICE.getInstance()
-
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
         val ui = MaterialComponentsUi(toolWindow)
         ui.navigateToMenu()
