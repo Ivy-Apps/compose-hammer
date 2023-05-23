@@ -8,6 +8,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.ui.components.JBScrollPane
+import com.intellij.ui.components.panels.VerticalLayout
 import com.intellij.ui.content.ContentFactory
 import java.awt.BorderLayout
 import java.awt.GridLayout
@@ -18,6 +19,7 @@ import javax.swing.ImageIcon
 import javax.swing.JLabel
 import javax.swing.JPanel
 import javax.swing.JTextArea
+import javax.swing.SwingConstants
 
 
 fun materialComponents() = List(size = 20) {
@@ -60,11 +62,9 @@ class MyToolWindowFactory : ToolWindowFactory {
             val mainPanel = JPanel(GridLayout(0, 2, 10, 10)).apply {
                 for (component in materialComponents) {
                     add(
-                        JPanel(BorderLayout()).apply {
-                            add(JLabel(ImageIcon(component.screenshot.toImagePath())), BorderLayout.CENTER).apply {
-                                isVisible = true
-                            }
-                            add(JLabel(component.name), BorderLayout.CENTER)
+                        JPanel(VerticalLayout(0, SwingConstants.CENTER)).apply {
+                            add(JLabel(ImageIcon(component.screenshot.toImagePath())))
+                            add(JLabel(component.name))
 
                             addMouseListener(object : MouseAdapter() {
                                 override fun mouseClicked(e: MouseEvent?) {
