@@ -50,7 +50,11 @@ class MaterialComponentsUi(private val toolWindow: ToolWindow) {
     fun navigateToComponent(component: MaterialComponent) {
         toolWindow.contentManager.removeAllContents(false)
         toolWindow.contentManager.addContent(
-            contentFactory.createContent(detailsUi(component), component.name, false)
+            contentFactory.createContent(
+                addScrollPaneIfNecessary(componentDetailsUi(component)),
+                component.name,
+                false
+            )
         )
     }
 
@@ -96,7 +100,7 @@ class MaterialComponentsUi(private val toolWindow: ToolWindow) {
         }
     }
 
-    private fun detailsUi(component: MaterialComponent): JPanel = panel {
+    private fun componentDetailsUi(component: MaterialComponent): JPanel = panel {
         row(
             label = JLabel(ImageIcon(component.enlargedScreenshot.toImagePath()))
         ) {}
