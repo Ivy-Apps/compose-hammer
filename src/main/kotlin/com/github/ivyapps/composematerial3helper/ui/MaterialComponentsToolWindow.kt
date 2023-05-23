@@ -6,7 +6,7 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowFactory
-import com.intellij.ui.components.JBScrollPane
+import com.intellij.profile.codeInspection.ui.addScrollPaneIfNecessary
 import com.intellij.ui.components.panels.VerticalLayout
 import com.intellij.ui.content.ContentFactory
 import java.awt.BorderLayout
@@ -23,7 +23,6 @@ class MaterialComponentsWindowFactory : ToolWindowFactory {
         val materialComponentsWindow = MaterialComponentsWindow(toolWindow)
         val content = contentFactory.createContent(
             materialComponentsWindow.content,
-
             "Compose Material3 Helper",
             false
         )
@@ -36,7 +35,7 @@ class MaterialComponentsWindowFactory : ToolWindowFactory {
 class MaterialComponentsWindow(toolWindow: ToolWindow) {
     private val service = toolWindow.project.service<MaterialComponentsService>()
 
-    val content = JBScrollPane(menuUi())
+    val content = addScrollPaneIfNecessary(menuUi())
 
     private fun menuUi(): JPanel {
         return JPanel(GridLayout(0, 2, 10, 10)).apply {
