@@ -9,10 +9,16 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.iliyangermanov.composematerial3helperplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+        <toolWindow factoryClass="com.github.iliyangermanov.composematerial3helperplugin.toolWindow.MyToolWindowFactory"
+                    id="MyToolWindow"
+                    anchor="right"
+                    largeStripeAnchor="right"
+                    doNotActivateOnStart="false"
+                    secondary="true"/>
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.iliyangermanov.composematerial3helperplugin.listeners.MyFrameStateListener" topic="com.intellij.ide.FrameStateListener"/>
+        <listener class="com.github.iliyangermanov.composematerial3helperplugin.listeners.MyFrameStateListener"
+                  topic="com.intellij.ide.FrameStateListener"/>
     </applicationListeners>
 </idea-plugin>

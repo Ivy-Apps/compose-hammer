@@ -1,17 +1,36 @@
 package com.github.iliyangermanov.composematerial3helperplugin.toolWindow
 
+import com.github.iliyangermanov.composematerial3helperplugin.data.MaterialComponent
+import com.github.iliyangermanov.composematerial3helperplugin.services.MyProjectService
 import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowFactory
-import com.intellij.ui.components.JBLabel
-import com.intellij.ui.components.JBPanel
+import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.content.ContentFactory
-import com.github.iliyangermanov.composematerial3helperplugin.MyBundle
-import com.github.iliyangermanov.composematerial3helperplugin.services.MyProjectService
-import javax.swing.JButton
+import java.awt.BorderLayout
+import java.awt.GridLayout
+import java.awt.event.MouseAdapter
+import java.awt.event.MouseEvent
+import javax.swing.ImageIcon
+import javax.swing.JLabel
+import javax.swing.JPanel
+import javax.swing.JTextArea
 
+
+fun materialComponents() = List(size = 20) {
+    MaterialComponent(
+        name = "Component $it",
+        screenshot = "screenshot1.png",
+        enlargedScreenshot = "screenshot1.png",
+        codeSample = """
+            fun main() {
+                println("Hello, world!")
+            }
+        """.trimIndent()
+    )
+}
 
 class MyToolWindowFactory : ToolWindowFactory {
 
@@ -23,25 +42,49 @@ class MyToolWindowFactory : ToolWindowFactory {
 
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
         val myToolWindow = MyToolWindow(toolWindow)
-        val content = contentFactory.createContent(myToolWindow.getContent(), null, false)
+        val content = contentFactory.createContent(myToolWindow.getContent(), "Iliyan's Plugin", false)
         toolWindow.contentManager.addContent(content)
     }
 
     override fun shouldBeAvailable(project: Project) = true
 
     class MyToolWindow(toolWindow: ToolWindow) {
-
         private val service = toolWindow.project.service<MyProjectService>()
 
-        fun getContent() = JBPanel<JBPanel<*>>().apply {
-            val label = JBLabel(MyBundle.message("randomLabel", "?"))
+        fun getContent() = mainUi(materialComponents())
 
-            add(label)
-            add(JButton(MyBundle.message("shuffle")).apply {
-                addActionListener {
-                    label.text = MyBundle.message("randomLabel", service.getRandomNumber())
+        private fun mainUi(
+            materialComponents: List<MaterialComponent>
+        ): JBScrollPane {
+            val mainPanel = JPanel(GridLayout(0, 2, 10, 10)).apply {
+                for (component in materialComponents) {
+                    add(
+                        JPanel(BorderLayout()).apply {
+                            add(JLabel(ImageIcon(component.screenshot.toImagePath())), BorderLayout.CENTER)
+                            add(JLabel(component.name), BorderLayout.CENTER)
+
+                            addMouseListener(object : MouseAdapter() {
+                                override fun mouseClicked(e: MouseEvent?) {
+                                    showComponentDetails(component)
+                                }
+                            })
+                        }
+                    )
                 }
-            })
+            }
+
+            return JBScrollPane(mainPanel)
         }
+
+        fun showComponentDetails(component: MaterialComponent) {
+            val detailsPanel = JPanel(BorderLayout()).apply {
+                add(JLabel(ImageIcon(component.enlargedScreenshot.toImagePath())), BorderLayout.CENTER)
+                add(JTextArea(component.codeSample).apply { isEditable = false }, BorderLayout.PAGE_END)
+
+                // Code to show detailsPanel goes here
+            }
+        }
+
+        private fun String.toImagePath() = "images/$this"
     }
 }
