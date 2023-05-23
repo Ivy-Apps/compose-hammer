@@ -13,6 +13,7 @@ import java.awt.BorderLayout
 import java.awt.GridLayout
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
+import java.net.URL
 import javax.swing.ImageIcon
 import javax.swing.JLabel
 import javax.swing.JPanel
@@ -22,8 +23,8 @@ import javax.swing.JTextArea
 fun materialComponents() = List(size = 20) {
     MaterialComponent(
         name = "Component $it",
-        screenshot = "screenshot1.png",
-        enlargedScreenshot = "screenshot1.png",
+        screenshot = "screenshot1",
+        enlargedScreenshot = "screenshot1",
         codeSample = """
             fun main() {
                 println("Hello, world!")
@@ -60,7 +61,9 @@ class MyToolWindowFactory : ToolWindowFactory {
                 for (component in materialComponents) {
                     add(
                         JPanel(BorderLayout()).apply {
-                            add(JLabel(ImageIcon(component.screenshot.toImagePath())), BorderLayout.CENTER)
+                            add(JLabel(ImageIcon(component.screenshot.toImagePath())), BorderLayout.CENTER).apply {
+                                isVisible = true
+                            }
                             add(JLabel(component.name), BorderLayout.CENTER)
 
                             addMouseListener(object : MouseAdapter() {
@@ -85,6 +88,14 @@ class MyToolWindowFactory : ToolWindowFactory {
             }
         }
 
-        private fun String.toImagePath() = "images/$this"
+        private fun String.toImagePath(): URL {
+            val fullPath = "/images/$this.png"
+            val resource = MyToolWindowFactory::class.java.getResource(fullPath)
+            requireNotNull(resource) {
+                "Couldn't find an image for '$fullPath'"
+            }
+            return resource
+        }
+
     }
 }
