@@ -1,4 +1,4 @@
-package com.github.iliyangermanov.composematerial3helperplugin
+package com.github.ivyapps.composematerial3helper
 
 import com.intellij.ide.highlighter.XmlFileType
 import com.intellij.openapi.components.service
@@ -6,7 +6,7 @@ import com.intellij.psi.xml.XmlFile
 import com.intellij.testFramework.TestDataPath
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import com.intellij.util.PsiErrorElementUtil
-import com.github.iliyangermanov.composematerial3helperplugin.services.MyProjectService
+import com.github.ivyapps.composematerial3helper.services.MaterialComponentsService
 
 @TestDataPath("\$CONTENT_ROOT/src/test/testData")
 class MyPluginTest : BasePlatformTestCase() {
@@ -30,7 +30,7 @@ class MyPluginTest : BasePlatformTestCase() {
     }
 
     fun testProjectService() {
-        val projectService = project.service<MyProjectService>()
+        val projectService = project.service<MaterialComponentsService>()
 
         assertNotSame(projectService.getRandomNumber(), projectService.getRandomNumber())
     }

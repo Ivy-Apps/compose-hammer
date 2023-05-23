@@ -1,4 +1,4 @@
-package com.github.iliyangermanov.composematerial3helperplugin.listeners
+package com.github.ivyapps.composematerial3helper.listeners
 
 import com.intellij.ide.FrameStateListener
 import com.intellij.openapi.diagnostic.thisLogger

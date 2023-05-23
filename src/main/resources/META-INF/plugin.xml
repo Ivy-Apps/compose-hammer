@@ -1,15 +1,15 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.iliyangermanov.composematerial3helperplugin</id>
-    <name>compose-material3-helper-plugin Template</name>
-    <vendor>iliyangermanov</vendor>
+    <id>com.github.ivyapps.composematerial3helper</id>
+    <name>Compose Material3 UI Generator</name>
+    <vendor>ivyapps</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.iliyangermanov.composematerial3helperplugin.toolWindow.MyToolWindowFactory"
+        <toolWindow factoryClass="com.github.ivyapps.composematerial3helper.ui.MaterialComponentsWindowFactory"
                     id="MyToolWindow"
                     anchor="right"
                     largeStripeAnchor="right"
@@ -18,7 +18,7 @@
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.iliyangermanov.composematerial3helperplugin.listeners.MyFrameStateListener"
+        <listener class="com.github.ivyapps.composematerial3helper.listeners.MyFrameStateListener"
                   topic="com.intellij.ide.FrameStateListener"/>
     </applicationListeners>
 </idea-plugin>
