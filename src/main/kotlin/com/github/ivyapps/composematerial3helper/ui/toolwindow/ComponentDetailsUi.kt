@@ -2,6 +2,7 @@ package com.github.ivyapps.composematerial3helper.ui.toolwindow
 
 import com.github.ivyapps.composematerial3helper.copyToClipboard
 import com.github.ivyapps.composematerial3helper.data.MaterialComponent
+import com.github.ivyapps.composematerial3helper.services.formatText
 import com.github.ivyapps.composematerial3helper.services.importsCode
 import com.github.ivyapps.composematerial3helper.ui.common.image
 import com.intellij.icons.AllIcons
@@ -19,6 +20,9 @@ class ComponentDetailsUi(
     fun ui(component: MaterialComponent): DialogPanel = panel {
         group(indent = true) {
             row {
+                button("Back") {
+                    navigateToMenu()
+                }
                 label(component.name).bold()
             }
             image(component.detailsScreenshot)
@@ -28,7 +32,7 @@ class ComponentDetailsUi(
             }
             if (component.description != null) {
                 row {
-                    label(component.description)
+                    label(component.description.formatText())
                 }
             }
             val importsCode = importsCode(component.imports)
@@ -41,11 +45,6 @@ class ComponentDetailsUi(
             codeArea(
                 title = "Code",
                 code = component.defaultImplementation,
-                backButton = {
-                    button("Back") {
-                        navigateToMenu()
-                    }
-                },
                 tip = component.defaultImplementationTip,
             )
             if (component.customImplementation != null) {
@@ -62,7 +61,6 @@ class ComponentDetailsUi(
     private fun Panel.codeArea(
         title: String?,
         code: String,
-        backButton: Row.() -> Unit = {},
         tip: String? = null,
     ) {
         if (title != null) {
@@ -81,7 +79,6 @@ class ComponentDetailsUi(
                 .comment(tip)
         }
         row {
-            backButton()
             copyButton(code)
         }
     }

@@ -31,7 +31,7 @@ private fun MutableList<MaterialComponentsGroup>.buttons() = group("Buttons") {
             such as when the button requires visual separation from a patterned background.
         """.trimIndent()
         screenshot = "btn_elevated"
-        import = "import androidx.compose.material3.ElevatedButton"
+        import = "androidx.compose.material3.ElevatedButton"
         code = """
         ElevatedButton(
             onClick = {

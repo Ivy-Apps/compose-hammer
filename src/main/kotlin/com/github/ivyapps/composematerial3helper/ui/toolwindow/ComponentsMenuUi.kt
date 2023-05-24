@@ -3,6 +3,7 @@ package com.github.ivyapps.composematerial3helper.ui.toolwindow
 import com.github.ivyapps.composematerial3helper.addOnClickListener
 import com.github.ivyapps.composematerial3helper.data.MaterialComponent
 import com.github.ivyapps.composematerial3helper.services.MaterialComponentsService
+import com.github.ivyapps.composematerial3helper.services.formatText
 import com.github.ivyapps.composematerial3helper.ui.common.image
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.dsl.builder.Panel
@@ -47,7 +48,7 @@ class ComponentsMenuUi(
             }
             if (component.description != null) {
                 row {
-                    label(component.description)
+                    label(text = component.description.formatText())
                 }
             }
         }
