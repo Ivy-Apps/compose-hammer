@@ -74,8 +74,8 @@ private fun MutableList<MaterialComponentsGroup>.buttons() = group("Buttons") {
             "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#Button(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.ButtonColors,androidx.compose.material3.ButtonElevation,androidx.compose.foundation.BorderStroke,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function1)"
         description = """
             Filled buttons have the most visual impact after the FAB,
-            and should be used for important, final actions
-            that complete a flow, like Save, Join now, or Confirm.
+             and should be used for important, final actions
+             that complete a flow, like Save, Join now, or Confirm.
         """.trimIndent()
         screenshot = "btn_filled"
         import = "androidx.compose.material3.Button"
@@ -117,9 +117,9 @@ private fun MutableList<MaterialComponentsGroup>.buttons() = group("Buttons") {
             "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#FilledTonalButton(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.ButtonColors,androidx.compose.material3.ButtonElevation,androidx.compose.foundation.BorderStroke,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function1)"
         description = """
             A filled tonal button is an alternative middle ground between filled and outlined buttons.
-            They’re useful in contexts where a lower-priority button requires slightly more emphasis
-            than an outline would give, such as "Next" in an onboarding flow.
-            Tonal buttons use the secondary color mapping.
+             They’re useful in contexts where a lower-priority button requires slightly more emphasis
+             than an outline would give, such as "Next" in an onboarding flow.
+             Tonal buttons use the secondary color mapping.
         """.trimIndent()
         screenshot = "btn_filled_tonal"
         import = "androidx.compose.material3.FilledTonalButton"
@@ -161,9 +161,9 @@ private fun MutableList<MaterialComponentsGroup>.buttons() = group("Buttons") {
             "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#OutlinedButton(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.ButtonColors,androidx.compose.material3.ButtonElevation,androidx.compose.foundation.BorderStroke,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function1)"
         description = """
             Outlined buttons are medium-emphasis buttons. They contain actions that are important,
-            but aren’t the primary action in an app.
+             but aren’t the primary action in an app.
 
-            Outlined buttons pair well with filled buttons to indicate an alternative, secondary action.
+             Outlined buttons pair well with filled buttons to indicate an alternative, secondary action.
         """.trimIndent()
         screenshot = "btn_outlined"
         import = "androidx.compose.material3.OutlinedButton"
@@ -207,8 +207,8 @@ private fun MutableList<MaterialComponentsGroup>.buttons() = group("Buttons") {
         description = """
             Text buttons are used for the lowest priority actions, especially when presenting multiple options.
 
-            Text buttons can be placed on a variety of backgrounds.
-            Until the button is interacted with, its container isn’t visible.
+             Text buttons can be placed on a variety of backgrounds.
+             Until the button is interacted with, its container isn’t visible.
         """.trimIndent()
         screenshot = "btn_text"
         import = "androidx.compose.material3.TextButton"
@@ -291,7 +291,7 @@ private fun MutableList<MaterialComponentsGroup>.fab() = group("Floating Action 
             "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#SmallFloatingActionButton(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.material3.FloatingActionButtonElevation,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)"
         description = """
             A small FAB is used for a secondary, supporting action, or in place of a default FAB on smaller screens.
-            One or more small FABs can be paired with a default FAB or extended FAB.
+             One or more small FABs can be paired with a default FAB or extended FAB.
         """.trimIndent()
         screenshot = "fab_small"
         import = "androidx.compose.material3.SmallFloatingActionButton"
@@ -335,8 +335,8 @@ private fun MutableList<MaterialComponentsGroup>.fab() = group("Floating Action 
             "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#LargeFloatingActionButton(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.material3.FloatingActionButtonElevation,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)"
         description = """
             A large FAB is useful when the layout calls for a clear and prominent primary action,
-            and where a larger footprint would help the user engage. For example,
-            when appearing on taller and larger device screens.
+             and where a larger footprint would help the user engage. For example,
+             when appearing on taller and larger device screens.
         """.trimIndent()
         screenshot = "fab_large"
         import = "androidx.compose.material3.LargeFloatingActionButton"
@@ -369,6 +369,54 @@ private fun MutableList<MaterialComponentsGroup>.fab() = group("Floating Action 
                 contentDescription = "Localized description",
                 modifier = Modifier.size(FloatingActionButtonDefaults.LargeIconSize),
             )
+        }
+        """.trimIndent()
+    }
+
+    component {
+        name = "Extended Floating Action Button"
+        specUrl = "https://m3.material.io/components/extended-fab/specs#8c06766e-0afc-436f-a695-aa589700be14"
+        guidelinesUrl =
+            "https://m3.material.io/components/extended-fab/guidelines#c33cceea-4076-4df8-b83c-edf5e644f64d"
+        docsUrl =
+            "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#ExtendedFloatingActionButton(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.material3.FloatingActionButtonElevation,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function1)"
+        description = """
+            Use an extended FAB on screens with long, scrolling views that require persistent access to an action,
+             such as a check-out screen. Do not use an extended FAB in a view that cannot scroll.
+        """.trimIndent()
+        screenshot = "fab_extended"
+        import = "androidx.compose.material3.ExtendedFloatingActionButton"
+        code = """
+        ExtendedFloatingActionButton(
+            onClick = {
+                /* do something */
+            }
+        ) {
+            Icon(
+                imageVector = Icons.Default.Create,
+                contentDescription = "Create",
+            )
+            Spacer(modifier = Modifier.width(12.dp))
+            Text(text = "Compose")
+        }
+        """.trimIndent()
+        customCode = """
+        ExtendedFloatingActionButton(
+            onClick = {
+                /* do something */
+            },
+            modifier = Modifier,
+            shape = FloatingActionButtonDefaults.extendedFabShape,
+            containerColor = FloatingActionButtonDefaults.containerColor,
+            contentColor = contentColorFor(FloatingActionButtonDefaults.containerColor),
+            elevation = FloatingActionButtonDefaults.elevation(4.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Default.Create,
+                contentDescription = "Create",
+            )
+            Spacer(modifier = Modifier.width(12.dp))
+            Text(text = "Compose")
         }
         """.trimIndent()
     }
