@@ -40,7 +40,7 @@ class MaterialComponentsUi(private val toolWindow: ToolWindow) {
     }
 
     private fun navigateToComponent(component: MaterialComponent) {
-        toolWindow.contentManager.removeAllContents(false)
+        toolWindow.contentManager.removeAllContents(true)
         toolWindow.contentManager.addContent(
             contentFactory.createContent(
                 addScrollPaneIfNecessary(

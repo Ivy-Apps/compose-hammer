@@ -13,6 +13,8 @@ data class MaterialComponent(
     val menuScreenshot: String,
     val detailsScreenshot: String,
     val imports: List<String> = emptyList(),
-    val implementation: String,
+    val defaultImplementation: String,
+    val defaultImplementationTip: String? = null,
     val customImplementation: String? = null,
+    val customImplementationTip: String? = null,
 )

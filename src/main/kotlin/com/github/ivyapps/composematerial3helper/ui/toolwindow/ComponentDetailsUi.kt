@@ -2,20 +2,21 @@ package com.github.ivyapps.composematerial3helper.ui.toolwindow
 
 import com.github.ivyapps.composematerial3helper.copyToClipboard
 import com.github.ivyapps.composematerial3helper.data.MaterialComponent
+import com.github.ivyapps.composematerial3helper.services.importsCode
 import com.github.ivyapps.composematerial3helper.ui.common.image
 import com.intellij.icons.AllIcons
+import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.dsl.builder.Panel
 import com.intellij.ui.dsl.builder.Row
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.gridLayout.HorizontalAlign
 import java.awt.Dimension
 import javax.swing.JLabel
-import javax.swing.JPanel
 
 class ComponentDetailsUi(
     private val navigateToMenu: () -> Unit,
 ) {
-    fun ui(component: MaterialComponent): JPanel = panel {
+    fun ui(component: MaterialComponent): DialogPanel = panel {
         group {
             row {
                 label(component.name).bold()
@@ -25,16 +26,30 @@ class ComponentDetailsUi(
                 browserLink("Guidelines", component.guidelinesUrl)
                 browserLink("Spec", component.specUrl)
             }
+            val importsCode = importsCode(component.imports)
+            if (importsCode != null) {
+                codeArea(
+                    title = "Imports",
+                    code = importsCode
+                )
+            }
             codeArea(
                 title = "Implementation",
-                code = component.implementation,
+                code = component.defaultImplementation,
                 backButton = {
                     button("Back") {
                         navigateToMenu()
                     }
                 },
-                tip = "Recommended. Inherits the colors of from Material theme."
+                tip = component.defaultImplementationTip,
             )
+            if (component.customImplementation != null) {
+                codeArea(
+                    title = "Custom Implementation",
+                    code = component.customImplementation,
+                    tip = component.customImplementationTip,
+                )
+            }
         }
     }
 

@@ -4,6 +4,7 @@ import com.github.ivyapps.composematerial3helper.addOnClickListener
 import com.github.ivyapps.composematerial3helper.data.MaterialComponent
 import com.github.ivyapps.composematerial3helper.services.MaterialComponentsService
 import com.github.ivyapps.composematerial3helper.ui.common.image
+import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.dsl.builder.Panel
 import com.intellij.ui.dsl.builder.panel
 
@@ -11,7 +12,7 @@ class ComponentsMenuUi(
     private val service: MaterialComponentsService,
     private val navigateToComponent: (MaterialComponent) -> Unit,
 ) {
-    fun ui() = panel {
+    fun ui(): DialogPanel = panel {
         for (group in service.content) {
             collapsibleGroup(
                 title = group.title,
