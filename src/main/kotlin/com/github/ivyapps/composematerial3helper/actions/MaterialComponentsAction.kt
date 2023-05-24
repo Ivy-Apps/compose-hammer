@@ -79,8 +79,8 @@ class MaterialComponentsAction : IntentionAction {
         WriteCommandAction.runWriteCommandAction(project) {
             // Insert the text at the cursor position
             document.insertString(offset, componentCode)
-
             reformatCode(project, document, offset, componentCode)
+            addMissingImports(project, file, document, component.imports)
         }
 
         // Optionally, you can move the cursor to the end of the inserted text
@@ -100,9 +100,55 @@ class MaterialComponentsAction : IntentionAction {
         val range = TextRange(startOffset, endOffset)
 
         if (psiFile != null) {
-            CodeStyleManager.getInstance(project).reformatText(psiFile, range.startOffset, range.endOffset)
+            val codeStyleManager = CodeStyleManager.getInstance(project)
+            codeStyleManager.reformatText(psiFile, range.startOffset, range.endOffset)
         }
     }
+
+    private fun addMissingImports(
+        project: Project,
+        file: PsiFile,
+        document: Document,
+        imports: List<String>
+    ) {
+        for (import in imports) {
+            addImportStatementIfNecessary(project, file, document, import)
+        }
+    }
+
+    private fun addImportStatementIfNecessary(
+        project: Project,
+        file: PsiFile,
+        document: Document,
+        importTarget: String
+    ) {
+        val text = file.originalFile.text
+        if (importTarget !in text) {
+            // add import
+            val offset = text.findPackageEndOffset()
+            WriteCommandAction.runWriteCommandAction(project) {
+                // Insert the text at the cursor position
+                val importStatement = "\nimport $importTarget"
+                document.insertString(offset, importStatement)
+            }
+        }
+    }
+
+    private fun String.findPackageEndOffset(): Int {
+        var offset = 0
+
+        for (c in this) {
+            if (c != '\n') {
+                offset++
+            } else {
+                break
+            }
+        }
+        offset++ // to leave one empty line
+
+        return offset
+    }
+
 
     private fun Editor.showPopup(
         title: String,
