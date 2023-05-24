@@ -16,6 +16,11 @@
                 largeStripeAnchor="right"
                 doNotActivateOnStart="false"
                 secondary="false"/>
+
+        <intentionAction>
+            <className>com.github.ivyapps.composematerial3helper.actions.MaterialComponentsAction</className>
+            <category>M3 Components</category>
+        </intentionAction>
     </extensions>
 
     <applicationListeners>
