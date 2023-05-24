@@ -7,6 +7,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.profile.codeInspection.ui.addScrollPaneIfNecessary
+import com.intellij.ui.ScrollPaneFactory
 import com.intellij.ui.content.ContentFactory
 
 class MaterialComponentsWindowFactory : ToolWindowFactory {
@@ -39,11 +40,11 @@ class MaterialComponentsUi(private val toolWindow: ToolWindow) {
         )
     }
 
-    private fun navigateToComponent(component: MaterialComponent) {
+    fun navigateToComponent(component: MaterialComponent) {
         toolWindow.contentManager.removeAllContents(true)
         toolWindow.contentManager.addContent(
             contentFactory.createContent(
-                addScrollPaneIfNecessary(
+                ScrollPaneFactory.createScrollPane(
                     ComponentDetailsUi(
                         navigateToMenu = ::navigateToMenu
                     ).ui(component)

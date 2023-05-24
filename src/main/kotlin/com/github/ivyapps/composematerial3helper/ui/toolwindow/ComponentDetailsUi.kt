@@ -17,24 +17,29 @@ class ComponentDetailsUi(
     private val navigateToMenu: () -> Unit,
 ) {
     fun ui(component: MaterialComponent): DialogPanel = panel {
-        group {
+        group(indent = true) {
             row {
                 label(component.name).bold()
             }
             image(component.detailsScreenshot)
             row {
-                browserLink("Guidelines", component.guidelinesUrl)
                 browserLink("Spec", component.specUrl)
+                browserLink("Guidelines", component.guidelinesUrl)
+            }
+            if (component.description != null) {
+                row {
+                    label(component.description)
+                }
             }
             val importsCode = importsCode(component.imports)
             if (importsCode != null) {
                 codeArea(
-                    title = "Imports",
+                    title = null,
                     code = importsCode
                 )
             }
             codeArea(
-                title = "Implementation",
+                title = "Code",
                 code = component.defaultImplementation,
                 backButton = {
                     button("Back") {
@@ -45,22 +50,25 @@ class ComponentDetailsUi(
             )
             if (component.customImplementation != null) {
                 codeArea(
-                    title = "Custom Implementation",
+                    title = "Customization code",
                     code = component.customImplementation,
                     tip = component.customImplementationTip,
                 )
             }
+            gradleDependency()
         }
     }
 
     private fun Panel.codeArea(
-        title: String,
+        title: String?,
         code: String,
         backButton: Row.() -> Unit = {},
         tip: String? = null,
     ) {
-        row {
-            label(title).bold()
+        if (title != null) {
+            row {
+                label(title).bold()
+            }
         }
         row {
             textArea().applyToComponent {
@@ -76,7 +84,6 @@ class ComponentDetailsUi(
             backButton()
             copyButton(code)
         }
-        gradleDependency()
     }
 
     private fun Row.copyButton(text: String) {
