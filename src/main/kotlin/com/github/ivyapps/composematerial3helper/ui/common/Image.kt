@@ -2,22 +2,24 @@ package com.github.ivyapps.composematerial3helper.ui.common
 
 import com.github.ivyapps.composematerial3helper.addOnClickListener
 import com.github.ivyapps.composematerial3helper.ui.toolwindow.MaterialComponentsWindowFactory
+import com.intellij.ui.components.JBLabel
 import com.intellij.ui.dsl.builder.Panel
+import com.intellij.ui.dsl.builder.RowLayout
 import java.net.URL
 import javax.swing.ImageIcon
-import javax.swing.JLabel
 
 fun Panel.image(
     imageFileName: String,
     onClick: (() -> Unit)? = null,
 ) {
     row(
-        label = JLabel(ImageIcon(imageFileName.toImagePath())).apply {
+        label = JBLabel(ImageIcon(imageFileName.toImagePath())).apply {
             if (onClick != null) {
                 addOnClickListener(onClick = onClick)
             }
+
         }
-    ) {}
+    ) {}.layout(RowLayout.PARENT_GRID)
 }
 
 fun String.toImagePath(): URL {
