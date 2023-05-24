@@ -3,11 +3,9 @@ package com.github.ivyapps.composematerial3helper.ui.toolwindow
 import com.github.ivyapps.composematerial3helper.addOnClickListener
 import com.github.ivyapps.composematerial3helper.data.MaterialComponent
 import com.github.ivyapps.composematerial3helper.services.MaterialComponentsService
-import com.github.ivyapps.composematerial3helper.toImagePath
+import com.github.ivyapps.composematerial3helper.ui.common.image
 import com.intellij.ui.dsl.builder.Panel
 import com.intellij.ui.dsl.builder.panel
-import javax.swing.ImageIcon
-import javax.swing.JLabel
 
 class ComponentsMenuUi(
     private val service: MaterialComponentsService,
@@ -30,13 +28,12 @@ class ComponentsMenuUi(
 
     private fun Panel.componentUi(component: MaterialComponent) {
         group(indent = false) {
-            row(
-                label = JLabel(ImageIcon(component.screenshot.toImagePath())).apply {
-                    addOnClickListener {
-                        navigateToComponent(component)
-                    }
+            image(
+                imageFileName = component.screenshot,
+                onClick = {
+                    navigateToComponent(component)
                 }
-            ) {}
+            )
             row {
                 text(component.name).applyToComponent {
                     addOnClickListener {
