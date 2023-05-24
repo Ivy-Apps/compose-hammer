@@ -5,11 +5,15 @@ import com.github.ivyapps.composematerial3helper.services.MaterialComponentsServ
 import com.intellij.codeInsight.intention.IntentionAction
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.components.service
+import com.intellij.openapi.editor.Document
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.popup.JBPopup
 import com.intellij.openapi.ui.popup.JBPopupFactory
+import com.intellij.openapi.util.TextRange
+import com.intellij.psi.PsiDocumentManager
 import com.intellij.psi.PsiFile
+import com.intellij.psi.codeStyle.CodeStyleManager
 
 
 class MaterialComponentsAction : IntentionAction {
@@ -75,10 +79,29 @@ class MaterialComponentsAction : IntentionAction {
         WriteCommandAction.runWriteCommandAction(project) {
             // Insert the text at the cursor position
             document.insertString(offset, componentCode)
+
+            reformatCode(project, document, offset, componentCode)
         }
 
         // Optionally, you can move the cursor to the end of the inserted text
         caretModel.moveToOffset(offset + componentCode.length)
+    }
+
+    private fun reformatCode(
+        project: Project,
+        document: Document,
+        offset: Int,
+        componentCode: String,
+    ) {
+        // Reformat the code to fix indentation
+        val psiFile = PsiDocumentManager.getInstance(project).getPsiFile(document)
+        val startOffset = offset
+        val endOffset = offset + componentCode.length
+        val range = TextRange(startOffset, endOffset)
+
+        if (psiFile != null) {
+            CodeStyleManager.getInstance(project).reformatText(psiFile, range.startOffset, range.endOffset)
+        }
     }
 
     private fun Editor.showPopup(
