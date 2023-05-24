@@ -37,7 +37,7 @@ private fun MutableList<MaterialComponentsGroup>.buttons() = group("Buttons") {
         code = """
         ElevatedButton(
             onClick = {
-                /*TODO: Handle click*/
+                /* Do something! */
             }
         ) {
             Text(text = "Text")
@@ -46,14 +46,65 @@ private fun MutableList<MaterialComponentsGroup>.buttons() = group("Buttons") {
         customCode = """
         ElevatedButton(
             onClick = {
-                /*TODO: Handle click*/
+                /* Do something! */
             },
+            modifier = Modifier,
             enabled = true,
             shape = RoundedCornerShape(12.dp),
-            colors = ButtonDefaults.elevatedButtonColors(),
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+            colors = ButtonDefaults.elevatedButtonColors(
+                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                disabledContentColor = MaterialTheme.colorScheme.onTertiaryContainer
+            ),
+            elevation = ButtonDefaults.elevatedButtonElevation(),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
         ) {
             Text(text = "Text")
+        }
+        """.trimIndent()
+    }
+
+    component {
+        name = "Filled Button"
+        specUrl = "https://m3.material.io/components/buttons/specs#0b1b7bd2-3de8-431a-afa1-d692e2e18b0d"
+        guidelinesUrl = "https://m3.material.io/components/buttons/guidelines#9ecffdb3-ef29-47e7-8d5d-f78b404fcafe"
+        docsUrl =
+            "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#Button(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.ButtonColors,androidx.compose.material3.ButtonElevation,androidx.compose.foundation.BorderStroke,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function1)"
+        description = """
+            Filled buttons have the most visual impact after the FAB,
+            and should be used for important, final actions
+            that complete a flow, like Save, Join now, or Confirm.
+        """.trimIndent()
+        screenshot = "btn_filled"
+        import = "import androidx.compose.material3.Button\n" +
+                "import androidx.compose.material3.Text"
+        code = """
+        Button(
+            onClick = {
+                /* Do something! */
+            }
+        ) {
+            Text("Text")
+        }
+        """.trimIndent()
+        customCode = """
+        Button(
+            onClick = {
+                /* Do something! */
+            },
+            modifier = Modifier,
+            enabled = true,
+            shape = RoundedCornerShape(12.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+                disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                disabledContentColor = MaterialTheme.colorScheme.onSecondaryContainer
+            ),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+            Text("Text")
         }
         """.trimIndent()
     }
