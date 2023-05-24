@@ -77,8 +77,7 @@ private fun MutableList<MaterialComponentsGroup>.buttons() = group("Buttons") {
             that complete a flow, like Save, Join now, or Confirm.
         """.trimIndent()
         screenshot = "btn_filled"
-        import = "import androidx.compose.material3.Button\n" +
-                "import androidx.compose.material3.Text"
+        import = "androidx.compose.material3.Button"
         code = """
         Button(
             onClick = {
@@ -122,8 +121,7 @@ private fun MutableList<MaterialComponentsGroup>.buttons() = group("Buttons") {
             Tonal buttons use the secondary color mapping.
         """.trimIndent()
         screenshot = "btn_filled_tonal"
-        import = "import androidx.compose.material3.FilledTonalButton\n" +
-                "import androidx.compose.material3.Text"
+        import = "androidx.compose.material3.FilledTonalButton"
         code = """
         FilledTonalButton(
             onClick = {
@@ -167,8 +165,7 @@ private fun MutableList<MaterialComponentsGroup>.buttons() = group("Buttons") {
             Outlined buttons pair well with filled buttons to indicate an alternative, secondary action.
         """.trimIndent()
         screenshot = "btn_outlined"
-        import = "import androidx.compose.material3.OutlinedButton\n" +
-                "import androidx.compose.material3.Text"
+        import = "androidx.compose.material3.OutlinedButton"
         code = """
         OutlinedButton(
             onClick = {
