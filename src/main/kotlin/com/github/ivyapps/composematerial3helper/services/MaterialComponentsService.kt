@@ -281,6 +281,50 @@ private fun MutableList<MaterialComponentsGroup>.fab() = group("Floating Action 
         }
         """.trimIndent()
     }
+
+    component {
+        name = "Small Floating Action Button"
+        specUrl = "https://m3.material.io/components/floating-action-button/specs#df918e03-5939-4aa4-8d4b-4cdffa52b240"
+        guidelinesUrl =
+            "https://m3.material.io/components/floating-action-button/guidelines#2f9ec481-b30d-4dc3-89d7-feb2ca7bec4d"
+        docsUrl =
+            "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#SmallFloatingActionButton(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.material3.FloatingActionButtonElevation,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)"
+        description = """
+            A small FAB is used for a secondary, supporting action, or in place of a default FAB on smaller screens.
+            One or more small FABs can be paired with a default FAB or extended FAB.
+        """.trimIndent()
+        screenshot = "fab_small"
+        import = "androidx.compose.material3.SmallFloatingActionButton"
+        code = """
+        SmallFloatingActionButton(
+            onClick = {
+                /* do something */
+            },
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Add,
+                contentDescription = "Add"
+            )
+        }
+        """.trimIndent()
+        customCode = """
+        SmallFloatingActionButton(
+            onClick = {
+                /* do something */
+            },
+            modifier = Modifier,
+            shape = FloatingActionButtonDefaults.smallShape,
+            containerColor = FloatingActionButtonDefaults.containerColor,
+            contentColor = contentColorFor(FloatingActionButtonDefaults.containerColor),
+            elevation = FloatingActionButtonDefaults.elevation(4.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Add,
+                contentDescription = "Add"
+            )
+        }
+        """.trimIndent()
+    }
 }
 
 
