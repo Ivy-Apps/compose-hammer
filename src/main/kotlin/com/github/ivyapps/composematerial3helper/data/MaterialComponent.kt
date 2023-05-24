@@ -10,6 +10,7 @@ data class MaterialComponent(
     val description: String?,
     val guidelinesUrl: String,
     val specUrl: String,
+    val docsUrl: String,
     val menuScreenshot: String,
     val detailsScreenshot: String,
     val imports: List<String>,

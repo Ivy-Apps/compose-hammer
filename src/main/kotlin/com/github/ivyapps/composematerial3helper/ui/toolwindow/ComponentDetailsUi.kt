@@ -29,6 +29,7 @@ class ComponentDetailsUi(
             row {
                 browserLink("Spec", component.specUrl)
                 browserLink("Guidelines", component.guidelinesUrl)
+                browserLink("Docs", component.docsUrl)
             }
             if (component.description != null) {
                 row {
@@ -49,7 +50,7 @@ class ComponentDetailsUi(
             )
             if (component.customImplementation != null) {
                 codeArea(
-                    title = "Customization code",
+                    title = "Customization",
                     code = component.customImplementation,
                     tip = component.customImplementationTip,
                 )

@@ -25,6 +25,8 @@ private fun MutableList<MaterialComponentsGroup>.buttons() = group("Buttons") {
         name = "Elevated Button"
         specUrl = "https://m3.material.io/components/buttons/specs#2a19e853-d5dc-46a2-8ef4-1d954c9dcefa"
         guidelinesUrl = "https://m3.material.io/components/buttons/guidelines#4e89da4d-a8fa-4e20-bb8d-b8a93eff3e3e"
+        docsUrl =
+            "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#ElevatedButton(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.ButtonColors,androidx.compose.material3.ButtonElevation,androidx.compose.foundation.BorderStroke,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function1)"
         description = """
             Elevated buttons are essentially filled tonal buttons with a shadow. 
             To prevent shadow creep, only use them when absolutely necessary, 
@@ -80,6 +82,7 @@ class ComponentScope {
     var description: String? = null
     var specUrl: String? = null
     var guidelinesUrl: String? = null
+    var docsUrl: String? = null
     var screenshot: String? = null
     var code: String? = null
     var codeTip: String? = null
@@ -94,6 +97,7 @@ class ComponentScope {
             description = description.required(),
             specUrl = specUrl.required(),
             guidelinesUrl = guidelinesUrl.required(),
+            docsUrl = docsUrl.required(),
             menuScreenshot = screenshot.required(),
             detailsScreenshot = screenshot.required(),
             imports = import?.let(::listOf) ?: imports.takeIf { it.isNotEmpty() }.required(),
