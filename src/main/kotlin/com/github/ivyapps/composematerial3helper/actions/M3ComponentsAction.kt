@@ -67,17 +67,19 @@ class M3ComponentsAction : IntentionAction {
 
         // Get the offset of the current cursor position
         val offset = caretModel.offset
+        var finalOffset = offset
 
         // Run a write action because document modifications should be run in write actions
         WriteCommandAction.runWriteCommandAction(project) {
             // Insert the text at the cursor position
             document.insertString(offset, componentCode)
             reformatCode(project, document, offset, componentCode)
-            addMissingImports(project, file, document, component.imports)
+            val charsAdded = addMissingImports(project, file, document, component.imports)
+            finalOffset = offset + charsAdded + componentCode.length
         }
 
         // Optionally, you can move the cursor to the end of the inserted text
-        caretModel.moveToOffset(offset + componentCode.length)
+        caretModel.moveToOffset(finalOffset)
     }
 
     private fun reformatCode(
@@ -103,10 +105,12 @@ class M3ComponentsAction : IntentionAction {
         file: PsiFile,
         document: Document,
         imports: List<String>
-    ) {
+    ): Int {
+        var charsAdded = 0
         for (import in imports) {
-            addImportStatementIfNecessary(project, file, document, import)
+            charsAdded += addImportStatementIfNecessary(project, file, document, import)
         }
+        return charsAdded
     }
 
     private fun addImportStatementIfNecessary(
@@ -114,7 +118,9 @@ class M3ComponentsAction : IntentionAction {
         file: PsiFile,
         document: Document,
         importTarget: String
-    ) {
+    ): Int {
+        var charsAdded = 0
+
         val text = file.originalFile.text
         if (importTarget !in text) {
             // add import
@@ -122,9 +128,12 @@ class M3ComponentsAction : IntentionAction {
             WriteCommandAction.runWriteCommandAction(project) {
                 // Insert the text at the cursor position
                 val importStatement = "\nimport $importTarget"
+                charsAdded = importStatement.length
                 document.insertString(offset, importStatement)
             }
         }
+
+        return charsAdded
     }
 
     private fun String.findPackageEndOffset(): Int {
