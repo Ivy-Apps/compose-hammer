@@ -7,7 +7,6 @@ import com.intellij.openapi.project.Project
 
 @Service(Service.Level.PROJECT)
 class MaterialComponentsService(project: Project) {
-
     val content by lazy {
         buildList {
             buttons()
@@ -17,6 +16,21 @@ class MaterialComponentsService(project: Project) {
             group("Navigation") {
 
             }
+        }
+    }
+
+    fun findGroupByTitle(groupTitle: String): MaterialComponentsGroup {
+        return requireNotNull(content.find { it.title == groupTitle }) {
+            "Couldn't find '$groupTitle' group in $content!!!"
+        }
+    }
+
+    fun findComponentByNameInGroup(
+        group: MaterialComponentsGroup,
+        componentName: String
+    ): MaterialComponent {
+        return requireNotNull(group.components.find { it.name == componentName }) {
+            "Couldn't find '$componentName' component in ${group.components}!!!"
         }
     }
 }

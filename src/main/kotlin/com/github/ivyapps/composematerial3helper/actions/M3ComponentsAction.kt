@@ -8,15 +8,13 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.editor.Document
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.ui.popup.JBPopup
-import com.intellij.openapi.ui.popup.JBPopupFactory
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiDocumentManager
 import com.intellij.psi.PsiFile
 import com.intellij.psi.codeStyle.CodeStyleManager
 
 
-class MaterialComponentsAction : IntentionAction {
+class M3ComponentsAction : IntentionAction {
     override fun getText() = "M3 Components"
     override fun getFamilyName() = "Compose Material3 UI"
 
@@ -27,21 +25,18 @@ class MaterialComponentsAction : IntentionAction {
 
     override fun invoke(project: Project, editor: Editor, file: PsiFile) {
         val service = project.service<MaterialComponentsService>()
-        val groups = service.content
 
-        editor.showPopup(
+        editor.showM3ComponentsPopup(
             title = "Choose a component type",
             backItem = "Close menu",
             backItemLast = true,
-            items = groups.map { it.title },
+            items = service.content.map { it.title },
             onBack = {
                 it.closeOk(null)
             }
         ) { groupTitle ->
-            val group = requireNotNull(groups.find { it.title == groupTitle }) {
-                "Couldn't find '$groupTitle' group in $groups!!!"
-            }
-            editor.showPopup(
+            val group = service.findGroupByTitle(groupTitle)
+            editor.showM3ComponentsPopup(
                 title = "Choose a component",
                 backItem = "Go back",
                 backItemLast = false,
@@ -50,9 +45,7 @@ class MaterialComponentsAction : IntentionAction {
                 },
                 items = group.components.map { it.name }
             ) { componentName ->
-                val component = requireNotNull(group.components.find { it.name == componentName }) {
-                    "Couldn't find '$componentName' component in ${group.components}!!!"
-                }
+                val component = service.findComponentByNameInGroup(group, componentName)
                 applyCode(editor, project, file, component)
             }
         }
@@ -147,36 +140,6 @@ class MaterialComponentsAction : IntentionAction {
         offset++ // to leave one empty line
 
         return offset
-    }
-
-
-    private fun Editor.showPopup(
-        title: String,
-        backItem: String,
-        backItemLast: Boolean,
-        items: List<String>,
-        onBack: (JBPopup) -> Unit,
-        onChosen: (String) -> Unit
-    ) {
-        var popup: JBPopup? = null
-        popup = JBPopupFactory.getInstance()
-            .createPopupChooserBuilder(
-                if (backItemLast) {
-                    items + backItem
-                } else {
-                    listOf(backItem) + items
-                }
-            )
-            .setTitle(title)
-            .setItemChosenCallback {
-                if (it != backItem) {
-                    onChosen(it)
-                } else {
-                    onBack(popup!!)
-                }
-            }
-            .createPopup()
-        popup.showInBestPositionFor(this)
     }
 
     override fun startInWriteAction() = true

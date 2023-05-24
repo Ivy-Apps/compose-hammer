@@ -18,7 +18,7 @@
                 secondary="false"/>
 
         <intentionAction>
-            <className>com.github.ivyapps.composematerial3helper.actions.MaterialComponentsAction</className>
+            <className>com.github.ivyapps.composematerial3helper.actions.M3ComponentsAction</className>
             <category>M3 Components</category>
         </intentionAction>
     </extensions>
