@@ -12,6 +12,8 @@ class MaterialComponentsService(project: Project) {
         buildList {
             buttons()
 
+            fab()
+
             group("Navigation") {
 
             }
@@ -19,7 +21,6 @@ class MaterialComponentsService(project: Project) {
     }
 }
 
-@MaterialComponentDsl
 private fun MutableList<MaterialComponentsGroup>.buttons() = group("Buttons") {
     component {
         name = "Elevated Button"
@@ -232,6 +233,51 @@ private fun MutableList<MaterialComponentsGroup>.buttons() = group("Buttons") {
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
         ) {
             Text("Text")
+        }
+        """.trimIndent()
+    }
+}
+
+private fun MutableList<MaterialComponentsGroup>.fab() = group("Floating Action Buttons") {
+    component {
+        name = "Floating Action Button"
+        specUrl = "https://m3.material.io/components/floating-action-button/specs#71504201-7bd1-423d-8bb7-07e0291743e5"
+        guidelinesUrl =
+            "https://m3.material.io/components/floating-action-button/guidelines#dbfbab5d-c3e2-47a4-be6e-c566e9125443"
+        docsUrl =
+            "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#FloatingActionButton(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.material3.FloatingActionButtonElevation,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)"
+        description = """
+            Use a FAB to represent the screen’s primary action.
+        """.trimIndent()
+        screenshot = "fab"
+        import = "androidx.compose.material3.FloatingActionButton"
+        code = """
+        FloatingActionButton(
+            onClick = {
+                /* Do something! */
+            }
+        ) {
+            Icon(
+                imageVector = Icons.Default.Create,
+                contentDescription = "Create"
+            )
+        }
+        """.trimIndent()
+        customCode = """
+        FloatingActionButton(
+            onClick = {
+                /* Do something! */
+            },
+            modifier = Modifier,
+            shape = FloatingActionButtonDefaults.shape,
+            containerColor = FloatingActionButtonDefaults.containerColor,
+            contentColor = contentColorFor(FloatingActionButtonDefaults.containerColor),
+            elevation = FloatingActionButtonDefaults.elevation(4.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Default.Create,
+                contentDescription = "Create"
+            )
         }
         """.trimIndent()
     }
