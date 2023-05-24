@@ -108,6 +108,51 @@ private fun MutableList<MaterialComponentsGroup>.buttons() = group("Buttons") {
         }
         """.trimIndent()
     }
+
+    component {
+        name = "Filled Tonal Button"
+        specUrl = "https://m3.material.io/components/buttons/specs#158f0a18-67fb-4ac4-9d22-cc4d1adc4579"
+        guidelinesUrl = "https://m3.material.io/components/buttons/guidelines#07a1577b-aaf5-4824-a698-03526421058b"
+        docsUrl =
+            "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#FilledTonalButton(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.ButtonColors,androidx.compose.material3.ButtonElevation,androidx.compose.foundation.BorderStroke,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function1)"
+        description = """
+            A filled tonal button is an alternative middle ground between filled and outlined buttons.
+            They’re useful in contexts where a lower-priority button requires slightly more emphasis
+            than an outline would give, such as "Next" in an onboarding flow.
+            Tonal buttons use the secondary color mapping.
+        """.trimIndent()
+        screenshot = "btn_filled_tonal"
+        import = "import androidx.compose.material3.FilledTonalButton\n" +
+                "import androidx.compose.material3.Text"
+        code = """
+        FilledTonalButton(
+            onClick = {
+                /* Do something! */
+            }
+        ) {
+            Text("Text")
+        }
+        """.trimIndent()
+        customCode = """
+        FilledTonalButton(
+            onClick = {
+                /* Do something! */
+            },
+            modifier = Modifier,
+            enabled = true,
+            shape = RoundedCornerShape(12.dp),
+            colors = ButtonDefaults.filledTonalButtonColors(
+                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                disabledContentColor = MaterialTheme.colorScheme.onTertiaryContainer
+            ),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+            Text("Text")
+        }
+        """.trimIndent()
+    }
 }
 
 
