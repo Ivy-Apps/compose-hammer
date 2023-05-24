@@ -10,7 +10,9 @@ data class MaterialComponent(
     val description: String?,
     val guidelinesUrl: String,
     val specUrl: String,
-    val screenshot: String,
-    val enlargedScreenshot: String,
-    val codeSample: String,
+    val menuScreenshot: String,
+    val detailsScreenshot: String,
+    val imports: List<String> = emptyList(),
+    val implementation: String,
+    val customImplementation: String? = null,
 )

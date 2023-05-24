@@ -6,6 +6,7 @@ import com.github.ivyapps.composematerial3helper.ui.common.image
 import com.intellij.ui.dsl.builder.Panel
 import com.intellij.ui.dsl.builder.Row
 import com.intellij.ui.dsl.builder.panel
+import com.intellij.ui.dsl.gridLayout.HorizontalAlign
 import java.awt.Dimension
 import javax.swing.JLabel
 import javax.swing.JPanel
@@ -15,14 +16,14 @@ class ComponentDetailsUi(
 ) {
     fun ui(component: MaterialComponent): JPanel = panel {
         group {
-            image(component.enlargedScreenshot)
+            image(component.detailsScreenshot)
             row {
                 browserLink("Guidelines", component.guidelinesUrl)
                 browserLink("Spec", component.specUrl)
             }
             codeArea(
                 title = "${component.name} implementation",
-                code = component.codeSample,
+                code = component.implementation,
                 backButton = {
                     button("Back") {
                         navigateToMenu()
@@ -47,7 +48,7 @@ class ComponentDetailsUi(
                 size = Dimension(Int.MAX_VALUE, height)
                 autoscrolls = true
                 updateUI()
-            }
+            }.horizontalAlign(HorizontalAlign.FILL)
         }
         row {
             backButton()

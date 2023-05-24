@@ -172,9 +172,9 @@ class MaterialComponentsService(project: Project) {
                 description = description,
                 guidelinesUrl = guidelines,
                 specUrl = spec,
-                screenshot = screenshot,
-                enlargedScreenshot = if (hasLargeScreenshot) "${screenshot}_large" else screenshot,
-                codeSample = code
+                menuScreenshot = screenshot,
+                detailsScreenshot = if (hasLargeScreenshot) "${screenshot}_large" else screenshot,
+                implementation = code
             )
         )
     }

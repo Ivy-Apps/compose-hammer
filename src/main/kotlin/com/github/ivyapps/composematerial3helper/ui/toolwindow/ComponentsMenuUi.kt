@@ -29,7 +29,7 @@ class ComponentsMenuUi(
     private fun Panel.componentUi(component: MaterialComponent) {
         group(indent = false) {
             image(
-                imageFileName = component.screenshot,
+                imageFileName = component.menuScreenshot,
                 onClick = {
                     navigateToComponent(component)
                 }
