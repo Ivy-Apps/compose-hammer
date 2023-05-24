@@ -325,6 +325,53 @@ private fun MutableList<MaterialComponentsGroup>.fab() = group("Floating Action 
         }
         """.trimIndent()
     }
+
+    component {
+        name = "Large Floating Action Button"
+        specUrl = "https://m3.material.io/components/floating-action-button/specs#9d7d3d6a-bab7-47cb-be32-5596fbd660fe"
+        guidelinesUrl =
+            "https://m3.material.io/components/floating-action-button/guidelines#8a2b2f98-c84b-4284-bd31-a54cb77194bc"
+        docsUrl =
+            "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#LargeFloatingActionButton(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.material3.FloatingActionButtonElevation,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)"
+        description = """
+            A large FAB is useful when the layout calls for a clear and prominent primary action,
+            and where a larger footprint would help the user engage. For example,
+            when appearing on taller and larger device screens.
+        """.trimIndent()
+        screenshot = "fab_large"
+        import = "androidx.compose.material3.LargeFloatingActionButton"
+        code = """
+        LargeFloatingActionButton(
+            onClick = {
+                /* do something */
+            }
+        ) {
+            Icon(
+                Icons.Filled.Add,
+                contentDescription = "Localized description",
+                modifier = Modifier.size(FloatingActionButtonDefaults.LargeIconSize),
+            )
+        }
+        """.trimIndent()
+        customCode = """
+        LargeFloatingActionButton(
+            onClick = {
+                /* do something */
+            },
+            modifier = Modifier,
+            shape = FloatingActionButtonDefaults.largeShape,
+            containerColor = FloatingActionButtonDefaults.containerColor,
+            contentColor = contentColorFor(FloatingActionButtonDefaults.containerColor),
+            elevation = FloatingActionButtonDefaults.elevation(4.dp)
+        ) {
+            Icon(
+                Icons.Filled.Add,
+                contentDescription = "Localized description",
+                modifier = Modifier.size(FloatingActionButtonDefaults.LargeIconSize),
+            )
+        }
+        """.trimIndent()
+    }
 }
 
 
