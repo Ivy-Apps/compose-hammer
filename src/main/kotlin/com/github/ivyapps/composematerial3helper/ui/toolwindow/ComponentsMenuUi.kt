@@ -14,7 +14,7 @@ class ComponentsMenuUi(
     private val navigateToComponent: (MaterialComponent) -> Unit,
 ) {
     fun ui(): DialogPanel = panel {
-        for (group in service.content) {
+        for (group in service.content.filter { it.showInToolWindow }) {
             collapsibleGroup(
                 title = group.title,
                 indent = true

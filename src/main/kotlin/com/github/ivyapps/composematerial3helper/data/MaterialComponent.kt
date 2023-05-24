@@ -1,10 +1,5 @@
 package com.github.ivyapps.composematerial3helper.data
 
-data class MaterialComponentsGroup(
-    val title: String,
-    val components: List<MaterialComponent>
-)
-
 data class MaterialComponent(
     val name: String,
     val description: String?,
@@ -18,4 +13,5 @@ data class MaterialComponent(
     val defaultImplementationTip: String?,
     val customImplementation: String?,
     val customImplementationTip: String?,
+    val showInToolWindow: Boolean,
 )
