@@ -153,6 +153,52 @@ private fun MutableList<MaterialComponentsGroup>.buttons() = group("Buttons") {
         }
         """.trimIndent()
     }
+
+    component {
+        name = "Outlined Button"
+        specUrl = "https://m3.material.io/components/buttons/specs#de72d8b1-ba16-4cd7-989e-e2ad3293cf63"
+        guidelinesUrl = "https://m3.material.io/components/buttons/guidelines#3742b09f-c224-43e0-a83e-541bd29d0f05"
+        docsUrl =
+            "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#OutlinedButton(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.ButtonColors,androidx.compose.material3.ButtonElevation,androidx.compose.foundation.BorderStroke,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function1)"
+        description = """
+            Outlined buttons are medium-emphasis buttons. They contain actions that are important,
+            but aren’t the primary action in an app.
+
+            Outlined buttons pair well with filled buttons to indicate an alternative, secondary action.
+        """.trimIndent()
+        screenshot = "btn_outlined"
+        import = "import androidx.compose.material3.OutlinedButton\n" +
+                "import androidx.compose.material3.Text"
+        code = """
+        OutlinedButton(
+            onClick = {
+                /* Do something! */
+            }
+        ) {
+            Text("Text")
+        }
+        """.trimIndent()
+        customCode = """
+        OutlinedButton(
+            onClick = {
+                /* Do something! */
+            },
+            modifier = Modifier,
+            enabled = true,
+            shape = RoundedCornerShape(12.dp),
+            colors = ButtonDefaults.outlinedButtonColors(
+                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                disabledContentColor = MaterialTheme.colorScheme.onTertiaryContainer
+            ),
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.secondary),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+            Text("Text")
+        }
+        """.trimIndent()
+    }
 }
 
 
