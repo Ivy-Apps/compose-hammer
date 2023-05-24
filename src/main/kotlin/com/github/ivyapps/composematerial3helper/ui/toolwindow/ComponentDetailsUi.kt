@@ -3,6 +3,7 @@ package com.github.ivyapps.composematerial3helper.ui.toolwindow
 import com.github.ivyapps.composematerial3helper.copyToClipboard
 import com.github.ivyapps.composematerial3helper.data.MaterialComponent
 import com.github.ivyapps.composematerial3helper.ui.common.image
+import com.intellij.icons.AllIcons
 import com.intellij.ui.dsl.builder.Panel
 import com.intellij.ui.dsl.builder.Row
 import com.intellij.ui.dsl.builder.panel
@@ -16,19 +17,23 @@ class ComponentDetailsUi(
 ) {
     fun ui(component: MaterialComponent): JPanel = panel {
         group {
+            row {
+                label(component.name).bold()
+            }
             image(component.detailsScreenshot)
             row {
                 browserLink("Guidelines", component.guidelinesUrl)
                 browserLink("Spec", component.specUrl)
             }
             codeArea(
-                title = "${component.name} implementation",
+                title = "Implementation",
                 code = component.implementation,
                 backButton = {
                     button("Back") {
                         navigateToMenu()
                     }
-                }
+                },
+                tip = "Recommended. Inherits the colors of from Material theme."
             )
         }
     }
@@ -36,7 +41,8 @@ class ComponentDetailsUi(
     private fun Panel.codeArea(
         title: String,
         code: String,
-        backButton: Row.() -> Unit = {}
+        backButton: Row.() -> Unit = {},
+        tip: String? = null,
     ) {
         row {
             label(title).bold()
@@ -49,11 +55,13 @@ class ComponentDetailsUi(
                 autoscrolls = true
                 updateUI()
             }.horizontalAlign(HorizontalAlign.FILL)
+                .comment(tip)
         }
         row {
             backButton()
             copyButton(code)
         }
+        gradleDependency()
     }
 
     private fun Row.copyButton(text: String) {
@@ -71,6 +79,17 @@ class ComponentDetailsUi(
         label("Copied to clipboard!").applyToComponent {
             isVisible = false
             copiedLabel = this
+        }
+    }
+
+    private fun Panel.gradleDependency() {
+        row {
+            icon(AllIcons.Actions.QuickfixOffBulb)
+            label("If it doesn't work: ")
+            browserLink(
+                "Add the Gradle dependency",
+                "https://developer.android.com/jetpack/androidx/releases/compose-material3#declaring_dependencies"
+            )
         }
     }
 }
