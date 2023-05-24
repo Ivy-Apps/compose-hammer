@@ -196,6 +196,45 @@ private fun MutableList<MaterialComponentsGroup>.buttons() = group("Buttons") {
         }
         """.trimIndent()
     }
+
+    component {
+        name = "Text Button"
+        specUrl = "https://m3.material.io/components/buttons/specs#899b9107-0127-4a01-8f4c-87f19323a1b4"
+        guidelinesUrl = "https://m3.material.io/components/buttons/guidelines#c9bcbc0b-ee05-45ad-8e80-e814ae919fbb"
+        docsUrl =
+            "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#TextButton(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.ButtonColors,androidx.compose.material3.ButtonElevation,androidx.compose.foundation.BorderStroke,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function1)"
+        description = """
+            Text buttons are used for the lowest priority actions, especially when presenting multiple options.
+
+            Text buttons can be placed on a variety of backgrounds.
+            Until the button is interacted with, its container isn’t visible.
+        """.trimIndent()
+        screenshot = "btn_text"
+        import = "androidx.compose.material3.TextButton"
+        code = """
+        TextButton(
+            onClick = {
+                /* Do something! */
+            }
+        ) {
+            Text("Text")
+        }
+        """.trimIndent()
+        customCode = """
+        TextButton(
+            onClick = {
+                /* Do something! */
+            },
+            modifier = Modifier,
+            enabled = true,
+            shape = RoundedCornerShape(12.dp),
+            colors = ButtonDefaults.textButtonColors(),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+            Text("Text")
+        }
+        """.trimIndent()
+    }
 }
 
 
