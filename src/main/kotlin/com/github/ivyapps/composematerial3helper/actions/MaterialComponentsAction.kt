@@ -7,6 +7,7 @@ import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.components.service
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.ui.popup.JBPopup
 import com.intellij.openapi.ui.popup.JBPopupFactory
 import com.intellij.psi.PsiFile
 
@@ -26,13 +27,23 @@ class MaterialComponentsAction : IntentionAction {
 
         editor.showPopup(
             title = "Choose a component type",
-            items = groups.map { it.title }
+            backItem = "Close menu",
+            backItemLast = true,
+            items = groups.map { it.title },
+            onBack = {
+                it.closeOk(null)
+            }
         ) { groupTitle ->
             val group = requireNotNull(groups.find { it.title == groupTitle }) {
                 "Couldn't find '$groupTitle' group in $groups!!!"
             }
             editor.showPopup(
                 title = "Choose a component",
+                backItem = "Go back",
+                backItemLast = false,
+                onBack = {
+                    invoke(project, editor, file)
+                },
                 items = group.components.map { it.name }
             ) { componentName ->
                 val component = requireNotNull(group.components.find { it.name == componentName }) {
@@ -72,13 +83,29 @@ class MaterialComponentsAction : IntentionAction {
 
     private fun Editor.showPopup(
         title: String,
+        backItem: String,
+        backItemLast: Boolean,
         items: List<String>,
+        onBack: (JBPopup) -> Unit,
         onChosen: (String) -> Unit
     ) {
-        val popup = JBPopupFactory.getInstance()
-            .createPopupChooserBuilder(items)
+        var popup: JBPopup? = null
+        popup = JBPopupFactory.getInstance()
+            .createPopupChooserBuilder(
+                if (backItemLast) {
+                    items + backItem
+                } else {
+                    listOf(backItem) + items
+                }
+            )
             .setTitle(title)
-            .setItemChosenCallback(onChosen)
+            .setItemChosenCallback {
+                if (it != backItem) {
+                    onChosen(it)
+                } else {
+                    onBack(popup!!)
+                }
+            }
             .createPopup()
         popup.showInBestPositionFor(this)
     }
