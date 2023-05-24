@@ -4,14 +4,12 @@ import com.github.ivyapps.composematerial3helper.addOnClickListener
 import com.github.ivyapps.composematerial3helper.data.MaterialComponent
 import com.github.ivyapps.composematerial3helper.services.MaterialComponentsService
 import com.github.ivyapps.composematerial3helper.toImagePath
-import com.intellij.openapi.wm.ToolWindow
 import com.intellij.ui.dsl.builder.Panel
 import com.intellij.ui.dsl.builder.panel
 import javax.swing.ImageIcon
 import javax.swing.JLabel
 
 class ComponentsMenuUi(
-    private val toolWindow: ToolWindow,
     private val service: MaterialComponentsService,
     private val navigateToComponent: (MaterialComponent) -> Unit,
 ) {

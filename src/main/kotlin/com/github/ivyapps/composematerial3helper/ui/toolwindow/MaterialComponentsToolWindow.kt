@@ -8,12 +8,6 @@ import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.profile.codeInspection.ui.addScrollPaneIfNecessary
 import com.intellij.ui.content.ContentFactory
-import java.awt.Component
-import java.awt.Toolkit
-import java.awt.datatransfer.StringSelection
-import java.awt.event.MouseEvent
-import java.awt.event.MouseListener
-import java.net.URL
 
 class MaterialComponentsWindowFactory : ToolWindowFactory {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
@@ -35,7 +29,6 @@ class MaterialComponentsUi(private val toolWindow: ToolWindow) {
             contentFactory.createContent(
                 addScrollPaneIfNecessary(
                     ComponentsMenuUi(
-                        toolWindow = toolWindow,
                         service = service,
                         navigateToComponent = ::navigateToComponent
                     ).ui()
@@ -52,7 +45,6 @@ class MaterialComponentsUi(private val toolWindow: ToolWindow) {
             contentFactory.createContent(
                 addScrollPaneIfNecessary(
                     ComponentDetailsUi(
-                        toolWindow = toolWindow,
                         navigateToMenu = ::navigateToMenu
                     ).ui(component)
                 ),

@@ -3,7 +3,6 @@ package com.github.ivyapps.composematerial3helper.ui.toolwindow
 import com.github.ivyapps.composematerial3helper.copyToClipboard
 import com.github.ivyapps.composematerial3helper.data.MaterialComponent
 import com.github.ivyapps.composematerial3helper.toImagePath
-import com.intellij.openapi.wm.ToolWindow
 import com.intellij.ui.components.JBTextArea
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.builder.text
@@ -12,7 +11,6 @@ import javax.swing.JLabel
 import javax.swing.JPanel
 
 class ComponentDetailsUi(
-    private val toolWindow: ToolWindow,
     private val navigateToMenu: () -> Unit,
 ) {
     fun ui(component: MaterialComponent): JPanel = panel {
