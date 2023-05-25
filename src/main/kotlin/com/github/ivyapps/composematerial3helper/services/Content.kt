@@ -688,4 +688,58 @@ fun MutableList<MaterialComponentsGroup>.iconButtons() = group("Icon Buttons") {
         }
         """.trimIndent()
     }
+
+    component {
+        name = "Outlined Icon Button"
+        specUrl = "https://m3.material.io/components/icon-buttons/specs#632e1356-8002-4ae1-ae36-48c1f9b17ef2"
+        guidelinesUrl =
+            "https://m3.material.io/components/icon-buttons/guidelines#a78dd95b-c0a6-4d18-ad3d-57d4a173f37c"
+        docsUrl =
+            "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#OutlinedIconButton(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.IconButtonColors,androidx.compose.foundation.BorderStroke,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)"
+        description = """
+            Outlined icon buttons are medium-emphasis buttons. They’re useful when an icon button needs more emphasis
+             than a standard icon button but less than a filled or filled tonal icon button.
+        """.trimIndent()
+        screenshot = "iconbtn_outlined"
+        imports = listOf(
+            "androidx.compose.material3.OutlinedIconButton",
+            "androidx.compose.material3.Icon",
+            "androidx.compose.material.icons.Icons",
+            "androidx.compose.material.icons.outlined.Lock"
+        )
+        code = """
+        OutlinedIconButton(
+            onClick = {
+                /* doSomething() */
+            }
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.Lock,
+                contentDescription = "Lock"
+            )
+        }
+        """.trimIndent()
+        customCode = """
+        OutlinedIconButton(
+            onClick = {
+                /* doSomething() */
+            },
+            modifier = Modifier,
+            enabled = true,
+            shape = RoundedCornerShape(12.dp),
+            colors = IconButtonDefaults.filledTonalIconButtonColors(
+                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                disabledContentColor = MaterialTheme.colorScheme.onPrimaryContainer
+            ),
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.primaryContainer)
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.Lock,
+                contentDescription = "Lock"
+            )
+        }
+        """.trimIndent()
+    }
 }
