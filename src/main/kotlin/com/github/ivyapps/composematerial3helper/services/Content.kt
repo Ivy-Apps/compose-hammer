@@ -383,7 +383,12 @@ fun MutableList<MaterialComponentsGroup>.fab() = group("Floating Action Buttons"
             Use a FAB to represent the screen’s primary action.
         """.trimIndent()
         screenshot = "fab"
-        import = "androidx.compose.material3.FloatingActionButton"
+        imports = listOf(
+            "androidx.compose.material3.FloatingActionButton",
+            "androidx.compose.material.icons.Icons",
+            "androidx.compose.material.icons.filled.Create",
+            "androidx.compose.material3.Icon"
+        )
         code = """
         FloatingActionButton(
             onClick = {
@@ -427,7 +432,12 @@ fun MutableList<MaterialComponentsGroup>.fab() = group("Floating Action Buttons"
              One or more small FABs can be paired with a default FAB or extended FAB.
         """.trimIndent()
         screenshot = "fab_small"
-        import = "androidx.compose.material3.SmallFloatingActionButton"
+        imports = listOf(
+            "androidx.compose.material3.SmallFloatingActionButton",
+            "androidx.compose.material3.Icon",
+            "import androidx.compose.material.icons.Icons",
+            "import androidx.compose.material.icons.filled.Add"
+        )
         code = """
         SmallFloatingActionButton(
             onClick = {
@@ -472,7 +482,15 @@ fun MutableList<MaterialComponentsGroup>.fab() = group("Floating Action Buttons"
              when appearing on taller and larger device screens.
         """.trimIndent()
         screenshot = "fab_large"
-        import = "androidx.compose.material3.LargeFloatingActionButton"
+        imports = listOf(
+            "androidx.compose.material3.LargeFloatingActionButton",
+            "androidx.compose.material3.Icon",
+            "androidx.compose.ui.Modifier",
+            "androidx.compose.foundation.layout.size",
+            "androidx.compose.material.icons.Icons",
+            "androidx.compose.material.icons.filled.Add",
+            "androidx.compose.material3.FloatingActionButtonDefaults"
+        )
         code = """
         LargeFloatingActionButton(
             onClick = {
@@ -481,7 +499,7 @@ fun MutableList<MaterialComponentsGroup>.fab() = group("Floating Action Buttons"
         ) {
             Icon(
                 Icons.Filled.Add,
-                contentDescription = "Localized description",
+                contentDescription = "Add",
                 modifier = Modifier.size(FloatingActionButtonDefaults.LargeIconSize),
             )
         }
@@ -499,7 +517,7 @@ fun MutableList<MaterialComponentsGroup>.fab() = group("Floating Action Buttons"
         ) {
             Icon(
                 Icons.Filled.Add,
-                contentDescription = "Localized description",
+                contentDescription = "Add",
                 modifier = Modifier.size(FloatingActionButtonDefaults.LargeIconSize),
             )
         }
@@ -518,7 +536,16 @@ fun MutableList<MaterialComponentsGroup>.fab() = group("Floating Action Buttons"
              such as a check-out screen. Do not use an extended FAB in a view that cannot scroll.
         """.trimIndent()
         screenshot = "fab_extended"
-        import = "androidx.compose.material3.ExtendedFloatingActionButton"
+        imports = listOf(
+            "androidx.compose.material3.ExtendedFloatingActionButton",
+            "androidx.compose.foundation.layout.Spacer",
+            "androidx.compose.foundation.layout.width",
+            "androidx.compose.material.icons.Icons",
+            "androidx.compose.material.icons.filled.Create",
+            "androidx.compose.material3.Icon",
+            "androidx.compose.ui.Modifier",
+            "androidx.compose.ui.unit.dp"
+        )
         code = """
         ExtendedFloatingActionButton(
             onClick = {
@@ -550,6 +577,64 @@ fun MutableList<MaterialComponentsGroup>.fab() = group("Floating Action Buttons"
             )
             Spacer(modifier = Modifier.width(12.dp))
             Text(text = "Compose")
+        }
+        """.trimIndent()
+    }
+}
+
+fun MutableList<MaterialComponentsGroup>.iconButtons() = group("Icon Buttons") {
+    component {
+        name = "Filled Icon Button"
+        specUrl = "https://m3.material.io/components/icon-buttons/specs#d4169fb5-4cf8-40b6-9ec3-4044f09cca1f"
+        guidelinesUrl =
+            "https://m3.material.io/components/icon-buttons/guidelines#a78dd95b-c0a6-4d18-ad3d-57d4a173f37c"
+        docsUrl =
+            "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#FilledIconButton(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.IconButtonColors,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)"
+        description = """
+            Use icon buttons to display actions in a compact layout.
+             Icon buttons can represent opening actions such as opening an overflow menu or search,
+             or represent binary actions that can be toggled on and off, such as favorite or bookmark.
+
+             Icon buttons can be grouped together or they can stand alone.
+        """.trimIndent()
+        screenshot = "iconbtn_filled"
+        imports = listOf(
+            "androidx.compose.material3.FilledIconButton",
+            "androidx.compose.material3.Icon",
+            "androidx.compose.material.icons.Icons",
+            "androidx.compose.material.icons.outlined.Lock"
+        )
+        code = """
+        FilledIconButton(
+            onClick = {
+                /* doSomething() */
+            }
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.Lock,
+                contentDescription = "Lock"
+            )
+        }
+        """.trimIndent()
+        customCode = """
+        FilledIconButton(
+            onClick = {
+                /* doSomething() */
+            },
+            modifier = Modifier,
+            enabled = true,
+            shape = RoundedCornerShape(12.dp),
+            colors = IconButtonDefaults.filledIconButtonColors(
+                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                disabledContentColor = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.Lock,
+                contentDescription = "Lock"
+            )
         }
         """.trimIndent()
     }
