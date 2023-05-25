@@ -11,14 +11,14 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtPsiFactory
 import org.jetbrains.uast.*
 
-
+// TODO: Doesn't work!
 @Service(Service.Level.PROJECT)
 class InsertCodeService(private val project: Project) {
 
     fun insertCodeAtCursor(
             psiFile: PsiFile,
             editor: Editor,
-            newCode: String
+            fullyQualifiedCode: String
     ) {
         if (psiFile !is KtFile) {
             return
@@ -29,7 +29,7 @@ class InsertCodeService(private val project: Project) {
         val offset = caretModel.offset
 
         val ktPsiFactory = KtPsiFactory(project)
-        val newElement = ktPsiFactory.createFunction(newCode)
+        val newElement = ktPsiFactory.createComment(fullyQualifiedCode)
 
         WriteCommandAction.runWriteCommandAction(project) {
             // Inserting the text into the document
