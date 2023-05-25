@@ -591,11 +591,7 @@ fun MutableList<MaterialComponentsGroup>.iconButtons() = group("Icon Buttons") {
         docsUrl =
             "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#FilledIconButton(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.IconButtonColors,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)"
         description = """
-            Use icon buttons to display actions in a compact layout.
-             Icon buttons can represent opening actions such as opening an overflow menu or search,
-             or represent binary actions that can be toggled on and off, such as favorite or bookmark.
-
-             Icon buttons can be grouped together or they can stand alone.
+            Filled icon buttons have higher visual impact and are best for high emphasis actions.
         """.trimIndent()
         screenshot = "iconbtn_filled"
         imports = listOf(
@@ -625,6 +621,60 @@ fun MutableList<MaterialComponentsGroup>.iconButtons() = group("Icon Buttons") {
             enabled = true,
             shape = RoundedCornerShape(12.dp),
             colors = IconButtonDefaults.filledIconButtonColors(
+                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                disabledContentColor = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.Lock,
+                contentDescription = "Lock"
+            )
+        }
+        """.trimIndent()
+    }
+
+    component {
+        name = "Filled Tonal Icon Button"
+        specUrl = "https://m3.material.io/components/icon-buttons/specs#c2ca424b-2ad7-40e6-8946-47fb1918060a"
+        guidelinesUrl =
+            "https://m3.material.io/components/icon-buttons/guidelines#a78dd95b-c0a6-4d18-ad3d-57d4a173f37c"
+        docsUrl =
+            "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#FilledTonalIconButton(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.IconButtonColors,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)"
+        description = """
+            Filled tonal icon buttons are a middle ground between filled and outlined icon buttons.
+             They’re useful in contexts where the button requires slightly more emphasis than an outline would give,
+             such as a secondary action paired with a high emphasis action.
+        """.trimIndent()
+        screenshot = "iconbtn_filled_tonal"
+        imports = listOf(
+            "androidx.compose.material3.FilledTonalIconButton",
+            "androidx.compose.material3.Icon",
+            "androidx.compose.material.icons.Icons",
+            "androidx.compose.material.icons.outlined.Lock"
+        )
+        code = """
+        FilledTonalIconButton(
+            onClick = {
+                /* doSomething() */
+            }
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.Lock,
+                contentDescription = "Lock"
+            )
+        }
+        """.trimIndent()
+        customCode = """
+        FilledTonalIconButton(
+            onClick = {
+                /* doSomething() */
+            },
+            modifier = Modifier,
+            enabled = true,
+            shape = RoundedCornerShape(12.dp),
+            colors = IconButtonDefaults.filledTonalIconButtonColors(
                 containerColor = MaterialTheme.colorScheme.secondaryContainer,
                 contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
                 disabledContainerColor = MaterialTheme.colorScheme.primaryContainer,
