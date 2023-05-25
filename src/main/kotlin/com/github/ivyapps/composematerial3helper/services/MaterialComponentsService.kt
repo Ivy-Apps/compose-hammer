@@ -12,6 +12,7 @@ class MaterialComponentsService(project: Project) {
             common()
             buttons()
             fab()
+            iconButtons()
 
             group("Navigation") {
 
