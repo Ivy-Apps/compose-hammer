@@ -3,7 +3,7 @@ package com.github.ivyapps.composematerial3helper.ui.toolwindow
 import com.github.ivyapps.composematerial3helper.copyToClipboard
 import com.github.ivyapps.composematerial3helper.data.MaterialComponent
 import com.github.ivyapps.composematerial3helper.services.formatText
-import com.github.ivyapps.composematerial3helper.services.importsCode
+import com.github.ivyapps.composematerial3helper.services.generateImportsCode
 import com.github.ivyapps.composematerial3helper.ui.common.image
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.ui.DialogPanel
@@ -36,7 +36,7 @@ class ComponentDetailsUi(
                     label(component.description.formatText())
                 }
             }
-            val importsCode = importsCode(component.imports)
+            val importsCode = generateImportsCode(component.imports)
             if (importsCode != null) {
                 codeArea(
                     title = null,

@@ -3,6 +3,7 @@ package com.github.ivyapps.composematerial3helper.actions
 import com.github.ivyapps.composematerial3helper.services.MaterialComponentsService
 import com.github.ivyapps.composematerial3helper.services.RecognizerService
 import com.github.ivyapps.composematerial3helper.services.legacy.InsertComponentService
+import com.intellij.codeInsight.intention.HighPriorityAction
 import com.intellij.codeInsight.intention.IntentionAction
 import com.intellij.openapi.components.service
 import com.intellij.openapi.editor.Editor
@@ -10,7 +11,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFile
 
 
-class M3ComponentsAction : IntentionAction {
+class M3ComponentsAction : IntentionAction, HighPriorityAction {
     override fun getText() = "M3 Components"
     override fun getFamilyName() = "Compose Material3 UI"
 
