@@ -18,8 +18,8 @@
                 secondary="false"/>
 
         <intentionAction>
-            <className>com.github.ivyapps.composematerial3helper.actions.M3ComponentsAction</className>
-            <category>M3 Components</category>
+            <className>com.github.ivyapps.composematerial3helper.actions.ComposeM3UiIntentionAction</className>
+            <category>Compose Material3 UI</category>
         </intentionAction>
     </extensions>
 

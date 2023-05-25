@@ -11,8 +11,8 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFile
 
 
-class M3ComponentsAction : IntentionAction, HighPriorityAction {
-    override fun getText() = "M3 Components"
+class ComposeM3UiIntentionAction : IntentionAction, HighPriorityAction {
+    override fun getText() = "Compose Material3 UI builder"
     override fun getFamilyName() = "Compose Material3 UI"
 
     override fun isAvailable(project: Project, editor: Editor, file: PsiFile): Boolean {
