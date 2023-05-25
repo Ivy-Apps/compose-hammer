@@ -10,7 +10,8 @@ import com.intellij.psi.PsiFile
 // TODO: Doesn't work!
 @Service(Service.Level.PROJECT)
 class InsertComponentService(private val project: Project) {
-    fun insertCodeAtCursor(
+
+    fun insertAtCursor(
             psiFile: PsiFile,
             editor: Editor,
             component: MaterialComponent,
