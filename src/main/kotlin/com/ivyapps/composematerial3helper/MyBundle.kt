@@ -1,4 +1,4 @@
-package com.github.ivyapps.composematerial3helper
+package com.ivyapps.composematerial3helper
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls

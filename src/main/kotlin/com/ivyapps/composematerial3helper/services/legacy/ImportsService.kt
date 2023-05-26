@@ -1,4 +1,4 @@
-package com.github.ivyapps.composematerial3helper.services.legacy
+package com.ivyapps.composematerial3helper.services.legacy
 
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.components.Service

@@ -1,8 +1,8 @@
-package com.github.ivyapps.composematerial3helper
+package com.ivyapps.composematerial3helper
 
-import com.github.ivyapps.composematerial3helper.data.MaterialComponentsGroup
-import com.github.ivyapps.composematerial3helper.services.component
-import com.github.ivyapps.composematerial3helper.services.group
+import com.ivyapps.composematerial3helper.data.MaterialComponentsGroup
+import com.ivyapps.composematerial3helper.services.component
+import com.ivyapps.composematerial3helper.services.group
 
 fun MutableList<MaterialComponentsGroup>.common() = group("Common", showInToolWindow = false) {
     component {

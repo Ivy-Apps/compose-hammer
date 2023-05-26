@@ -1,7 +1,7 @@
-package com.github.ivyapps.composematerial3helper.services
+package com.ivyapps.composematerial3helper.services
 
-import com.github.ivyapps.composematerial3helper.data.MaterialComponent
-import com.github.ivyapps.composematerial3helper.data.MaterialComponentsGroup
+import com.ivyapps.composematerial3helper.data.MaterialComponent
+import com.ivyapps.composematerial3helper.data.MaterialComponentsGroup
 
 
 @DslMarker

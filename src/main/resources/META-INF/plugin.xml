@@ -1,7 +1,7 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.ivyapps.composematerial3helper</id>
-    <name>Compose Material3 UI Generator</name>
+    <name>Compose Material3 UI Builder</name>
     <vendor>ivyapps</vendor>
 
     <depends>com.intellij.modules.platform</depends>
@@ -10,7 +10,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow
-                factoryClass="com.github.ivyapps.composematerial3helper.ui.toolwindow.MaterialComponentsWindowFactory"
+                factoryClass="com.ivyapps.composematerial3helper.ui.toolwindow.MaterialComponentsWindowFactory"
                 id="Compose Material3 UI"
                 anchor="right"
                 largeStripeAnchor="right"
@@ -18,7 +18,7 @@
                 secondary="false"/>
 
         <intentionAction>
-            <className>com.github.ivyapps.composematerial3helper.actions.ComposeM3UiIntentionAction</className>
+            <className>com.ivyapps.composematerial3helper.actions.ComposeM3UiIntentionAction</className>
             <category>Compose Material3 UI</category>
         </intentionAction>
     </extensions>

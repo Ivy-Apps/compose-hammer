@@ -1,4 +1,4 @@
-package com.github.ivyapps.composematerial3helper.actions
+package com.ivyapps.composematerial3helper.actions
 
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.ui.popup.JBPopup

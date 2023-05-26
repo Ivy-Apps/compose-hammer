@@ -1,7 +1,7 @@
-package com.github.ivyapps.composematerial3helper.ui.common
+package com.ivyapps.composematerial3helper.ui.common
 
-import com.github.ivyapps.composematerial3helper.addOnClickListener
-import com.github.ivyapps.composematerial3helper.ui.toolwindow.MaterialComponentsWindowFactory
+import com.ivyapps.composematerial3helper.addOnClickListener
+import com.ivyapps.composematerial3helper.ui.toolwindow.MaterialComponentsWindowFactory
 import com.intellij.ui.components.JBLabel
 import com.intellij.ui.dsl.builder.Panel
 import com.intellij.ui.dsl.builder.RowLayout

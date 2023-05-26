@@ -1,8 +1,8 @@
-package com.github.ivyapps.composematerial3helper.actions
+package com.ivyapps.composematerial3helper.actions
 
-import com.github.ivyapps.composematerial3helper.services.MaterialComponentsService
-import com.github.ivyapps.composematerial3helper.services.RecognizerService
-import com.github.ivyapps.composematerial3helper.services.legacy.InsertComponentService
+import com.ivyapps.composematerial3helper.services.MaterialComponentsService
+import com.ivyapps.composematerial3helper.services.RecognizerService
+import com.ivyapps.composematerial3helper.services.legacy.InsertComponentService
 import com.intellij.codeInsight.intention.HighPriorityAction
 import com.intellij.codeInsight.intention.IntentionAction
 import com.intellij.openapi.components.service

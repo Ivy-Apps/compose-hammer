@@ -1,4 +1,4 @@
-package com.github.ivyapps.composematerial3helper.data
+package com.ivyapps.composematerial3helper.data
 
 data class MaterialComponentsGroup(
     val title: String,
