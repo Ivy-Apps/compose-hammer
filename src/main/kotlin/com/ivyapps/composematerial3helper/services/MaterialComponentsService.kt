@@ -1,19 +1,17 @@
 package com.ivyapps.composematerial3helper.services
 
-import com.ivyapps.composematerial3helper.buttons
-import com.ivyapps.composematerial3helper.common
 import com.ivyapps.composematerial3helper.data.MaterialComponent
 import com.ivyapps.composematerial3helper.data.MaterialComponentsGroup
-import com.ivyapps.composematerial3helper.fab
-import com.ivyapps.composematerial3helper.iconButtons
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.project.Project
+import com.ivyapps.composematerial3helper.*
 
 @Service(Service.Level.PROJECT)
 class MaterialComponentsService(project: Project) {
     val content by lazy {
         buildList {
             common()
+            composeRuntime()
             buttons()
             fab()
             iconButtons()
