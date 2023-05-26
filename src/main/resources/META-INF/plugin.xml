@@ -22,9 +22,4 @@
             <category>Compose Material3 UI</category>
         </intentionAction>
     </extensions>
-
-    <applicationListeners>
-        <listener class="com.github.ivyapps.composematerial3helper.listeners.MyFrameStateListener"
-                  topic="com.intellij.ide.FrameStateListener"/>
-    </applicationListeners>
 </idea-plugin>
