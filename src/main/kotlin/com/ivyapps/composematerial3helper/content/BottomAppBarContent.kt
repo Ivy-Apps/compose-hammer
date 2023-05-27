@@ -18,7 +18,7 @@ fun ContentScope.bottomAppBar() = group("Bottom app bar") {
             + Mobile devices only
             + Screens with two to five actions
             
-            Bottom app bars shouldn't be used for:
+            >Bottom app bars shouldn't be used for:
             - Apps with a navigation bar
             - Screens with one or no actions
         """.trimIndent()

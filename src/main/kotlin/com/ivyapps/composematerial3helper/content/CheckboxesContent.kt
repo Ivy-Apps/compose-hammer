@@ -17,7 +17,7 @@ fun ContentScope.checkboxes() = group("Checkboxes") {
             - Select one or more options from a list
             - Present a list containing sub-selections
             - Turn an item on or off in a desktop environment
-            Checkboxes should be used instead of switches if multiple options can be selected from a list.
+            >Checkboxes should be used instead of switches if multiple options can be selected from a list.
         """.trimIndent()
         imports = listOf(
             "androidx.compose.material3.Checkbox",
@@ -62,7 +62,7 @@ fun ContentScope.checkboxes() = group("Checkboxes") {
             "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#TriStateCheckbox(androidx.compose.ui.state.ToggleableState,kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.CheckboxColors,androidx.compose.foundation.interaction.MutableInteractionSource)"
         screenshot = "checkbox_tri_state"
         description = """
-            A checkbox with three states - On / Off / Indeterminate.
+            A checkbox with three states: On / Off / Indeterminate.
             Checkboxes can have a parent-child relationship with other checkboxes. 
             When the parent checkbox is checked, all child checkboxes are checked. 
             If a parent checkbox is unchecked, all child checkboxes are unchecked. 
