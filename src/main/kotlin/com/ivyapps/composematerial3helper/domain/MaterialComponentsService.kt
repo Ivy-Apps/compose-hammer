@@ -25,6 +25,7 @@ class MaterialComponentsService(project: Project) {
             chips()
             dialogs()
             dividers()
+            lists()
         }
     }
 
