@@ -21,6 +21,7 @@ class MaterialComponentsService(project: Project) {
             bottomAppBar()
             bottomSheets()
             cards()
+            checkboxes()
         }
     }
 
