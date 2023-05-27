@@ -36,8 +36,8 @@ class ComponentsMenuUi(
             label(
                 """
                 Did you know?    
-                You can quickly add components and generate Compose code by 
-                pressing "⌘ Cmd + ⤶ Enter" on Mac or "CTRL+ENTER" on Windows/Linux.
+                You can quickly add Compose components by pressing 
+                "⌘ Cmd + ⤶ Enter" on Mac or "CTRL+ENTER" on Windows/Linux.
                 """.trimIndent()
             )
         }
