@@ -22,6 +22,7 @@ class MaterialComponentsService(project: Project) {
             bottomSheets()
             cards()
             checkboxes()
+            chips()
         }
     }
 
