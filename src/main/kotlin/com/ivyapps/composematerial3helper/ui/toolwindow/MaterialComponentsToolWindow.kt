@@ -1,7 +1,7 @@
 package com.ivyapps.composematerial3helper.ui.toolwindow
 
-import com.ivyapps.composematerial3helper.data.MaterialComponent
-import com.ivyapps.composematerial3helper.services.MaterialComponentsService
+import com.ivyapps.composematerial3helper.domain.data.MaterialComponent
+import com.ivyapps.composematerial3helper.domain.MaterialComponentsService
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow

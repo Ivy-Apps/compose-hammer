@@ -1,9 +1,9 @@
 package com.ivyapps.composematerial3helper.ui.toolwindow
 
 import com.ivyapps.composematerial3helper.copyToClipboard
-import com.ivyapps.composematerial3helper.data.MaterialComponent
-import com.ivyapps.composematerial3helper.services.formatText
-import com.ivyapps.composematerial3helper.services.generateImportsCode
+import com.ivyapps.composematerial3helper.domain.data.MaterialComponent
+import com.ivyapps.composematerial3helper.domain.formatText
+import com.ivyapps.composematerial3helper.domain.generateImportsCode
 import com.ivyapps.composematerial3helper.ui.common.image
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.ui.DialogPanel

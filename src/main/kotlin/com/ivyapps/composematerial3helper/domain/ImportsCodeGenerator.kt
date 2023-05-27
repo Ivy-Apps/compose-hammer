@@ -1,4 +1,4 @@
-package com.ivyapps.composematerial3helper.services
+package com.ivyapps.composematerial3helper.domain
 
 fun generateImportsCode(imports: List<String>): String? {
     if (imports.isEmpty()) return null

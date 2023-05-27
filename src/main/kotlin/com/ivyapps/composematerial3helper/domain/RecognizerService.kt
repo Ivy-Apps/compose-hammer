@@ -1,4 +1,4 @@
-package com.ivyapps.composematerial3helper.services
+package com.ivyapps.composematerial3helper.domain
 
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.editor.Editor

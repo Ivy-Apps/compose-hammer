@@ -1,9 +1,9 @@
 package com.ivyapps.composematerial3helper.ui.toolwindow
 
 import com.ivyapps.composematerial3helper.addOnClickListener
-import com.ivyapps.composematerial3helper.data.MaterialComponent
-import com.ivyapps.composematerial3helper.services.MaterialComponentsService
-import com.ivyapps.composematerial3helper.services.formatText
+import com.ivyapps.composematerial3helper.domain.data.MaterialComponent
+import com.ivyapps.composematerial3helper.domain.MaterialComponentsService
+import com.ivyapps.composematerial3helper.domain.formatText
 import com.ivyapps.composematerial3helper.ui.common.image
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.dsl.builder.Panel

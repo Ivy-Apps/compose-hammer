@@ -1,7 +1,7 @@
-package com.ivyapps.composematerial3helper.services
+package com.ivyapps.composematerial3helper.domain
 
-import com.ivyapps.composematerial3helper.data.MaterialComponent
-import com.ivyapps.composematerial3helper.data.MaterialComponentsGroup
+import com.ivyapps.composematerial3helper.domain.data.MaterialComponent
+import com.ivyapps.composematerial3helper.domain.data.MaterialComponentsGroup
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.project.Project
 import com.ivyapps.composematerial3helper.*
