@@ -20,6 +20,7 @@ class MaterialComponentsService(project: Project) {
             badges()
             bottomAppBar()
             bottomSheets()
+            cards()
         }
     }
 
