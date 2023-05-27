@@ -1,5 +1,6 @@
 package com.ivyapps.composematerial3helper.toolwindow
 
+import com.intellij.icons.AllIcons
 import com.ivyapps.composematerial3helper.util.addOnClickListener
 import com.ivyapps.composematerial3helper.domain.data.MaterialComponent
 import com.ivyapps.composematerial3helper.domain.MaterialComponentsService
@@ -14,6 +15,7 @@ class ComponentsMenuUi(
     private val navigateToComponent: (MaterialComponent) -> Unit,
 ) {
     fun ui(): DialogPanel = panel {
+        altEnterTip()
         for (group in service.content.filter { it.showInToolWindow }) {
             collapsibleGroup(
                 title = group.title,
@@ -25,6 +27,19 @@ class ComponentsMenuUi(
             }.apply {
                 expanded = false
             }
+        }
+    }
+
+    private fun Panel.altEnterTip() {
+        row {
+            icon(AllIcons.Actions.QuickfixOffBulb)
+            label(
+                """
+                Did you know?    
+                You can quickly add components and generate Compose code by 
+                pressing "⌘ Cmd + ⤶ Enter" on Mac or "CTRL+ENTER" on Windows/Linux.
+                """.trimIndent()
+            )
         }
     }
 
