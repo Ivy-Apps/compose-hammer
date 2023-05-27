@@ -17,6 +17,7 @@ class MaterialComponentsService(project: Project) {
             fab()
             iconButtons()
             datePickers()
+            badges()
         }
     }
 
