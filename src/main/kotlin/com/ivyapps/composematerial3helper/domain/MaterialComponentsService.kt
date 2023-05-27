@@ -24,6 +24,7 @@ class MaterialComponentsService(project: Project) {
             checkboxes()
             chips()
             dialogs()
+            dividers()
         }
     }
 
