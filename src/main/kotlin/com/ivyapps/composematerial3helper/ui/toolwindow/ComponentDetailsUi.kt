@@ -104,10 +104,10 @@ class ComponentDetailsUi(
 
     private fun Panel.gradleDependency() {
         row {
-            icon(AllIcons.Actions.QuickfixOffBulb)
+            icon(AllIcons.Actions.QuickfixBulb)
             label("If it doesn't work: ")
             browserLink(
-                "Add the Gradle dependency",
+                "Add the material3 dependency",
                 "https://developer.android.com/jetpack/androidx/releases/compose-material3#declaring_dependencies"
             )
         }

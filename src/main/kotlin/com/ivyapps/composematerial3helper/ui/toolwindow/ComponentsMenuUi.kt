@@ -30,12 +30,6 @@ class ComponentsMenuUi(
 
     private fun Panel.componentUi(component: MaterialComponent) {
         group(indent = false) {
-            image(
-                imageFileName = component.menuScreenshot,
-                onClick = {
-                    navigateToComponent(component)
-                }
-            )
             row {
                 text(component.name).applyToComponent {
                     addOnClickListener {
@@ -46,6 +40,12 @@ class ComponentsMenuUi(
                     navigateToComponent(component)
                 }
             }
+            image(
+                imageFileName = component.menuScreenshot,
+                onClick = {
+                    navigateToComponent(component)
+                }
+            )
             if (component.description != null) {
                 row {
                     label(text = component.description.formatText())
