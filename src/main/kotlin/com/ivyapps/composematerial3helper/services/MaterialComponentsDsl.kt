@@ -7,8 +7,10 @@ import com.ivyapps.composematerial3helper.data.MaterialComponentsGroup
 @DslMarker
 annotation class MaterialComponentDsl
 
+typealias ContentScope = MutableList<MaterialComponentsGroup>
+
 @MaterialComponentDsl
-fun MutableList<MaterialComponentsGroup>.group(
+fun ContentScope.group(
         title: String,
         showInToolWindow: Boolean = true,
         components: MutableList<MaterialComponent>.() -> Unit

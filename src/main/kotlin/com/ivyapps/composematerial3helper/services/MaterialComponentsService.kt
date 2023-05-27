@@ -15,10 +15,7 @@ class MaterialComponentsService(project: Project) {
             buttons()
             fab()
             iconButtons()
-
-            group("Navigation") {
-
-            }
+            datePickers()
         }
     }
 
