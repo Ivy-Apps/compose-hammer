@@ -19,6 +19,7 @@ class MaterialComponentsService(project: Project) {
             datePickers()
             badges()
             bottomAppBar()
+            bottomSheets()
         }
     }
 
