@@ -28,7 +28,7 @@ class MaterialComponentsUi(private val toolWindow: ToolWindow) {
         toolWindow.contentManager.removeAllContents(true)
         toolWindow.contentManager.addContent(
             contentFactory.createContent(
-                addScrollPaneIfNecessary(
+                ScrollPaneFactory.createScrollPane(
                     ComponentsMenuUi(
                         service = service,
                         navigateToComponent = ::navigateToComponent

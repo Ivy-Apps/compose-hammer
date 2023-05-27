@@ -1,18 +1,11 @@
 package com.ivyapps.composematerial3helper.toolwindow
 
-import com.ivyapps.composematerial3helper.util.copyToClipboard
+import com.intellij.openapi.ui.DialogPanel
+import com.intellij.ui.dsl.builder.panel
 import com.ivyapps.composematerial3helper.domain.data.MaterialComponent
 import com.ivyapps.composematerial3helper.domain.formatText
 import com.ivyapps.composematerial3helper.domain.generateImportsCode
 import com.ivyapps.composematerial3helper.util.image
-import com.intellij.icons.AllIcons
-import com.intellij.openapi.ui.DialogPanel
-import com.intellij.ui.dsl.builder.Panel
-import com.intellij.ui.dsl.builder.Row
-import com.intellij.ui.dsl.builder.panel
-import com.intellij.ui.dsl.gridLayout.HorizontalAlign
-import java.awt.Dimension
-import javax.swing.JLabel
 
 class ComponentDetailsUi(
     private val navigateToMenu: () -> Unit,
@@ -55,61 +48,9 @@ class ComponentDetailsUi(
                     tip = component.customImplementationTip,
                 )
             }
-            gradleDependency()
+            unresolvedImportsTip(indent = false)
+            altEnterTip(indent = false)
         }
     }
 
-    private fun Panel.codeArea(
-        title: String?,
-        code: String,
-        tip: String? = null,
-    ) {
-        if (title != null) {
-            row {
-                label(title).bold()
-            }
-        }
-        row {
-            textArea().applyToComponent {
-                text = code
-                isEditable = false
-                size = Dimension(Int.MAX_VALUE, height)
-                autoscrolls = true
-                updateUI()
-            }.horizontalAlign(HorizontalAlign.FILL)
-                .comment(tip)
-        }
-        row {
-            copyButton(code)
-        }
-    }
-
-    private fun Row.copyButton(text: String) {
-        var copyCounter = 0
-        var copiedLabel: JLabel? = null
-        button("Copy") {
-            copyToClipboard(text)
-            copyCounter++
-            copiedLabel?.isVisible = true
-            if (copyCounter > 1) {
-                copiedLabel?.text = "Copied to clipboard! ($copyCounter)"
-                copiedLabel?.updateUI()
-            }
-        }
-        label("Copied to clipboard!").applyToComponent {
-            isVisible = false
-            copiedLabel = this
-        }
-    }
-
-    private fun Panel.gradleDependency() {
-        row {
-            icon(AllIcons.Actions.QuickfixBulb)
-            label("If it doesn't work: ")
-            browserLink(
-                "Add the material3 dependency",
-                "https://developer.android.com/jetpack/androidx/releases/compose-material3#declaring_dependencies"
-            )
-        }
-    }
 }

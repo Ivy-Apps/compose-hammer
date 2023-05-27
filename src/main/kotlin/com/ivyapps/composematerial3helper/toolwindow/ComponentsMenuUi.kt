@@ -15,7 +15,7 @@ class ComponentsMenuUi(
     private val navigateToComponent: (MaterialComponent) -> Unit,
 ) {
     fun ui(): DialogPanel = panel {
-        altEnterTip()
+        altEnterTip(indent = true)
         for (group in service.content.filter { it.showInToolWindow }) {
             collapsibleGroup(
                 title = group.title,
@@ -28,19 +28,7 @@ class ComponentsMenuUi(
                 expanded = false
             }
         }
-    }
-
-    private fun Panel.altEnterTip() {
-        row {
-            icon(AllIcons.Actions.QuickfixOffBulb)
-            label(
-                """
-                Did you know?    
-                You can quickly add Compose components by pressing 
-                "⌘ Cmd + ⤶ Enter" on Mac or "CTRL+ENTER" on Windows/Linux.
-                """.trimIndent()
-            )
-        }
+        unresolvedImportsTip(indent = true)
     }
 
     private fun Panel.componentUi(component: MaterialComponent) {
