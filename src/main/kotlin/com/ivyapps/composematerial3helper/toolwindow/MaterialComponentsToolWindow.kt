@@ -1,4 +1,4 @@
-package com.ivyapps.composematerial3helper.ui.toolwindow
+package com.ivyapps.composematerial3helper.toolwindow
 
 import com.ivyapps.composematerial3helper.domain.data.MaterialComponent
 import com.ivyapps.composematerial3helper.domain.MaterialComponentsService

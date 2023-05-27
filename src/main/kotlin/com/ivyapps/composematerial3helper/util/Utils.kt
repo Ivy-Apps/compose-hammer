@@ -1,4 +1,4 @@
-package com.ivyapps.composematerial3helper
+package com.ivyapps.composematerial3helper.util
 
 import java.awt.Component
 import java.awt.Toolkit
