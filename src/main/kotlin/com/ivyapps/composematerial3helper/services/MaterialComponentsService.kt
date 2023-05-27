@@ -5,6 +5,7 @@ import com.ivyapps.composematerial3helper.data.MaterialComponentsGroup
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.project.Project
 import com.ivyapps.composematerial3helper.*
+import com.ivyapps.composematerial3helper.content.*
 
 @Service(Service.Level.PROJECT)
 class MaterialComponentsService(project: Project) {
