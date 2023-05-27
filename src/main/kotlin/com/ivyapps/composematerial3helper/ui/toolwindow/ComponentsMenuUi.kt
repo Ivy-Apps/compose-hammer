@@ -23,7 +23,7 @@ class ComponentsMenuUi(
                     componentUi(component)
                 }
             }.apply {
-                expanded = true
+                expanded = false
             }
         }
     }
