@@ -24,20 +24,22 @@ class MaterialComponentsUi(private val toolWindow: ToolWindow) {
     private val contentFactory = ContentFactory.SERVICE.getInstance()
     private val service = toolWindow.project.service<MaterialComponentsService>()
 
+    private val menuContent by lazy {
+        contentFactory.createContent(
+            ScrollPaneFactory.createScrollPane(
+                ComponentsMenuUi(
+                    service = service,
+                    navigateToComponent = ::navigateToComponent
+                ).ui()
+            ),
+            "M3 Components",
+            false,
+        )
+    }
+
     fun navigateToMenu() {
         toolWindow.contentManager.removeAllContents(true)
-        toolWindow.contentManager.addContent(
-            contentFactory.createContent(
-                ScrollPaneFactory.createScrollPane(
-                    ComponentsMenuUi(
-                        service = service,
-                        navigateToComponent = ::navigateToComponent
-                    ).ui()
-                ),
-                "M3 Components",
-                false,
-            )
-        )
+        toolWindow.contentManager.addContent(menuContent)
     }
 
     fun navigateToComponent(component: MaterialComponent) {
