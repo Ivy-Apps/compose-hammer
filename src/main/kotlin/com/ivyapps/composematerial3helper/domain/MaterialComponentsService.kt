@@ -26,6 +26,7 @@ class MaterialComponentsService(project: Project) {
             dialogs()
             dividers()
             lists()
+            menus()
         }
     }
 
