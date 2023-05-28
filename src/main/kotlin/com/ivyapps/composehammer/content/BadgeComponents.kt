@@ -18,6 +18,8 @@ fun ContentScope.badges() = group("Badges") {
         """.trimIndent()
         screenshot = "badge"
         imports = listOf(
+            "androidx.compose.material.icons.Icons",
+            "androidx.compose.material.icons.filled.ShoppingCart",
             "androidx.compose.material3.Badge",
             "androidx.compose.material3.BadgedBox",
             "androidx.compose.material3.Icon",
