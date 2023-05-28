@@ -35,6 +35,7 @@ fun ContentScope.snackbars() = group("Snackbars") {
             "androidx.compose.runtime.remember",
             "androidx.compose.runtime.rememberCoroutineScope",
             "androidx.compose.ui.Modifier",
+            "kotlinx.coroutines.launch",
         )
         code = """
             val snackbarHostState = remember { SnackbarHostState() }
