@@ -30,6 +30,7 @@ class MaterialComponentsService(project: Project) {
             menus()
             navigationBars()
             navigationDrawers()
+            navigationRails()
         }
     }
 
