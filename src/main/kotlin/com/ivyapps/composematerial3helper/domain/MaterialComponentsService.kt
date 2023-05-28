@@ -36,6 +36,7 @@ class MaterialComponentsService(project: Project) {
             searchBars()
             sliders()
             snackbars()
+            switches()
         }
     }
 
