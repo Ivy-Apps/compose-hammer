@@ -60,7 +60,6 @@ fun ContentScope.animations() = group(
                     true -> {
         
                     }
-        
                     false -> {
         
                     }
@@ -69,8 +68,66 @@ fun ContentScope.animations() = group(
         """.trimIndent()
     }
 
-//    component {
-//        showInToolWindow = false
-//        name = "animateFloatAs"
-//    }
+    component {
+        showInToolWindow = false
+        name = "by animateFloatAsState()"
+        imports = listOf(
+            "androidx.compose.animation.core.animateFloatAsState",
+            "androidx.compose.runtime.Composable",
+            "androidx.compose.runtime.getValue",
+            "androidx.compose.runtime.mutableStateOf",
+            "androidx.compose.runtime.remember",
+            "androidx.compose.runtime.setValue",
+        )
+        code = """
+            var visible by remember { mutableStateOf(false) }
+            val alpha by animateFloatAsState(
+                targetValue = if (visible) 1f else 0f,
+                label = "alpha anim"
+            )
+            // use Modifier.alpha(alpha) if you want to animate alpha animation
+        """.trimIndent()
+    }
+
+    component {
+        showInToolWindow = false
+        name = "by animateDpAsState()"
+        imports = listOf(
+            "androidx.compose.animation.core.animateDpAsState",
+            "androidx.compose.runtime.Composable",
+            "androidx.compose.runtime.getValue",
+            "androidx.compose.runtime.mutableStateOf",
+            "androidx.compose.runtime.remember",
+            "androidx.compose.runtime.setValue",
+            "androidx.compose.ui.unit.dp",
+        )
+        code = """
+            var visible by remember { mutableStateOf(false) }
+            val animatedDp by animateDpAsState(
+                targetValue = if (visible) 0.dp else 48.dp,
+                label = "dp anim"
+            )
+        """.trimIndent()
+    }
+
+    component {
+        showInToolWindow = false
+        name = "by animateColorAsState()"
+        imports = listOf(
+            "androidx.compose.animation.animateColorAsState",
+            "androidx.compose.runtime.Composable",
+            "androidx.compose.runtime.getValue",
+            "androidx.compose.runtime.mutableStateOf",
+            "androidx.compose.runtime.remember",
+            "androidx.compose.runtime.setValue",
+            "androidx.compose.ui.graphics.Color",
+        )
+        code = """
+            var visible by remember { mutableStateOf(false) }
+            val animatedColor by animateColorAsState(
+                targetValue = if (visible) Color.Blue else Color.Red,
+                label = "color anim"
+            )
+        """.trimIndent()
+    }
 }
