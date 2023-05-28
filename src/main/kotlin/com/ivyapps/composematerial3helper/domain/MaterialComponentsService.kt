@@ -41,6 +41,7 @@ class MaterialComponentsService(project: Project) {
             textFields()
             timePickers()
             tooltips()
+            topAppBars()
         }
     }
 
