@@ -40,6 +40,7 @@ fun ContentScope.navigationDrawers() = group("Navigation drawers") {
             "androidx.compose.runtime.rememberCoroutineScope",
             "androidx.compose.ui.Modifier",
             "androidx.compose.ui.unit.dp",
+            "kotlinx.coroutines.launch",
         )
         code = """
             val drawerState = rememberDrawerState(DrawerValue.Closed)
@@ -155,6 +156,7 @@ fun ContentScope.navigationDrawers() = group("Navigation drawers") {
             "androidx.compose.runtime.rememberCoroutineScope",
             "androidx.compose.ui.Modifier",
             "androidx.compose.ui.unit.dp",
+            "kotlinx.coroutines.launch",
         )
         code = """
             val drawerState = rememberDrawerState(DrawerValue.Closed)
