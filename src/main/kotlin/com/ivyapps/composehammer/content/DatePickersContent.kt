@@ -177,7 +177,9 @@ fun ContentScope.datePickers() = group("Date Pickers") {
         
             if (openDialog) {
                 val datePickerState = rememberDatePickerState()
-                val confirmEnabled by derivedStateOf { datePickerState.selectedDateMillis != null }
+                val confirmEnabled by remember {
+                    derivedStateOf { datePickerState.selectedDateMillis != null }
+                }
                 DatePickerDialog(
                     onDismissRequest = {
                         openDialog = false
