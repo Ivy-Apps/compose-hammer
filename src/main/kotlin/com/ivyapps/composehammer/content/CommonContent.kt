@@ -30,15 +30,6 @@ fun ContentScope.common() = group(
 
     component {
         showInToolWindow = false
-        name = "modifier: Modifier = Modifier"
-        import = "androidx.compose.ui.Modifier"
-        code = """
-            modifier: Modifier = Modifier,
-        """.trimIndent()
-    }
-
-    component {
-        showInToolWindow = false
         name = "Column"
         imports = listOf(
             "androidx.compose.ui.Modifier",
@@ -73,24 +64,6 @@ fun ContentScope.common() = group(
 
     component {
         showInToolWindow = false
-        name = "Box"
-        imports = listOf(
-            "androidx.compose.ui.Modifier",
-            "androidx.compose.foundation.layout.Box",
-            "androidx.compose.ui.Alignment",
-        )
-        code = """
-            Box(
-                modifier = Modifier,
-                contentAlignment = Alignment.Center,
-            ) {
-        
-            }
-        """.trimIndent()
-    }
-
-    component {
-        showInToolWindow = false
         name = "Spacer - Vertical"
         imports = listOf(
             "androidx.compose.foundation.layout.Spacer",
@@ -114,6 +87,33 @@ fun ContentScope.common() = group(
         )
         code = """
             Spacer(modifier = Modifier.width(8.dp))
+        """.trimIndent()
+    }
+
+    component {
+        showInToolWindow = false
+        name = "Box"
+        imports = listOf(
+            "androidx.compose.ui.Modifier",
+            "androidx.compose.foundation.layout.Box",
+            "androidx.compose.ui.Alignment",
+        )
+        code = """
+            Box(
+                modifier = Modifier,
+                contentAlignment = Alignment.Center,
+            ) {
+        
+            }
+        """.trimIndent()
+    }
+
+    component {
+        showInToolWindow = false
+        name = "modifier: Modifier = Modifier"
+        import = "androidx.compose.ui.Modifier"
+        code = """
+            modifier: Modifier = Modifier,
         """.trimIndent()
     }
 
