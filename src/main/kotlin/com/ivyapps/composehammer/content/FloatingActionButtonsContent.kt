@@ -4,7 +4,10 @@ import com.ivyapps.composehammer.domain.ContentScope
 import com.ivyapps.composehammer.domain.component
 import com.ivyapps.composehammer.domain.group
 
-fun ContentScope.fab() = group("Floating Action Buttons") {
+fun ContentScope.fab() = group(
+    title = "Floating Action Buttons",
+    shortTitle = "FABs"
+) {
     component {
         name = "Floating Action Button"
         specUrl = "https://m3.material.io/components/floating-action-button/specs#71504201-7bd1-423d-8bb7-07e0291743e5"

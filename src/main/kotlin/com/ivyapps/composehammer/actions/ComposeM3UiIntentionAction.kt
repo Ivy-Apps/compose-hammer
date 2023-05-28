@@ -35,7 +35,7 @@ class ComposeM3UiIntentionAction : IntentionAction, HighPriorityAction, Iconable
             title = "Choose an option",
             backItem = "(X) Close menu",
             backItemLast = true,
-            items = componentsService.content.map { it.title },
+            items = componentsService.content.map { it.shortTitle ?: it.title },
             onBack = {
                 it.closeOk(null)
             }
@@ -48,7 +48,7 @@ class ComposeM3UiIntentionAction : IntentionAction, HighPriorityAction, Iconable
                 onBack = {
                     invoke(project, editor, file)
                 },
-                items = group.components.map { it.name }
+                items = group.components.map { it.shortName ?: it.name }
             ) { componentName ->
                 val component = componentsService.findComponentByNameInGroup(group, componentName)
                 insertService.addCode(editor, file, component)

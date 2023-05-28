@@ -2,6 +2,7 @@ package com.ivyapps.composehammer.domain.data
 
 data class MaterialComponent(
     val name: String,
+    val shortName: String?,
     val description: String?,
     val guidelinesUrl: String,
     val specUrl: String,
