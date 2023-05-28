@@ -7,6 +7,7 @@ import com.ivyapps.composehammer.domain.group
 fun ContentScope.topAppBars() = group("Top app bars") {
     component {
         name = "Center-aligned top app bar"
+        shortName = "Center-aligned"
         specUrl = "https://m3.material.io/components/top-app-bar/specs#51ac0fae-61c2-4abc-b8f9-1167bf54e875"
         guidelinesUrl = "https://m3.material.io/components/top-app-bar/guidelines"
         docsUrl =
@@ -129,6 +130,7 @@ fun ContentScope.topAppBars() = group("Top app bars") {
 
     component {
         name = "Small top app bar"
+        shortName = "Small"
         specUrl = "https://m3.material.io/components/top-app-bar/specs#14e23895-ac2e-40d8-b0f7-8d016c10a225"
         guidelinesUrl = "https://m3.material.io/components/top-app-bar/guidelines"
         docsUrl =
@@ -252,6 +254,7 @@ fun ContentScope.topAppBars() = group("Top app bars") {
 
     component {
         name = "Medium top app bar"
+        shortName = "Medium"
         specUrl = "https://m3.material.io/components/top-app-bar/specs#e3fd3eba-0444-437c-9a82-071ef03d85b1"
         guidelinesUrl = "https://m3.material.io/components/top-app-bar/guidelines"
         docsUrl =
@@ -400,6 +403,7 @@ fun ContentScope.topAppBars() = group("Top app bars") {
 
     component {
         name = "Large top app bar"
+        shortName = "Large"
         specUrl = "https://m3.material.io/components/top-app-bar/specs#8140aaaf-5729-4368-a0f5-baef8d576dbf"
         guidelinesUrl = "https://m3.material.io/components/top-app-bar/guidelines"
         docsUrl =

@@ -6,7 +6,8 @@ import com.ivyapps.composehammer.domain.group
 
 fun ContentScope.iconButtons() = group("Icon buttons") {
     component {
-        name = "Standard Icon Button"
+        name = "Standard icon button"
+        shortName = "Standard"
         specUrl = "https://m3.material.io/components/icon-buttons/specs#eca0451e-430b-41e1-bea3-a31cb7ccda76"
         guidelinesUrl =
             "https://m3.material.io/components/icon-buttons/guidelines#a78dd95b-c0a6-4d18-ad3d-57d4a173f37c"
@@ -56,7 +57,8 @@ fun ContentScope.iconButtons() = group("Icon buttons") {
     }
 
     component {
-        name = "Filled Icon Button"
+        name = "Filled icon button"
+        shortName = "Filled"
         specUrl = "https://m3.material.io/components/icon-buttons/specs#d4169fb5-4cf8-40b6-9ec3-4044f09cca1f"
         guidelinesUrl =
             "https://m3.material.io/components/icon-buttons/guidelines#a78dd95b-c0a6-4d18-ad3d-57d4a173f37c"
@@ -108,7 +110,8 @@ fun ContentScope.iconButtons() = group("Icon buttons") {
     }
 
     component {
-        name = "Filled Tonal Icon Button"
+        name = "Filled tonal icon button"
+        shortName = "Filled tonal"
         specUrl = "https://m3.material.io/components/icon-buttons/specs#c2ca424b-2ad7-40e6-8946-47fb1918060a"
         guidelinesUrl =
             "https://m3.material.io/components/icon-buttons/guidelines#a78dd95b-c0a6-4d18-ad3d-57d4a173f37c"
@@ -162,7 +165,8 @@ fun ContentScope.iconButtons() = group("Icon buttons") {
     }
 
     component {
-        name = "Outlined Icon Button"
+        name = "Outlined icon button"
+        shortName = "Outlined"
         specUrl = "https://m3.material.io/components/icon-buttons/specs#632e1356-8002-4ae1-ae36-48c1f9b17ef2"
         guidelinesUrl =
             "https://m3.material.io/components/icon-buttons/guidelines#a78dd95b-c0a6-4d18-ad3d-57d4a173f37c"

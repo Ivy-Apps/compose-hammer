@@ -7,7 +7,7 @@ import com.ivyapps.composehammer.domain.group
 
 fun ContentScope.datePickers() = group("Date Pickers") {
     component {
-        name = "Date Picker (input)"
+        name = "Date picker (input)"
         specUrl = "https://m3.material.io/components/date-pickers/specs#ccd8cb55-4c20-4832-9db2-7c14c49b6e8f"
         guidelinesUrl = "https://m3.material.io/components/date-pickers/guidelines#07d8ef51-1085-4838-b20f-2a0aa62dabe0"
         docsUrl =
@@ -76,7 +76,7 @@ fun ContentScope.datePickers() = group("Date Pickers") {
     }
 
     component {
-        name = "Date Picker (calendar)"
+        name = "Date picker (calendar)"
         specUrl = "https://m3.material.io/components/date-pickers/specs#d58626b9-ed69-4963-a75c-18d00cae5a06"
         guidelinesUrl = "https://m3.material.io/components/date-pickers/guidelines#c5c0471f-aa8a-4205-ab4b-1ab8cb893c5c"
         docsUrl =
@@ -149,7 +149,7 @@ fun ContentScope.datePickers() = group("Date Pickers") {
     }
 
     component {
-        name = "Date Picker dialog"
+        name = "Date picker dialog"
         specUrl = "https://m3.material.io/components/date-pickers/specs#d58626b9-ed69-4963-a75c-18d00cae5a06"
         guidelinesUrl = "https://m3.material.io/components/date-pickers/guidelines#c5c0471f-aa8a-4205-ab4b-1ab8cb893c5c"
         docsUrl =
@@ -209,7 +209,7 @@ fun ContentScope.datePickers() = group("Date Pickers") {
     }
 
     component {
-        name = "Date Range Picker"
+        name = "Date range picker"
         specUrl = "https://m3.material.io/components/date-pickers/specs#d3189372-1b73-49d2-977e-e766f43a2774"
         guidelinesUrl = "https://m3.material.io/components/date-pickers/guidelines#b4c77e58-e85e-40da-8a6b-7d921832a7ad"
         docsUrl =

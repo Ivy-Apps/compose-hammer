@@ -6,7 +6,8 @@ import com.ivyapps.composehammer.domain.group
 
 fun ContentScope.navigationDrawers() = group("Navigation drawers") {
     component {
-        name = "Modal Navigation drawer"
+        name = "Modal navigation drawer"
+        shortName = "Modal nav drawer"
         specUrl = "https://m3.material.io/components/navigation-drawer/specs"
         guidelinesUrl = "https://m3.material.io/components/navigation-drawer/guidelines"
         docsUrl =
@@ -121,6 +122,7 @@ fun ContentScope.navigationDrawers() = group("Navigation drawers") {
 
     component {
         name = "Dismissible Navigation drawer"
+        shortName = "Dismissible nav drawer"
         specUrl = "https://m3.material.io/components/navigation-drawer/specs"
         guidelinesUrl = "https://m3.material.io/components/navigation-drawer/guidelines"
         docsUrl =

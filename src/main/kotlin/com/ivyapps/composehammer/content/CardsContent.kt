@@ -7,6 +7,7 @@ import com.ivyapps.composehammer.domain.group
 fun ContentScope.cards() = group("Cards") {
     component {
         name = "Elevated card"
+        shortName = "Elevated"
         specUrl = "https://m3.material.io/components/cards/specs#a012d40d-7a5c-4b07-8740-491dec79d58b"
         guidelinesUrl = "https://m3.material.io/components/cards/guidelines"
         docsUrl =
@@ -75,6 +76,7 @@ fun ContentScope.cards() = group("Cards") {
 
     component {
         name = "Filled card"
+        shortName = "Filled"
         specUrl = "https://m3.material.io/components/cards/specs#6192bdaa-bd56-45c9-97ff-d540ce5337ac"
         guidelinesUrl = "https://m3.material.io/components/cards/guidelines"
         docsUrl =
@@ -142,6 +144,7 @@ fun ContentScope.cards() = group("Cards") {
 
     component {
         name = "Outlined card"
+        shortName = "Outlined"
         specUrl = "https://m3.material.io/components/cards/specs#9ad208b3-3d37-475c-a0eb-68cf845718f8"
         guidelinesUrl = "https://m3.material.io/components/cards/guidelines"
         docsUrl =

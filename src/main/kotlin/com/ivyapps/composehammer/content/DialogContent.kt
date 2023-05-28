@@ -6,7 +6,7 @@ import com.ivyapps.composehammer.domain.group
 
 fun ContentScope.dialogs() = group("Dialogs") {
     component {
-        name = "Alert Dialog"
+        name = "Alert dialog"
         specUrl = "https://m3.material.io/components/dialogs/specs"
         guidelinesUrl = "https://m3.material.io/components/dialogs/guidelines"
         docsUrl =

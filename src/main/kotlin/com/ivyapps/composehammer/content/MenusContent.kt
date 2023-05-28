@@ -7,6 +7,7 @@ import com.ivyapps.composehammer.domain.group
 fun ContentScope.menus() = group("Dropdown menus") {
     component {
         name = "Dropdown menu"
+        shortName = "Dropdown"
         specUrl = "https://m3.material.io/components/menus/specs"
         guidelinesUrl = "https://m3.material.io/components/menus/guidelines"
         docsUrl =
@@ -166,7 +167,8 @@ fun ContentScope.menus() = group("Dropdown menus") {
     }
 
     component {
-        name = "Exposed Dropdown menu"
+        name = "Exposed dropdown menu"
+        shortName = "Exposed dropdown"
         specUrl = "https://m3.material.io/components/menus/specs"
         guidelinesUrl = "https://m3.material.io/components/menus/guidelines"
         docsUrl =

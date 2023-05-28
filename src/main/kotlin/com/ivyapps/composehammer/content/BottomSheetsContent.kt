@@ -6,7 +6,7 @@ import com.ivyapps.composehammer.domain.group
 
 fun ContentScope.bottomSheets() = group("Bottom sheets") {
     component {
-        name = "Bottom sheets"
+        name = "Bottom sheet"
         specUrl = "https://m3.material.io/components/bottom-sheets/specs"
         guidelinesUrl = "https://m3.material.io/components/bottom-sheets/guidelines"
         docsUrl =

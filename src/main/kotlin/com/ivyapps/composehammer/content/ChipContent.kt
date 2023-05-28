@@ -7,6 +7,7 @@ import com.ivyapps.composehammer.domain.group
 fun ContentScope.chips() = group("Chips") {
     component {
         name = "Assist chip"
+        shortName = "Assist"
         specUrl = "https://m3.material.io/components/chips/specs#a144389c-9478-4fe4-9bd8-ca9f7dd830eb"
         guidelinesUrl = "https://m3.material.io/components/chips/guidelines#5dd1928c-1476-4029-bdc5-fde66fc0dcb1"
         docsUrl =
@@ -82,6 +83,7 @@ fun ContentScope.chips() = group("Chips") {
 
     component {
         name = "Filter chip"
+        shortName = "Filter"
         specUrl = "https://m3.material.io/components/chips/specs#e900592f-75a4-4298-853c-bedd8f462f83"
         guidelinesUrl = "https://m3.material.io/components/chips/guidelines#8d453d50-8d8e-43aa-9ae3-87ed134d2e64"
         docsUrl =
@@ -175,6 +177,7 @@ fun ContentScope.chips() = group("Chips") {
 
     component {
         name = "Input chip"
+        shortName = "Input"
         specUrl = "https://m3.material.io/components/chips/specs#facb7c02-74c4-4b81-bd52-6ad10ce351eb"
         guidelinesUrl = "https://m3.material.io/components/chips/guidelines#4d2d5ef5-3fcd-46e9-99f2-067747b2393f"
         docsUrl =
@@ -249,6 +252,7 @@ fun ContentScope.chips() = group("Chips") {
 
     component {
         name = "Suggestion chip"
+        shortName = "Suggestion"
         specUrl = "https://m3.material.io/components/chips/specs#67a358c0-c370-4bf1-b410-7f8dd3f1a60c"
         guidelinesUrl = "https://m3.material.io/components/chips/guidelines#36d7bb16-a9bf-4cf6-a73d-8e05510d66a7"
         docsUrl =

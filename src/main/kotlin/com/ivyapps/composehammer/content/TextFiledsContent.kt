@@ -7,6 +7,7 @@ import com.ivyapps.composehammer.domain.group
 fun ContentScope.textFields() = group("Text fields") {
     component {
         name = "Filled text field"
+        shortName = "Filled"
         specUrl = "https://m3.material.io/components/text-fields/specs#6d654d1d-262e-4697-858c-9a75e8e7c81d"
         guidelinesUrl = "https://m3.material.io/components/text-fields/guidelines"
         docsUrl =
@@ -68,6 +69,7 @@ fun ContentScope.textFields() = group("Text fields") {
 
     component {
         name = "Outlined text field"
+        shortName = "Outlined"
         specUrl = "https://m3.material.io/components/text-fields/specs#68b00bd6-ab40-4b4f-93d9-ed1fbbc5d06e"
         guidelinesUrl = "https://m3.material.io/components/text-fields/guidelines#1206edf3-4472-4c05-90e7-8efe7e409ea2"
         docsUrl =
