@@ -15,7 +15,7 @@ fun Panel.altEnterTip(
         row {
             label(
                 """
-                You can quickly add Compose components by pressing 
+                You can quickly add Compose components and more by pressing 
                 "⌘ Cmd + ⤶ Enter" on Mac or "CTRL+ENTER" on Windows/Linux.
                 Try it out! It's worth it.
             """.trimIndent()
