@@ -28,6 +28,9 @@ fun ContentScope.bottomAppBar() = group("Bottom app bar") {
             "androidx.compose.material3.Icon",
             "androidx.compose.material3.IconButton",
             "androidx.compose.material.icons.Icons",
+            "androidx.compose.material.icons.filled.Edit",
+            "androidx.compose.material.icons.filled.Search",
+            "androidx.compose.material.icons.filled.Star",
         )
         code = """
             BottomAppBar(
