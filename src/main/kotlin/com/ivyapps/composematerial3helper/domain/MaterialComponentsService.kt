@@ -34,6 +34,7 @@ class MaterialComponentsService(project: Project) {
             progressIndicators()
             radioButtons()
             searchBars()
+            sliders()
         }
     }
 
