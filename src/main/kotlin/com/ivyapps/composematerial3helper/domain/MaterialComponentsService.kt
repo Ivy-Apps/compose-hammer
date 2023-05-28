@@ -28,6 +28,7 @@ class MaterialComponentsService(project: Project) {
             dividers()
             lists()
             menus()
+            navigationBars()
         }
     }
 
