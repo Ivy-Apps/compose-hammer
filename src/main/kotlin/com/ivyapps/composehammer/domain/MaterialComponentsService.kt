@@ -46,7 +46,9 @@ class MaterialComponentsService(project: Project) {
     }
 
     fun findGroupByTitle(groupTitle: String): MaterialComponentsGroup {
-        return requireNotNull(content.find { it.title == groupTitle }) {
+        return requireNotNull(content.find {
+            it.title == groupTitle || it.shortTitle == groupTitle
+        }) {
             "Couldn't find '$groupTitle' group in $content!!!"
         }
     }
@@ -55,7 +57,9 @@ class MaterialComponentsService(project: Project) {
         group: MaterialComponentsGroup,
         componentName: String
     ): MaterialComponent {
-        return requireNotNull(group.components.find { it.name == componentName }) {
+        return requireNotNull(group.components.find {
+            it.name == componentName || it.shortName == componentName
+        }) {
             "Couldn't find '$componentName' component in ${group.components}!!!"
         }
     }

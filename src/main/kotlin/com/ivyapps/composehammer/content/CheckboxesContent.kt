@@ -55,7 +55,7 @@ fun ContentScope.checkboxes() = group("Checkboxes") {
     }
 
     component {
-        name = "Checkbox"
+        name = "Tri-State checkbox"
         specUrl = "https://m3.material.io/components/checkbox/specs"
         guidelinesUrl = "https://m3.material.io/components/checkbox/guidelines"
         docsUrl =
