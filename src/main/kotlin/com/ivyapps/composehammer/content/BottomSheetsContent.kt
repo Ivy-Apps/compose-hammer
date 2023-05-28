@@ -18,19 +18,13 @@ fun ContentScope.bottomSheets() = group("Bottom sheets") {
             including menu items (in list or grid layouts), actions, and supplemental content.
         """.trimIndent()
         imports = listOf(
-            "androidx.compose.foundation.layout.Arrangement",
             "androidx.compose.foundation.layout.Column",
-            "androidx.compose.foundation.layout.Row",
             "androidx.compose.foundation.layout.Spacer",
             "androidx.compose.foundation.layout.fillMaxSize",
-            "androidx.compose.foundation.layout.fillMaxWidth",
             "androidx.compose.foundation.layout.height",
             "androidx.compose.foundation.layout.padding",
-            "androidx.compose.foundation.shape.RoundedCornerShape",
             "androidx.compose.material3.BottomSheetScaffold",
             "androidx.compose.material3.ExperimentalMaterial3Api",
-            "androidx.compose.material3.MaterialTheme",
-            "androidx.compose.material3.Surface",
             "androidx.compose.material3.Text",
             "androidx.compose.material3.rememberBottomSheetScaffoldState",
             "androidx.compose.runtime.Composable",
