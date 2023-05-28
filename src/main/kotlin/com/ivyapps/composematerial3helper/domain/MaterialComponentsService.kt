@@ -37,6 +37,7 @@ class MaterialComponentsService(project: Project) {
             sliders()
             snackbars()
             switches()
+            tabs()
         }
     }
 
