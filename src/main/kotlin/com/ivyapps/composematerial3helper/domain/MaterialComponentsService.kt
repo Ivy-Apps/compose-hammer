@@ -32,6 +32,7 @@ class MaterialComponentsService(project: Project) {
             navigationDrawers()
             navigationRails()
             progressIndicators()
+            radioButtons()
         }
     }
 
