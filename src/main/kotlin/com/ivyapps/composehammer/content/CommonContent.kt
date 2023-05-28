@@ -30,6 +30,46 @@ fun ContentScope.common() = group(
 
     component {
         showInToolWindow = false
+        name = "Spacer (vertical)"
+        imports = listOf(
+            "androidx.compose.foundation.layout.Spacer",
+            "androidx.compose.ui.Modifier",
+            "androidx.compose.ui.unit.dp",
+            "androidx.compose.foundation.layout.height",
+        )
+        code = """
+            Spacer(modifier = Modifier.height(8.dp))
+        """.trimIndent()
+    }
+
+    component {
+        showInToolWindow = false
+        name = "Spacer (horizontal)"
+        imports = listOf(
+            "androidx.compose.foundation.layout.Spacer",
+            "androidx.compose.ui.Modifier",
+            "androidx.compose.ui.unit.dp",
+            "androidx.compose.foundation.layout.width"
+        )
+        code = """
+            Spacer(modifier = Modifier.width(8.dp))
+        """.trimIndent()
+    }
+
+    component {
+        showInToolWindow = false
+        name = "Spacer (weight)"
+        imports = listOf(
+            "androidx.compose.foundation.layout.Spacer",
+            "androidx.compose.ui.Modifier",
+        )
+        code = """
+            Spacer(modifier = Modifier.weight(1f))
+        """.trimIndent()
+    }
+
+    component {
+        showInToolWindow = false
         name = "Column"
         imports = listOf(
             "androidx.compose.ui.Modifier",
@@ -64,34 +104,6 @@ fun ContentScope.common() = group(
 
     component {
         showInToolWindow = false
-        name = "Spacer - Vertical"
-        imports = listOf(
-            "androidx.compose.foundation.layout.Spacer",
-            "androidx.compose.ui.Modifier",
-            "androidx.compose.ui.unit.dp",
-            "androidx.compose.foundation.layout.height",
-        )
-        code = """
-            Spacer(modifier = Modifier.height(8.dp))
-        """.trimIndent()
-    }
-
-    component {
-        showInToolWindow = false
-        name = "Spacer - Horizontal"
-        imports = listOf(
-            "androidx.compose.foundation.layout.Spacer",
-            "androidx.compose.ui.Modifier",
-            "androidx.compose.ui.unit.dp",
-            "androidx.compose.foundation.layout.width"
-        )
-        code = """
-            Spacer(modifier = Modifier.width(8.dp))
-        """.trimIndent()
-    }
-
-    component {
-        showInToolWindow = false
         name = "Box"
         imports = listOf(
             "androidx.compose.ui.Modifier",
@@ -105,27 +117,6 @@ fun ContentScope.common() = group(
             ) {
         
             }
-        """.trimIndent()
-    }
-
-    component {
-        showInToolWindow = false
-        name = "modifier: Modifier = Modifier"
-        import = "androidx.compose.ui.Modifier"
-        code = """
-            modifier: Modifier = Modifier,
-        """.trimIndent()
-    }
-
-    component {
-        showInToolWindow = false
-        name = "Spacer - Weight"
-        imports = listOf(
-            "androidx.compose.foundation.layout.Spacer",
-            "androidx.compose.ui.Modifier",
-        )
-        code = """
-            Spacer(modifier = Modifier.weight(1f))
         """.trimIndent()
     }
 
@@ -164,6 +155,24 @@ fun ContentScope.common() = group(
             ) {
         
             }
+        """.trimIndent()
+    }
+
+    component {
+        showInToolWindow = false
+        name = "modifier = Modifier"
+        import = "androidx.compose.ui.Modifier"
+        code = """
+            modifier = Modifier,
+        """.trimIndent()
+    }
+
+    component {
+        showInToolWindow = false
+        name = "modifier: Modifier = Modifier"
+        import = "androidx.compose.ui.Modifier"
+        code = """
+            modifier: Modifier = Modifier,
         """.trimIndent()
     }
 }
