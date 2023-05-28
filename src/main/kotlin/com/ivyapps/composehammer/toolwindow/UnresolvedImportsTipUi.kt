@@ -21,10 +21,15 @@ fun Panel.unresolvedImportsTip(
         codeArea(
             title = "Material3 dependencies",
             code = """
+                // Make sure to use the latest material3 version!
                 implementation("androidx.compose.material3:material3:1.1.0")
                 implementation("androidx.compose.material3:material3-window-size-class:1.1.0")
             """.trimIndent(),
             tip = "Use the latest version from the link above."
         )
+        row {
+            icon(AllIcons.General.Warning)
+            label("Make sure to use the latest material3 version!")
+        }
     }
 }

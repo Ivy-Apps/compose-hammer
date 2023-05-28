@@ -183,8 +183,9 @@ fun ContentScope.fab() = group(
             "androidx.compose.material.icons.Icons",
             "androidx.compose.material.icons.filled.Create",
             "androidx.compose.material3.Icon",
+            "androidx.compose.material3.Text",
             "androidx.compose.ui.Modifier",
-            "androidx.compose.ui.unit.dp"
+            "androidx.compose.ui.unit.dp",
         )
         code = """
         ExtendedFloatingActionButton(
