@@ -18,7 +18,10 @@ fun ContentScope.buttons() = group("Buttons") {
             such as when the button requires visual separation from a patterned background.
         """.trimIndent()
         screenshot = "btn_elevated"
-        import = "androidx.compose.material3.ElevatedButton"
+        imports = listOf(
+            "androidx.compose.material3.ElevatedButton",
+            "androidx.compose.material3.Text"
+        )
         code = """
         ElevatedButton(
             onClick = {
@@ -63,7 +66,10 @@ fun ContentScope.buttons() = group("Buttons") {
              that complete a flow, like Save, Join now, or Confirm.
         """.trimIndent()
         screenshot = "btn_filled"
-        import = "androidx.compose.material3.Button"
+        imports = listOf(
+            "androidx.compose.material3.Button",
+            "androidx.compose.material3.Text",
+        )
         code = """
         Button(
             onClick = {
@@ -108,7 +114,10 @@ fun ContentScope.buttons() = group("Buttons") {
              Tonal buttons use the secondary color mapping.
         """.trimIndent()
         screenshot = "btn_filled_tonal"
-        import = "androidx.compose.material3.FilledTonalButton"
+        imports = listOf(
+            "androidx.compose.material3.FilledTonalButton",
+            "androidx.compose.material3.Text",
+        )
         code = """
         FilledTonalButton(
             onClick = {
@@ -153,7 +162,10 @@ fun ContentScope.buttons() = group("Buttons") {
              Outlined buttons pair well with filled buttons to indicate an alternative, secondary action.
         """.trimIndent()
         screenshot = "btn_outlined"
-        import = "androidx.compose.material3.OutlinedButton"
+        imports = listOf(
+            "androidx.compose.material3.OutlinedButton",
+            "androidx.compose.material3.Text",
+        )
         code = """
         OutlinedButton(
             onClick = {
@@ -199,7 +211,10 @@ fun ContentScope.buttons() = group("Buttons") {
              Until the button is interacted with, its container isn’t visible.
         """.trimIndent()
         screenshot = "btn_text"
-        import = "androidx.compose.material3.TextButton"
+        imports = listOf(
+            "androidx.compose.material3.TextButton",
+            "androidx.compose.material3.Text",
+        )
         code = """
         TextButton(
             onClick = {

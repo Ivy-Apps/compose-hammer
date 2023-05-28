@@ -38,7 +38,6 @@ class ComponentScope {
     var codeTip: String? = null
     var customCode: String? = null
     var customCodeTip: String? = null
-    var import: String? = null
     var imports: List<String> = emptyList()
     var showInToolWindow = true
 
@@ -53,7 +52,7 @@ class ComponentScope {
                 docsUrl = docsUrl ?: "",
                 menuScreenshot = screenshot ?: "",
                 detailsScreenshot = screenshot ?: "",
-                imports = import?.let(::listOf) ?: imports.takeIf { it.isNotEmpty() } ?: emptyList(),
+                imports = imports.takeIf { it.isNotEmpty() } ?: emptyList(),
                 defaultImplementation = code.required(),
                 defaultImplementationTip = codeTip,
                 customImplementation = customCode,
@@ -71,7 +70,7 @@ class ComponentScope {
             docsUrl = docsUrl.required(),
             menuScreenshot = screenshot.required(),
             detailsScreenshot = screenshot.required(),
-            imports = import?.let(::listOf) ?: imports.takeIf { it.isNotEmpty() }.required(),
+            imports = imports.takeIf { it.isNotEmpty() }.required(),
             defaultImplementation = code.required(),
             defaultImplementationTip = codeTip,
             customImplementation = customCode,

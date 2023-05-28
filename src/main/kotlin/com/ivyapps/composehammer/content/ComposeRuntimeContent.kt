@@ -50,7 +50,7 @@ fun ContentScope.composeRuntime() = group(
     component {
         showInToolWindow = false
         name = "Coroutine scope"
-        import = "androidx.compose.runtime.rememberCoroutineScope"
+        imports = listOf("androidx.compose.runtime.rememberCoroutineScope")
         code = """
             val coroutineScope = rememberCoroutineScope()
         """.trimIndent()
@@ -59,7 +59,7 @@ fun ContentScope.composeRuntime() = group(
     component {
         showInToolWindow = false
         name = "LaunchedEffect"
-        import = "androidx.compose.runtime.LaunchedEffect"
+        imports = listOf("androidx.compose.runtime.LaunchedEffect")
         code = """
             LaunchedEffect(Unit) {
     

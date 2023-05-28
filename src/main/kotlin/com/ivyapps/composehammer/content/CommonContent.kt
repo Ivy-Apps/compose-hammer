@@ -161,7 +161,7 @@ fun ContentScope.common() = group(
     component {
         showInToolWindow = false
         name = "modifier = Modifier"
-        import = "androidx.compose.ui.Modifier"
+        imports = listOf("androidx.compose.ui.Modifier")
         code = """
             modifier = Modifier,
         """.trimIndent()
@@ -170,7 +170,7 @@ fun ContentScope.common() = group(
     component {
         showInToolWindow = false
         name = "modifier: Modifier = Modifier"
-        import = "androidx.compose.ui.Modifier"
+        imports = listOf("androidx.compose.ui.Modifier")
         code = """
             modifier: Modifier = Modifier,
         """.trimIndent()
