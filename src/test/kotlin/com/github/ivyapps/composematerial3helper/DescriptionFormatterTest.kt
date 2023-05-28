@@ -2,7 +2,7 @@ package com.github.ivyapps.composematerial3helper
 
 import com.intellij.testFramework.TestDataPath
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
-import com.ivyapps.composematerial3helper.domain.formatText
+import com.ivyapps.composehammer.domain.formatText
 
 @TestDataPath("\$CONTENT_ROOT/src/test/testData")
 class DescriptionFormatterTest : BasePlatformTestCase() {

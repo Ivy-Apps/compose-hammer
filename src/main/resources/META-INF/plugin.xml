@@ -1,7 +1,7 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.ivyapps.composematerial3helper</id>
-    <name>Compose Material3 UI Builder</name>
+    <id>com.ivyapps.composehammer</id>
+    <name>Compose Hammer</name>
     <vendor>ivyapps</vendor>
 
     <depends>com.intellij.modules.platform</depends>
@@ -10,8 +10,8 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow
-                factoryClass="com.ivyapps.composematerial3helper.toolwindow.MaterialComponentsWindowFactory"
-                id="Compose M3 UI"
+                factoryClass="com.ivyapps.composehammer.toolwindow.MaterialComponentsWindowFactory"
+                id="Compose Hammer"
                 anchor="right"
                 icon="/logo_small.svg"
                 largeStripeAnchor="right"
@@ -19,8 +19,8 @@
                 secondary="false"/>
 
         <intentionAction>
-            <className>com.ivyapps.composematerial3helper.actions.ComposeM3UiIntentionAction</className>
-            <category>Compose M3 UI</category>
+            <className>com.ivyapps.composehammer.actions.ComposeM3UiIntentionAction</className>
+            <category>Compose Hammer</category>
         </intentionAction>
     </extensions>
 </idea-plugin>
