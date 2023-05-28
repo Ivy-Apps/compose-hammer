@@ -1,6 +1,6 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# compose-material3-helper-plugin Changelog
+# Compose Hammer
 
 ## [Unreleased]
 ### Added
