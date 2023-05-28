@@ -6,6 +6,56 @@ import com.ivyapps.composehammer.domain.group
 
 fun ContentScope.iconButtons() = group("Icon buttons") {
     component {
+        name = "Standard Icon Button"
+        specUrl = "https://m3.material.io/components/icon-buttons/specs#eca0451e-430b-41e1-bea3-a31cb7ccda76"
+        guidelinesUrl =
+            "https://m3.material.io/components/icon-buttons/guidelines#a78dd95b-c0a6-4d18-ad3d-57d4a173f37c"
+        docsUrl =
+            "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#IconButton(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.IconButtonColors,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)"
+        description = """
+            Use icon buttons to display actions in a compact layout.
+             Icon buttons can represent opening actions such as opening an overflow menu or search,
+             or represent binary actions that can be toggled on and off, such as favorite or bookmark.
+
+             Icon buttons can be grouped together or they can stand alone.
+        """.trimIndent()
+        screenshot = "iconbtn_standard"
+        imports = listOf(
+            "androidx.compose.material.icons.Icons",
+            "androidx.compose.material.icons.filled.Menu",
+            "androidx.compose.material3.Icon",
+            "androidx.compose.material3.IconButton"
+        )
+        code = """
+        IconButton(
+            onClick = {
+                /* doSomething() */
+            }
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Menu,
+                contentDescription = "Menu"
+            )
+        }
+        """.trimIndent()
+        customCode = """
+        IconButton(
+            onClick = {
+                /* doSomething() */
+            },
+            modifier = Modifier,
+            enabled = true,
+            colors = IconButtonDefaults.iconButtonColors()
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Menu,
+                contentDescription = "Menu"
+            )
+        }
+        """.trimIndent()
+    }
+
+    component {
         name = "Filled Icon Button"
         specUrl = "https://m3.material.io/components/icon-buttons/specs#d4169fb5-4cf8-40b6-9ec3-4044f09cca1f"
         guidelinesUrl =
@@ -160,56 +210,6 @@ fun ContentScope.iconButtons() = group("Icon buttons") {
             Icon(
                 imageVector = Icons.Outlined.Lock,
                 contentDescription = "Lock"
-            )
-        }
-        """.trimIndent()
-    }
-
-    component {
-        name = "Standard Icon Button"
-        specUrl = "https://m3.material.io/components/icon-buttons/specs#eca0451e-430b-41e1-bea3-a31cb7ccda76"
-        guidelinesUrl =
-            "https://m3.material.io/components/icon-buttons/guidelines#a78dd95b-c0a6-4d18-ad3d-57d4a173f37c"
-        docsUrl =
-            "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#IconButton(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.IconButtonColors,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)"
-        description = """
-            Use icon buttons to display actions in a compact layout.
-             Icon buttons can represent opening actions such as opening an overflow menu or search,
-             or represent binary actions that can be toggled on and off, such as favorite or bookmark.
-
-             Icon buttons can be grouped together or they can stand alone.
-        """.trimIndent()
-        screenshot = "iconbtn_standard"
-        imports = listOf(
-            "androidx.compose.material.icons.Icons",
-            "androidx.compose.material.icons.filled.Menu",
-            "androidx.compose.material3.Icon",
-            "androidx.compose.material3.IconButton"
-        )
-        code = """
-        IconButton(
-            onClick = {
-                /* doSomething() */
-            }
-        ) {
-            Icon(
-                imageVector = Icons.Filled.Menu,
-                contentDescription = "Menu"
-            )
-        }
-        """.trimIndent()
-        customCode = """
-        IconButton(
-            onClick = {
-                /* doSomething() */
-            },
-            modifier = Modifier,
-            enabled = true,
-            colors = IconButtonDefaults.iconButtonColors()
-        ) {
-            Icon(
-                imageVector = Icons.Filled.Menu,
-                contentDescription = "Menu"
             )
         }
         """.trimIndent()
