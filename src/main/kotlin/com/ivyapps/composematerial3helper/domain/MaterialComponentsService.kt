@@ -39,6 +39,7 @@ class MaterialComponentsService(project: Project) {
             switches()
             tabs()
             textFields()
+            timePickers()
         }
     }
 
