@@ -68,7 +68,7 @@ fun ContentScope.sliders() = group("Sliders") {
     }
 
     component {
-        name = "Range Slider"
+        name = "Range slider"
         specUrl = "https://m3.material.io/components/sliders/specs"
         guidelinesUrl = "https://m3.material.io/components/sliders/guidelines"
         docsUrl =

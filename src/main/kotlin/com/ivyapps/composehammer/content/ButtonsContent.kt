@@ -6,7 +6,7 @@ import com.ivyapps.composehammer.domain.group
 
 fun ContentScope.buttons() = group("Buttons") {
     component {
-        name = "Elevated Button"
+        name = "Elevated button"
         specUrl = "https://m3.material.io/components/buttons/specs#2a19e853-d5dc-46a2-8ef4-1d954c9dcefa"
         guidelinesUrl = "https://m3.material.io/components/buttons/guidelines#4e89da4d-a8fa-4e20-bb8d-b8a93eff3e3e"
         docsUrl =
@@ -50,7 +50,7 @@ fun ContentScope.buttons() = group("Buttons") {
     }
 
     component {
-        name = "Filled Button"
+        name = "Filled button"
         specUrl = "https://m3.material.io/components/buttons/specs#0b1b7bd2-3de8-431a-afa1-d692e2e18b0d"
         guidelinesUrl = "https://m3.material.io/components/buttons/guidelines#9ecffdb3-ef29-47e7-8d5d-f78b404fcafe"
         docsUrl =
@@ -93,7 +93,7 @@ fun ContentScope.buttons() = group("Buttons") {
     }
 
     component {
-        name = "Filled Tonal Button"
+        name = "Filled tonal button"
         specUrl = "https://m3.material.io/components/buttons/specs#158f0a18-67fb-4ac4-9d22-cc4d1adc4579"
         guidelinesUrl = "https://m3.material.io/components/buttons/guidelines#07a1577b-aaf5-4824-a698-03526421058b"
         docsUrl =
@@ -137,7 +137,7 @@ fun ContentScope.buttons() = group("Buttons") {
     }
 
     component {
-        name = "Outlined Button"
+        name = "Outlined button"
         specUrl = "https://m3.material.io/components/buttons/specs#de72d8b1-ba16-4cd7-989e-e2ad3293cf63"
         guidelinesUrl = "https://m3.material.io/components/buttons/guidelines#3742b09f-c224-43e0-a83e-541bd29d0f05"
         docsUrl =
@@ -182,7 +182,7 @@ fun ContentScope.buttons() = group("Buttons") {
     }
 
     component {
-        name = "Text Button"
+        name = "Text button"
         specUrl = "https://m3.material.io/components/buttons/specs#899b9107-0127-4a01-8f4c-87f19323a1b4"
         guidelinesUrl = "https://m3.material.io/components/buttons/guidelines#c9bcbc0b-ee05-45ad-8e80-e814ae919fbb"
         docsUrl =

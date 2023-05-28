@@ -9,7 +9,8 @@ fun ContentScope.fab() = group(
     shortTitle = "FABs"
 ) {
     component {
-        name = "Floating Action Button"
+        name = "Floating action button"
+        shortName = "FAB"
         specUrl = "https://m3.material.io/components/floating-action-button/specs#71504201-7bd1-423d-8bb7-07e0291743e5"
         guidelinesUrl =
             "https://m3.material.io/components/floating-action-button/guidelines#dbfbab5d-c3e2-47a4-be6e-c566e9125443"
@@ -57,7 +58,8 @@ fun ContentScope.fab() = group(
     }
 
     component {
-        name = "Small Floating Action Button"
+        name = "Small floating action button"
+        shortName = "Small FAB"
         specUrl = "https://m3.material.io/components/floating-action-button/specs#df918e03-5939-4aa4-8d4b-4cdffa52b240"
         guidelinesUrl =
             "https://m3.material.io/components/floating-action-button/guidelines#2f9ec481-b30d-4dc3-89d7-feb2ca7bec4d"
@@ -106,7 +108,8 @@ fun ContentScope.fab() = group(
     }
 
     component {
-        name = "Large Floating Action Button"
+        name = "Large floating action button"
+        shortName = "Large FAB"
         specUrl = "https://m3.material.io/components/floating-action-button/specs#9d7d3d6a-bab7-47cb-be32-5596fbd660fe"
         guidelinesUrl =
             "https://m3.material.io/components/floating-action-button/guidelines#8a2b2f98-c84b-4284-bd31-a54cb77194bc"
@@ -161,7 +164,8 @@ fun ContentScope.fab() = group(
     }
 
     component {
-        name = "Extended Floating Action Button"
+        name = "Extended floating action button"
+        shortName = "Extended FAB"
         specUrl = "https://m3.material.io/components/extended-fab/specs#8c06766e-0afc-436f-a695-aa589700be14"
         guidelinesUrl =
             "https://m3.material.io/components/extended-fab/guidelines#c33cceea-4076-4df8-b83c-edf5e644f64d"
