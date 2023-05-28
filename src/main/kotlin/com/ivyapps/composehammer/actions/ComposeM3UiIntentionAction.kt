@@ -33,7 +33,7 @@ class ComposeM3UiIntentionAction : IntentionAction, HighPriorityAction, Iconable
 
         editor.showM3ComponentsPopup(
             title = "Choose an option",
-            backItem = "(X) Close menu",
+            backItem = "❌ Close menu",
             backItemLast = true,
             items = componentsService.content.map { it.shortTitle ?: it.title },
             onBack = {
@@ -43,8 +43,8 @@ class ComposeM3UiIntentionAction : IntentionAction, HighPriorityAction, Iconable
             val group = componentsService.findGroupByTitle(groupTitle)
             editor.showM3ComponentsPopup(
                 title = groupTitle,
-                backItem = "(<-) Go back",
-                backItemLast = false,
+                backItem = "⬅ Go back",
+                backItemLast = true,
                 onBack = {
                     invoke(project, editor, file)
                 },
