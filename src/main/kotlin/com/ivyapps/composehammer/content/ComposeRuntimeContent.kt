@@ -5,7 +5,7 @@ import com.ivyapps.composehammer.domain.component
 import com.ivyapps.composehammer.domain.group
 
 fun ContentScope.composeRuntime() = group(
-    title = "(*) Compose runtime",
+    title = "⚡ Compose runtime",
     showInToolWindow = false
 ) {
     component {

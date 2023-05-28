@@ -5,7 +5,7 @@ import com.ivyapps.composehammer.domain.component
 import com.ivyapps.composehammer.domain.group
 
 fun ContentScope.animations() = group(
-    title = "(*) Animations",
+    title = "⚡ Animations",
     showInToolWindow = false
 ) {
     component {

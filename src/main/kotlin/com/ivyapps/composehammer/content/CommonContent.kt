@@ -5,7 +5,7 @@ import com.ivyapps.composehammer.domain.component
 import com.ivyapps.composehammer.domain.group
 
 fun ContentScope.common() = group(
-    title = "(*) Quick UI",
+    title = "⚡ Quick UI",
     showInToolWindow = false
 ) {
     component {
