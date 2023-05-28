@@ -35,6 +35,7 @@ class MaterialComponentsService(project: Project) {
             radioButtons()
             searchBars()
             sliders()
+            snackbars()
         }
     }
 
