@@ -38,6 +38,7 @@ class MaterialComponentsService(project: Project) {
             snackbars()
             switches()
             tabs()
+            textFields()
         }
     }
 
