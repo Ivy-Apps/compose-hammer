@@ -4,7 +4,10 @@ import com.ivyapps.composematerial3helper.domain.ContentScope
 import com.ivyapps.composematerial3helper.domain.component
 import com.ivyapps.composematerial3helper.domain.group
 
-fun ContentScope.animations() = group("Animations", showInToolWindow = false) {
+fun ContentScope.animations() = group(
+    title = "(*) Animations",
+    showInToolWindow = false
+) {
     component {
         showInToolWindow = false
         name = "Visibility: fade-in/out + expand/collapse"
@@ -66,8 +69,8 @@ fun ContentScope.animations() = group("Animations", showInToolWindow = false) {
         """.trimIndent()
     }
 
-    component {
-        showInToolWindow = false
-        name = "animateFloatAs"
-    }
+//    component {
+//        showInToolWindow = false
+//        name = "animateFloatAs"
+//    }
 }

@@ -4,7 +4,10 @@ import com.ivyapps.composematerial3helper.domain.ContentScope
 import com.ivyapps.composematerial3helper.domain.component
 import com.ivyapps.composematerial3helper.domain.group
 
-fun ContentScope.common() = group("Common", showInToolWindow = false) {
+fun ContentScope.common() = group(
+    title = "(*) Quick UI",
+    showInToolWindow = false
+) {
     component {
         showInToolWindow = false
         name = "Text"

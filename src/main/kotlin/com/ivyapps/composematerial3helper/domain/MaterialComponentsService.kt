@@ -13,6 +13,7 @@ class MaterialComponentsService(project: Project) {
         buildList {
             common()
             composeRuntime()
+            animations()
             buttons()
             fab()
             iconButtons()

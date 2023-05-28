@@ -27,7 +27,7 @@ class ComposeM3UiIntentionAction : IntentionAction, HighPriorityAction {
         val insertService = project.service<InsertComponentService>()
 
         editor.showM3ComponentsPopup(
-                title = "Choose a component type",
+                title = "Choose an option",
                 backItem = "(X) Close menu",
                 backItemLast = true,
                 items = componentsService.content.map { it.title },
@@ -37,7 +37,7 @@ class ComposeM3UiIntentionAction : IntentionAction, HighPriorityAction {
         ) { groupTitle ->
             val group = componentsService.findGroupByTitle(groupTitle)
             editor.showM3ComponentsPopup(
-                    title = "Choose a component",
+                    title = groupTitle,
                     backItem = "(<-) Go back",
                     backItemLast = false,
                     onBack = {
