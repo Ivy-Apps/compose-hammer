@@ -29,6 +29,7 @@ class MaterialComponentsService(project: Project) {
             lists()
             menus()
             navigationBars()
+            navigationDrawers()
         }
     }
 
