@@ -11,7 +11,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow
                 factoryClass="com.ivyapps.composematerial3helper.toolwindow.MaterialComponentsWindowFactory"
-                id="Compose Material3 UI"
+                id="Compose M3 UI"
                 anchor="right"
                 icon="/logo_small.svg"
                 largeStripeAnchor="right"
@@ -20,7 +20,7 @@
 
         <intentionAction>
             <className>com.ivyapps.composematerial3helper.actions.ComposeM3UiIntentionAction</className>
-            <category>Compose Material3 UI</category>
+            <category>Compose M3 UI</category>
         </intentionAction>
     </extensions>
 </idea-plugin>

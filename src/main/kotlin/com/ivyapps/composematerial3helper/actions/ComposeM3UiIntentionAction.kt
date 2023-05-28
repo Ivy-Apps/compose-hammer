@@ -14,8 +14,8 @@ import javax.swing.Icon
 
 
 class ComposeM3UiIntentionAction : IntentionAction, HighPriorityAction {
-    override fun getText() = "Compose Material3 UI builder"
-    override fun getFamilyName() = "Compose Material3 UI"
+    override fun getText() = "Compose M3 UI builder"
+    override fun getFamilyName() = "Compose M3 UI"
 
     override fun isAvailable(project: Project, editor: Editor, file: PsiFile): Boolean {
         val service = project.service<RecognizerService>()

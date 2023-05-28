@@ -32,7 +32,7 @@ class MaterialComponentsUi(private val toolWindow: ToolWindow) {
                     navigateToComponent = ::navigateToComponent
                 ).ui()
             ),
-            "M3 Components",
+            "Components",
             false,
         )
     }
