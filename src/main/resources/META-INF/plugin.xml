@@ -13,6 +13,7 @@
                 factoryClass="com.ivyapps.composematerial3helper.toolwindow.MaterialComponentsWindowFactory"
                 id="Compose Material3 UI"
                 anchor="right"
+                icon="/logo_small.svg"
                 largeStripeAnchor="right"
                 doNotActivateOnStart="false"
                 secondary="false"/>

@@ -10,7 +10,21 @@ fun ContentScope.composeRuntime() = group(
 ) {
     component {
         showInToolWindow = false
-        name = "Compose State"
+        name = "by remember { mutableStateOf(false) }"
+        imports = listOf(
+            "androidx.compose.runtime.getValue",
+            "androidx.compose.runtime.mutableStateOf",
+            "androidx.compose.runtime.remember",
+            "androidx.compose.runtime.setValue",
+        )
+        code = """
+            var visible by remember { mutableStateOf(false) }
+        """.trimIndent()
+    }
+
+    component {
+        showInToolWindow = false
+        name = "by remember { mutableStateOf<String?>(null) }"
         imports = listOf(
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
@@ -24,7 +38,7 @@ fun ContentScope.composeRuntime() = group(
 
     component {
         showInToolWindow = false
-        name = "Local Context"
+        name = "LocalContext.current"
         imports = listOf(
             "androidx.compose.ui.platform.LocalContext",
         )
@@ -44,7 +58,7 @@ fun ContentScope.composeRuntime() = group(
 
     component {
         showInToolWindow = false
-        name = "Launched Effect"
+        name = "LaunchedEffect"
         import = "androidx.compose.runtime.LaunchedEffect"
         code = """
             LaunchedEffect(Unit) {

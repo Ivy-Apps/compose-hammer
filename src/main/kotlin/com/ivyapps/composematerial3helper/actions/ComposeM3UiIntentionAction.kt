@@ -8,7 +8,9 @@ import com.intellij.codeInsight.intention.IntentionAction
 import com.intellij.openapi.components.service
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.util.IconLoader
 import com.intellij.psi.PsiFile
+import javax.swing.Icon
 
 
 class ComposeM3UiIntentionAction : IntentionAction, HighPriorityAction {
