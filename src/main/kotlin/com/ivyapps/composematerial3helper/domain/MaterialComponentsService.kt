@@ -31,6 +31,7 @@ class MaterialComponentsService(project: Project) {
             navigationBars()
             navigationDrawers()
             navigationRails()
+            progressIndicators()
         }
     }
 
