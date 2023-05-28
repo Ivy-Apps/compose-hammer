@@ -33,6 +33,7 @@ class MaterialComponentsService(project: Project) {
             navigationRails()
             progressIndicators()
             radioButtons()
+            searchBars()
         }
     }
 
