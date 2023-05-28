@@ -4,7 +4,7 @@ import com.ivyapps.composehammer.domain.ContentScope
 import com.ivyapps.composehammer.domain.component
 import com.ivyapps.composehammer.domain.group
 
-fun ContentScope.menus() = group("Dropdown Menus") {
+fun ContentScope.menus() = group("Dropdown menus") {
     component {
         name = "Dropdown menu"
         specUrl = "https://m3.material.io/components/menus/specs"

@@ -4,7 +4,7 @@ import com.ivyapps.composehammer.domain.ContentScope
 import com.ivyapps.composehammer.domain.component
 import com.ivyapps.composehammer.domain.group
 
-fun ContentScope.iconButtons() = group("Icon Buttons") {
+fun ContentScope.iconButtons() = group("Icon buttons") {
     component {
         name = "Filled Icon Button"
         specUrl = "https://m3.material.io/components/icon-buttons/specs#d4169fb5-4cf8-40b6-9ec3-4044f09cca1f"

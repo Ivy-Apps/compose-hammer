@@ -4,7 +4,7 @@ import com.ivyapps.composehammer.domain.ContentScope
 import com.ivyapps.composehammer.domain.component
 import com.ivyapps.composehammer.domain.group
 
-fun ContentScope.radioButtons() = group("Radio Buttons") {
+fun ContentScope.radioButtons() = group("Radio buttons") {
     component {
         name = "Radio button"
         specUrl = "https://m3.material.io/components/radio-button/specs"

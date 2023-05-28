@@ -5,7 +5,7 @@ import com.ivyapps.composehammer.domain.component
 import com.ivyapps.composehammer.domain.group
 
 fun ContentScope.fab() = group(
-    title = "Floating Action Buttons",
+    title = "Floating action buttons",
     shortTitle = "FABs"
 ) {
     component {
