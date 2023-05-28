@@ -40,6 +40,7 @@ class MaterialComponentsService(project: Project) {
             tabs()
             textFields()
             timePickers()
+            tooltips()
         }
     }
 
