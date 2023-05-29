@@ -154,6 +154,6 @@ _Pst: Keep in mind - this an MVP ⚠️, and it’ll only get better. That being
 your feedback and encouragement _(positive reviews)_ are highly appreciated!
 This will motivate us to work harder and make the plugin better._
 
-**P.S.** If any component isn't working properly/missing or you want to
-share your feedback and experiences, please do so at `iliyan.germanov971@gmail.com`.
+**P.S.** Feel free to report any bugs, 
+missing components or your feedback at general at `iliyan.germanov971@gmail.com`.
 <!-- Plugin description end -->

@@ -37,12 +37,13 @@ class MaterialComponentsUi(private val toolWindow: ToolWindow) {
     }
 
     fun navigateToMenu() {
-        toolWindow.contentManager.removeAllContents(true)
+        val contentsToRemove = toolWindow.contentManager.contents
         toolWindow.contentManager.addContent(menuContent)
+        contentsToRemove.forEach { toolWindow.contentManager.removeContent(it, true) }
     }
 
     fun navigateToComponent(component: MaterialComponent) {
-        toolWindow.contentManager.removeAllContents(true)
+        val contentsToRemove = toolWindow.contentManager.contents
         toolWindow.contentManager.addContent(
             contentFactory.createContent(
                 ScrollPaneFactory.createScrollPane(
@@ -54,5 +55,6 @@ class MaterialComponentsUi(private val toolWindow: ToolWindow) {
                 false
             )
         )
+        contentsToRemove.forEach { toolWindow.contentManager.removeContent(it, true) }
     }
 }
