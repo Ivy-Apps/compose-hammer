@@ -179,17 +179,24 @@ fun ContentScope.common() = group(
         showInToolWindow = false
         name = "Lazy Column"
         imports = listOf(
-            "androidx.compose.ui.Modifier",
-            "androidx.compose.foundation.lazy.LazyColumn",
             "androidx.compose.foundation.layout.PaddingValues",
+            "androidx.compose.foundation.lazy.LazyColumn",
+            "androidx.compose.foundation.lazy.items",
+            "androidx.compose.ui.Modifier",
             "androidx.compose.ui.unit.dp",
         )
         code = """
             LazyColumn(
                 modifier = Modifier,
-                contentPadding = PaddingValues(vertical = 8.dp)
+                contentPadding = PaddingValues(vertical = 8.dp) // 8.dp between each item
             ) {
-        
+                item {
+                    // If you want a single item
+                }
+                items(items = listOf<Any>()) { item ->
+                    // display a single list item
+                    // it's like forEach {}
+                }
             }
         """.trimIndent()
     }
@@ -198,17 +205,24 @@ fun ContentScope.common() = group(
         showInToolWindow = false
         name = "Lazy Row"
         imports = listOf(
-            "androidx.compose.ui.Modifier",
-            "androidx.compose.foundation.lazy.LazyRow",
             "androidx.compose.foundation.layout.PaddingValues",
+            "androidx.compose.foundation.lazy.LazyRow",
+            "androidx.compose.foundation.lazy.items",
+            "androidx.compose.ui.Modifier",
             "androidx.compose.ui.unit.dp",
         )
         code = """
             LazyRow(
                 modifier = Modifier,
-                contentPadding = PaddingValues(horizontal = 8.dp)
+                contentPadding = PaddingValues(horizontal = 8.dp) // 8.dp between each item
             ) {
-        
+                item {
+                    // If you want a single item
+                }
+                items(items = listOf<Any>()) { item ->
+                    // display a single list item
+                    // it's like forEach {}
+                }
             }
         """.trimIndent()
     }
