@@ -16,7 +16,7 @@ from https://m3.material.io.
 - **A copy-paste ready implementation code** including imports for 
 the Material3 Jetpack Compose components.
 - **A quick action (⌥ Option/Alt + ⤶ Enter)** that auto-magically
-generates and inserts the code for you with all imports necessarily.
+generates and inserts the code for you with all the imports necessary.
 - **Full customization code** for the M3 components, so you can more
 easily make them match your design requirements.
 - **Relevant links** to the [M3 Spec](https://m3.material.io/components/buttons/specs) _(anatomy)_,
@@ -26,14 +26,14 @@ for all components, so you can quickly find the info that you need.
 
 If you haven't done already, watch the 
 [Compose Hammer demo video](https://www.youtube.com/watch?v=07Yeogvw0wo).
-"Better show, than tell!"
+Better show, than tell!
 
 In a nutshell, Compose Hammer is so slick that even Thor’s Mjölnir will get envy.
 Our goal is to make Android UI development with **Jetpack Compose - easy, fun and fast.
 ⚡🔨**
 
 **Tool window features** _(Android Studio's right sidebar)_
-- _Note:_ These are all **also supported in the alt-enter quick action.**
+- _Note:_ These are all **also supported** in the alt/option + enter quick action.
 - Buttons
     - [Elevated button](https://m3.material.io/components/buttons/specs#2a19e853-d5dc-46a2-8ef4-1d954c9dcefa)
     - [Filled button](https://m3.material.io/components/buttons/specs#0b1b7bd2-3de8-431a-afa1-d692e2e18b0d)
@@ -125,30 +125,37 @@ Our goal is to make Android UI development with **Jetpack Compose - easy, fun an
 
 **Quick action only support** _(⌥ Option/Alt + ⤶ Enter)_
 - ⚡ Quick UI
-    - Text
-    - Spacer (vertical)
-    - Spacer (horizontal)
-    - Spacer (weight)
-    - Column
-    - Row
-    - Box
-    - Lazy Column
-    - Lazy Row
-    - modifier = Modifier
-    - modifier: Modifier = Modifier
+  - Text
+  - Icon
+  - Image
+  - Spacer (vertical)
+  - Spacer (horizontal)
+  - Spacer (weight)
+  - Column
+  - Row
+  - Box
+  - MaterialTheme.typography
+  - MaterialTheme.colorScheme
+  - Lazy Column
+  - Lazy Row
+  - modifier = Modifier
+  - modifier: Modifier = Modifier
+  - RoundedCornerShape (dp)
+  - RoundedCornerShape (fully rounded)
 - ⚡ Compose runtime
-    - by remember { mutableStateOf(false) }
-    - by remember { mutableStateOf<String?>(null) }
-    - LocalContext.current
-    - Coroutine scope
-    - LaunchedEffect
+  - by remember { mutableStateOf(false) }
+  - by remember { mutableStateOf<String?>(null) }
+  - LocalContext.current
+  - Coroutine scope
+  - LaunchedEffect
+  - with(LocalDensity.current) {}
+  - Open link in the browser
 - ⚡ Animations
-    - Visibility: fade-in/out + expand/collapse
-    - Crossfade
-    - by animateFloatAsState()
-    - by animateDpAsState()
-    - by animateColorAsState()
-
+  - Visibility: fade-in/out + expand/collapse
+  - Crossfade
+  - by animateFloatAsState()
+  - by animateDpAsState()
+  - by animateColorAsState()
 
 _Pst: Keep in mind - this an MVP ⚠️, and it’ll only get better. That being said, 
 your feedback and encouragement _(positive reviews)_ are highly appreciated!

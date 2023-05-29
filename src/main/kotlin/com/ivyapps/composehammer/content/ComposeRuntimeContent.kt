@@ -66,4 +66,29 @@ fun ContentScope.composeRuntime() = group(
             }
         """.trimIndent()
     }
+
+    component {
+        showInToolWindow = false
+        name = "with(LocalDensity.current) {}"
+        imports = listOf(
+            "androidx.compose.ui.platform.LocalDensity",
+        )
+        code = """
+            with(LocalDensity.current) {
+                
+            }
+        """.trimIndent()
+    }
+
+    component {
+        showInToolWindow = false
+        name = "Open link in the browser"
+        imports = listOf(
+            "androidx.compose.ui.platform.LocalUriHandler"
+        )
+        code = """
+            val browser = LocalUriHandler.current
+            browser.openUri("https://www.google.com/")
+        """.trimIndent()
+    }
 }
