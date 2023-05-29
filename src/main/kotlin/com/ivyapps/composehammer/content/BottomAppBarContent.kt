@@ -4,7 +4,7 @@ import com.ivyapps.composehammer.domain.ContentScope
 import com.ivyapps.composehammer.domain.component
 import com.ivyapps.composehammer.domain.group
 
-fun ContentScope.bottomAppBar() = group("Bottom app bar") {
+fun ContentScope.bottomAppBar() = group("Bottom app bars") {
     component {
         name = "Bottom app bar"
         specUrl = "https://m3.material.io/components/bottom-app-bar/specs"

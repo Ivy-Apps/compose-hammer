@@ -1,13 +1,13 @@
 package com.ivyapps.composehammer.toolwindow
 
-import com.ivyapps.composehammer.util.addOnClickListener
-import com.ivyapps.composehammer.domain.data.MaterialComponent
-import com.ivyapps.composehammer.domain.MaterialComponentsService
-import com.ivyapps.composehammer.domain.formatText
-import com.ivyapps.composehammer.util.image
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.dsl.builder.Panel
 import com.intellij.ui.dsl.builder.panel
+import com.ivyapps.composehammer.domain.MaterialComponentsService
+import com.ivyapps.composehammer.domain.data.MaterialComponent
+import com.ivyapps.composehammer.domain.formatText
+import com.ivyapps.composehammer.util.addOnClickListener
+import com.ivyapps.composehammer.util.image
 
 class ComponentsMenuUi(
     private val service: MaterialComponentsService,
@@ -15,6 +15,7 @@ class ComponentsMenuUi(
 ) {
     fun ui(): DialogPanel = panel {
         altEnterTip(indent = true)
+//        contentDebugInfo(service)
         for (group in service.content.filter { it.showInToolWindow }) {
             collapsibleGroup(
                 title = group.title,
