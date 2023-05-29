@@ -14,7 +14,7 @@ fun ContentScope.common() = group(
         imports = listOf(
             "androidx.compose.material3.MaterialTheme",
             "androidx.compose.material3.Text",
-            "androidx.compose.runtime.Composable",
+
             "androidx.compose.ui.Modifier",
             "androidx.compose.ui.text.style.TextAlign",
         )
@@ -24,6 +24,39 @@ fun ContentScope.common() = group(
                 text = "Text",
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Start,
+            )
+        """.trimIndent()
+    }
+
+    component {
+        showInToolWindow = false
+        name = "Icon"
+        imports = listOf(
+            "androidx.compose.material.icons.Icons",
+            "androidx.compose.material.icons.filled.Add",
+            "androidx.compose.material3.Icon",
+        )
+        code = """
+            Icon(
+                imageVector = Icons.Default.Add,
+                contentDescription = null,
+            )
+        """.trimIndent()
+    }
+
+    component {
+        showInToolWindow = false
+        name = "Image"
+        imports = listOf(
+            "androidx.compose.foundation.Image",
+            "androidx.compose.ui.layout.ContentScale",
+            "androidx.compose.ui.res.painterResource",
+        )
+        code = """
+            Image(
+                painter = painterResource(id = ),
+                contentDescription = null,
+                contentScale = ContentScale.Fit,
             )
         """.trimIndent()
     }
@@ -122,6 +155,28 @@ fun ContentScope.common() = group(
 
     component {
         showInToolWindow = false
+        name = "MaterialTheme.typography"
+        imports = listOf(
+            "androidx.compose.material3.MaterialTheme"
+        )
+        code = """
+            MaterialTheme.typography.
+        """.trimIndent()
+    }
+
+    component {
+        showInToolWindow = false
+        name = "MaterialTheme.colorScheme"
+        imports = listOf(
+            "androidx.compose.material3.MaterialTheme",
+        )
+        code = """
+            MaterialTheme.colorScheme.
+        """.trimIndent()
+    }
+
+    component {
+        showInToolWindow = false
         name = "Lazy Column"
         imports = listOf(
             "androidx.compose.ui.Modifier",
@@ -173,6 +228,29 @@ fun ContentScope.common() = group(
         imports = listOf("androidx.compose.ui.Modifier")
         code = """
             modifier: Modifier = Modifier,
+        """.trimIndent()
+    }
+
+    component {
+        showInToolWindow = false
+        name = "RoundedCornerShape (dp)"
+        imports = listOf(
+            "androidx.compose.foundation.shape.RoundedCornerShape",
+            "androidx.compose.ui.unit.dp",
+        )
+        code = """
+            RoundedCornerShape(16.dp),
+        """.trimIndent()
+    }
+
+    component {
+        showInToolWindow = false
+        name = "RoundedCornerShape (fully rounded)"
+        imports = listOf(
+            "androidx.compose.foundation.shape.RoundedCornerShape",
+        )
+        code = """
+            RoundedCornerShape(percent = 50),
         """.trimIndent()
     }
 }

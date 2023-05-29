@@ -22,7 +22,7 @@ fun ContentScope.cards() = group("Cards") {
             "androidx.compose.foundation.layout.Column",
             "androidx.compose.foundation.layout.padding",
             "androidx.compose.material3.ElevatedCard",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.ui.Modifier",
             "androidx.compose.ui.unit.dp",
         )
@@ -91,7 +91,7 @@ fun ContentScope.cards() = group("Cards") {
             "androidx.compose.foundation.layout.Column",
             "androidx.compose.foundation.layout.padding",
             "androidx.compose.material3.Card",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.ui.Modifier",
             "androidx.compose.ui.unit.dp",
         )
@@ -159,7 +159,7 @@ fun ContentScope.cards() = group("Cards") {
             "androidx.compose.foundation.layout.Column",
             "androidx.compose.foundation.layout.padding",
             "androidx.compose.material3.OutlinedCard",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.ui.Modifier",
             "androidx.compose.ui.unit.dp",
         )

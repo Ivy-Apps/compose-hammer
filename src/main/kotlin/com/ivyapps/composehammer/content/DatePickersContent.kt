@@ -165,7 +165,7 @@ fun ContentScope.datePickers() = group("Date Pickers") {
             "androidx.compose.material3.Text",
             "androidx.compose.material3.TextButton",
             "androidx.compose.material3.rememberDatePickerState",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.derivedStateOf",
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",

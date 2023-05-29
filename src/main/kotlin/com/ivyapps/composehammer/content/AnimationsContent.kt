@@ -17,7 +17,6 @@ fun ContentScope.animations() = group(
             "androidx.compose.animation.fadeIn",
             "androidx.compose.animation.fadeOut",
             "androidx.compose.animation.shrinkVertically",
-            "androidx.compose.runtime.Composable",
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.remember",
@@ -43,7 +42,6 @@ fun ContentScope.animations() = group(
         name = "Crossfade"
         imports = listOf(
             "androidx.compose.animation.Crossfade",
-            "androidx.compose.runtime.Composable",
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.remember",
@@ -73,7 +71,6 @@ fun ContentScope.animations() = group(
         name = "by animateFloatAsState()"
         imports = listOf(
             "androidx.compose.animation.core.animateFloatAsState",
-            "androidx.compose.runtime.Composable",
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.remember",
@@ -94,7 +91,6 @@ fun ContentScope.animations() = group(
         name = "by animateDpAsState()"
         imports = listOf(
             "androidx.compose.animation.core.animateDpAsState",
-            "androidx.compose.runtime.Composable",
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.remember",
@@ -115,7 +111,6 @@ fun ContentScope.animations() = group(
         name = "by animateColorAsState()"
         imports = listOf(
             "androidx.compose.animation.animateColorAsState",
-            "androidx.compose.runtime.Composable",
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.remember",

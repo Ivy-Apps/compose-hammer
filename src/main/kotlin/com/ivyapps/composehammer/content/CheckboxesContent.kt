@@ -21,17 +21,17 @@ fun ContentScope.checkboxes() = group("Checkboxes") {
         """.trimIndent()
         imports = listOf(
             "androidx.compose.material3.Checkbox",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.remember",
             "androidx.compose.runtime.setValue",
         )
         code = """
-            var checkedState by remember { mutableStateOf(false) }
+            var checked by remember { mutableStateOf(false) }
             Checkbox(
-                checked = checkedState,
-                onCheckedChange = { checkedState = it }
+                checked = checked,
+                onCheckedChange = { checked = it }
             )
         """.trimIndent()
         customCode = """
@@ -71,7 +71,7 @@ fun ContentScope.checkboxes() = group("Checkboxes") {
         """.trimIndent()
         imports = listOf(
             "androidx.compose.material3.TriStateCheckbox",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.ui.state.ToggleableState",
         )
         code = """

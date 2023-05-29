@@ -28,7 +28,7 @@ fun ContentScope.navigationRails() = group("Navigation rails") {
             "androidx.compose.material3.NavigationRail",
             "androidx.compose.material3.NavigationRailItem",
             "androidx.compose.material3.Text",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.remember",

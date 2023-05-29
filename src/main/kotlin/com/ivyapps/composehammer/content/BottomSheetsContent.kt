@@ -27,7 +27,6 @@ fun ContentScope.bottomSheets() = group("Bottom sheets") {
             "androidx.compose.material3.ExperimentalMaterial3Api",
             "androidx.compose.material3.Text",
             "androidx.compose.material3.rememberBottomSheetScaffoldState",
-            "androidx.compose.runtime.Composable",
             "androidx.compose.ui.Alignment",
             "androidx.compose.ui.Modifier",
             "androidx.compose.ui.unit.dp",

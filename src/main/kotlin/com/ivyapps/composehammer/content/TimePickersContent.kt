@@ -25,7 +25,7 @@ fun ContentScope.timePickers() = group("Time pickers") {
             "androidx.compose.material3.ExperimentalMaterial3Api",
             "androidx.compose.material3.TimePicker",
             "androidx.compose.material3.rememberTimePickerState",
-            "androidx.compose.runtime.Composable",
+            
         )
         code = """
             val state = rememberTimePickerState()
@@ -87,7 +87,7 @@ fun ContentScope.timePickers() = group("Time pickers") {
             "androidx.compose.material3.ExperimentalMaterial3Api",
             "androidx.compose.material3.TimeInput",
             "androidx.compose.material3.rememberTimePickerState",
-            "androidx.compose.runtime.Composable",
+            
         )
         code = """
             val state = rememberTimePickerState()

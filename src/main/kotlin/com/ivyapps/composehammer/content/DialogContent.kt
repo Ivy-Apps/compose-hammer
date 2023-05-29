@@ -24,7 +24,7 @@ fun ContentScope.dialogs() = group("Dialogs") {
             "androidx.compose.material3.Icon",
             "androidx.compose.material3.Text",
             "androidx.compose.material3.TextButton",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.remember",

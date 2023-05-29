@@ -20,7 +20,7 @@ fun ContentScope.switches() = group("Switches") {
         """.trimIndent()
         imports = listOf(
             "androidx.compose.material3.Switch",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.remember",

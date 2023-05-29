@@ -34,7 +34,7 @@ fun ContentScope.navigationDrawers() = group("Navigation drawers") {
             "androidx.compose.material3.NavigationDrawerItemDefaults",
             "androidx.compose.material3.Text",
             "androidx.compose.material3.rememberDrawerState",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.remember",
             "androidx.compose.runtime.rememberCoroutineScope",
@@ -150,7 +150,7 @@ fun ContentScope.navigationDrawers() = group("Navigation drawers") {
             "androidx.compose.material3.NavigationDrawerItem",
             "androidx.compose.material3.Text",
             "androidx.compose.material3.rememberDrawerState",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.remember",
             "androidx.compose.runtime.rememberCoroutineScope",

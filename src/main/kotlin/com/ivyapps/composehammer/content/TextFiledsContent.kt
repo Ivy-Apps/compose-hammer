@@ -20,7 +20,7 @@ fun ContentScope.textFields() = group("Text fields") {
         imports = listOf(
             "androidx.compose.material3.Text",
             "androidx.compose.material3.TextField",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.saveable.rememberSaveable",
@@ -81,7 +81,7 @@ fun ContentScope.textFields() = group("Text fields") {
         imports = listOf(
             "androidx.compose.material3.OutlinedTextField",
             "androidx.compose.material3.Text",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.saveable.rememberSaveable",

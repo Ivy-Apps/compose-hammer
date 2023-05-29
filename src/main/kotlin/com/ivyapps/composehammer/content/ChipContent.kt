@@ -26,7 +26,7 @@ fun ContentScope.chips() = group("Chips") {
             "androidx.compose.material3.AssistChipDefaults",
             "androidx.compose.material3.Icon",
             "androidx.compose.material3.Text",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.ui.Modifier",
         )
         code = """
@@ -103,7 +103,7 @@ fun ContentScope.chips() = group("Chips") {
             "androidx.compose.material3.FilterChipDefaults",
             "androidx.compose.material3.Icon",
             "androidx.compose.material3.Text",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.remember",
@@ -197,7 +197,7 @@ fun ContentScope.chips() = group("Chips") {
             "androidx.compose.material3.InputChip",
             "androidx.compose.material3.InputChipDefaults",
             "androidx.compose.material3.Text",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.remember",

@@ -28,7 +28,7 @@ fun ContentScope.menus() = group("Dropdown menus") {
             "androidx.compose.material3.DropdownMenuItem",
             "androidx.compose.material3.Icon",
             "androidx.compose.material3.Text",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.remember",
@@ -186,7 +186,7 @@ fun ContentScope.menus() = group("Dropdown menus") {
             "androidx.compose.material3.ExposedDropdownMenuDefaults",
             "androidx.compose.material3.Text",
             "androidx.compose.material3.TextField",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.remember",

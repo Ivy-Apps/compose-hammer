@@ -31,7 +31,7 @@ fun ContentScope.topAppBars() = group("Top app bars") {
             "androidx.compose.material3.IconButton",
             "androidx.compose.material3.Scaffold",
             "androidx.compose.material3.Text",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.ui.Modifier",
             "androidx.compose.ui.text.style.TextOverflow",
         )
@@ -151,7 +151,7 @@ fun ContentScope.topAppBars() = group("Top app bars") {
             "androidx.compose.material3.Scaffold",
             "androidx.compose.material3.Text",
             "androidx.compose.material3.TopAppBar",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.ui.text.style.TextOverflow",
         )
         code = """
@@ -277,7 +277,7 @@ fun ContentScope.topAppBars() = group("Top app bars") {
             "androidx.compose.material3.Scaffold",
             "androidx.compose.material3.Text",
             "androidx.compose.material3.TopAppBarDefaults",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.ui.Modifier",
             "androidx.compose.ui.input.nestedscroll.nestedScroll",
             "androidx.compose.ui.text.style.TextOverflow",
@@ -427,7 +427,7 @@ fun ContentScope.topAppBars() = group("Top app bars") {
             "androidx.compose.material3.Scaffold",
             "androidx.compose.material3.Text",
             "androidx.compose.material3.TopAppBarDefaults",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.ui.Modifier",
             "androidx.compose.ui.input.nestedscroll.nestedScroll",
             "androidx.compose.ui.text.style.TextOverflow",

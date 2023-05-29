@@ -26,7 +26,7 @@ fun ContentScope.navigationBars() = group("Navigation bars") {
             "androidx.compose.material3.NavigationBar",
             "androidx.compose.material3.NavigationBarItem",
             "androidx.compose.material3.Text",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.remember",

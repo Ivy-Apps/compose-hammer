@@ -19,7 +19,7 @@ fun ContentScope.progressIndicators() = group("Progress indicators") {
         """.trimIndent()
         imports = listOf(
             "androidx.compose.material3.LinearProgressIndicator",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.ui.Modifier",
         )
         code = """
@@ -74,7 +74,7 @@ fun ContentScope.progressIndicators() = group("Progress indicators") {
         """.trimIndent()
         imports = listOf(
             "androidx.compose.material3.LinearProgressIndicator",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.ui.Modifier",
         )
         code = """
@@ -114,7 +114,7 @@ fun ContentScope.progressIndicators() = group("Progress indicators") {
         """.trimIndent()
         imports = listOf(
             "androidx.compose.material3.CircularProgressIndicator",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.ui.Modifier",
         )
         code = """
@@ -172,7 +172,7 @@ fun ContentScope.progressIndicators() = group("Progress indicators") {
         """.trimIndent()
         imports = listOf(
             "androidx.compose.material3.CircularProgressIndicator",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.ui.Modifier",
         )
         code = """

@@ -31,7 +31,7 @@ fun ContentScope.snackbars() = group("Snackbars") {
             "androidx.compose.material3.Scaffold",
             "androidx.compose.material3.SnackbarHost",
             "androidx.compose.material3.SnackbarHostState",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.remember",
             "androidx.compose.runtime.rememberCoroutineScope",
             "androidx.compose.ui.Modifier",

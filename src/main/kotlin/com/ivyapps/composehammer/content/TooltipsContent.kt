@@ -25,7 +25,7 @@ fun ContentScope.tooltips() = group("Tooltips") {
             "androidx.compose.material3.PlainTooltipBox",
             "androidx.compose.material3.PlainTooltipState",
             "androidx.compose.material3.Text",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.LaunchedEffect",
             "androidx.compose.runtime.remember",
             "androidx.compose.ui.Modifier",

@@ -20,7 +20,7 @@ fun ContentScope.sliders() = group("Sliders") {
         """.trimIndent()
         imports = listOf(
             "androidx.compose.material3.Slider",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.remember",
@@ -86,7 +86,7 @@ fun ContentScope.sliders() = group("Sliders") {
         """.trimIndent()
         imports = listOf(
             "androidx.compose.material3.RangeSlider",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.remember",

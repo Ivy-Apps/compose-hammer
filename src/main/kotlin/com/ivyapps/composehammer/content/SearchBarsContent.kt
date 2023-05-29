@@ -24,7 +24,7 @@ fun ContentScope.searchBars() = group("Search bars") {
             "androidx.compose.material3.Icon",
             "androidx.compose.material3.SearchBar",
             "androidx.compose.material3.Text",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.saveable.rememberSaveable",
@@ -151,7 +151,7 @@ fun ContentScope.searchBars() = group("Search bars") {
             "androidx.compose.material3.ExperimentalMaterial3Api",
             "androidx.compose.material3.Icon",
             "androidx.compose.material3.Text",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.saveable.rememberSaveable",

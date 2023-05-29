@@ -22,7 +22,7 @@ fun ContentScope.tabs() = group("Tabs") {
             "androidx.compose.material3.Tab",
             "androidx.compose.material3.TabRow",
             "androidx.compose.material3.Text",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.runtime.getValue",
             "androidx.compose.runtime.mutableStateOf",
             "androidx.compose.runtime.remember",

@@ -22,7 +22,7 @@ fun ContentScope.radioButtons() = group("Radio buttons") {
         """.trimIndent()
         imports = listOf(
             "androidx.compose.material3.RadioButton",
-            "androidx.compose.runtime.Composable",
+            
             "androidx.compose.ui.Modifier",
             "androidx.compose.ui.semantics.contentDescription",
             "androidx.compose.ui.semantics.semantics",
