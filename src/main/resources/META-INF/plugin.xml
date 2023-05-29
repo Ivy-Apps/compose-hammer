@@ -3,6 +3,11 @@
     <id>com.ivyapps.composehammer</id>
     <name>Compose Hammer</name>
     <vendor>ivyapps</vendor>
+    <product-descriptor
+            code="PCOMPOSEHAMMER"
+            release-date="20230530"
+            release-version="20235"
+            optional="false"/>
 
     <depends>com.intellij.modules.platform</depends>
 
