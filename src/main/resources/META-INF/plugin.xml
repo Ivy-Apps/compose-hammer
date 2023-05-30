@@ -2,7 +2,11 @@
 <idea-plugin>
     <id>com.ivyapps.composehammer</id>
     <name>Compose Hammer</name>
-    <vendor>ivyapps</vendor>
+    <vendor
+            url="https://ivy-apps.com"
+            email="iliyan.germanov971@gmail.com">
+        ivyapps
+    </vendor>
     <product-descriptor
             code="PCOMPOSEHAMMER"
             release-date="20230530"
