@@ -11,7 +11,7 @@ class CustomComponentsMenu(
     private val navigateToMainMenu: () -> Unit,
     private val refreshUi: () -> Unit,
 ) {
-    private val service = project.service<CustomComponentsPersistence>()
+    private val persistence = project.service<CustomComponentsPersistence>()
 
     fun ui() = panel {
         row {
@@ -22,8 +22,8 @@ class CustomComponentsMenu(
         row {
             val field = textField()
             button("Add") {
-                service.addGroup(
-                    group = ComponentGroup(
+                persistence.state.groups.add(
+                    ComponentGroup(
                         name = field.component.text,
                         order = 0.0,
                         components = emptyList()
@@ -33,7 +33,7 @@ class CustomComponentsMenu(
             }
         }
 
-        service.state.groups.forEach { group ->
+        persistence.state.groups.forEach { group ->
             collapsibleGroup(
                 title = group.name,
                 indent = true

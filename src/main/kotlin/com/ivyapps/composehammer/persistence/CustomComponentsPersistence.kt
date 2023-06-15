@@ -15,7 +15,6 @@ data class CustomComponentsState(
     var groups: MutableList<ComponentGroup> = mutableListOf()
 )
 
-
 @State(
     name = "com.ivyapps.composehammer.persistence.CustomComponentsPersistence",
     storages = [Storage("ComposeHammerCustomComponents.xml")]
@@ -28,10 +27,6 @@ class CustomComponentsPersistence : PersistentStateComponent<CustomComponentsSta
 
     override fun loadState(state: CustomComponentsState) {
         internalState = state
-    }
-
-    fun addGroup(group: ComponentGroup) {
-        internalState.groups.add(group)
     }
 }
 
