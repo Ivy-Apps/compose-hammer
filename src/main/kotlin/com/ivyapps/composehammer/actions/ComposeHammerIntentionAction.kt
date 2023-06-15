@@ -8,6 +8,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.IconLoader
 import com.intellij.openapi.util.Iconable
 import com.intellij.psi.PsiFile
+import com.ivyapps.composehammer.actions.component.showOptionsPopup
 import com.ivyapps.composehammer.domain.MaterialComponentsService
 import com.ivyapps.composehammer.domain.RecognizerService
 import com.ivyapps.composehammer.domain.legacy.InsertComponentService
@@ -31,7 +32,7 @@ class ComposeHammerIntentionAction : IntentionAction, HighPriorityAction, Iconab
         val componentsService = project.service<MaterialComponentsService>()
         val insertService = project.service<InsertComponentService>()
 
-        editor.showM3ComponentsPopup(
+        editor.showOptionsPopup(
             title = "Choose an option",
             backItem = "❌ Close menu",
             backItemLast = true,
@@ -41,7 +42,7 @@ class ComposeHammerIntentionAction : IntentionAction, HighPriorityAction, Iconab
             }
         ) { groupTitle ->
             val group = componentsService.findGroupByTitle(groupTitle)
-            editor.showM3ComponentsPopup(
+            editor.showOptionsPopup(
                 title = groupTitle,
                 backItem = "⬅ Go back",
                 backItemLast = true,

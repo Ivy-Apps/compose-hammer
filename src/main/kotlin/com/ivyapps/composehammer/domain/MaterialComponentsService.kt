@@ -3,7 +3,7 @@ package com.ivyapps.composehammer.domain
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.project.Project
 import com.ivyapps.composehammer.*
-import com.ivyapps.composehammer.content.*
+import com.ivyapps.composehammer.m3content.*
 import com.ivyapps.composehammer.domain.data.MaterialComponent
 import com.ivyapps.composehammer.domain.data.MaterialComponentsGroup
 
