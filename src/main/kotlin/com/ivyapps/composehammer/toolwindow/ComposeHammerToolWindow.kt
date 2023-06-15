@@ -9,6 +9,8 @@ import com.intellij.ui.content.Content
 import com.intellij.ui.content.ContentFactory
 import com.ivyapps.composehammer.domain.MaterialComponentsService
 import com.ivyapps.composehammer.domain.data.MaterialComponent
+import com.ivyapps.composehammer.toolwindow.screen.ComponentDetailsUi
+import com.ivyapps.composehammer.toolwindow.screen.ComponentsMenuUi
 
 class MaterialComponentsWindowFactory : ToolWindowFactory {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {

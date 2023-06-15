@@ -1,4 +1,4 @@
-package com.ivyapps.composehammer.toolwindow
+package com.ivyapps.composehammer.toolwindow.screen
 
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.dsl.builder.Panel
@@ -6,6 +6,8 @@ import com.intellij.ui.dsl.builder.panel
 import com.ivyapps.composehammer.domain.MaterialComponentsService
 import com.ivyapps.composehammer.domain.data.MaterialComponent
 import com.ivyapps.composehammer.domain.formatText
+import com.ivyapps.composehammer.toolwindow.component.altEnterTip
+import com.ivyapps.composehammer.toolwindow.component.unresolvedImportsTip
 import com.ivyapps.composehammer.util.addOnClickListener
 import com.ivyapps.composehammer.util.image
 

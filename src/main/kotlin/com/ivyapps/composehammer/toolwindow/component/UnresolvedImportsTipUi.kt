@@ -1,4 +1,4 @@
-package com.ivyapps.composehammer.toolwindow
+package com.ivyapps.composehammer.toolwindow.component
 
 import com.intellij.icons.AllIcons
 import com.intellij.ui.dsl.builder.Panel
