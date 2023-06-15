@@ -9,6 +9,7 @@ import com.ivyapps.composehammer.persistence.CustomComponentsPersistence
 class CustomComponentsMenu(
     project: Project,
     private val navigateToMainMenu: () -> Unit,
+    private val refreshUi: () -> Unit,
 ) {
     private val service = project.service<CustomComponentsPersistence>()
 
@@ -28,6 +29,7 @@ class CustomComponentsMenu(
                         components = emptyList()
                     )
                 )
+                refreshUi()
             }
         }
 

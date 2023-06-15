@@ -69,7 +69,8 @@ class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
         navigateTo(
             screen = CustomComponentsMenu(
                 project = toolWindow.project,
-                navigateToMainMenu = ::navigateToMainMenu
+                navigateToMainMenu = ::navigateToMainMenu,
+                refreshUi = ::navigateToCustomComponents,
             ).ui(),
             screenTitle = "Custom"
         )
