@@ -8,7 +8,7 @@ import com.ivyapps.composehammer.domain.generateImportsCode
 import com.ivyapps.composehammer.toolwindow.component.altEnterTip
 import com.ivyapps.composehammer.toolwindow.component.codeArea
 import com.ivyapps.composehammer.toolwindow.component.unresolvedImportsTip
-import com.ivyapps.composehammer.util.image
+import com.ivyapps.composehammer.toolwindow.component.image
 
 class MaterialComponentDetails(
     private val navigateToMenu: () -> Unit,
