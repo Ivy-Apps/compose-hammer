@@ -19,7 +19,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow
-                factoryClass="com.ivyapps.composehammer.toolwindow.MaterialComponentsWindowFactory"
+                factoryClass="com.ivyapps.composehammer.toolwindow.ComposeHammerToolWindowFactory"
                 id="Compose Hammer"
                 anchor="right"
                 icon="/logo_small.svg"

@@ -10,7 +10,7 @@ import com.ivyapps.composehammer.toolwindow.component.codeArea
 import com.ivyapps.composehammer.toolwindow.component.unresolvedImportsTip
 import com.ivyapps.composehammer.util.image
 
-class ComponentDetailsUi(
+class MaterialComponentDetails(
     private val navigateToMenu: () -> Unit,
 ) {
     fun ui(component: MaterialComponent): DialogPanel = panel {

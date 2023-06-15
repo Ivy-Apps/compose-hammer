@@ -11,9 +11,9 @@ import com.ivyapps.composehammer.toolwindow.component.unresolvedImportsTip
 import com.ivyapps.composehammer.util.addOnClickListener
 import com.ivyapps.composehammer.util.image
 
-class ComponentsMenuUi(
+class MainMenu(
     private val service: MaterialComponentsService,
-    private val navigateToComponent: (MaterialComponent) -> Unit,
+    private val navigateToMaterialComponent: (MaterialComponent) -> Unit,
 ) {
     fun ui(): DialogPanel = panel {
         altEnterTip(indent = true)
@@ -38,17 +38,17 @@ class ComponentsMenuUi(
             row {
                 text(component.name).applyToComponent {
                     addOnClickListener {
-                        navigateToComponent(component)
+                        navigateToMaterialComponent(component)
                     }
                 }.bold()
                 button("View") {
-                    navigateToComponent(component)
+                    navigateToMaterialComponent(component)
                 }
             }
             image(
                 imageFileName = component.menuScreenshot,
                 onClick = {
-                    navigateToComponent(component)
+                    navigateToMaterialComponent(component)
                 }
             )
             if (component.description != null) {

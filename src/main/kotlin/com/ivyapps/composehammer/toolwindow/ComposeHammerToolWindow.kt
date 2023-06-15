@@ -9,57 +9,57 @@ import com.intellij.ui.content.Content
 import com.intellij.ui.content.ContentFactory
 import com.ivyapps.composehammer.domain.MaterialComponentsService
 import com.ivyapps.composehammer.domain.data.MaterialComponent
-import com.ivyapps.composehammer.toolwindow.screen.ComponentDetailsUi
-import com.ivyapps.composehammer.toolwindow.screen.ComponentsMenuUi
+import com.ivyapps.composehammer.toolwindow.screen.MaterialComponentDetails
+import com.ivyapps.composehammer.toolwindow.screen.MainMenu
 
-class MaterialComponentsWindowFactory : ToolWindowFactory {
+class ComposeHammerToolWindowFactory : ToolWindowFactory {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
-        val ui = MaterialComponentsUi(toolWindow)
-        ui.navigateToMenu()
+        val composeHammerToolWindow = ComposeHammerToolWindow(toolWindow)
+        composeHammerToolWindow.navigateToMainMenu()
     }
 
     override fun shouldBeAvailable(project: Project) = true
 }
 
 
-class MaterialComponentsUi(private val toolWindow: ToolWindow) {
+class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
     private val contentFactory = ContentFactory.SERVICE.getInstance()
     private val service = toolWindow.project.service<MaterialComponentsService>()
 
     private var menuContent: Content? = null
 
-    fun navigateToMenu(recreate: Boolean = false) {
+    fun navigateToMainMenu(recreate: Boolean = false) {
         try {
-            val content = menuContent?.takeIf { !recreate } ?: createMenuContent()
+            val content = menuContent?.takeIf { !recreate } ?: createMainMenuContent()
             menuContent = content // persist for the next iteration
             val contentsToRemove = toolWindow.contentManager.contents
             toolWindow.contentManager.addContent(content)
             contentsToRemove.forEach { toolWindow.contentManager.removeContent(it, true) }
         } catch (e: Exception) {
             if (!recreate) { // check to avoid potential infinite recursion
-                navigateToMenu(recreate = true)
+                navigateToMainMenu(recreate = true)
             }
         }
     }
 
-    private fun createMenuContent(): Content = contentFactory.createContent(
+    private fun createMainMenuContent(): Content = contentFactory.createContent(
         ScrollPaneFactory.createScrollPane(
-            ComponentsMenuUi(
+            MainMenu(
                 service = service,
-                navigateToComponent = ::navigateToComponent
+                navigateToMaterialComponent = ::navigateToMaterialComponent
             ).ui()
         ),
         "Components",
         false,
     )
 
-    fun navigateToComponent(component: MaterialComponent) {
+    fun navigateToMaterialComponent(component: MaterialComponent) {
         val contentsToRemove = toolWindow.contentManager.contents
         toolWindow.contentManager.addContent(
             contentFactory.createContent(
                 ScrollPaneFactory.createScrollPane(
-                    ComponentDetailsUi(
-                        navigateToMenu = ::navigateToMenu
+                    MaterialComponentDetails(
+                        navigateToMenu = ::navigateToMainMenu
                     ).ui(component)
                 ),
                 component.name,

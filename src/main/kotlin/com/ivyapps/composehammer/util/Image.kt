@@ -1,6 +1,6 @@
 package com.ivyapps.composehammer.util
 
-import com.ivyapps.composehammer.toolwindow.MaterialComponentsWindowFactory
+import com.ivyapps.composehammer.toolwindow.ComposeHammerToolWindowFactory
 import com.intellij.ui.components.JBLabel
 import com.intellij.ui.dsl.builder.Panel
 import com.intellij.ui.dsl.builder.RowLayout
@@ -23,7 +23,7 @@ fun Panel.image(
 
 fun String.toImagePath(): URL {
     val fullPath = "/images/$this.png"
-    val resource = MaterialComponentsWindowFactory::class.java.getResource(fullPath)
+    val resource = ComposeHammerToolWindowFactory::class.java.getResource(fullPath)
     requireNotNull(resource) {
         "Couldn't find an image for '$fullPath'"
     }
