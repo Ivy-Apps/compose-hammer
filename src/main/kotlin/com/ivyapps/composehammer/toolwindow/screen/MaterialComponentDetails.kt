@@ -2,7 +2,7 @@ package com.ivyapps.composehammer.toolwindow.screen
 
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.dsl.builder.panel
-import com.ivyapps.composehammer.domain.data.MaterialComponent
+import com.ivyapps.composehammer.domain.data.material3.MaterialComponent
 import com.ivyapps.composehammer.domain.formatText
 import com.ivyapps.composehammer.domain.generateImportsCode
 import com.ivyapps.composehammer.toolwindow.component.altEnterTip

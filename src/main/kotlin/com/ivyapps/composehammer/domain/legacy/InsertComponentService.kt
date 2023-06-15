@@ -1,6 +1,6 @@
 package com.ivyapps.composehammer.domain.legacy
 
-import com.ivyapps.composehammer.domain.data.MaterialComponent
+import com.ivyapps.composehammer.domain.data.material3.MaterialComponent
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service

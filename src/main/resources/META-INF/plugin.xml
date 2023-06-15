@@ -18,6 +18,8 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
+        <projectService serviceImplementation="com.ivyapps.composehammer.persistence.CustomComponentsPersistence"/>
+
         <toolWindow
                 factoryClass="com.ivyapps.composehammer.toolwindow.ComposeHammerToolWindowFactory"
                 id="Compose Hammer"

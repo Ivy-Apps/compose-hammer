@@ -1,4 +1,4 @@
-package com.ivyapps.composehammer.domain.data
+package com.ivyapps.composehammer.domain.data.material3
 
 data class MaterialComponentsGroup(
     val title: String,

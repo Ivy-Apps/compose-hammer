@@ -1,7 +1,7 @@
 package com.ivyapps.composehammer.domain
 
-import com.ivyapps.composehammer.domain.data.MaterialComponent
-import com.ivyapps.composehammer.domain.data.MaterialComponentsGroup
+import com.ivyapps.composehammer.domain.data.material3.MaterialComponent
+import com.ivyapps.composehammer.domain.data.material3.MaterialComponentsGroup
 
 
 @DslMarker

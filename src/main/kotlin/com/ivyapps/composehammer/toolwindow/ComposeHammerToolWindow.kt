@@ -8,9 +8,11 @@ import com.intellij.ui.ScrollPaneFactory
 import com.intellij.ui.content.Content
 import com.intellij.ui.content.ContentFactory
 import com.ivyapps.composehammer.domain.MaterialComponentsService
-import com.ivyapps.composehammer.domain.data.MaterialComponent
-import com.ivyapps.composehammer.toolwindow.screen.MaterialComponentDetails
+import com.ivyapps.composehammer.domain.data.material3.MaterialComponent
+import com.ivyapps.composehammer.toolwindow.screen.CustomComponentsMenu
 import com.ivyapps.composehammer.toolwindow.screen.MainMenu
+import com.ivyapps.composehammer.toolwindow.screen.MaterialComponentDetails
+import javax.swing.JComponent
 
 class ComposeHammerToolWindowFactory : ToolWindowFactory {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
@@ -24,7 +26,7 @@ class ComposeHammerToolWindowFactory : ToolWindowFactory {
 
 class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
     private val contentFactory = ContentFactory.SERVICE.getInstance()
-    private val service = toolWindow.project.service<MaterialComponentsService>()
+    private val m3service = toolWindow.project.service<MaterialComponentsService>()
 
     private var menuContent: Content? = null
 
@@ -45,8 +47,9 @@ class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
     private fun createMainMenuContent(): Content = contentFactory.createContent(
         ScrollPaneFactory.createScrollPane(
             MainMenu(
-                service = service,
-                navigateToMaterialComponent = ::navigateToMaterialComponent
+                service = m3service,
+                navigateToMaterialComponent = ::navigateToMaterialComponent,
+                navigateToCustomComponentsMenu = ::navigateToCustomComponents,
             ).ui()
         ),
         "Components",
@@ -54,15 +57,33 @@ class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
     )
 
     fun navigateToMaterialComponent(component: MaterialComponent) {
+        navigateTo(
+            screen = MaterialComponentDetails(
+                navigateToMenu = ::navigateToMainMenu
+            ).ui(component),
+            screenTitle = component.name
+        )
+    }
+
+    fun navigateToCustomComponents() {
+        navigateTo(
+            screen = CustomComponentsMenu(
+                project = toolWindow.project,
+                navigateToMainMenu = ::navigateToMainMenu
+            ).ui(),
+            screenTitle = "Custom"
+        )
+    }
+
+    private fun navigateTo(
+        screen: JComponent,
+        screenTitle: String,
+    ) {
         val contentsToRemove = toolWindow.contentManager.contents
         toolWindow.contentManager.addContent(
             contentFactory.createContent(
-                ScrollPaneFactory.createScrollPane(
-                    MaterialComponentDetails(
-                        navigateToMenu = ::navigateToMainMenu
-                    ).ui(component)
-                ),
-                component.name,
+                ScrollPaneFactory.createScrollPane(screen),
+                screenTitle,
                 false
             )
         )
