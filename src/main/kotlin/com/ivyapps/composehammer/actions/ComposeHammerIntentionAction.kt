@@ -14,12 +14,12 @@ import com.ivyapps.composehammer.domain.legacy.InsertComponentService
 import javax.swing.Icon
 
 
-class ComposeM3UiIntentionAction : IntentionAction, HighPriorityAction, Iconable {
+class ComposeHammerIntentionAction : IntentionAction, HighPriorityAction, Iconable {
     override fun getText() = "Compose Hammer"
     override fun getFamilyName() = "Compose Hammer"
     override fun getIcon(flags: Int): Icon = IconLoader.getIcon(
         "/logo_small.svg",
-        this@ComposeM3UiIntentionAction::class.java.classLoader
+        this@ComposeHammerIntentionAction::class.java.classLoader
     )
 
     override fun isAvailable(project: Project, editor: Editor, file: PsiFile): Boolean {

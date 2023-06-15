@@ -28,7 +28,7 @@
                 secondary="false"/>
 
         <intentionAction>
-            <className>com.ivyapps.composehammer.actions.ComposeM3UiIntentionAction</className>
+            <className>com.ivyapps.composehammer.actions.ComposeHammerIntentionAction</className>
             <category>Compose Hammer</category>
         </intentionAction>
     </extensions>
