@@ -6,18 +6,12 @@ import com.intellij.openapi.components.Storage
 import com.intellij.util.xmlb.Converter
 import com.intellij.util.xmlb.annotations.OptionTag
 import com.ivyapps.composehammer.domain.data.custom.ComponentGroup
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 data class CustomComponentsState(
-    @OptionTag(converter = StateConverter::class)
-    var state: CustomState = CustomState()
-)
-
-@Serializable
-data class CustomState(
+    @OptionTag(converter = GroupsConverter::class)
     var groups: MutableList<ComponentGroup> = mutableListOf()
 )
 
@@ -37,16 +31,16 @@ class CustomComponentsPersistence : PersistentStateComponent<CustomComponentsSta
     }
 
     fun addGroup(group: ComponentGroup) {
-        internalState.state.groups.add(group)
+        internalState.groups.add(group)
     }
 }
 
-class StateConverter : Converter<CustomState>() {
-    override fun toString(value: CustomState): String {
+class GroupsConverter : Converter<List<ComponentGroup>>() {
+    override fun toString(value: List<ComponentGroup>): String {
         return Json.encodeToString(value)
     }
 
-    override fun fromString(value: String): CustomState? {
+    override fun fromString(value: String): List<ComponentGroup>? {
         return Json.decodeFromString(value)
     }
 }

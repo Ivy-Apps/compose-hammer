@@ -33,7 +33,7 @@ class CustomComponentsMenu(
             }
         }
 
-        service.state.state.groups.forEach { group ->
+        service.state.groups.forEach { group ->
             collapsibleGroup(
                 title = group.name,
                 indent = true
