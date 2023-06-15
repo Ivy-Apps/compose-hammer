@@ -8,7 +8,7 @@ import com.ivyapps.composehammer.domain.data.MaterialComponent
 import com.ivyapps.composehammer.domain.formatText
 import com.ivyapps.composehammer.toolwindow.component.altEnterTip
 import com.ivyapps.composehammer.toolwindow.component.unresolvedImportsTip
-import com.ivyapps.composehammer.util.addOnClickListener
+import com.ivyapps.composehammer.addOnClickListener
 import com.ivyapps.composehammer.toolwindow.component.image
 
 class MainMenu(

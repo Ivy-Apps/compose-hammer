@@ -1,4 +1,4 @@
-package com.ivyapps.composehammer.util
+package com.ivyapps.composehammer
 
 import java.awt.Component
 import java.awt.Toolkit

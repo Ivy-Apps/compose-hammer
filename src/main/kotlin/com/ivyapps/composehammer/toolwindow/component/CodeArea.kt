@@ -3,7 +3,7 @@ package com.ivyapps.composehammer.toolwindow.component
 import com.intellij.ui.dsl.builder.Panel
 import com.intellij.ui.dsl.builder.Row
 import com.intellij.ui.dsl.gridLayout.HorizontalAlign
-import com.ivyapps.composehammer.util.copyToClipboard
+import com.ivyapps.composehammer.copyToClipboard
 import java.awt.Dimension
 import javax.swing.JLabel
 
