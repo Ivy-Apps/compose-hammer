@@ -17,7 +17,7 @@ import javax.swing.Icon
 
 class QuickCodeIntentionAction : IntentionAction, HighPriorityAction, Iconable {
     override fun getText() = "Quick Code"
-    override fun getFamilyName() = "Compose Hammer"
+    override fun getFamilyName() = "Quick Code"
     override fun getIcon(flags: Int): Icon = IconLoader.getIcon(
         "/quick_code.svg",
         this@QuickCodeIntentionAction::class.java.classLoader

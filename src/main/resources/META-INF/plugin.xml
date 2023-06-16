@@ -36,7 +36,7 @@
 
         <intentionAction>
             <className>com.ivyapps.composehammer.action.QuickCodeIntentionAction</className>
-            <category>Compose Hammer</category>
+            <category>Quick Code</category>
         </intentionAction>
     </extensions>
 </idea-plugin>
