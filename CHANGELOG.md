@@ -1,11 +1,24 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# Compose Hammer
+# Changelog
 
 ## [Unreleased]
-### Compose Hammer 0.0.1
-- Initial release - the best is yet to come!
-- MVP version for Android Developers productivity covering Jetpack Compose and Material3.
 
 ### Added
-- Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
+- Support for custom components
+
+
+## [2023.06.16] Improvements
+
+### Changed
+
+### Fixed
+- Imports bug in quick action caused by `@file:OptIn()`
+
+
+## [2023.05.30] Initial release
+
+### Added
+
+- Initial release - the best is yet to come!
+- MVP version for Android Developers productivity covering Jetpack Compose and Material3.
