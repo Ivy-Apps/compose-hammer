@@ -1,4 +1,4 @@
-package com.ivyapps.composehammer.domain
+package com.ivyapps.composehammer.domain.ui
 
 fun String.formatText(maxLineLength: Int = 35): String {
     val words = this.replace("\n", " ")

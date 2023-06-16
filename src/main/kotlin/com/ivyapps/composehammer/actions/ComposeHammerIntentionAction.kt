@@ -11,7 +11,7 @@ import com.intellij.psi.PsiFile
 import com.ivyapps.composehammer.actions.component.showOptionsPopup
 import com.ivyapps.composehammer.domain.MaterialComponentsService
 import com.ivyapps.composehammer.domain.RecognizerService
-import com.ivyapps.composehammer.domain.legacy.InsertComponentService
+import com.ivyapps.composehammer.domain.core.InsertComponentService
 import javax.swing.Icon
 
 

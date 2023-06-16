@@ -1,4 +1,4 @@
-package com.ivyapps.composehammer.domain
+package com.ivyapps.composehammer.domain.ui
 
 fun generateImportsCode(imports: List<String>): String? {
     if (imports.isEmpty()) return null

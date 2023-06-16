@@ -3,8 +3,8 @@ package com.ivyapps.composehammer.toolwindow.screen
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.dsl.builder.panel
 import com.ivyapps.composehammer.domain.data.material3.MaterialComponent
-import com.ivyapps.composehammer.domain.formatText
-import com.ivyapps.composehammer.domain.generateImportsCode
+import com.ivyapps.composehammer.domain.ui.formatText
+import com.ivyapps.composehammer.domain.ui.generateImportsCode
 import com.ivyapps.composehammer.toolwindow.component.altEnterTip
 import com.ivyapps.composehammer.toolwindow.component.codeArea
 import com.ivyapps.composehammer.toolwindow.component.unresolvedImportsTip

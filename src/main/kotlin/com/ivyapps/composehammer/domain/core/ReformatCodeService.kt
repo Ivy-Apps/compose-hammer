@@ -1,4 +1,4 @@
-package com.ivyapps.composehammer.domain.legacy
+package com.ivyapps.composehammer.domain.core
 
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.editor.Document

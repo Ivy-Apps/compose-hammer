@@ -1,4 +1,4 @@
-package com.ivyapps.composehammer.domain.legacy
+package com.ivyapps.composehammer.domain.core
 
 import com.ivyapps.composehammer.domain.data.material3.MaterialComponent
 import com.intellij.openapi.command.WriteCommandAction

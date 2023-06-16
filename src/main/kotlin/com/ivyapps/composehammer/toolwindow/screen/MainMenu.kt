@@ -5,7 +5,7 @@ import com.intellij.ui.dsl.builder.Panel
 import com.intellij.ui.dsl.builder.panel
 import com.ivyapps.composehammer.domain.MaterialComponentsService
 import com.ivyapps.composehammer.domain.data.material3.MaterialComponent
-import com.ivyapps.composehammer.domain.formatText
+import com.ivyapps.composehammer.domain.ui.formatText
 import com.ivyapps.composehammer.toolwindow.component.altEnterTip
 import com.ivyapps.composehammer.toolwindow.component.unresolvedImportsTip
 import com.ivyapps.composehammer.addOnClickListener
