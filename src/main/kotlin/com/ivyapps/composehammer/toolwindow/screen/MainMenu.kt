@@ -14,15 +14,10 @@ import com.ivyapps.composehammer.toolwindow.component.unresolvedImportsTip
 class MainMenu(
     private val service: MaterialComponentsService,
     private val navigateToMaterialComponent: (MaterialComponent) -> Unit,
-    private val navigateToCustomComponentsMenu: () -> Unit,
+    private val navigateToCustomCodeMenu: () -> Unit,
 ) {
     fun ui(): DialogPanel = panel {
-        row {
-            button("Custom components") {
-                navigateToCustomComponentsMenu()
-            }
-        }
-        altEnterTip(indent = true)
+        customSection()
 //        contentDebugInfo(service)
         for (group in service.content.filter { it.showInToolWindow }) {
             collapsibleGroup(
@@ -38,6 +33,7 @@ class MainMenu(
                 expanded = false
             }
         }
+        altEnterTip(indent = true)
         unresolvedImportsTip(indent = true)
     }
 
@@ -63,6 +59,25 @@ class MainMenu(
                 row {
                     label(text = component.description.formatText())
                 }
+            }
+        }
+    }
+
+    private fun Panel.customSection() {
+        group(indent = true) {
+            row {
+                text("Custom templates")
+            }
+
+            row {
+                button("Custom code") {
+                    navigateToCustomCodeMenu()
+                }.comment(
+                    """
+                        Manage the custom components 
+                        for the "⚡ Quick Code" action.
+                    """.trimIndent()
+                )
             }
         }
     }

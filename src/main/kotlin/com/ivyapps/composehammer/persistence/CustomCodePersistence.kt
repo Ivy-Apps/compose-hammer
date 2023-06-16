@@ -5,37 +5,37 @@ import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
 import com.intellij.util.xmlb.Converter
 import com.intellij.util.xmlb.annotations.OptionTag
-import com.ivyapps.composehammer.domain.data.custom.ComponentGroup
+import com.ivyapps.composehammer.domain.data.custom.CodeGroup
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-data class CustomComponentsState(
+data class CustomCodeState(
     @OptionTag(converter = GroupsConverter::class)
-    var groups: MutableList<ComponentGroup> = mutableListOf()
+    var groups: MutableList<CodeGroup> = mutableListOf()
 )
 
 @State(
     name = "com.ivyapps.composehammer.persistence.CustomComponentsPersistence",
     storages = [Storage("ComposeHammerCustomComponents.xml")]
 )
-class CustomComponentsPersistence : PersistentStateComponent<CustomComponentsState> {
+class CustomCodePersistence : PersistentStateComponent<CustomCodeState> {
 
-    private var internalState = CustomComponentsState()
+    private var internalState = CustomCodeState()
 
-    override fun getState(): CustomComponentsState = internalState
+    override fun getState(): CustomCodeState = internalState
 
-    override fun loadState(state: CustomComponentsState) {
+    override fun loadState(state: CustomCodeState) {
         internalState = state
     }
 }
 
-class GroupsConverter : Converter<List<ComponentGroup>>() {
-    override fun toString(value: List<ComponentGroup>): String {
+class GroupsConverter : Converter<List<CodeGroup>>() {
+    override fun toString(value: List<CodeGroup>): String {
         return Json.encodeToString(value)
     }
 
-    override fun fromString(value: String): List<ComponentGroup>? {
+    override fun fromString(value: String): List<CodeGroup>? {
         return Json.decodeFromString(value)
     }
 }

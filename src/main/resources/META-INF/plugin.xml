@@ -18,7 +18,7 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <projectService serviceImplementation="com.ivyapps.composehammer.persistence.CustomComponentsPersistence"/>
+        <projectService serviceImplementation="com.ivyapps.composehammer.persistence.CustomCodePersistence"/>
 
         <toolWindow
                 factoryClass="com.ivyapps.composehammer.toolwindow.ComposeHammerToolWindowFactory"
@@ -30,7 +30,12 @@
                 secondary="false"/>
 
         <intentionAction>
-            <className>com.ivyapps.composehammer.actions.ComposeHammerIntentionAction</className>
+            <className>com.ivyapps.composehammer.action.ComposeHammerIntentionAction</className>
+            <category>Compose Hammer</category>
+        </intentionAction>
+
+        <intentionAction>
+            <className>com.ivyapps.composehammer.action.QuickCodeIntentionAction</className>
             <category>Compose Hammer</category>
         </intentionAction>
     </extensions>

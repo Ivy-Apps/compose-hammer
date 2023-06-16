@@ -1,4 +1,4 @@
-package com.ivyapps.composehammer.actions.component
+package com.ivyapps.composehammer.action.component
 
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.ui.popup.JBPopup

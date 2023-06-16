@@ -3,15 +3,15 @@ package com.ivyapps.composehammer.toolwindow.screen
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.ui.dsl.builder.panel
-import com.ivyapps.composehammer.domain.data.custom.ComponentGroup
-import com.ivyapps.composehammer.persistence.CustomComponentsPersistence
+import com.ivyapps.composehammer.domain.data.custom.CodeGroup
+import com.ivyapps.composehammer.persistence.CustomCodePersistence
 
-class CustomComponentsMenu(
+class CustomCodeMenu(
     project: Project,
     private val navigateToMainMenu: () -> Unit,
     private val refreshUi: () -> Unit,
 ) {
-    private val persistence = project.service<CustomComponentsPersistence>()
+    private val persistence = project.service<CustomCodePersistence>()
 
     fun ui() = panel {
         row {
@@ -23,7 +23,7 @@ class CustomComponentsMenu(
             val field = textField()
             button("Add") {
                 persistence.state.groups.add(
-                    ComponentGroup(
+                    CodeGroup(
                         name = field.component.text,
                         order = 0.0,
                         components = emptyList()

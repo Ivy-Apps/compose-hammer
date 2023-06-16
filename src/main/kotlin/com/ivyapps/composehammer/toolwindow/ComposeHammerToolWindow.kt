@@ -9,7 +9,7 @@ import com.intellij.ui.content.Content
 import com.intellij.ui.content.ContentFactory
 import com.ivyapps.composehammer.domain.MaterialComponentsService
 import com.ivyapps.composehammer.domain.data.material3.MaterialComponent
-import com.ivyapps.composehammer.toolwindow.screen.CustomComponentsMenu
+import com.ivyapps.composehammer.toolwindow.screen.CustomCodeMenu
 import com.ivyapps.composehammer.toolwindow.screen.MainMenu
 import com.ivyapps.composehammer.toolwindow.screen.MaterialComponentDetails
 import javax.swing.JComponent
@@ -49,7 +49,7 @@ class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
             MainMenu(
                 service = m3service,
                 navigateToMaterialComponent = ::navigateToMaterialComponent,
-                navigateToCustomComponentsMenu = ::navigateToCustomComponents,
+                navigateToCustomCodeMenu = ::navigateToCustomComponents,
             ).ui()
         ),
         "Components",
@@ -67,7 +67,7 @@ class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
 
     fun navigateToCustomComponents() {
         navigateTo(
-            screen = CustomComponentsMenu(
+            screen = CustomCodeMenu(
                 project = toolWindow.project,
                 navigateToMainMenu = ::navigateToMainMenu,
                 refreshUi = ::navigateToCustomComponents,
