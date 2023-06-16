@@ -5,6 +5,7 @@ import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
+import kotlin.random.Random
 
 fun copyToClipboard(content: String) {
     val selection = StringSelection(content)
@@ -26,4 +27,9 @@ fun Component.addOnClickListener(onClick: () -> Unit) {
 
         override fun mouseExited(p0: MouseEvent?) {}
     })
+}
+
+fun randomBetween(min: Double, max: Double): Double {
+    require(min <= max) { "Max must be greater than min" }
+    return min + (Random.nextDouble() * (max - min))
 }

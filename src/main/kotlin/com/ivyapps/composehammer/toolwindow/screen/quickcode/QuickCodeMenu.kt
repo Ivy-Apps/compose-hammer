@@ -6,6 +6,7 @@ import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.Panel
 import com.intellij.ui.dsl.builder.panel
+import com.ivyapps.composehammer.addOnClickListener
 import com.ivyapps.composehammer.domain.data.quickcode.CodeGroup
 import com.ivyapps.composehammer.domain.data.quickcode.CodeItem
 import com.ivyapps.composehammer.domain.quickcode.QuickCodeService
@@ -48,22 +49,32 @@ class QuickCodeMenu(
     }
 
     private fun Panel.codeGroups() {
-        service.groups.forEach { group ->
-            codeGroup(group)
+        val groups = service.groups
+        groups.forEachIndexed { index, group ->
+            codeGroup(index, group, groups.size)
         }
     }
 
-    private fun Panel.codeGroup(group: CodeGroup) {
+    private fun Panel.codeGroup(
+        index: Int,
+        group: CodeGroup,
+        groupsCount: Int,
+    ) {
+        val codeItems = group.codeItems
         collapsibleGroup(
-            title = "${group.name} (${group.codeItems.size})",
+            title = "${group.name} (${codeItems.size})",
             indent = true
         ) {
             row {
-                button("Move up") {
-                    perform { moveGroupUp(group) }
+                if (index > 0) {
+                    button("Move up") {
+                        perform { moveGroupUp(group) }
+                    }
                 }
-                button("Move down") {
-                    perform { moveGroupDown(group) }
+                if (index < groupsCount - 1) {
+                    button("Move down") {
+                        perform { moveGroupDown(group) }
+                    }
                 }
                 deleteButton {
                     perform { deleteGroup(group) }
@@ -75,23 +86,36 @@ class QuickCodeMenu(
                     navigateToCodeItem(group, null)
                 }
             }
-            group.codeItems.forEach { codeItem ->
-                codeItemUi(group, codeItem)
+            codeItems.sortedBy {
+                it.order
+            }.forEachIndexed { index, codeItem ->
+                codeItemUi(index, group, codeItem, codeItems.size)
             }
         }
     }
 
-    private fun Panel.codeItemUi(group: CodeGroup, item: CodeItem) {
+    private fun Panel.codeItemUi(
+        index: Int,
+        group: CodeGroup,
+        item: CodeItem,
+        itemsCount: Int,
+    ) {
         row {
-            text(item.name)
-            button("Edit") {
+            text(item.name).component.addOnClickListener {
                 navigateToCodeItem(group, item)
             }
-            button("Move up") {
-                perform { moveItemUp(group, item) }
+            button("View/Edit") {
+                navigateToCodeItem(group, item)
             }
-            button("Move down") {
-                perform { moveItemDown(group, item) }
+            if (index > 0) {
+                button("Move up") {
+                    perform { moveItemUp(group, item) }
+                }
+            }
+            if (index < itemsCount - 1) {
+                button("Move down") {
+                    perform { moveItemDown(group, item) }
+                }
             }
             deleteButton {
                 perform { deleteItem(group, item) }

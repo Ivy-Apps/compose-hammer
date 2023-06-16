@@ -26,7 +26,9 @@ class QuickCodePersistence : PersistentStateComponent<QuickCodeState> {
     override fun getState(): QuickCodeState = internalState
 
     override fun loadState(state: QuickCodeState) {
-        internalState = state
+        internalState = state.copy(
+            groups = state.groups.sortedBy { it.order }.toMutableList()
+        )
     }
 }
 
