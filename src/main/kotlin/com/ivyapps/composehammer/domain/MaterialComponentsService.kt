@@ -11,7 +11,8 @@ import com.ivyapps.composehammer.domain.data.material3.MaterialComponentsGroup
 class MaterialComponentsService(project: Project) {
     val content by lazy {
         buildList {
-            common()
+            quickUi()
+            layouts()
             composeRuntime()
             animations()
             buttons()

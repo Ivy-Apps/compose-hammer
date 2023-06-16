@@ -8,17 +8,25 @@
 
 - Support for custom components
 
-## [2023.06.16] Improvements
+## [0.0.2] Initial feedback
+
+### Added
+
+- **Quick Action:** Added "⚡ Layouts" section that contains
+  `Column`, `Row`, `Box`, `LazyColumn` and `LazyRow`.
 
 ### Changed
 
+- **Quick Action:** Moved the layouts from "⚡ Quick UI" to
+  "⚡ Layouts"
+
 ### Fixed
 
-- Imports bug in the quick action
+- Imports bug in the Quick Action
   where imports were added above "package"
   caused by `@file:OptIn()` 🐛
 
-## [2023.05.30] Initial release
+## [0.0.1] Initial release
 
 ### Added
 
