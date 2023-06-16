@@ -5,13 +5,14 @@ import javax.swing.JButton
 
 
 fun Row.deleteButton(
+    notConfirmedLabel: String = "Delete",
     confirmation: ConfirmationStage = ConfirmationStage.NotConfirmed,
     onDelete: () -> Unit,
 ) {
     var button: JButton? = null
     when (confirmation) {
         ConfirmationStage.NotConfirmed -> {
-            button = button("Delete") {
+            button = button(notConfirmedLabel) {
                 button?.isVisible = false
                 deleteButton(
                     confirmation = ConfirmationStage.ConfirmedOnce,
@@ -29,6 +30,7 @@ fun Row.deleteButton(
                 )
             }.also {
                 button = it.component
+                button?.isVisible = true
             }.comment("This operation can NOT be reverted.")
         }
 
@@ -38,6 +40,7 @@ fun Row.deleteButton(
                 onDelete()
             }.also {
                 button = it.component
+                button?.isVisible = true
             }.comment("The item will be permanently deleted!")
         }
     }

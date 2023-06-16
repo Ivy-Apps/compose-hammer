@@ -12,6 +12,7 @@ fun Panel.codeArea(
     title: String?,
     code: String,
     tip: String? = null,
+    editable: Boolean = false,
     hasCopy: Boolean = true,
 ): JBTextArea {
     var inputField: JBTextArea? = null
@@ -23,7 +24,7 @@ fun Panel.codeArea(
     row {
         textArea().applyToComponent {
             text = code
-            isEditable = false
+            isEditable = editable
             size = Dimension(Int.MAX_VALUE, height)
             autoscrolls = true
             updateUI()

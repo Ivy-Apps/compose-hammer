@@ -66,17 +66,15 @@ class MainMenu(
     private fun Panel.customSection() {
         group(indent = true) {
             row {
-                text("⚡ Quick Code").bold()
+                text("Custom code").bold()
+                    .comment("Done fast!")
             }
             row {
-                text("Create custom code")
-            }
-            row {
-                button("Custom code") {
+                button("⚡ Quick code") {
                     navigateToCustomCodeMenu()
                 }.comment(
                     """
-                        Manage the custom components 
+                        Create and manage custom code snippets 
                         for the "⚡ Quick Code" action.
                     """.trimIndent()
                 )

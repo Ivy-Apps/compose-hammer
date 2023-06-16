@@ -33,6 +33,7 @@ class CodeItemDetails(
                 button("Back") {
                     navigateToQuickCodeMenu()
                 }
+                text(codeItem?.name ?: "New item").bold()
             }
 
             row {
@@ -41,24 +42,31 @@ class CodeItemDetails(
                         nameInput = it.component
                     }
                     .text(codeItem?.name ?: "")
+                    .label("Item name")
                     .bold()
             }
             val importsInput = codeArea(
                 title = "Imports",
                 code = generateImportsCode(codeItem?.imports ?: emptyList()) ?: "",
                 tip = """
-                    Paste the imports are "import x.y.z"
-                """.trimIndent()
+                    Paste your imports as they are. Like "import x.y.z".
+                """.trimIndent(),
+                editable = true,
+                hasCopy = false,
             )
             val codeInput: JBTextArea = codeArea(
                 title = "Code",
                 code = codeItem?.code ?: "",
                 tip = """
                     Paste your code here. Don't worry about formatting.
-                """.trimIndent()
+                """.trimIndent(),
+                editable = true,
+                hasCopy = false,
             )
             row {
-                button("Save") {
+                button(
+                    if (codeItem != null) "Save changes" else "+ Add item"
+                ) {
                     val name = nameInput?.text ?: error("CodeItem name cannot be null!")
                     val imports = importsInput.text
                     val code = codeInput.text

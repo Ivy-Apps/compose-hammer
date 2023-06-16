@@ -26,26 +26,41 @@ class QuickCodeMenu(
             button("Back") {
                 navigateToMainMenu()
             }
-            text("Quick Code!").bold()
+            text("⚡ Quick Code").bold()
         }
-        row {
-            button("Import") {
-
-            }
-            button("Export") {
-
-            }
-        }
-        row {
-            val inputField: JBTextField
-            textField().also {
-                inputField = it.component
-            }.comment("Code group name")
-            button("Add") {
-                perform { addGroup(inputField.name) }
-            }
-        }
+        importExportSection()
+        addCodeGroupSection()
         codeGroups()
+    }
+
+    private fun Panel.importExportSection() {
+        group(indent = true) {
+            row {
+                text("File configuration")
+            }
+            row {
+                button("Import") {
+                    // TODO: Implement
+                }
+                button("Export") {
+                    // TODO: Implement
+                }
+            }
+        }
+    }
+
+    private fun Panel.addCodeGroupSection() {
+        group(indent = true) {
+            row {
+                val inputField: JBTextField
+                textField().also {
+                    inputField = it.component
+                }.comment("Code group name")
+                button("Add") {
+                    perform { addGroup(inputField.text) }
+                }
+            }
+        }
     }
 
     private fun Panel.codeGroups() {
@@ -76,13 +91,15 @@ class QuickCodeMenu(
                         perform { moveGroupDown(group) }
                     }
                 }
-                deleteButton {
+                deleteButton(
+                    notConfirmedLabel = "Delete \"${group.name}\" group"
+                ) {
                     perform { deleteGroup(group) }
                 }
             }
             row {
-                text("Code item")
-                button("Add new") {
+                text("Code item:")
+                button("+ Add new code item") {
                     navigateToCodeItem(group, null)
                 }
             }
