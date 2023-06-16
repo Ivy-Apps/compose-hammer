@@ -49,4 +49,33 @@ class ImportsServiceTest : BasePlatformTestCase() {
         """.trimIndent().length + 1
         assertEquals(expectedOffset, offset)
     }
+
+    fun testOffset_multiple_fileOptIn() {
+        // given
+        val file = """
+            @file:OptIn(ExperimentalMaterial3Api::class)
+            @file:OptIn(ExperimentalMaterial3Api::class)
+            @file:OptIn(ContextReceivers::class)
+
+            package com.example.composehamemrdemo1.ui.demo
+
+            import androidx.compose.material3.Text
+            import androidx.compose.material3.Icon
+            import androidx.compose.material3.BadgedBox
+            import androidx.compose.material3.Badge
+        """.trimIndent()
+
+        // when
+        val offset = file.findImportsOffset()
+
+        // then
+        val expectedOffset = """
+            @file:OptIn(ExperimentalMaterial3Api::class)
+            @file:OptIn(ExperimentalMaterial3Api::class)
+            @file:OptIn(ContextReceivers::class)
+
+            package com.example.composehamemrdemo1.ui.demo
+        """.trimIndent().length + 1
+        assertEquals(expectedOffset, offset)
+    }
 }
