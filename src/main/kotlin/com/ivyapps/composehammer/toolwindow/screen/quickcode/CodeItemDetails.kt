@@ -28,8 +28,6 @@ class CodeItemDetails(
             indent = true
         ) {
             var nameInput: JBTextField? = null
-            val importsInput: JBTextArea
-            val codeInput: JBTextArea
 
             row {
                 button("Back") {
@@ -45,14 +43,14 @@ class CodeItemDetails(
                     .text(codeItem?.name ?: "")
                     .bold()
             }
-            importsInput = codeArea(
+            val importsInput = codeArea(
                 title = "Imports",
                 code = generateImportsCode(codeItem?.imports ?: emptyList()) ?: "",
                 tip = """
                     Paste the imports are "import x.y.z"
                 """.trimIndent()
             )
-            codeInput = codeArea(
+            val codeInput: JBTextArea = codeArea(
                 title = "Code",
                 code = codeItem?.code ?: "",
                 tip = """
@@ -76,7 +74,7 @@ class CodeItemDetails(
                         }
                     } else {
                         perform {
-                            addItem(
+                            addCodeItem(
                                 group = codeGroup,
                                 rawName = name,
                                 rawImports = imports,
@@ -89,7 +87,7 @@ class CodeItemDetails(
                 if (codeItem != null) {
                     deleteButton {
                         perform {
-                            deleteItem(codeGroup, codeItem)
+                            deleteCodeItem(codeGroup, codeItem)
                             true
                         }
                     }

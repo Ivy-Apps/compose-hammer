@@ -3,6 +3,7 @@ package com.ivyapps.composehammer.domain.quickcode
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
+import com.ivyapps.composehammer.domain.data.Reorderable
 import com.ivyapps.composehammer.domain.data.quickcode.CodeGroup
 import com.ivyapps.composehammer.domain.data.quickcode.CodeItem
 import com.ivyapps.composehammer.persistence.QuickCodePersistence
@@ -28,44 +29,22 @@ class QuickCodeService(project: Project) {
         return true
     }
 
-    fun moveGroupUp(targetGroup: CodeGroup): Boolean {
-        val sortedGroups = groups
-        for ((i, group) in sortedGroups.withIndex()) {
-            if (targetGroup.name == group.name) {
-                val next = sortedGroups.getOrNull(i + 1)
-                    ?: return false // it's already first!
-                val prev = sortedGroups.getOrNull(i - 1)
-                moveGroup(
-                    targetGroup = targetGroup,
-                    newOrder = randomBetween(
-                        min = prev?.order ?: next.order.minus(2),
-                        max = next.order
-                    )
-                )
-                return true
-            }
-        }
-        return false
+    fun moveGroupUp(group: CodeGroup): Boolean {
+        val newOrder = groups.moveUp(group) ?: return false
+        moveGroup(
+            targetGroup = group,
+            newOrder = newOrder
+        )
+        return true
     }
 
-    fun moveGroupDown(targetGroup: CodeGroup): Boolean {
-        val sortedGroups = groups
-        for ((i, group) in sortedGroups.withIndex()) {
-            if (targetGroup.name == group.name) {
-                val prev = sortedGroups.getOrNull(i - 1)
-                    ?: return false // it's already last!
-                val next = sortedGroups.getOrNull(i + 1)
-                moveGroup(
-                    targetGroup = targetGroup,
-                    newOrder = randomBetween(
-                        min = prev.order,
-                        max = next?.order ?: prev.order.plus(2)
-                    )
-                )
-                return true
-            }
-        }
-        return false
+    fun moveGroupDown(group: CodeGroup): Boolean {
+        val newOrder = groups.moveDown(group) ?: return false
+        moveGroup(
+            targetGroup = group,
+            newOrder = newOrder
+        )
+        return true
     }
 
     private fun moveGroup(
@@ -81,7 +60,7 @@ class QuickCodeService(project: Project) {
     // endregion
 
     // region CodeItem operations
-    fun addItem(
+    fun addCodeItem(
         group: CodeGroup,
         rawName: String,
         rawImports: String,
@@ -94,7 +73,7 @@ class QuickCodeService(project: Project) {
             order = group.codeItems.lastOrNull()?.order?.plus(2) ?: 1.0
         ) ?: return false
 
-        group.updateCodeItems(
+        group.executeCodeItemsUpdate(
             newCodeItems = group.codeItems + item,
         )
         return true
@@ -114,7 +93,7 @@ class QuickCodeService(project: Project) {
             order = item.order
         ) ?: return false
 
-        group.updateCodeItems(
+        group.executeCodeItemsUpdate(
             newCodeItems = group.codeItems.filter { it != item } + updatedItem
         )
         return true
@@ -142,24 +121,36 @@ class QuickCodeService(project: Project) {
         )
     }
 
-    fun moveItemUp(group: CodeGroup, item: CodeItem): Boolean {
-
-        return false
+    fun moveCodeItemUp(group: CodeGroup, item: CodeItem): Boolean {
+        val newOrder = group.codeItems.moveUp(group) ?: return false
+        moveCodeItem(group, item, newOrder)
+        return true
     }
 
-    fun moveItemDown(group: CodeGroup, item: CodeItem): Boolean {
-
-        return false
+    fun moveCodeItemDown(group: CodeGroup, item: CodeItem): Boolean {
+        val newOrder = group.codeItems.moveDown(group) ?: return false
+        moveCodeItem(group, item, newOrder)
+        return true
     }
 
-    fun deleteItem(group: CodeGroup, item: CodeItem): Boolean {
-        group.updateCodeItems(
+    private fun moveCodeItem(
+        group: CodeGroup,
+        item: CodeItem,
+        newOrder: Double
+    ) {
+        group.executeCodeItemsUpdate(
+            newCodeItems = group.codeItems.filter { it != item } + item.copy(order = newOrder)
+        )
+    }
+
+    fun deleteCodeItem(group: CodeGroup, item: CodeItem): Boolean {
+        group.executeCodeItemsUpdate(
             newCodeItems = group.codeItems.filter { it != item }
         )
         return true
     }
 
-    private fun CodeGroup.updateCodeItems(
+    private fun CodeGroup.executeCodeItemsUpdate(
         newCodeItems: List<CodeItem>
     ) {
         updateState(
@@ -180,5 +171,35 @@ class QuickCodeService(project: Project) {
         }
         persistence.state.groups.add(new)
         persistence.state.groups.sortBy { it.order }
+    }
+
+    private fun <T : Reorderable> List<T>.moveUp(target: Reorderable): Double? {
+        for ((index, group) in this.withIndex()) {
+            if (target.name == group.name) {
+                val prev = getOrNull(index - 1)
+                    ?: return null // it's already first!
+                val prevPrev = getOrNull(index - 2)
+                return randomBetween(
+                    min = prevPrev?.order ?: prev.order.minus(2),
+                    max = prev.order
+                )
+            }
+        }
+        return null
+    }
+
+    private fun <T : Reorderable> List<T>.moveDown(target: Reorderable): Double? {
+        for ((index, group) in this.withIndex()) {
+            if (target.name == group.name) {
+                val next = getOrNull(index + 1)
+                    ?: return null // it's already last!
+                val nextNext = getOrNull(index + 2)
+                return randomBetween(
+                    min = next.order,
+                    max = nextNext?.order ?: next.order.plus(2)
+                )
+            }
+        }
+        return null
     }
 }

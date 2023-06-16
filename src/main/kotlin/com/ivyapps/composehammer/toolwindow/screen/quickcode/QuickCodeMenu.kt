@@ -109,16 +109,16 @@ class QuickCodeMenu(
             }
             if (index > 0) {
                 button("Move up") {
-                    perform { moveItemUp(group, item) }
+                    perform { moveCodeItemUp(group, item) }
                 }
             }
             if (index < itemsCount - 1) {
                 button("Move down") {
-                    perform { moveItemDown(group, item) }
+                    perform { moveCodeItemDown(group, item) }
                 }
             }
             deleteButton {
-                perform { deleteItem(group, item) }
+                perform { deleteCodeItem(group, item) }
             }
         }
     }
