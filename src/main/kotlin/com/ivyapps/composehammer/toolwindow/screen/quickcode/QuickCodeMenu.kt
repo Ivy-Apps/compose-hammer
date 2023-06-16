@@ -10,7 +10,7 @@ import com.ivyapps.composehammer.addOnClickListener
 import com.ivyapps.composehammer.domain.data.quickcode.CodeGroup
 import com.ivyapps.composehammer.domain.data.quickcode.CodeItem
 import com.ivyapps.composehammer.domain.quickcode.QuickCodeService
-import com.ivyapps.composehammer.toolwindow.component.deleteButton
+import com.ivyapps.composehammer.toolwindow.component.DeleteButton
 import com.ivyapps.composehammer.toolwindow.screen.ToolWindowScreen
 
 class QuickCodeMenu(
@@ -75,11 +75,21 @@ class QuickCodeMenu(
         group: CodeGroup,
         groupsCount: Int,
     ) {
-        val codeItems = group.codeItems
         collapsibleGroup(
-            title = "${group.name} (${codeItems.size})",
+            title = "${group.name} (${group.codeItems.size})",
             indent = true
         ) {
+            codeGroupControls(index, group, groupsCount)
+            codeGroupItems(group)
+        }
+    }
+
+    private fun Panel.codeGroupControls(
+        index: Int,
+        group: CodeGroup,
+        groupsCount: Int,
+    ) {
+        group(indent = false) {
             row {
                 if (index > 0) {
                     button("Move up") {
@@ -91,18 +101,26 @@ class QuickCodeMenu(
                         perform { moveGroupDown(group) }
                     }
                 }
-                deleteButton(
+                DeleteButton().ui(
+                    row = this,
                     notConfirmedLabel = "Delete \"${group.name}\" group"
                 ) {
                     perform { deleteGroup(group) }
                 }
             }
             row {
-                text("Code item:")
                 button("+ Add new code item") {
                     navigateToCodeItem(group, null)
                 }
             }
+        }
+    }
+
+    private fun Panel.codeGroupItems(
+        group: CodeGroup,
+    ) {
+        val codeItems = group.codeItems
+        group(indent = false) {
             codeItems.sortedBy {
                 it.order
             }.forEachIndexed { index, codeItem ->
@@ -118,10 +136,12 @@ class QuickCodeMenu(
         itemsCount: Int,
     ) {
         row {
-            text(item.name).component.addOnClickListener {
-                navigateToCodeItem(group, item)
-            }
-            button("View/Edit") {
+            text(item.name).also {
+                it.component.addOnClickListener {
+                    navigateToCodeItem(group, item)
+                }
+            }.bold()
+            button("Edit") {
                 navigateToCodeItem(group, item)
             }
             if (index > 0) {
@@ -134,7 +154,7 @@ class QuickCodeMenu(
                     perform { moveCodeItemDown(group, item) }
                 }
             }
-            deleteButton {
+            DeleteButton().ui(this) {
                 perform { deleteCodeItem(group, item) }
             }
         }

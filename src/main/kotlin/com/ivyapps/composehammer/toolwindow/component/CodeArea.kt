@@ -14,6 +14,7 @@ fun Panel.codeArea(
     tip: String? = null,
     editable: Boolean = false,
     hasCopy: Boolean = true,
+    minLines: Int? = null,
 ): JBTextArea {
     var inputField: JBTextArea? = null
     if (title != null) {
@@ -23,7 +24,11 @@ fun Panel.codeArea(
     }
     row {
         textArea().applyToComponent {
-            text = code
+            text = code.let {
+                if (minLines != null && it.isBlank()) {
+                    "\n".repeat(minLines)
+                } else it
+            }
             isEditable = editable
             size = Dimension(Int.MAX_VALUE, height)
             autoscrolls = true

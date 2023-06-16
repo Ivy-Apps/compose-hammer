@@ -3,45 +3,35 @@ package com.ivyapps.composehammer.toolwindow.component
 import com.intellij.ui.dsl.builder.Row
 import javax.swing.JButton
 
+class DeleteButton {
+    private var confirmation = ConfirmationStage.NotConfirmed
 
-fun Row.deleteButton(
-    notConfirmedLabel: String = "Delete",
-    confirmation: ConfirmationStage = ConfirmationStage.NotConfirmed,
-    onDelete: () -> Unit,
-) {
-    var button: JButton? = null
-    when (confirmation) {
-        ConfirmationStage.NotConfirmed -> {
-            button = button(notConfirmedLabel) {
-                button?.isVisible = false
-                deleteButton(
-                    confirmation = ConfirmationStage.ConfirmedOnce,
-                    onDelete = onDelete
-                )
-            }.component
-        }
+    fun ui(
+        row: Row,
+        notConfirmedLabel: String = "Delete",
+        onDelete: () -> Unit,
+    ): Unit = with(row) {
+        var button: JButton? = null
+        button(notConfirmedLabel) {
+            when (confirmation) {
+                ConfirmationStage.NotConfirmed -> {
+                    button?.text = "Confirm, deletion?"
+                    confirmation = ConfirmationStage.ConfirmedOnce
+                }
 
-        ConfirmationStage.ConfirmedOnce -> {
-            button("Confirm, deletion?") {
-                button?.isVisible = false
-                deleteButton(
-                    confirmation = ConfirmationStage.ConfirmedTwice,
-                    onDelete = onDelete
-                )
-            }.also {
-                button = it.component
-                button?.isVisible = true
-            }.comment("This operation can NOT be reverted.")
-        }
+                ConfirmationStage.ConfirmedOnce -> {
+                    button?.text = "[DANGER] DELETE PERMANENTLY!"
+                    confirmation = ConfirmationStage.ConfirmedTwice
+                }
 
-        ConfirmationStage.ConfirmedTwice -> {
-            button("[DANGER] DELETE PERMANENTLY!") {
-                button?.isVisible = false
-                onDelete()
-            }.also {
-                button = it.component
-                button?.isVisible = true
-            }.comment("The item will be permanently deleted!")
+                ConfirmationStage.ConfirmedTwice -> {
+                    button?.text = notConfirmedLabel
+                    confirmation = ConfirmationStage.NotConfirmed
+                    onDelete()
+                }
+            }
+        }.also {
+            button = it.component
         }
     }
 }

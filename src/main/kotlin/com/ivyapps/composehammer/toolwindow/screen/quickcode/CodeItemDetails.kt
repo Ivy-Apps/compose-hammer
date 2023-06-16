@@ -11,8 +11,8 @@ import com.ivyapps.composehammer.domain.data.quickcode.CodeGroup
 import com.ivyapps.composehammer.domain.data.quickcode.CodeItem
 import com.ivyapps.composehammer.domain.quickcode.QuickCodeService
 import com.ivyapps.composehammer.domain.ui.generateImportsCode
+import com.ivyapps.composehammer.toolwindow.component.DeleteButton
 import com.ivyapps.composehammer.toolwindow.component.codeArea
-import com.ivyapps.composehammer.toolwindow.component.deleteButton
 import com.ivyapps.composehammer.toolwindow.screen.ToolWindowScreen
 
 class CodeItemDetails(
@@ -35,14 +35,16 @@ class CodeItemDetails(
                 }
                 text(codeItem?.name ?: "New item").bold()
             }
-
+            row {
+                text("Name").bold()
+            }
             row {
                 textField()
                     .also {
                         nameInput = it.component
                     }
                     .text(codeItem?.name ?: "")
-                    .label("Item name")
+                    .comment("The name of the code item.")
                     .bold()
             }
             val importsInput = codeArea(
@@ -53,6 +55,7 @@ class CodeItemDetails(
                 """.trimIndent(),
                 editable = true,
                 hasCopy = false,
+                minLines = 3,
             )
             val codeInput: JBTextArea = codeArea(
                 title = "Code",
@@ -62,6 +65,7 @@ class CodeItemDetails(
                 """.trimIndent(),
                 editable = true,
                 hasCopy = false,
+                minLines = 6,
             )
             row {
                 button(
@@ -93,7 +97,7 @@ class CodeItemDetails(
                 }
 
                 if (codeItem != null) {
-                    deleteButton {
+                    DeleteButton().ui(this) {
                         perform {
                             deleteCodeItem(codeGroup, codeItem)
                             true
