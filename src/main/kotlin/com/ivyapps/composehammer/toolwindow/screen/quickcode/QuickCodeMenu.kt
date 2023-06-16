@@ -130,6 +130,11 @@ class QuickCodeMenu(
             }.forEachIndexed { index, codeItem ->
                 codeItemUi(index, group, codeItem, codeItems.size)
             }
+            if (codeItems.isEmpty()) {
+                row {
+                    text("No code items, yet.")
+                }
+            }
         }
     }
 
@@ -157,9 +162,6 @@ class QuickCodeMenu(
                 button("Move down") {
                     perform { moveCodeItemDown(group, item) }
                 }
-            }
-            DeleteButton().ui(this) {
-                perform { deleteCodeItem(group, item) }
             }
         }
     }
