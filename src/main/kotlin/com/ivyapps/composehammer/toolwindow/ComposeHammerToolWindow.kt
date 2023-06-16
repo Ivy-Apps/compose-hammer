@@ -9,10 +9,13 @@ import com.intellij.ui.content.Content
 import com.intellij.ui.content.ContentFactory
 import com.ivyapps.composehammer.domain.MaterialComponentsService
 import com.ivyapps.composehammer.domain.data.material3.MaterialComponent
+import com.ivyapps.composehammer.domain.data.quickcode.CodeGroup
+import com.ivyapps.composehammer.domain.data.quickcode.CodeItem
 import com.ivyapps.composehammer.toolwindow.screen.MainMenu
 import com.ivyapps.composehammer.toolwindow.screen.MaterialComponentDetails
+import com.ivyapps.composehammer.toolwindow.screen.ToolWindowScreen
+import com.ivyapps.composehammer.toolwindow.screen.quickcode.CodeItemDetails
 import com.ivyapps.composehammer.toolwindow.screen.quickcode.QuickCodeMenu
-import javax.swing.JComponent
 
 class ComposeHammerToolWindowFactory : ToolWindowFactory {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
@@ -25,8 +28,9 @@ class ComposeHammerToolWindowFactory : ToolWindowFactory {
 
 
 class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
+    private val project = toolWindow.project
     private val contentFactory = ContentFactory.SERVICE.getInstance()
-    private val m3service = toolWindow.project.service<MaterialComponentsService>()
+    private val m3service = project.service<MaterialComponentsService>()
 
     private var menuContent: Content? = null
 
@@ -50,40 +54,57 @@ class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
                 service = m3service,
                 navigateToMaterialComponent = ::navigateToMaterialComponent,
                 navigateToCustomCodeMenu = ::navigateToQuickCode,
-            ).ui()
+            ).ui
         ),
         "Components",
         false,
     )
 
-    fun navigateToMaterialComponent(component: MaterialComponent) {
+    private fun navigateToMaterialComponent(component: MaterialComponent) {
         navigateTo(
             screen = MaterialComponentDetails(
+                component = component,
                 navigateToMenu = ::navigateToMainMenu
-            ).ui(component),
+            ),
             screenTitle = component.name
         )
     }
 
-    fun navigateToQuickCode() {
+    private fun navigateToQuickCode() {
         navigateTo(
             screen = QuickCodeMenu(
-                project = toolWindow.project,
+                project = project,
                 navigateToMainMenu = ::navigateToMainMenu,
                 refreshUi = ::navigateToQuickCode,
-            ).ui(),
+                navigateToCodeItem = ::navigateToCodeItem,
+            ),
             screenTitle = "Quick Code"
         )
     }
 
+    private fun navigateToCodeItem(
+        group: CodeGroup,
+        item: CodeItem?
+    ) {
+        navigateTo(
+            screen = CodeItemDetails(
+                project = project,
+                codeGroup = group,
+                codeItem = item,
+                navigateToQuickCodeMenu = ::navigateToQuickCode,
+            ),
+            screenTitle = "[${group.name}] ${item?.name ?: "New"}"
+        )
+    }
+
     private fun navigateTo(
-        screen: JComponent,
+        screen: ToolWindowScreen,
         screenTitle: String,
     ) {
         val contentsToRemove = toolWindow.contentManager.contents
         toolWindow.contentManager.addContent(
             contentFactory.createContent(
-                ScrollPaneFactory.createScrollPane(screen),
+                ScrollPaneFactory.createScrollPane(screen.ui),
                 screenTitle,
                 false
             )

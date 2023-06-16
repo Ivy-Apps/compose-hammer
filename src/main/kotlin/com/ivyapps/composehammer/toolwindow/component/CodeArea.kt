@@ -1,5 +1,6 @@
 package com.ivyapps.composehammer.toolwindow.component
 
+import com.intellij.ui.components.JBTextArea
 import com.intellij.ui.dsl.builder.Panel
 import com.intellij.ui.dsl.builder.Row
 import com.intellij.ui.dsl.gridLayout.HorizontalAlign
@@ -11,7 +12,9 @@ fun Panel.codeArea(
     title: String?,
     code: String,
     tip: String? = null,
-) {
+    hasCopy: Boolean = true,
+): JBTextArea {
+    var inputField: JBTextArea? = null
     if (title != null) {
         row {
             label(title).bold()
@@ -24,12 +27,17 @@ fun Panel.codeArea(
             size = Dimension(Int.MAX_VALUE, height)
             autoscrolls = true
             updateUI()
-        }.horizontalAlign(HorizontalAlign.FILL)
+        }.also {
+            inputField = it.component
+        }.horizontalAlign(HorizontalAlign.FILL) // TODO: Fix this FILL deprecation
             .comment(tip)
     }
-    row {
-        copyButton(code)
+    if (hasCopy) {
+        row {
+            copyButton(code)
+        }
     }
+    return inputField!!
 }
 
 private fun Row.copyButton(text: String) {

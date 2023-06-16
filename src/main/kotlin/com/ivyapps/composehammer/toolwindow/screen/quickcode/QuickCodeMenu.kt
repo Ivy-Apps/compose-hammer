@@ -2,6 +2,7 @@ package com.ivyapps.composehammer.toolwindow.screen.quickcode
 
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.Panel
 import com.intellij.ui.dsl.builder.panel
@@ -9,16 +10,17 @@ import com.ivyapps.composehammer.domain.data.quickcode.CodeGroup
 import com.ivyapps.composehammer.domain.data.quickcode.CodeItem
 import com.ivyapps.composehammer.domain.quickcode.QuickCodeService
 import com.ivyapps.composehammer.toolwindow.component.deleteButton
+import com.ivyapps.composehammer.toolwindow.screen.ToolWindowScreen
 
 class QuickCodeMenu(
     project: Project,
     private val navigateToMainMenu: () -> Unit,
     private val refreshUi: () -> Unit,
-    private val navigateToCodeItemDetails: (CodeItem?) -> Unit,
-) {
+    private val navigateToCodeItem: (CodeGroup, CodeItem?) -> Unit,
+) : ToolWindowScreen {
     private val service = project.service<QuickCodeService>()
 
-    fun ui() = panel {
+    override val ui: DialogPanel = panel {
         row {
             button("Back") {
                 navigateToMainMenu()
@@ -70,7 +72,7 @@ class QuickCodeMenu(
             row {
                 text("Code item")
                 button("Add new") {
-
+                    navigateToCodeItem(group, null)
                 }
             }
             group.codeItems.forEach { codeItem ->
@@ -82,6 +84,9 @@ class QuickCodeMenu(
     private fun Panel.codeItemUi(group: CodeGroup, item: CodeItem) {
         row {
             text(item.name)
+            button("Edit") {
+                navigateToCodeItem(group, item)
+            }
             button("Move up") {
                 perform { moveItemUp(group, item) }
             }

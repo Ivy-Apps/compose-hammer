@@ -15,8 +15,8 @@ class MainMenu(
     private val service: MaterialComponentsService,
     private val navigateToMaterialComponent: (MaterialComponent) -> Unit,
     private val navigateToCustomCodeMenu: () -> Unit,
-) {
-    fun ui(): DialogPanel = panel {
+) : ToolWindowScreen {
+    override val ui: DialogPanel = panel {
         customSection()
 //        contentDebugInfo(service)
         for (group in service.content.filter { it.showInToolWindow }) {

@@ -33,8 +33,23 @@ class QuickCodeService(project: Project) {
     // endregion
 
     // region CodeItem operations
-    fun addItem(group: CodeGroup, item: CodeItem) {
+    fun addItem(
+        group: CodeGroup,
+        name: String,
+        imports: String,
+        code: String,
+    ): Boolean {
+        return true
+    }
 
+    fun editCodeItem(
+        group: CodeGroup,
+        item: CodeItem,
+        name: String,
+        imports: String,
+        code: String,
+    ): Boolean {
+        return true
     }
 
     fun moveItemUp(group: CodeGroup, item: CodeItem) {

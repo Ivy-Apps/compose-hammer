@@ -7,13 +7,14 @@ import com.ivyapps.composehammer.domain.ui.formatText
 import com.ivyapps.composehammer.domain.ui.generateImportsCode
 import com.ivyapps.composehammer.toolwindow.component.altEnterTip
 import com.ivyapps.composehammer.toolwindow.component.codeArea
-import com.ivyapps.composehammer.toolwindow.component.unresolvedImportsTip
 import com.ivyapps.composehammer.toolwindow.component.image
+import com.ivyapps.composehammer.toolwindow.component.unresolvedImportsTip
 
 class MaterialComponentDetails(
+    private val component: MaterialComponent,
     private val navigateToMenu: () -> Unit,
-) {
-    fun ui(component: MaterialComponent): DialogPanel = panel {
+) : ToolWindowScreen {
+    override val ui: DialogPanel = panel {
         group(indent = true) {
             row {
                 button("Back") {
