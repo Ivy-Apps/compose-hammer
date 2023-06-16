@@ -2,7 +2,7 @@ package com.github.ivyapps.composematerial3helper
 
 import com.intellij.testFramework.TestDataPath
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
-import com.ivyapps.composehammer.domain.core.findImportsOffset
+import com.ivyapps.composehammer.domain.action.findImportsOffset
 
 @TestDataPath("\$CONTENT_ROOT/src/test/testData")
 class ImportsServiceTest : BasePlatformTestCase() {

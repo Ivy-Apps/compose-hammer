@@ -1,4 +1,4 @@
-package com.ivyapps.composehammer.domain.core
+package com.ivyapps.composehammer.domain.action
 
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.editor.Document
@@ -8,19 +8,18 @@ import com.intellij.psi.PsiDocumentManager
 import com.intellij.psi.codeStyle.CodeStyleManager
 
 @Service(Service.Level.PROJECT)
-class ReformatCodeService(private val project: Project) {
+class ReformatCodeService {
 
     fun reformatCode(
-            project: Project,
-            document: Document,
-            offset: Int,
-            componentCode: String,
+        project: Project,
+        document: Document,
+        offset: Int,
+        componentCode: String,
     ) {
         // Reformat the code to fix indentation
         val psiFile = PsiDocumentManager.getInstance(project).getPsiFile(document)
-        val startOffset = offset
         val endOffset = offset + componentCode.length
-        val range = TextRange(startOffset, endOffset)
+        val range = TextRange(offset, endOffset)
 
         if (psiFile != null) {
             val codeStyleManager = CodeStyleManager.getInstance(project)

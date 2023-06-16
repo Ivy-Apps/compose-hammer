@@ -1,4 +1,4 @@
-package com.ivyapps.composehammer.domain.core
+package com.ivyapps.composehammer.domain.action
 
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.components.Service
@@ -10,7 +10,6 @@ import com.intellij.psi.PsiFile
 class ImportsService(private val project: Project) {
 
     fun addMissingImports(
-        project: Project,
         file: PsiFile,
         document: Document,
         imports: List<String>

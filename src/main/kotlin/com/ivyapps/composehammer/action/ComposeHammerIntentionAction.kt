@@ -11,7 +11,7 @@ import com.intellij.psi.PsiFile
 import com.ivyapps.composehammer.action.component.showOptionsPopup
 import com.ivyapps.composehammer.domain.MaterialComponentsService
 import com.ivyapps.composehammer.domain.RecognizerService
-import com.ivyapps.composehammer.domain.core.InsertComponentService
+import com.ivyapps.composehammer.domain.action.InsertCodeService
 import javax.swing.Icon
 
 
@@ -30,7 +30,7 @@ class ComposeHammerIntentionAction : IntentionAction, HighPriorityAction, Iconab
 
     override fun invoke(project: Project, editor: Editor, file: PsiFile) {
         val componentsService = project.service<MaterialComponentsService>()
-        val insertService = project.service<InsertComponentService>()
+        val insertService = project.service<InsertCodeService>()
 
         editor.showOptionsPopup(
             title = "Choose an option",

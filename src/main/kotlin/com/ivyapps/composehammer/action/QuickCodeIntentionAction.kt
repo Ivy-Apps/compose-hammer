@@ -10,7 +10,7 @@ import com.intellij.openapi.util.Iconable
 import com.intellij.psi.PsiFile
 import com.ivyapps.composehammer.action.component.showOptionsPopup
 import com.ivyapps.composehammer.domain.MaterialComponentsService
-import com.ivyapps.composehammer.domain.core.InsertComponentService
+import com.ivyapps.composehammer.domain.action.InsertCodeService
 import com.ivyapps.composehammer.persistence.QuickCodePersistence
 import javax.swing.Icon
 
@@ -30,7 +30,7 @@ class QuickCodeIntentionAction : IntentionAction, HighPriorityAction, Iconable {
 
     override fun invoke(project: Project, editor: Editor, file: PsiFile) {
         val componentsService = project.service<MaterialComponentsService>()
-        val insertService = project.service<InsertComponentService>()
+        val insertService = project.service<InsertCodeService>()
 
         editor.showOptionsPopup(
             title = "Choose an option",
