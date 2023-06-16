@@ -3,13 +3,13 @@ package com.ivyapps.composehammer.toolwindow.screen
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.dsl.builder.Panel
 import com.intellij.ui.dsl.builder.panel
+import com.ivyapps.composehammer.addOnClickListener
 import com.ivyapps.composehammer.domain.MaterialComponentsService
 import com.ivyapps.composehammer.domain.data.material3.MaterialComponent
 import com.ivyapps.composehammer.domain.ui.formatText
 import com.ivyapps.composehammer.toolwindow.component.altEnterTip
-import com.ivyapps.composehammer.toolwindow.component.unresolvedImportsTip
-import com.ivyapps.composehammer.addOnClickListener
 import com.ivyapps.composehammer.toolwindow.component.image
+import com.ivyapps.composehammer.toolwindow.component.unresolvedImportsTip
 
 class MainMenu(
     private val service: MaterialComponentsService,
@@ -29,7 +29,9 @@ class MainMenu(
                 title = group.title,
                 indent = true
             ) {
-                group.components.forEach { component ->
+                group.components.filter {
+                    it.showInToolWindow
+                }.forEach { component ->
                     componentUi(component)
                 }
             }.apply {

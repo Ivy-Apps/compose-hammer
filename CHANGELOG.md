@@ -14,11 +14,13 @@
 
 - **Quick Action:** Added "⚡ Layouts" section that contains
   `Column`, `Row`, `Box`, `LazyColumn` and `LazyRow`.
+- **Components:** `Horizontal pager`, `Tabs with horizontal pager` 
 
 ### Changed
 
 - **Quick Action:** Moved the layouts from "⚡ Quick UI" to
   "⚡ Layouts"
+- Improved components: `Tabs`
 
 ### Fixed
 
