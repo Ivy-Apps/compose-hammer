@@ -22,21 +22,20 @@ class QuickCodeMenu(
     private val service = project.service<QuickCodeService>()
 
     override val ui: DialogPanel = panel {
-        row {
-            button("Back") {
-                navigateToMainMenu()
-            }
-            text("⚡ Quick Code").bold()
-        }
-        importExportSection()
+        header()
         addCodeGroupSection()
         codeGroups()
     }
 
-    private fun Panel.importExportSection() {
+    private fun Panel.header() {
         group(indent = true) {
             row {
-                text("File configuration")
+                button("Back") {
+                    navigateToMainMenu()
+                }
+            }
+            row {
+                text("⚡ Quick Code configuration").bold()
             }
             row {
                 button("Import") {
@@ -52,11 +51,14 @@ class QuickCodeMenu(
     private fun Panel.addCodeGroupSection() {
         group(indent = true) {
             row {
+                text("Code groups").bold()
+            }
+            row {
                 val inputField: JBTextField
                 textField().also {
                     inputField = it.component
                 }.comment("Code group name")
-                button("Add") {
+                button("Add new") {
                     perform { addGroup(inputField.text) }
                 }
             }
@@ -81,6 +83,11 @@ class QuickCodeMenu(
         ) {
             codeGroupControls(index, group, groupsCount)
             codeGroupItems(group)
+            row {
+                button("+ Add new code item") {
+                    navigateToCodeItem(group, null)
+                }
+            }
         }
     }
 
@@ -89,29 +96,25 @@ class QuickCodeMenu(
         group: CodeGroup,
         groupsCount: Int,
     ) {
-        group(indent = false) {
-            row {
-                if (index > 0) {
-                    button("Move up") {
-                        perform { moveGroupUp(group) }
-                    }
-                }
-                if (index < groupsCount - 1) {
-                    button("Move down") {
-                        perform { moveGroupDown(group) }
-                    }
-                }
-                DeleteButton().ui(
-                    row = this,
-                    notConfirmedLabel = "Delete \"${group.name}\" group"
-                ) {
-                    perform { deleteGroup(group) }
+        row {
+            button("Rename") {
+
+            }
+            if (index > 0) {
+                button("Move up") {
+                    perform { moveGroupUp(group) }
                 }
             }
-            row {
-                button("+ Add new code item") {
-                    navigateToCodeItem(group, null)
+            if (index < groupsCount - 1) {
+                button("Move down") {
+                    perform { moveGroupDown(group) }
                 }
+            }
+            DeleteButton().ui(
+                row = this,
+                notConfirmedLabel = "Delete \"${group.name}\" group"
+            ) {
+                perform { deleteGroup(group) }
             }
         }
     }
@@ -141,7 +144,7 @@ class QuickCodeMenu(
                     navigateToCodeItem(group, item)
                 }
             }.bold()
-            button("Edit") {
+            button("View") {
                 navigateToCodeItem(group, item)
             }
             if (index > 0) {

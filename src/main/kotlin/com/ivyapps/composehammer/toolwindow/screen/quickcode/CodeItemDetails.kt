@@ -33,7 +33,6 @@ class CodeItemDetails(
                 button("Back") {
                     navigateToQuickCodeMenu()
                 }
-                text(codeItem?.name ?: "New item").bold()
             }
             row {
                 text("Name").bold()
