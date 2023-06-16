@@ -68,7 +68,7 @@ fun ContentScope.animations() = group(
 
     component {
         showInToolWindow = false
-        name = "by animateFloatAsState()"
+        name = "Animate Float"
         imports = listOf(
             "androidx.compose.animation.core.animateFloatAsState",
             "androidx.compose.runtime.getValue",
@@ -88,7 +88,7 @@ fun ContentScope.animations() = group(
 
     component {
         showInToolWindow = false
-        name = "by animateDpAsState()"
+        name = "Animate Dp"
         imports = listOf(
             "androidx.compose.animation.core.animateDpAsState",
             "androidx.compose.runtime.getValue",
@@ -108,7 +108,7 @@ fun ContentScope.animations() = group(
 
     component {
         showInToolWindow = false
-        name = "by animateColorAsState()"
+        name = "Animate Color"
         imports = listOf(
             "androidx.compose.animation.animateColorAsState",
             "androidx.compose.runtime.getValue",

@@ -38,17 +38,6 @@ fun ContentScope.composeRuntime() = group(
 
     component {
         showInToolWindow = false
-        name = "LocalContext.current"
-        imports = listOf(
-            "androidx.compose.ui.platform.LocalContext",
-        )
-        code = """
-            val context = LocalContext.current
-        """.trimIndent()
-    }
-
-    component {
-        showInToolWindow = false
         name = "Coroutine scope"
         imports = listOf("androidx.compose.runtime.rememberCoroutineScope")
         code = """
@@ -89,6 +78,17 @@ fun ContentScope.composeRuntime() = group(
         code = """
             val browser = LocalUriHandler.current
             browser.openUri("https://www.google.com/")
+        """.trimIndent()
+    }
+
+    component {
+        showInToolWindow = false
+        name = "LocalContext.current"
+        imports = listOf(
+            "androidx.compose.ui.platform.LocalContext",
+        )
+        code = """
+            val context = LocalContext.current
         """.trimIndent()
     }
 }
