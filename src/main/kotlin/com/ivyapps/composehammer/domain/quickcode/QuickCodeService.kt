@@ -41,6 +41,17 @@ class QuickCodeService(project: Project) {
         return true
     }
 
+    fun renameGroup(group: CodeGroup, rawNewName: String): Boolean {
+        val newName = rawNewName.trim().takeIf { it.isNotBlank() } ?: return false
+        updateState(
+            old = group,
+            new = group.copy(
+                name = newName
+            )
+        )
+        return true
+    }
+
     fun moveGroupUp(group: CodeGroup): Boolean {
         val newOrder = groups.moveUp(group) ?: return false
         moveGroup(

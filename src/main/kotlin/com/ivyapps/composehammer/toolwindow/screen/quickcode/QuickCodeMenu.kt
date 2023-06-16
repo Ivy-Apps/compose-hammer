@@ -18,6 +18,7 @@ class QuickCodeMenu(
     private val navigateToMainMenu: () -> Unit,
     private val refreshUi: () -> Unit,
     private val navigateToCodeItem: (CodeGroup, CodeItem?) -> Unit,
+    private val navigateToCodeGroup: (CodeGroup) -> Unit,
 ) : ToolWindowScreen {
     private val service = project.service<QuickCodeService>()
 
@@ -98,7 +99,7 @@ class QuickCodeMenu(
     ) {
         row {
             button("Rename") {
-
+                navigateToCodeGroup(group)
             }
             if (index > 0) {
                 button("Move up") {
