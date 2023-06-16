@@ -5,16 +5,18 @@
 ## [Unreleased]
 
 ### Added
-- Support for custom components
 
+- Support for custom components
 
 ## [2023.06.16] Improvements
 
 ### Changed
 
 ### Fixed
-- Imports bug in quick action caused by `@file:OptIn()`
 
+- Imports bug in the quick action
+  where imports were added above "package"
+  caused by `@file:OptIn()` 🐛
 
 ## [2023.05.30] Initial release
 
