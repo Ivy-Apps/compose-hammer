@@ -9,8 +9,8 @@ import com.intellij.openapi.util.IconLoader
 import com.intellij.openapi.util.Iconable
 import com.intellij.psi.PsiFile
 import com.ivyapps.composehammer.action.component.showOptionsPopup
-import com.ivyapps.composehammer.domain.MaterialComponentsService
 import com.ivyapps.composehammer.domain.action.InsertCodeService
+import com.ivyapps.composehammer.domain.quickcode.QuickCodeService
 import com.ivyapps.composehammer.persistence.QuickCodePersistence
 import javax.swing.Icon
 
@@ -29,29 +29,29 @@ class QuickCodeIntentionAction : IntentionAction, HighPriorityAction, Iconable {
     }
 
     override fun invoke(project: Project, editor: Editor, file: PsiFile) {
-        val componentsService = project.service<MaterialComponentsService>()
+        val quickCodeService = project.service<QuickCodeService>()
         val insertService = project.service<InsertCodeService>()
 
         editor.showOptionsPopup(
             title = "Choose an option",
             backItem = "❌ Close menu",
             backItemLast = true,
-            items = componentsService.content.map { it.shortTitle ?: it.title },
+            items = quickCodeService.groups.map { it.name },
             onBack = {
                 it.closeOk(null)
             }
-        ) { groupTitle ->
-            val group = componentsService.findGroupByTitle(groupTitle)
+        ) { groupName ->
+            val group = quickCodeService.findGroupByName(groupName)
             editor.showOptionsPopup(
-                title = groupTitle,
+                title = groupName,
                 backItem = "⬅ Go back",
                 backItemLast = true,
                 onBack = {
                     invoke(project, editor, file)
                 },
-                items = group.components.map { it.shortName ?: it.name }
+                items = group.codeItems.map { it.name }
             ) { componentName ->
-                val component = componentsService.findComponentByNameInGroup(group, componentName)
+                val component = quickCodeService.findCodeItemByName(group, componentName)
                 insertService.addCode(editor, file, component)
             }
         }

@@ -16,6 +16,18 @@ class QuickCodeService(project: Project) {
     val groups: List<CodeGroup>
         get() = persistence.state.groups.sortedBy { it.order }
 
+    fun findGroupByName(name: String): CodeGroup {
+        return requireNotNull(groups.find { it.name == name }) {
+            "CodeGroup with name '$name' doesn't exists in $groups."
+        }
+    }
+
+    fun findCodeItemByName(group: CodeGroup, name: String): CodeItem {
+        return requireNotNull(group.codeItems.find { it.name == name }) {
+            "CodeItem with name '$name' doesn't exists in ${group.codeItems}."
+        }
+    }
+
     // region Group operations
     fun addGroup(rawName: String): Boolean {
         val name = rawName.trim().takeIf { it.isNotBlank() } ?: return false
