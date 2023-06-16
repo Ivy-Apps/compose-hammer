@@ -34,9 +34,28 @@ class QuickCodeMenu(
                 button("Back") {
                     navigateToMainMenu()
                 }
+                text("⚡ Quick Code").bold()
+            }
+            importExport()
+        }
+    }
+
+    private fun Panel.importExport(
+        indent: Boolean = false,
+    ) {
+        group(indent = indent) {
+            row {
+                text("Configurations").bold()
             }
             row {
-                text("⚡ Quick Code configuration").bold()
+                label(
+                    "Import an existing Quick Code configuration" +
+                            "\nor export your current one."
+                ).comment(
+                    """
+                        Tip: You can import more than one configurations.
+                    """.trimIndent()
+                )
             }
             row {
                 button("Import") {
@@ -125,6 +144,9 @@ class QuickCodeMenu(
     ) {
         val codeItems = group.codeItems
         group(indent = false) {
+            row {
+                label("Code items").bold()
+            }
             codeItems.sortedBy {
                 it.order
             }.forEachIndexed { index, codeItem ->

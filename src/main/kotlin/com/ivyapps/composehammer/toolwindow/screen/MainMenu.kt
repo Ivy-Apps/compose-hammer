@@ -67,17 +67,17 @@ class MainMenu(
         group(indent = true) {
             row {
                 text("Custom code").bold()
-                    .comment(
-                        """
-                        Create and manage custom code snippets 
-                        for the "⚡ Quick Code" action.
-                    """.trimIndent()
-                    )
+            }
+            row {
+                label(
+                    "Create and manage custom code snippets\n" +
+                            "for the \"⚡ Quick Code\" quick action."
+                )
             }
             row {
                 button("⚡ Quick code") {
                     navigateToCustomCodeMenu()
-                }.comment("Done fast!")
+                }.comment("Coding done fast!")
             }
         }
     }
