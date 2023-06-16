@@ -16,11 +16,11 @@ class QuickCodeService(project: Project) {
         get() = persistence.state.groups.sortedBy { it.order }
 
     // region Group operations
-    fun addGroup(name: String): Boolean {
-        val finalName = name.trim().takeIf { it.isNotBlank() } ?: return false
-        persistence.state.groups.add(
-            CodeGroup(
-                name = finalName,
+    fun addGroup(rawName: String): Boolean {
+        val name = rawName.trim().takeIf { it.isNotBlank() } ?: return false
+        updateState(
+            new = CodeGroup(
+                name = name,
                 order = groups.lastOrNull()?.order?.plus(2) ?: 1.0,
                 codeItems = emptyList()
             )
@@ -72,9 +72,7 @@ class QuickCodeService(project: Project) {
         targetGroup: CodeGroup,
         newOrder: Double,
     ) {
-        persistence.state.groups.remove(targetGroup)
-        persistence.state.groups.add(targetGroup.copy(order = newOrder))
-        persistence.state.groups.sortBy { it.order }
+        updateState(old = targetGroup, new = targetGroup.copy(order = newOrder))
     }
 
     fun deleteGroup(group: CodeGroup) {
@@ -85,34 +83,102 @@ class QuickCodeService(project: Project) {
     // region CodeItem operations
     fun addItem(
         group: CodeGroup,
-        name: String,
-        imports: String,
-        code: String,
+        rawName: String,
+        rawImports: String,
+        rawCode: String,
     ): Boolean {
+        val item = codeItemFrom(
+            rawName = rawName,
+            rawImports = rawImports,
+            rawCode = rawCode,
+            order = group.codeItems.lastOrNull()?.order?.plus(2) ?: 1.0
+        ) ?: return false
+
+        group.updateCodeItems(
+            newCodeItems = group.codeItems + item,
+        )
         return true
     }
 
     fun editCodeItem(
         group: CodeGroup,
         item: CodeItem,
-        name: String,
-        imports: String,
-        code: String,
+        rawName: String,
+        rawImports: String,
+        rawCode: String,
     ): Boolean {
+        val updatedItem = codeItemFrom(
+            rawName = rawName,
+            rawImports = rawImports,
+            rawCode = rawCode,
+            order = item.order
+        ) ?: return false
+
+        group.updateCodeItems(
+            newCodeItems = group.codeItems.filter { it != item } + updatedItem
+        )
         return true
     }
 
-    fun moveItemUp(group: CodeGroup, item: CodeItem) {
+    private fun codeItemFrom(
+        rawName: String,
+        rawImports: String,
+        rawCode: String,
+        order: Double,
+    ): CodeItem? {
+        val name = rawName.trim().takeIf(String::isNotBlank) ?: return null
+        val code = rawCode.trim().takeIf(String::isNotBlank) ?: return null
+        val imports = rawImports.replace("import", "")
+            .split("\n")
+            .mapNotNull {
+                it.trim().takeIf(String::isNotBlank)
+            }
 
+        return CodeItem(
+            name = name,
+            imports = imports,
+            code = code,
+            order = order,
+        )
     }
 
-    fun moveItemDown(group: CodeGroup, item: CodeItem) {
+    fun moveItemUp(group: CodeGroup, item: CodeItem): Boolean {
 
+        return false
     }
 
-    fun deleteItem(group: CodeGroup, item: CodeItem) {
+    fun moveItemDown(group: CodeGroup, item: CodeItem): Boolean {
 
+        return false
+    }
+
+    fun deleteItem(group: CodeGroup, item: CodeItem): Boolean {
+        group.updateCodeItems(
+            newCodeItems = group.codeItems.filter { it != item }
+        )
+        return true
+    }
+
+    private fun CodeGroup.updateCodeItems(
+        newCodeItems: List<CodeItem>
+    ) {
+        updateState(
+            old = this,
+            new = this.copy(
+                codeItems = newCodeItems.sortedBy { it.order }
+            )
+        )
     }
     // endregion
 
+    private fun updateState(
+        new: CodeGroup,
+        old: CodeGroup? = null,
+    ) {
+        if (old != null) {
+            persistence.state.groups.remove(old)
+        }
+        persistence.state.groups.add(new)
+        persistence.state.groups.sortBy { it.order }
+    }
 }

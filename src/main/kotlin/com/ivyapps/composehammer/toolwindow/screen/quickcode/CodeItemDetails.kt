@@ -69,18 +69,18 @@ class CodeItemDetails(
                             editCodeItem(
                                 group = codeGroup,
                                 item = codeItem,
-                                name = name,
-                                imports = imports,
-                                code = code,
+                                rawName = name,
+                                rawImports = imports,
+                                rawCode = code,
                             )
                         }
                     } else {
                         perform {
                             addItem(
                                 group = codeGroup,
-                                name = name,
-                                imports = imports,
-                                code = code,
+                                rawName = name,
+                                rawImports = imports,
+                                rawCode = code,
                             )
                         }
                     }
