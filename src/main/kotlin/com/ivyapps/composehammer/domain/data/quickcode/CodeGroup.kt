@@ -1,4 +1,4 @@
-package com.ivyapps.composehammer.domain.data.custom
+package com.ivyapps.composehammer.domain.data.quickcode
 
 import kotlinx.serialization.Serializable
 
@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 data class CodeGroup(
     val name: String,
     val order: Double,
-    val components: List<Component>,
+    val codeItems: List<CodeItem>,
 )

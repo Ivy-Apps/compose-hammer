@@ -9,9 +9,9 @@ import com.intellij.ui.content.Content
 import com.intellij.ui.content.ContentFactory
 import com.ivyapps.composehammer.domain.MaterialComponentsService
 import com.ivyapps.composehammer.domain.data.material3.MaterialComponent
-import com.ivyapps.composehammer.toolwindow.screen.CustomCodeMenu
 import com.ivyapps.composehammer.toolwindow.screen.MainMenu
 import com.ivyapps.composehammer.toolwindow.screen.MaterialComponentDetails
+import com.ivyapps.composehammer.toolwindow.screen.quickcode.QuickCodeMenu
 import javax.swing.JComponent
 
 class ComposeHammerToolWindowFactory : ToolWindowFactory {
@@ -49,7 +49,7 @@ class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
             MainMenu(
                 service = m3service,
                 navigateToMaterialComponent = ::navigateToMaterialComponent,
-                navigateToCustomCodeMenu = ::navigateToCustomComponents,
+                navigateToCustomCodeMenu = ::navigateToQuickCode,
             ).ui()
         ),
         "Components",
@@ -65,14 +65,14 @@ class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
         )
     }
 
-    fun navigateToCustomComponents() {
+    fun navigateToQuickCode() {
         navigateTo(
-            screen = CustomCodeMenu(
+            screen = QuickCodeMenu(
                 project = toolWindow.project,
                 navigateToMainMenu = ::navigateToMainMenu,
-                refreshUi = ::navigateToCustomComponents,
+                refreshUi = ::navigateToQuickCode,
             ).ui(),
-            screenTitle = "Custom"
+            screenTitle = "Quick Code"
         )
     }
 

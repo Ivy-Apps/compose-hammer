@@ -18,7 +18,7 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <projectService serviceImplementation="com.ivyapps.composehammer.persistence.CustomCodePersistence"/>
+        <projectService serviceImplementation="com.ivyapps.composehammer.persistence.QuickCodePersistence"/>
 
         <toolWindow
                 factoryClass="com.ivyapps.composehammer.toolwindow.ComposeHammerToolWindowFactory"

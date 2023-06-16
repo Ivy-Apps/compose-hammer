@@ -66,9 +66,11 @@ class MainMenu(
     private fun Panel.customSection() {
         group(indent = true) {
             row {
-                text("Custom templates")
+                text("⚡ Quick Code").bold()
             }
-
+            row {
+                text("Create custom code")
+            }
             row {
                 button("Custom code") {
                     navigateToCustomCodeMenu()

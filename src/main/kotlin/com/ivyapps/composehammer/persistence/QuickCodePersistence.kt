@@ -5,12 +5,12 @@ import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
 import com.intellij.util.xmlb.Converter
 import com.intellij.util.xmlb.annotations.OptionTag
-import com.ivyapps.composehammer.domain.data.custom.CodeGroup
+import com.ivyapps.composehammer.domain.data.quickcode.CodeGroup
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-data class CustomCodeState(
+data class QuickCodeState(
     @OptionTag(converter = GroupsConverter::class)
     var groups: MutableList<CodeGroup> = mutableListOf()
 )
@@ -19,13 +19,13 @@ data class CustomCodeState(
     name = "com.ivyapps.composehammer.persistence.CustomComponentsPersistence",
     storages = [Storage("ComposeHammerCustomComponents.xml")]
 )
-class CustomCodePersistence : PersistentStateComponent<CustomCodeState> {
+class QuickCodePersistence : PersistentStateComponent<QuickCodeState> {
 
-    private var internalState = CustomCodeState()
+    private var internalState = QuickCodeState()
 
-    override fun getState(): CustomCodeState = internalState
+    override fun getState(): QuickCodeState = internalState
 
-    override fun loadState(state: CustomCodeState) {
+    override fun loadState(state: QuickCodeState) {
         internalState = state
     }
 }
