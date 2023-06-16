@@ -38,6 +38,44 @@ fun ContentScope.composeRuntime() = group(
 
     component {
         showInToolWindow = false
+        name = "derivedStateOf {}"
+        imports = listOf(
+            "androidx.compose.foundation.lazy.rememberLazyListState",
+            "androidx.compose.runtime.derivedStateOf",
+            "androidx.compose.runtime.remember",
+        )
+        code = """
+            val listState = rememberLazyListState()
+            val firstItemVisible = remember {
+                derivedStateOf { listState.firstVisibleItemIndex > 0 }
+            }
+        """.trimIndent()
+    }
+
+    component {
+        showInToolWindow = false
+        name = "produceState {}"
+        imports = listOf(
+            "androidx.compose.runtime.getValue",
+            "androidx.compose.runtime.produceState",
+            "kotlinx.coroutines.ExperimentalCoroutinesApi",
+            "kotlinx.coroutines.channels.produce",
+            "kotlinx.coroutines.delay",
+        )
+        code = """
+            val state by produceState<String?>(initialValue = null) {
+                produce<String> {
+                    delay(1_000)
+                    // do your async logic here
+                    value = "Produced!"
+                }
+            }
+        """.trimIndent()
+
+    }
+
+    component {
+        showInToolWindow = false
         name = "Coroutine scope"
         imports = listOf("androidx.compose.runtime.rememberCoroutineScope")
         code = """

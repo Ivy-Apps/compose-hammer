@@ -4,8 +4,7 @@
 
 ## [Unreleased]
 
-
-## [0.0.2] Initial feedback
+## [0.0.2] Level-up!
 
 ### Added
 
@@ -14,7 +13,9 @@
   alt/option + enter action!
 - **Quick Action:** Added "⚡ Layouts" section that contains
   `Column`, `Row`, `Box`, `LazyColumn` and `LazyRow`.
-- **Components:** `Horizontal pager`, `Tabs with horizontal pager` 
+- **Quick Action:** Added in the "⚡ Compose runtime" section
+  `derivedStateOf` and `produceState`.
+- **Components:** `Horizontal pager`, `Tabs with horizontal pager`
 
 ### Changed
 
