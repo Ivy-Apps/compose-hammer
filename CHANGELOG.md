@@ -4,14 +4,14 @@
 
 ## [Unreleased]
 
-### Added
-
-- Support for custom components
 
 ## [0.0.2] Initial feedback
 
 ### Added
 
+- **⚡ Quick Code 0.0.1:** a feature supporting the addition
+  of **custom code snippets** that will appear in the new "⚡ Quick Code"
+  alt/option + enter action!
 - **Quick Action:** Added "⚡ Layouts" section that contains
   `Column`, `Row`, `Box`, `LazyColumn` and `LazyRow`.
 - **Components:** `Horizontal pager`, `Tabs with horizontal pager` 
@@ -20,7 +20,7 @@
 
 - **Quick Action:** Moved the layouts from "⚡ Quick UI" to
   "⚡ Layouts"
-- Improved components: `Tabs`
+- Improved the "Tabs" material components.
 
 ### Fixed
 
