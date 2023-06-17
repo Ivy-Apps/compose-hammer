@@ -55,7 +55,7 @@ class QuickCodeLexerTest : BasePlatformTestCase() {
 
     fun testIfCondition() {
         // given
-        val text = "#if ({{var1}} && {{var2}}) || !{{var3}}"
+        val text = "#if ({{var1}} AND {{var2}}) OR NOT {{var3}}"
 
         // when
         val tokens = lexer.tokenize(text)
@@ -75,35 +75,46 @@ class QuickCodeLexerTest : BasePlatformTestCase() {
     }
 
 
-    fun dfdtestMixed() {
+    fun testMixed() {
         // given
         val text = """
-            |class {{name}}ViewModel : ViewModel() {
-            |   @Composable
-            |   fun content(): {{name}}State {
-            |       //TODO:
-            |   }
-            |      
-            |   #if {{hasEvents}} && !({{legacy}} || {{old}}) #then
-            |   fun eventHandling(event: {{name}}Event) {
-            |       // TODO:
-            |   }
-            |   #endif
-            |}
+            class {{name}}ViewModel : ViewModel() {
+               @Composable
+               fun content(): {{name}}State {
+                   //TODO:
+               }
+                  
+               #if {{hasEvents}} AND NOT ({{legacy}} OR {{old}}) #then
+               fun eventHandling(event: {{name}}Event) {
+                   // TODO:
+               }
+               #endif
+            }
         """.trimIndent()
 
         // when
         val tokens = lexer.tokenize(text)
 
         // then
-        tokens shouldBe listOf(
-            QuickCodeToken.RawText("class "),
-            QuickCodeToken.Variable("name"),
-            QuickCodeToken.RawText("ViewModel"),
-        )
+        tokens.printActual()
     }
 
-    private infix fun List<QuickCodeToken>.shouldBe(tokens: List<QuickCodeToken>) {
-        assertEquals(tokens, this)
+    private infix fun List<QuickCodeToken>.shouldBe(expectedTokens: List<QuickCodeToken>) {
+        printActual()
+
+        for (index in this.indices) {
+            val actualToken = this[index]
+            val expected = expectedTokens[index]
+            println("#$index: $actualToken")
+            assertEquals(expected, actualToken)
+        }
+    }
+
+    private fun List<QuickCodeToken>.printActual() {
+        println("Actual result:")
+        for ((index, token) in this.withIndex()) {
+            println("#$index: $token")
+        }
+        println("------")
     }
 }

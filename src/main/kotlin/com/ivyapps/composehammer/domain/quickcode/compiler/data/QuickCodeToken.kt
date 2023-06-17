@@ -1,38 +1,84 @@
 package com.ivyapps.composehammer.domain.quickcode.compiler.data
 
 sealed interface QuickCodeToken {
-    val startSyntax: String?
-    val endSyntax: String?
-
-    data class RawText(val text: String) : QuickCodeToken {
-        override val startSyntax = null
-        override val endSyntax = null
-    }
+    data class RawText(val text: String) : QuickCodeToken
 
     data class Variable(val name: String) : QuickCodeToken {
-        override val startSyntax = "{{"
-        override val endSyntax = "}}"
+        companion object {
+            val syntax = TokenSyntax(
+                starsWith = "{{",
+                endsWith = "}}",
+            )
+        }
     }
 
     object If : QuickCodeToken {
-        override val startSyntax = "#if"
-        override val endSyntax = "}}"
+        val syntax = TokenSyntax(
+            starsWith = "#if",
+        )
     }
-
-    object Then : QuickCodeToken
 
     sealed interface IfCondition {
-        data class BoolVariable(val name: String) : QuickCodeToken
+        data class BoolVariable(val name: String) : QuickCodeToken {
+            companion object {
+                val syntax = TokenSyntax(
+                    starsWith = "{{",
+                    endsWith = "}}"
+                )
+            }
+        }
 
-        object Not : QuickCodeToken
-        object And : QuickCodeToken
-        object Or : QuickCodeToken
+        object Not : QuickCodeToken {
+            val syntax = TokenSyntax(
+                starsWith = "NOT",
+            )
+        }
 
-        object OpenBracket : QuickCodeToken
-        object CloseBracket : QuickCodeToken
+        object And : QuickCodeToken {
+            val syntax = TokenSyntax(
+                starsWith = "AND",
+            )
+        }
+
+        object Or : QuickCodeToken {
+            val syntax = TokenSyntax(
+                starsWith = "OR",
+            )
+        }
+
+        object OpenBracket : QuickCodeToken {
+            val syntax = TokenSyntax(
+                starsWith = "(",
+            )
+        }
+
+        object CloseBracket : QuickCodeToken {
+            val syntax = TokenSyntax(
+                starsWith = ")",
+            )
+        }
     }
 
-    object Else : QuickCodeToken
-    object EndIf : QuickCodeToken
+    object Then : QuickCodeToken {
+        val syntax = TokenSyntax(
+            starsWith = "#then",
+        )
+    }
+
+    object Else : QuickCodeToken {
+        val syntax = TokenSyntax(
+            starsWith = "#else",
+        )
+    }
+
+    object EndIf : QuickCodeToken {
+        val syntax = TokenSyntax(
+            starsWith = "#endif",
+        )
+    }
 }
 
+data class TokenSyntax(
+    val starsWith: String,
+    val endsWith: String? = null,
+)
