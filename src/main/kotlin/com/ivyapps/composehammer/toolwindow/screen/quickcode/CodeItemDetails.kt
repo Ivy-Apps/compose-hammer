@@ -58,6 +58,9 @@ class CodeItemDetails(
             )
             val codeInput: JBTextArea = codeArea(
                 title = "Code",
+                description = """
+                    Supports zero or many variables using {{VARIABLE_NAME}} syntax.
+                """.trimIndent(),
                 code = codeItem?.code ?: "",
                 tip = """
                     Paste your code here. Don't worry about formatting.

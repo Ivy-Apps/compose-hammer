@@ -159,7 +159,8 @@ class QuickCodeService(project: Project) {
         return CodeItem(
             name = name,
             imports = imports,
-            code = code,
+            rawCode = code,
+            variables = emptyList(),
             order = order,
         )
     }

@@ -11,6 +11,7 @@ import javax.swing.JLabel
 fun Panel.codeArea(
     title: String?,
     code: String,
+    description: String? = null,
     tip: String? = null,
     editable: Boolean = false,
     hasCopy: Boolean = true,
@@ -20,6 +21,11 @@ fun Panel.codeArea(
     if (title != null) {
         row {
             label(title).bold()
+        }
+    }
+    if (description != null) {
+        row {
+            label(description)
         }
     }
     row {

@@ -13,7 +13,7 @@ data class QuickCodeState(
 
 @State(
     name = "com.ivyapps.composehammer.persistence.CustomComponentsPersistence",
-    storages = [Storage("ComposeHammerQuickCode_v1.xml")]
+    storages = [Storage("ComposeHammerQuickCode_v2.xml")]
 )
 class QuickCodePersistence : PersistentStateComponent<QuickCodeState> {
 
