@@ -9,12 +9,13 @@ import com.intellij.ui.dsl.builder.panel
 import com.ivyapps.composehammer.addOnClickListener
 import com.ivyapps.composehammer.domain.data.quickcode.CodeGroup
 import com.ivyapps.composehammer.domain.data.quickcode.CodeItem
+import com.ivyapps.composehammer.domain.quickcode.ExportQuickCodeService
 import com.ivyapps.composehammer.domain.quickcode.QuickCodeService
 import com.ivyapps.composehammer.toolwindow.component.DeleteButton
 import com.ivyapps.composehammer.toolwindow.screen.ToolWindowScreen
 
 class QuickCodeMenu(
-    project: Project,
+    private val project: Project,
     private val navigateToMainMenu: () -> Unit,
     private val refreshUi: () -> Unit,
     private val navigateToCodeItem: (CodeGroup, CodeItem?) -> Unit,
@@ -62,7 +63,7 @@ class QuickCodeMenu(
                     // TODO: Implement
                 }
                 button("Export") {
-                    // TODO: Implement
+                    project.service<ExportQuickCodeService>().export()
                 }
             }
         }
