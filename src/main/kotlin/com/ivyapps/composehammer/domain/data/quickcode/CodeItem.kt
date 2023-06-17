@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 data class CodeItem(
     override val name: String,
     override val imports: List<String> = emptyList(),
-    val rawCode: String,
+    val codeTemplate: String,
     val variables: List<String> = emptyList(),
     override val order: Double,
 ) : Code, Reorderable {
@@ -16,5 +16,5 @@ data class CodeItem(
         get() = name
 
     override val code: String
-        get() = rawCode
+        get() = codeTemplate
 }
