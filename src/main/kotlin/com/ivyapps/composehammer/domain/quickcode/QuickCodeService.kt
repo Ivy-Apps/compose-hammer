@@ -6,6 +6,7 @@ import com.intellij.openapi.project.Project
 import com.ivyapps.composehammer.domain.data.Reorderable
 import com.ivyapps.composehammer.domain.data.quickcode.CodeGroup
 import com.ivyapps.composehammer.domain.data.quickcode.CodeItem
+import com.ivyapps.composehammer.domain.data.quickcode.QuickCodeConfiguration
 import com.ivyapps.composehammer.persistence.QuickCodePersistence
 import com.ivyapps.composehammer.randomBetween
 
@@ -13,8 +14,11 @@ import com.ivyapps.composehammer.randomBetween
 class QuickCodeService(project: Project) {
     private val persistence = project.service<QuickCodePersistence>()
 
+    val configuration: QuickCodeConfiguration
+        get() = persistence.state.configuration
+
     val groups: List<CodeGroup>
-        get() = persistence.state.groups.sortedBy { it.order }
+        get() = configuration.groups.sortedBy { it.order }
 
     fun findGroupByName(name: String): CodeGroup {
         return requireNotNull(groups.find { it.name == name }) {
@@ -78,7 +82,7 @@ class QuickCodeService(project: Project) {
     }
 
     fun deleteGroup(group: CodeGroup) {
-        persistence.state.groups.remove(group)
+        configuration.groups.remove(group)
     }
     // endregion
 
@@ -190,10 +194,10 @@ class QuickCodeService(project: Project) {
         old: CodeGroup? = null,
     ) {
         if (old != null) {
-            persistence.state.groups.remove(old)
+            configuration.groups.remove(old)
         }
-        persistence.state.groups.add(new)
-        persistence.state.groups.sortBy { it.order }
+        configuration.groups.add(new)
+        configuration.groups.sortBy { it.order }
     }
 
     private fun <T : Reorderable> List<T>.moveUp(target: Reorderable): Double? {

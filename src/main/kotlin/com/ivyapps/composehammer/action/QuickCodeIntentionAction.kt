@@ -25,7 +25,7 @@ class QuickCodeIntentionAction : IntentionAction, HighPriorityAction, Iconable {
 
     override fun isAvailable(project: Project, editor: Editor, file: PsiFile): Boolean {
         val service = project.service<QuickCodePersistence>()
-        return service.state.groups.isNotEmpty()
+        return service.state.configuration.groups.isNotEmpty()
     }
 
     override fun invoke(project: Project, editor: Editor, file: PsiFile) {
