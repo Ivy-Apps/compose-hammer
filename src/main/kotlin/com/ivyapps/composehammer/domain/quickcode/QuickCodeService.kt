@@ -145,13 +145,13 @@ class QuickCodeService(project: Project) {
     }
 
     fun moveCodeItemUp(group: CodeGroup, item: CodeItem): Boolean {
-        val newOrder = group.codeItems.moveUp(group) ?: return false
+        val newOrder = group.codeItems.moveUp(item) ?: return false
         moveCodeItem(group, item, newOrder)
         return true
     }
 
     fun moveCodeItemDown(group: CodeGroup, item: CodeItem): Boolean {
-        val newOrder = group.codeItems.moveDown(group) ?: return false
+        val newOrder = group.codeItems.moveDown(item) ?: return false
         moveCodeItem(group, item, newOrder)
         return true
     }
@@ -212,8 +212,8 @@ class QuickCodeService(project: Project) {
     }
 
     private fun <T : Reorderable> List<T>.moveDown(target: Reorderable): Double? {
-        for ((index, group) in this.withIndex()) {
-            if (target.name == group.name) {
+        for ((index, item) in this.withIndex()) {
+            if (target.name == item.name) {
                 val next = getOrNull(index + 1)
                     ?: return null // it's already last!
                 val nextNext = getOrNull(index + 2)
