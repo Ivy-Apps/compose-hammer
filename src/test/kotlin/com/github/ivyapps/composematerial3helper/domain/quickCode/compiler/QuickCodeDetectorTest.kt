@@ -2,16 +2,16 @@ package com.github.ivyapps.composematerial3helper.domain.quickCode.compiler
 
 import com.intellij.testFramework.TestDataPath
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
-import com.ivyapps.composehammer.domain.quickcode.compiler.QuickCodeParserService
+import com.ivyapps.composehammer.domain.quickcode.compiler.QuickCodeDetector
 
 @TestDataPath("\$CONTENT_ROOT/src/test/testData")
-class QuickCodeParserServiceTest : BasePlatformTestCase() {
+class QuickCodeDetectorTest : BasePlatformTestCase() {
 
-    private lateinit var service: QuickCodeParserService
+    private lateinit var service: QuickCodeDetector
 
     override fun setUp() {
         super.setUp()
-        service = QuickCodeParserService()
+        service = QuickCodeDetector()
     }
 
     fun testEmptyString() {
