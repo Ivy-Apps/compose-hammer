@@ -10,6 +10,7 @@ import com.ivyapps.composehammer.addOnClickListener
 import com.ivyapps.composehammer.domain.data.quickcode.CodeGroup
 import com.ivyapps.composehammer.domain.data.quickcode.CodeItem
 import com.ivyapps.composehammer.domain.quickcode.ExportQuickCodeService
+import com.ivyapps.composehammer.domain.quickcode.ImportQuickCodeService
 import com.ivyapps.composehammer.domain.quickcode.QuickCodeService
 import com.ivyapps.composehammer.toolwindow.component.DeleteButton
 import com.ivyapps.composehammer.toolwindow.screen.ToolWindowScreen
@@ -60,7 +61,8 @@ class QuickCodeMenu(
             }
             row {
                 button("Import") {
-                    // TODO: Implement
+                    project.service<ImportQuickCodeService>().import()
+                    refreshUi()
                 }
                 button("Export") {
                     project.service<ExportQuickCodeService>().export()

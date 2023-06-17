@@ -20,6 +20,8 @@ class QuickCodeService(project: Project) {
     val groups: List<CodeGroup>
         get() = configuration.groups.sortedBy { it.order }
 
+    fun hasDefinedComponents() = configuration.groups.isNotEmpty()
+
     fun findGroupByName(name: String): CodeGroup {
         return requireNotNull(groups.find { it.name == name }) {
             "CodeGroup with name '$name' doesn't exists in $groups."
@@ -33,16 +35,25 @@ class QuickCodeService(project: Project) {
     }
 
     // region Group operations
-    fun addGroup(rawName: String): Boolean {
-        val name = rawName.trim().takeIf { it.isNotBlank() } ?: return false
-        updateState(
-            new = CodeGroup(
-                name = name,
-                order = groups.lastOrNull()?.order?.plus(2) ?: 1.0,
-                codeItems = emptyList()
-            )
+    fun addGroup(rawName: String): CodeGroup? {
+        val name = rawName.trim().takeIf { it.isNotBlank() } ?: return null
+        val groups = groups
+
+        val existingGroup = groups.find { it.name == name }
+        if (existingGroup != null) {
+            // group already exists
+            return existingGroup
+        }
+
+        val newGroup = CodeGroup(
+            name = name,
+            order = groups.lastOrNull()?.order?.plus(2) ?: 1.0,
+            codeItems = emptyList()
         )
-        return true
+        updateState(
+            new = newGroup
+        )
+        return newGroup
     }
 
     fun renameGroup(group: CodeGroup, rawNewName: String): Boolean {
@@ -93,15 +104,20 @@ class QuickCodeService(project: Project) {
         rawImports: String,
         rawCode: String,
     ): Boolean {
-        val item = codeItemFrom(
+        val newItem = codeItemFrom(
             rawName = rawName,
             rawImports = rawImports,
             rawCode = rawCode,
             order = group.codeItems.lastOrNull()?.order?.plus(2) ?: 1.0
         ) ?: return false
 
+        if (group.codeItems.any { it.name == newItem.name }) {
+            // item already exists, don't add it!
+            return false
+        }
+
         group.executeCodeItemsUpdate(
-            newCodeItems = group.codeItems + item,
+            newCodeItems = group.codeItems + newItem,
         )
         return true
     }

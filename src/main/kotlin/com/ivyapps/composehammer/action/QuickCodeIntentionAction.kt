@@ -11,7 +11,6 @@ import com.intellij.psi.PsiFile
 import com.ivyapps.composehammer.action.component.showOptionsPopup
 import com.ivyapps.composehammer.domain.action.InsertCodeService
 import com.ivyapps.composehammer.domain.quickcode.QuickCodeService
-import com.ivyapps.composehammer.persistence.QuickCodePersistence
 import javax.swing.Icon
 
 
@@ -24,8 +23,8 @@ class QuickCodeIntentionAction : IntentionAction, HighPriorityAction, Iconable {
     )
 
     override fun isAvailable(project: Project, editor: Editor, file: PsiFile): Boolean {
-        val service = project.service<QuickCodePersistence>()
-        return service.state.configuration.groups.isNotEmpty()
+        val quickCodeService = project.service<QuickCodeService>()
+        return quickCodeService.hasDefinedComponents()
     }
 
     override fun invoke(project: Project, editor: Editor, file: PsiFile) {

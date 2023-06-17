@@ -4,5 +4,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class QuickCodeConfiguration(
-    val groups: MutableList<CodeGroup>
+    val groups: MutableList<CodeGroup> = mutableListOf()
 )
