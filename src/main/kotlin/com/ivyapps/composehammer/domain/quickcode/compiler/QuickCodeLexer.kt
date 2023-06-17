@@ -3,9 +3,9 @@ package com.ivyapps.composehammer.domain.quickcode.compiler
 import com.ivyapps.composehammer.domain.quickcode.compiler.data.QuickCodeToken
 
 class QuickCodeLexer {
-
     fun tokenize(text: String): List<QuickCodeToken> {
         var position = 0
+        var insideIfStatement = false
 
         val tokens = mutableListOf<QuickCodeToken>()
         while (position < text.length) {
@@ -18,27 +18,27 @@ class QuickCodeLexer {
                     }
                 }
 
-                text.startsWith("&&", position) -> {
+                insideIfStatement && text.startsWith("&&", position) -> {
                     tokens.add(QuickCodeToken.Operator(text.substring(position, position + 2)))
                     position += 2
                 }
 
-                text.startsWith("||", position) -> {
+                insideIfStatement && text.startsWith("||", position) -> {
                     tokens.add(QuickCodeToken.Operator(text.substring(position, position + 2)))
                     position += 2
                 }
 
-                text.startsWith("!", position) -> {
+                insideIfStatement && text.startsWith("!", position) -> {
                     tokens.add(QuickCodeToken.Operator(text.substring(position, position + 1)))
                     position += 1
                 }
 
-                text.startsWith("(", position) -> {
+                insideIfStatement && text.startsWith("(", position) -> {
                     tokens.add(QuickCodeToken.OpenParenthesis())
                     position += 1
                 }
 
-                text.startsWith(")", position) -> {
+                insideIfStatement && text.startsWith(")", position) -> {
                     tokens.add(QuickCodeToken.CloseParenthesis())
                     position += 1
                 }
@@ -48,6 +48,7 @@ class QuickCodeLexer {
                     if (end != null) {
                         tokens.add(QuickCodeToken.IfCondition(text.substring(position + 6, end - 2)))
                         position = end
+                        insideIfStatement = true
                     }
                 }
 
@@ -56,6 +57,7 @@ class QuickCodeLexer {
                     if (end != null) {
                         tokens.add(QuickCodeToken.ElseIfCondition(text.substring(position + 11, end - 2)))
                         position = end
+                        insideIfStatement = true
                     }
                 }
 
@@ -67,16 +69,17 @@ class QuickCodeLexer {
                 text.startsWith("#endif", position) -> {
                     tokens.add(QuickCodeToken.EndIf)
                     position += 6
+                    insideIfStatement = false
                 }
 
                 else -> {
                     val nextSpecialChar = listOfNotNull(
                         text.indexOfOrNull("{{", position),
-                        text.indexOfOrNull("&&", position),
-                        text.indexOfOrNull("||", position),
-                        text.indexOfOrNull("!", position),
-                        text.indexOfOrNull("(", position),
-                        text.indexOfOrNull(")", position),
+                        text.indexOfOrNull("&&", position).takeIf { insideIfStatement },
+                        text.indexOfOrNull("||", position).takeIf { insideIfStatement },
+                        text.indexOfOrNull("!", position).takeIf { insideIfStatement },
+                        text.indexOfOrNull("(", position).takeIf { insideIfStatement },
+                        text.indexOfOrNull(")", position).takeIf { insideIfStatement },
                         text.indexOfOrNull("#if {{", position),
                         text.indexOfOrNull("#else if {{", position),
                         text.indexOfOrNull("#else", position),

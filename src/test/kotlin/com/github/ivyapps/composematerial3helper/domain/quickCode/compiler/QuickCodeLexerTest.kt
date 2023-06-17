@@ -19,7 +19,7 @@ class QuickCodeLexerTest : BasePlatformTestCase() {
         // given
         val text = ""
 
-        // when        
+        // when
         val tokens = lexer.tokenize(text)
 
         // then
@@ -36,9 +36,8 @@ class QuickCodeLexerTest : BasePlatformTestCase() {
         // then
         assertEquals(1, tokens.size)
         assertTrue(tokens[0] is QuickCodeToken.RawText)
-        assertEquals("Hello, World!", tokens[0].text)
+        assertEquals("Hello, World!", (tokens[0] as QuickCodeToken.RawText).text)
     }
-
 
     fun testVariable() {
         // given
@@ -50,42 +49,40 @@ class QuickCodeLexerTest : BasePlatformTestCase() {
         // then
         assertEquals(1, tokens.size)
         assertTrue(tokens[0] is QuickCodeToken.Variable)
-        assertEquals("{{variable}}", tokens[0].text)
+        assertEquals("{{variable}}", (tokens[0] as QuickCodeToken.Variable).text)
     }
-
 
     fun testOperators() {
         // given
-        val text = "&& || !"
+        val text = "#if {{condition}} && || !"
 
         // when
         val tokens = lexer.tokenize(text)
 
         // then
-        println("tokens: $tokens")
-        assertEquals(3, tokens.size)
-        assertTrue(tokens[0] is QuickCodeToken.Operator)
+        assertEquals(6, tokens.size)
+        assertTrue(tokens[0] is QuickCodeToken.IfCondition)
         assertTrue(tokens[1] is QuickCodeToken.Operator)
         assertTrue(tokens[2] is QuickCodeToken.Operator)
-        assertEquals("&&", tokens[0].text)
-        assertEquals("||", tokens[1].text)
-        assertEquals("!", tokens[2].text)
+        assertTrue(tokens[3] is QuickCodeToken.Operator)
+        assertEquals("&&", (tokens[1] as QuickCodeToken.Operator).text)
+        assertEquals("||", (tokens[2] as QuickCodeToken.Operator).text)
+        assertEquals("!", (tokens[3] as QuickCodeToken.Operator).text)
     }
-
 
     fun testParentheses() {
         // given
-        val text = "( )"
+        val text = "#if {{condition}} ( )"
 
         // when
         val tokens = lexer.tokenize(text)
 
         // then
-        assertEquals(2, tokens.size)
-        assertTrue(tokens[0] is QuickCodeToken.OpenParenthesis)
-        assertTrue(tokens[1] is QuickCodeToken.CloseParenthesis)
+        assertEquals(4, tokens.size)
+        assertTrue(tokens[0] is QuickCodeToken.IfCondition)
+        assertTrue(tokens[1] is QuickCodeToken.OpenParenthesis)
+        assertTrue(tokens[2] is QuickCodeToken.CloseParenthesis)
     }
-
 
     fun testIfCondition() {
         // given
@@ -100,7 +97,6 @@ class QuickCodeLexerTest : BasePlatformTestCase() {
         assertEquals("condition", (tokens[0] as QuickCodeToken.IfCondition).condition)
     }
 
-
     fun testElseIfCondition() {
         // given
         val text = "#else if {{condition}}"
@@ -114,7 +110,6 @@ class QuickCodeLexerTest : BasePlatformTestCase() {
         assertEquals("condition", (tokens[0] as QuickCodeToken.ElseIfCondition).condition)
     }
 
-
     fun testElse() {
         // given
         val text = "#else"
@@ -126,7 +121,6 @@ class QuickCodeLexerTest : BasePlatformTestCase() {
         assertEquals(1, tokens.size)
         assertTrue(tokens[0] is QuickCodeToken.Else)
     }
-
 
     fun testEndIf() {
         // given
@@ -140,7 +134,6 @@ class QuickCodeLexerTest : BasePlatformTestCase() {
         assertTrue(tokens[0] is QuickCodeToken.EndIf)
     }
 
-
     fun testMixed() {
         // given
         val text = "Hello, {{name}}! #if {{condition}} (&& || !)"
@@ -149,14 +142,17 @@ class QuickCodeLexerTest : BasePlatformTestCase() {
         val tokens = lexer.tokenize(text)
 
         // then
-        assertEquals(8, tokens.size)
-        assertEquals("Hello, ", tokens[0].text)
-        assertEquals("{{name}}", tokens[1].text)
+        assertEquals(9, tokens.size)
+        assertTrue(tokens[0] is QuickCodeToken.RawText)
+        assertEquals("Hello, ", (tokens[0] as QuickCodeToken.RawText).text)
+        assertTrue(tokens[1] is QuickCodeToken.Variable)
+        assertEquals("{{name}}", (tokens[1] as QuickCodeToken.Variable).text)
         assertTrue(tokens[2] is QuickCodeToken.RawText)
         assertTrue(tokens[3] is QuickCodeToken.IfCondition)
         assertTrue(tokens[4] is QuickCodeToken.OpenParenthesis)
         assertTrue(tokens[5] is QuickCodeToken.Operator)
         assertTrue(tokens[6] is QuickCodeToken.Operator)
         assertTrue(tokens[7] is QuickCodeToken.CloseParenthesis)
+        assertTrue(tokens[8] is QuickCodeToken.RawText)
     }
 }
