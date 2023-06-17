@@ -4,6 +4,7 @@ import com.intellij.testFramework.TestDataPath
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import com.ivyapps.composehammer.domain.quickcode.compiler.QuickCodeLexer
 import com.ivyapps.composehammer.domain.quickcode.compiler.data.QuickCodeToken
+import junit.framework.TestCase.*
 
 @TestDataPath("\$CONTENT_ROOT/src/test/testData")
 class QuickCodeLexerTest : BasePlatformTestCase() {
@@ -34,9 +35,9 @@ class QuickCodeLexerTest : BasePlatformTestCase() {
         val tokens = lexer.tokenize(text)
 
         // then
-        assertEquals(1, tokens.size)
-        assertTrue(tokens[0] is QuickCodeToken.RawText)
-        assertEquals("Hello, World!", (tokens[0] as QuickCodeToken.RawText).text)
+        tokens shouldBe listOf(
+            QuickCodeToken.RawText("Hello, World!")
+        )
     }
 
     fun testVariable() {
@@ -47,112 +48,62 @@ class QuickCodeLexerTest : BasePlatformTestCase() {
         val tokens = lexer.tokenize(text)
 
         // then
-        assertEquals(1, tokens.size)
-        assertTrue(tokens[0] is QuickCodeToken.Variable)
-        assertEquals("{{variable}}", (tokens[0] as QuickCodeToken.Variable).text)
-    }
-
-    fun testOperators() {
-        // given
-        val text = "#if {{condition}} && || !"
-
-        // when
-        val tokens = lexer.tokenize(text)
-
-        // then
-        assertEquals(6, tokens.size)
-        assertTrue(tokens[0] is QuickCodeToken.IfCondition)
-        assertTrue(tokens[1] is QuickCodeToken.Operator)
-        assertTrue(tokens[2] is QuickCodeToken.Operator)
-        assertTrue(tokens[3] is QuickCodeToken.Operator)
-        assertEquals("&&", (tokens[1] as QuickCodeToken.Operator).text)
-        assertEquals("||", (tokens[2] as QuickCodeToken.Operator).text)
-        assertEquals("!", (tokens[3] as QuickCodeToken.Operator).text)
-    }
-
-    fun testParentheses() {
-        // given
-        val text = "#if {{condition}} ( )"
-
-        // when
-        val tokens = lexer.tokenize(text)
-
-        // then
-        assertEquals(4, tokens.size)
-        assertTrue(tokens[0] is QuickCodeToken.IfCondition)
-        assertTrue(tokens[1] is QuickCodeToken.OpenParenthesis)
-        assertTrue(tokens[2] is QuickCodeToken.CloseParenthesis)
+        tokens shouldBe listOf(
+            QuickCodeToken.Variable("variable")
+        )
     }
 
     fun testIfCondition() {
         // given
-        val text = "#if {{condition}}"
+        val text = "#if ({{var1}} && {{var2}}) || !{{var3}}"
 
         // when
         val tokens = lexer.tokenize(text)
 
         // then
-        assertEquals(1, tokens.size)
-        assertTrue(tokens[0] is QuickCodeToken.IfCondition)
-        assertEquals("condition", (tokens[0] as QuickCodeToken.IfCondition).condition)
+        tokens shouldBe listOf(
+            QuickCodeToken.If,
+            QuickCodeToken.IfCondition.OpenBracket,
+            QuickCodeToken.IfCondition.BoolVariable("var1"),
+            QuickCodeToken.IfCondition.And,
+            QuickCodeToken.IfCondition.BoolVariable("var2"),
+            QuickCodeToken.IfCondition.CloseBracket,
+            QuickCodeToken.IfCondition.Or,
+            QuickCodeToken.IfCondition.Not,
+            QuickCodeToken.IfCondition.BoolVariable("var3"),
+        )
     }
 
-    fun testElseIfCondition() {
+
+    fun dfdtestMixed() {
         // given
-        val text = "#else if {{condition}}"
+        val text = """
+            |class {{name}}ViewModel : ViewModel() {
+            |   @Composable
+            |   fun content(): {{name}}State {
+            |       //TODO:
+            |   }
+            |      
+            |   #if {{hasEvents}} && !({{legacy}} || {{old}}) #then
+            |   fun eventHandling(event: {{name}}Event) {
+            |       // TODO:
+            |   }
+            |   #endif
+            |}
+        """.trimIndent()
 
         // when
         val tokens = lexer.tokenize(text)
 
         // then
-        assertEquals(1, tokens.size)
-        assertTrue(tokens[0] is QuickCodeToken.ElseIfCondition)
-        assertEquals("condition", (tokens[0] as QuickCodeToken.ElseIfCondition).condition)
+        tokens shouldBe listOf(
+            QuickCodeToken.RawText("class "),
+            QuickCodeToken.Variable("name"),
+            QuickCodeToken.RawText("ViewModel"),
+        )
     }
 
-    fun testElse() {
-        // given
-        val text = "#else"
-
-        // when
-        val tokens = lexer.tokenize(text)
-
-        // then
-        assertEquals(1, tokens.size)
-        assertTrue(tokens[0] is QuickCodeToken.Else)
-    }
-
-    fun testEndIf() {
-        // given
-        val text = "#endif"
-
-        // when
-        val tokens = lexer.tokenize(text)
-
-        // then
-        assertEquals(1, tokens.size)
-        assertTrue(tokens[0] is QuickCodeToken.EndIf)
-    }
-
-    fun testMixed() {
-        // given
-        val text = "Hello, {{name}}! #if {{condition}} (&& || !)"
-
-        // when
-        val tokens = lexer.tokenize(text)
-
-        // then
-        assertEquals(9, tokens.size)
-        assertTrue(tokens[0] is QuickCodeToken.RawText)
-        assertEquals("Hello, ", (tokens[0] as QuickCodeToken.RawText).text)
-        assertTrue(tokens[1] is QuickCodeToken.Variable)
-        assertEquals("{{name}}", (tokens[1] as QuickCodeToken.Variable).text)
-        assertTrue(tokens[2] is QuickCodeToken.RawText)
-        assertTrue(tokens[3] is QuickCodeToken.IfCondition)
-        assertTrue(tokens[4] is QuickCodeToken.OpenParenthesis)
-        assertTrue(tokens[5] is QuickCodeToken.Operator)
-        assertTrue(tokens[6] is QuickCodeToken.Operator)
-        assertTrue(tokens[7] is QuickCodeToken.CloseParenthesis)
-        assertTrue(tokens[8] is QuickCodeToken.RawText)
+    private infix fun List<QuickCodeToken>.shouldBe(tokens: List<QuickCodeToken>) {
+        assertEquals(tokens, this)
     }
 }

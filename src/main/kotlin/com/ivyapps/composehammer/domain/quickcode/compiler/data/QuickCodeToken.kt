@@ -1,26 +1,38 @@
 package com.ivyapps.composehammer.domain.quickcode.compiler.data
 
 sealed interface QuickCodeToken {
-    val text: String
+    val startSyntax: String?
+    val endSyntax: String?
 
-    data class RawText(override val text: String) : QuickCodeToken
-    data class Variable(override val text: String) : QuickCodeToken
-    data class Operator(override val text: String) : QuickCodeToken
-    data class OpenParenthesis(override val text: String = "(") : QuickCodeToken
-    data class CloseParenthesis(override val text: String = ")") : QuickCodeToken
-    data class IfCondition(val condition: String) : QuickCodeToken {
-        override val text: String = "#if {{$condition}}"
+    data class RawText(val text: String) : QuickCodeToken {
+        override val startSyntax = null
+        override val endSyntax = null
     }
 
-    object Else : QuickCodeToken {
-        override val text: String = "#else"
+    data class Variable(val name: String) : QuickCodeToken {
+        override val startSyntax = "{{"
+        override val endSyntax = "}}"
     }
 
-    data class ElseIfCondition(val condition: String) : QuickCodeToken {
-        override val text: String = "#else if {{$condition}}"
+    object If : QuickCodeToken {
+        override val startSyntax = "#if"
+        override val endSyntax = "}}"
     }
 
-    object EndIf : QuickCodeToken {
-        override val text: String = "#endif"
+    object Then : QuickCodeToken
+
+    sealed interface IfCondition {
+        data class BoolVariable(val name: String) : QuickCodeToken
+
+        object Not : QuickCodeToken
+        object And : QuickCodeToken
+        object Or : QuickCodeToken
+
+        object OpenBracket : QuickCodeToken
+        object CloseBracket : QuickCodeToken
     }
+
+    object Else : QuickCodeToken
+    object EndIf : QuickCodeToken
 }
+
