@@ -71,7 +71,7 @@ class MainMenu(
             row {
                 label(
                     "Create and manage custom code snippets\n" +
-                            "for the \"⚡ Quick Code\" quick action."
+                            "for the \"⚡ Quick Code\" alt+enter action."
                 )
             }
             row {
