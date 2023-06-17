@@ -62,6 +62,7 @@ class QuickCodeLexerTest : BasePlatformTestCase() {
         val tokens = lexer.tokenize(text)
 
         // then
+        println("tokens: $tokens")
         assertEquals(3, tokens.size)
         assertTrue(tokens[0] is QuickCodeToken.Operator)
         assertTrue(tokens[1] is QuickCodeToken.Operator)

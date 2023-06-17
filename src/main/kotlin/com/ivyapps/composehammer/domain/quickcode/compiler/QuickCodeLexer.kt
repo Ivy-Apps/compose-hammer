@@ -11,9 +11,11 @@ class QuickCodeLexer {
         while (position < text.length) {
             when {
                 text.startsWith("{{", position) -> {
-                    val end = text.indexOf("}}", position) + 2
-                    tokens.add(QuickCodeToken.Variable(text.substring(position, end)))
-                    position = end
+                    val end = text.indexOfOrNull("}}", position)?.plus(2)
+                    if (end != null) {
+                        tokens.add(QuickCodeToken.Variable(text.substring(position, end)))
+                        position = end
+                    }
                 }
 
                 text.startsWith("&&", position) -> {
@@ -42,15 +44,19 @@ class QuickCodeLexer {
                 }
 
                 text.startsWith("#if {{", position) -> {
-                    val end = text.indexOf("}}", position) + 2
-                    tokens.add(QuickCodeToken.IfCondition(text.substring(position + 6, end - 2)))
-                    position = end
+                    val end = text.indexOfOrNull("}}", position)?.plus(2)
+                    if (end != null) {
+                        tokens.add(QuickCodeToken.IfCondition(text.substring(position + 6, end - 2)))
+                        position = end
+                    }
                 }
 
                 text.startsWith("#else if {{", position) -> {
-                    val end = text.indexOf("}}", position) + 2
-                    tokens.add(QuickCodeToken.ElseIfCondition(text.substring(position + 11, end - 2)))
-                    position = end
+                    val end = text.indexOfOrNull("}}", position)?.plus(2)
+                    if (end != null) {
+                        tokens.add(QuickCodeToken.ElseIfCondition(text.substring(position + 11, end - 2)))
+                        position = end
+                    }
                 }
 
                 text.startsWith("#else", position) -> {
@@ -65,16 +71,16 @@ class QuickCodeLexer {
 
                 else -> {
                     val nextSpecialChar = listOfNotNull(
-                        text.indexOf("{{", position),
-                        text.indexOf("&&", position),
-                        text.indexOf("||", position),
-                        text.indexOf("!", position),
-                        text.indexOf("(", position),
-                        text.indexOf(")", position),
-                        text.indexOf("#if {{", position),
-                        text.indexOf("#else if {{", position),
-                        text.indexOf("#else", position),
-                        text.indexOf("#endif", position)
+                        text.indexOfOrNull("{{", position),
+                        text.indexOfOrNull("&&", position),
+                        text.indexOfOrNull("||", position),
+                        text.indexOfOrNull("!", position),
+                        text.indexOfOrNull("(", position),
+                        text.indexOfOrNull(")", position),
+                        text.indexOfOrNull("#if {{", position),
+                        text.indexOfOrNull("#else if {{", position),
+                        text.indexOfOrNull("#else", position),
+                        text.indexOfOrNull("#endif", position)
                     ).minOrNull() ?: text.length
                     tokens.add(QuickCodeToken.RawText(text.substring(position, nextSpecialChar)))
                     position = nextSpecialChar
@@ -83,4 +89,7 @@ class QuickCodeLexer {
         }
         return tokens
     }
+
+    private fun String.indexOfOrNull(string: String, startIndex: Int): Int? =
+        indexOf(string, startIndex).takeIf { it != -1 }
 }
