@@ -33,33 +33,20 @@ class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
     private val contentFactory = ContentFactory.SERVICE.getInstance()
     private val m3service = project.service<MaterialComponentsService>()
 
-    private var menuContent: Content? = null
+    private var contentCache = mutableMapOf<String, Content>()
 
-    fun navigateToMainMenu(recreate: Boolean = false) {
-        try {
-            val content = menuContent?.takeIf { !recreate } ?: createMainMenuContent()
-            menuContent = content // persist for the next iteration
-            val contentsToRemove = toolWindow.contentManager.contents
-            toolWindow.contentManager.addContent(content)
-            contentsToRemove.forEach { toolWindow.contentManager.removeContent(it, true) }
-        } catch (e: Exception) {
-            if (!recreate) { // check to avoid potential infinite recursion
-                navigateToMainMenu(recreate = true)
+    fun navigateToMainMenu() {
+        navigateWithPersistence(
+            key = "mainMenu",
+            createScreen = {
+                MainMenu(
+                    service = m3service,
+                    navigateToMaterialComponent = ::navigateToMaterialComponent,
+                    navigateToCustomCodeMenu = ::navigateToQuickCode,
+                ) to "Components"
             }
-        }
+        )
     }
-
-    private fun createMainMenuContent(): Content = contentFactory.createContent(
-        ScrollPaneFactory.createScrollPane(
-            MainMenu(
-                service = m3service,
-                navigateToMaterialComponent = ::navigateToMaterialComponent,
-                navigateToCustomCodeMenu = ::navigateToQuickCode,
-            ).ui
-        ),
-        "Components",
-        false,
-    )
 
     private fun navigateToMaterialComponent(component: MaterialComponent) {
         navigateTo(
@@ -80,7 +67,7 @@ class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
                 navigateToCodeItem = ::navigateToCodeItem,
                 navigateToCodeGroup = ::navigateToCodeGroup,
             ),
-            screenTitle = "Quick Code"
+            screenTitle = "Quick Code",
         )
     }
 
@@ -123,5 +110,37 @@ class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
             )
         )
         contentsToRemove.forEach { toolWindow.contentManager.removeContent(it, true) }
+    }
+
+    private fun navigateWithPersistence(
+        key: String,
+        createScreen: () -> Pair<ToolWindowScreen, String>,
+        recreate: Boolean = false
+    ) {
+        try {
+            val content = contentCache[key]?.takeIf { !recreate } ?: createContent(createScreen())
+            contentCache[key] = content // persist for the next iteration
+            val contentsToRemove = toolWindow.contentManager.contents
+            toolWindow.contentManager.addContent(content)
+            contentsToRemove.forEach { toolWindow.contentManager.removeContent(it, true) }
+        } catch (e: Exception) {
+            if (!recreate) { // check to avoid potential infinite recursion
+                navigateWithPersistence(
+                    key = key,
+                    createScreen = createScreen,
+                    recreate = true
+                )
+            }
+        }
+    }
+
+    private fun createContent(
+        screenTitle: Pair<ToolWindowScreen, String>
+    ): Content {
+        return contentFactory.createContent(
+            ScrollPaneFactory.createScrollPane(screenTitle.first.ui),
+            screenTitle.second,
+            false,
+        )
     }
 }
