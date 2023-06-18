@@ -55,11 +55,8 @@ class QuickCodeParser {
     ): Pair<IfCondition, Int> {
         var pos = startPos
 
-        // Skip #if
-        pos++
-
-        val condition = parseCondition(tokens, pos)
-
+        val (condition, newPos) = parseCondition(tokens, pos)
+        pos = newPos
 
         val thenBranch = parseUntil(tokens, pos, QuickCodeToken.Else, QuickCodeToken.EndIf)
         pos += thenBranch.second
@@ -123,7 +120,7 @@ class QuickCodeParser {
     private fun parseCondition(
         tokens: List<QuickCodeToken>,
         pos: Int
-    ): Condition {
+    ): Pair<Condition, Int> {
         val parser = QuickCodeIfConditionParser(tokens)
         return requireNotNull(parser.parse(pos)) {
             "Invalid if condition!"

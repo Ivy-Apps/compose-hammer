@@ -8,8 +8,12 @@ class QuickCodeIfConditionParser(
 ) {
     fun parse(
         position: Int
-    ): IfCondition.Condition? {
-        return ParseScope(position).condition()
+    ): Pair<IfCondition.Condition, Int>? {
+        val scope = ParseScope(position)
+        if (scope.consumeToken() !is QuickCodeToken.If) return null
+        val condition = scope.condition() ?: return null
+        if (scope.consumeToken() !is QuickCodeToken.Then) return null
+        return condition to scope.position
     }
 
     private fun ParseScope.condition(): IfCondition.Condition? {
