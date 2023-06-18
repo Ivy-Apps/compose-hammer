@@ -1,4 +1,4 @@
-package com.ivyapps.composehammer.domain.quickcode.compiler
+package com.ivyapps.composehammer.domain.quickcode.compiler.parser
 
 import com.intellij.testFramework.TestDataPath
 import com.intellij.testFramework.fixtures.BasePlatformTestCase

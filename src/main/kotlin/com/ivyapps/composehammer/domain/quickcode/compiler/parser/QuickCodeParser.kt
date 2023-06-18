@@ -1,4 +1,4 @@
-package com.ivyapps.composehammer.domain.quickcode.compiler
+package com.ivyapps.composehammer.domain.quickcode.compiler.parser
 
 import com.ivyapps.composehammer.domain.quickcode.compiler.data.*
 import com.ivyapps.composehammer.domain.quickcode.compiler.data.IfCondition.Condition
@@ -128,12 +128,3 @@ class QuickCodeParser {
     }
 }
 
-sealed interface ParseResult {
-    data class Success(
-        val ast: QuickCodeAst
-    ) : ParseResult
-
-    data class Failure(
-        val errorMsg: String
-    ) : ParseResult
-}
