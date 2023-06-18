@@ -1,8 +1,7 @@
-package com.github.ivyapps.composehammer.domain.quickCode.compiler
+package com.ivyapps.composehammer.domain.quickcode.compiler
 
 import com.intellij.testFramework.TestDataPath
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
-import com.ivyapps.composehammer.domain.quickcode.compiler.QuickCodeDetector
 
 @TestDataPath("\$CONTENT_ROOT/src/test/testData")
 class QuickCodeDetectorTest : BasePlatformTestCase() {

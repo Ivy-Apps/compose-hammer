@@ -124,7 +124,7 @@ class QuickCodeParser {
         tokens: List<QuickCodeToken>,
         pos: Int
     ): Condition {
-        val parser = IfExpressionParser(tokens)
+        val parser = QuickCodeIfConditionParser(tokens)
         return requireNotNull(parser.parse(pos)) {
             "Invalid if condition!"
         }

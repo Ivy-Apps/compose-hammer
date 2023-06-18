@@ -3,7 +3,7 @@ package com.ivyapps.composehammer.domain.quickcode.compiler
 import com.ivyapps.composehammer.domain.quickcode.compiler.data.IfCondition
 import com.ivyapps.composehammer.domain.quickcode.compiler.data.QuickCodeToken
 
-class IfExpressionParser(
+class QuickCodeIfConditionParser(
     private val tokens: List<QuickCodeToken>,
 ) {
     fun parse(
@@ -14,37 +14,29 @@ class IfExpressionParser(
 
     private fun ParseScope.condition(): IfCondition.Condition? {
         return or(
-            a = { brackets() },
+            a = { andExpr() },
             b = {
                 or(
-                    a = { andExpr() },
-                    b = {
-                        or(
-                            a = { orExpr() },
-                            b = {
-                                or(
-                                    a = { notExpr() },
-                                    b = { boolVar() }
-                                )
-                            }
-                        )
-                    }
+                    a = { orExpr() },
+                    b = { term() },
                 )
             }
         )
     }
 
     private fun ParseScope.brackets(): IfCondition.Condition.Brackets? {
-        if (tokens[position++] !is QuickCodeToken.IfExpression.OpenBracket) return null
+        println("brackets")
+        if (consumeToken() !is QuickCodeToken.IfExpression.OpenBracket) return null
         val cond = condition() ?: return null
-        if (tokens[position++] !is QuickCodeToken.IfExpression.CloseBracket) return null
+        if (consumeToken() !is QuickCodeToken.IfExpression.CloseBracket) return null
         return IfCondition.Condition.Brackets(cond)
     }
 
     private fun ParseScope.andExpr(): IfCondition.Condition.And? {
-        val cond1 = condition() ?: return null
-        if (tokens[position++] !is QuickCodeToken.IfExpression.And) return null
-        val cond2 = condition() ?: return null
+        println("andExpr")
+        val cond1 = term() ?: return null
+        if (consumeToken() !is QuickCodeToken.IfExpression.And) return null
+        val cond2 = term() ?: return null
         return IfCondition.Condition.And(
             cond1 = cond1,
             cond2 = cond2
@@ -52,9 +44,10 @@ class IfExpressionParser(
     }
 
     private fun ParseScope.orExpr(): IfCondition.Condition.Or? {
-        val cond1 = condition() ?: return null
-        if (tokens[position++] !is QuickCodeToken.IfExpression.Or) return null
-        val cond2 = condition() ?: return null
+        println("orExpr")
+        val cond1 = term() ?: return null
+        if (consumeToken() !is QuickCodeToken.IfExpression.Or) return null
+        val cond2 = term() ?: return null
         return IfCondition.Condition.Or(
             cond1 = cond1,
             cond2 = cond2
@@ -62,36 +55,59 @@ class IfExpressionParser(
     }
 
     private fun ParseScope.notExpr(): IfCondition.Condition.Not? {
-        if (tokens[position++] !is QuickCodeToken.IfExpression.Not) return null
+        println("notExpr")
+        if (consumeToken() !is QuickCodeToken.IfExpression.Not) return null
         val cond = condition() ?: return null
         return IfCondition.Condition.Not(cond)
     }
 
     private fun ParseScope.boolVar(): IfCondition.Condition.BoolVar? {
-        return (tokens[position++] as? QuickCodeToken.IfExpression.BoolVariable)?.let {
+        println("boolVar")
+        return (consumeToken() as? QuickCodeToken.IfExpression.BoolVariable)?.let {
             IfCondition.Condition.BoolVar(it.name)
         }
+    }
+
+    private fun ParseScope.term(): IfCondition.Condition? {
+        return or(
+            a = { brackets() },
+            b = {
+                or(
+                    a = { notExpr() },
+                    b = { boolVar() }
+                )
+            }
+        )
     }
 
     private fun ParseScope.or(
         a: ParseScope.() -> IfCondition.Condition?,
         b: ParseScope.() -> IfCondition.Condition?,
     ): IfCondition.Condition? {
+        println("or: test case A")
         val aScope = ParseScope(position)
         val resA = aScope.a()
         if (resA != null) {
+            println("or: case A")
             position = aScope.position
             return resA
         }
 
+        println("or: test case B")
         val bScope = ParseScope(position)
         val resB = bScope.b()
         if (resB != null) {
+            println("or: case B")
             position = bScope.position
             return resB
         }
 
+        println("or: NONE")
         return null
+    }
+
+    private fun ParseScope.consumeToken(): QuickCodeToken? {
+        return tokens.getOrNull(position++)
     }
 
     private data class ParseScope(

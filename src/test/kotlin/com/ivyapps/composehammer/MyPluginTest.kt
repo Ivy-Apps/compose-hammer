@@ -1,4 +1,4 @@
-package com.github.ivyapps.composehammer
+package com.ivyapps.composehammer
 
 import com.intellij.ide.highlighter.XmlFileType
 import com.intellij.openapi.components.service
