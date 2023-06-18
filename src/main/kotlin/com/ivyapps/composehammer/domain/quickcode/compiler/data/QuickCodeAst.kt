@@ -3,9 +3,7 @@ package com.ivyapps.composehammer.domain.quickcode.compiler.data
 sealed interface QuickCodeAst {
     var next: QuickCodeAst?
 
-    companion object Begin : QuickCodeAst {
-        override var next: QuickCodeAst? = null
-    }
+    data class Begin(override var next: QuickCodeAst? = null) : QuickCodeAst
 }
 
 data class RawText(

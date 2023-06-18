@@ -16,7 +16,7 @@ class QuickCodeParserTest : BasePlatformTestCase() {
     }
 
 
-    fun testSimpleExpression() {
+    fun testSimpleIf() {
         // given
         val tokens = listOf(
             QuickCodeToken.RawText("println(\"Hello, "),
@@ -36,9 +36,7 @@ class QuickCodeParserTest : BasePlatformTestCase() {
         val res = parser.parse(tokens)
 
         // then
-        res.printResult()
         res shouldBe buildAst(
-            QuickCodeAst.Begin,
             RawText("println(\"Hello, "),
             Variable("name"),
             RawText("!\""),
@@ -54,21 +52,45 @@ class QuickCodeParserTest : BasePlatformTestCase() {
         )
     }
 
-    // region utils
-    private fun ParseResult.printResult() {
-        when (this) {
-            is ParseResult.Failure -> "Failed to parse AST: ${this.errorMsg}"
-            is ParseResult.Success -> {
-                ast.printAst(indent = 0)
-            }
-        }
+    fun testIfElse() {
+        // given
+        val tokens = listOf(
+            QuickCodeToken.If,
+            QuickCodeToken.IfExpression.BoolVariable("day"),
+            QuickCodeToken.Then,
+            QuickCodeToken.RawText("Good day, "),
+            QuickCodeToken.Variable("name"),
+            QuickCodeToken.RawText("!"),
+            QuickCodeToken.Else,
+            QuickCodeToken.RawText("Good night!"),
+            QuickCodeToken.EndIf,
+        )
+
+        // when
+        val res = parser.parse(tokens)
+
+        // then
+        res shouldBe buildAst(
+            IfStatement(
+                condition = IfStatement.Condition.BoolVar("day"),
+                thenBranch = buildAst(
+                    RawText("Good day, "),
+                    Variable("name"),
+                    RawText("!")
+                ),
+                elseBranch = buildAst(
+                    RawText("Good night!")
+                )
+            )
+        )
     }
 
+    // region utils
     private fun QuickCodeAst.printAst(
         indent: Int = 0,
     ) {
         when (this) {
-            QuickCodeAst.Begin -> {
+            is QuickCodeAst.Begin -> {
                 printI("Begin", indent)
             }
 
@@ -94,21 +116,24 @@ class QuickCodeParserTest : BasePlatformTestCase() {
     }
 
     private infix fun ParseResult.shouldBe(expected: QuickCodeAst) {
+        println("Actual:")
+        (this as ParseResult.Success).ast.printAst()
+        println("-------")
+        println()
+        println("Expected:")
+        expected.printAst()
+        println("-------")
         TestCase.assertEquals(ParseResult.Success(expected), this)
     }
 
     private fun buildAst(vararg ast: QuickCodeAst): QuickCodeAst {
-        var first: QuickCodeAst? = null
-        var current: QuickCodeAst = QuickCodeAst.Begin
+        val begin = QuickCodeAst.Begin()
+        var current: QuickCodeAst = begin
         for (node in ast) {
-            if (first == null) {
-                first = node
-            } else {
-                current.next = node
-            }
+            current.next = node
             current = node
         }
-        return requireNotNull(first)
+        return begin
     }
     // endregion
 }

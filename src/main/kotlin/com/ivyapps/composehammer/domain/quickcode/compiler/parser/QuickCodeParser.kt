@@ -101,7 +101,7 @@ class QuickCodeParser {
     }
 
     private data class AstBuilder(
-        val begin: QuickCodeAst.Begin = QuickCodeAst.Begin,
+        val begin: QuickCodeAst.Begin = QuickCodeAst.Begin(),
         private var current: QuickCodeAst = begin
     ) {
         fun addNode(node: QuickCodeAst) {
