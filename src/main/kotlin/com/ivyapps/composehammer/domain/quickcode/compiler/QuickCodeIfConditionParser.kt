@@ -12,7 +12,9 @@ class QuickCodeIfConditionParser(
         val scope = ParseScope(position)
         if (scope.consumeToken() !is QuickCodeToken.If) return null
         val condition = scope.condition() ?: return null
-        if (scope.consumeToken() !is QuickCodeToken.Then) return null
+        if (scope.currentToken() == QuickCodeToken.Then) {
+            scope.consumeToken()
+        }
         return condition to scope.position
     }
 
@@ -40,7 +42,7 @@ class QuickCodeIfConditionParser(
         println("andExpr")
         val cond1 = term() ?: return null
         if (consumeToken() !is QuickCodeToken.IfExpression.And) return null
-        val cond2 = term() ?: return null
+        val cond2 = condition() ?: return null
         return IfCondition.Condition.And(
             cond1 = cond1,
             cond2 = cond2
@@ -51,7 +53,7 @@ class QuickCodeIfConditionParser(
         println("orExpr")
         val cond1 = term() ?: return null
         if (consumeToken() !is QuickCodeToken.IfExpression.Or) return null
-        val cond2 = term() ?: return null
+        val cond2 = condition() ?: return null
         return IfCondition.Condition.Or(
             cond1 = cond1,
             cond2 = cond2
@@ -91,8 +93,9 @@ class QuickCodeIfConditionParser(
         println("or: test case A")
         val aScope = ParseScope(position)
         val resA = aScope.a()
+        println("or: test case A, pos = ${aScope.position}")
         if (resA != null) {
-            println("or: case A")
+            println("or: case A = $resA, pos = ${aScope.position}")
             position = aScope.position
             return resA
         }
@@ -101,7 +104,7 @@ class QuickCodeIfConditionParser(
         val bScope = ParseScope(position)
         val resB = bScope.b()
         if (resB != null) {
-            println("or: case B")
+            println("or: case B = $resB, pos = ${bScope.position}")
             position = bScope.position
             return resB
         }
@@ -111,7 +114,13 @@ class QuickCodeIfConditionParser(
     }
 
     private fun ParseScope.consumeToken(): QuickCodeToken? {
-        return tokens.getOrNull(position++)
+        return tokens.getOrNull(position++).run {
+            if (this is QuickCodeToken.Then) null else this
+        }
+    }
+
+    private fun ParseScope.currentToken(): QuickCodeToken? {
+        return tokens.getOrNull(position)
     }
 
     private data class ParseScope(
