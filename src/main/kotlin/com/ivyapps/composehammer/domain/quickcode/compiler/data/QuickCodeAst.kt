@@ -21,7 +21,7 @@ data class Variable(
 data class IfCondition(
     val condition: Condition,
     val thenBranch: QuickCodeAst,
-    val elseBranch: QuickCodeAst?,
+    val elseBranch: QuickCodeAst? = null,
     override var next: QuickCodeAst? = null
 ) : QuickCodeAst {
     sealed interface Condition {

@@ -31,7 +31,6 @@ class QuickCodeIfConditionParser(
     }
 
     private fun ParseScope.brackets(): IfCondition.Condition.Brackets? {
-        println("brackets")
         if (consumeToken() !is QuickCodeToken.IfExpression.OpenBracket) return null
         val cond = condition() ?: return null
         if (consumeToken() !is QuickCodeToken.IfExpression.CloseBracket) return null
@@ -39,7 +38,6 @@ class QuickCodeIfConditionParser(
     }
 
     private fun ParseScope.andExpr(): IfCondition.Condition.And? {
-        println("andExpr")
         val cond1 = term() ?: return null
         if (consumeToken() !is QuickCodeToken.IfExpression.And) return null
         val cond2 = condition() ?: return null
@@ -50,7 +48,6 @@ class QuickCodeIfConditionParser(
     }
 
     private fun ParseScope.orExpr(): IfCondition.Condition.Or? {
-        println("orExpr")
         val cond1 = term() ?: return null
         if (consumeToken() !is QuickCodeToken.IfExpression.Or) return null
         val cond2 = condition() ?: return null
@@ -61,14 +58,12 @@ class QuickCodeIfConditionParser(
     }
 
     private fun ParseScope.notExpr(): IfCondition.Condition.Not? {
-        println("notExpr")
         if (consumeToken() !is QuickCodeToken.IfExpression.Not) return null
         val cond = condition() ?: return null
         return IfCondition.Condition.Not(cond)
     }
 
     private fun ParseScope.boolVar(): IfCondition.Condition.BoolVar? {
-        println("boolVar")
         return (consumeToken() as? QuickCodeToken.IfExpression.BoolVariable)?.let {
             IfCondition.Condition.BoolVar(it.name)
         }
@@ -90,26 +85,20 @@ class QuickCodeIfConditionParser(
         a: ParseScope.() -> IfCondition.Condition?,
         b: ParseScope.() -> IfCondition.Condition?,
     ): IfCondition.Condition? {
-        println("or: test case A")
         val aScope = ParseScope(position)
         val resA = aScope.a()
-        println("or: test case A, pos = ${aScope.position}")
         if (resA != null) {
-            println("or: case A = $resA, pos = ${aScope.position}")
             position = aScope.position
             return resA
         }
 
-        println("or: test case B")
         val bScope = ParseScope(position)
         val resB = bScope.b()
         if (resB != null) {
-            println("or: case B = $resB, pos = ${bScope.position}")
             position = bScope.position
             return resB
         }
 
-        println("or: NONE")
         return null
     }
 
