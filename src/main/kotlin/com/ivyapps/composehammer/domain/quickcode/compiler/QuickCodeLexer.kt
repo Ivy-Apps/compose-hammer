@@ -81,12 +81,12 @@ class QuickCodeLexer {
         val nextSpecialChar = listOf(
             QuickCodeToken.Variable.syntax,
             QuickCodeToken.If.syntax,
-            QuickCodeToken.IfCondition.OpenBracket.syntax,
-            QuickCodeToken.IfCondition.CloseBracket.syntax,
-            QuickCodeToken.IfCondition.And.syntax,
-            QuickCodeToken.IfCondition.Or.syntax,
-            QuickCodeToken.IfCondition.Not.syntax,
-            QuickCodeToken.IfCondition.BoolVariable.syntax,
+            QuickCodeToken.IfExpression.OpenBracket.syntax,
+            QuickCodeToken.IfExpression.CloseBracket.syntax,
+            QuickCodeToken.IfExpression.And.syntax,
+            QuickCodeToken.IfExpression.Or.syntax,
+            QuickCodeToken.IfExpression.Not.syntax,
+            QuickCodeToken.IfExpression.BoolVariable.syntax,
             QuickCodeToken.Then.syntax,
             QuickCodeToken.Else.syntax,
             QuickCodeToken.EndIf.syntax,
@@ -125,44 +125,44 @@ class QuickCodeLexer {
 
     private fun LexerScope.ifOpenBracket() = parseToken(
         condition = isInsideIfCondition,
-        syntax = QuickCodeToken.IfCondition.OpenBracket.syntax,
+        syntax = QuickCodeToken.IfExpression.OpenBracket.syntax,
     ) {
-        QuickCodeToken.IfCondition.OpenBracket
+        QuickCodeToken.IfExpression.OpenBracket
     }
 
     private fun LexerScope.ifCloseBracket() = parseToken(
         condition = isInsideIfCondition,
-        syntax = QuickCodeToken.IfCondition.CloseBracket.syntax,
+        syntax = QuickCodeToken.IfExpression.CloseBracket.syntax,
     ) {
-        QuickCodeToken.IfCondition.CloseBracket
+        QuickCodeToken.IfExpression.CloseBracket
     }
 
     private fun LexerScope.ifNot() = parseToken(
         condition = isInsideIfCondition,
-        syntax = QuickCodeToken.IfCondition.Not.syntax,
+        syntax = QuickCodeToken.IfExpression.Not.syntax,
     ) {
-        QuickCodeToken.IfCondition.Not
+        QuickCodeToken.IfExpression.Not
     }
 
     private fun LexerScope.ifAndCond() = parseToken(
         condition = isInsideIfCondition,
-        syntax = QuickCodeToken.IfCondition.And.syntax,
+        syntax = QuickCodeToken.IfExpression.And.syntax,
     ) {
-        QuickCodeToken.IfCondition.And
+        QuickCodeToken.IfExpression.And
     }
 
     private fun LexerScope.ifOrCond() = parseToken(
         condition = isInsideIfCondition,
-        syntax = QuickCodeToken.IfCondition.Or.syntax,
+        syntax = QuickCodeToken.IfExpression.Or.syntax,
     ) {
-        QuickCodeToken.IfCondition.Or
+        QuickCodeToken.IfExpression.Or
     }
 
     private fun LexerScope.ifBoolVar() = parseToken(
         condition = isInsideIfCondition,
-        syntax = QuickCodeToken.IfCondition.BoolVariable.syntax,
+        syntax = QuickCodeToken.IfExpression.BoolVariable.syntax,
     ) {
-        QuickCodeToken.IfCondition.BoolVariable(it)
+        QuickCodeToken.IfExpression.BoolVariable(it)
     }
 
     private fun LexerScope.thenCond() = parseToken(

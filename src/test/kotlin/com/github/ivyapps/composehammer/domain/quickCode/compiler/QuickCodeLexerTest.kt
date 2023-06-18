@@ -1,4 +1,4 @@
-package com.github.ivyapps.composematerial3helper.domain.quickCode.compiler
+package com.github.ivyapps.composehammer.domain.quickCode.compiler
 
 import com.intellij.testFramework.TestDataPath
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
@@ -63,14 +63,14 @@ class QuickCodeLexerTest : BasePlatformTestCase() {
         // then
         tokens shouldBe listOf(
             QuickCodeToken.If,
-            QuickCodeToken.IfCondition.OpenBracket,
-            QuickCodeToken.IfCondition.BoolVariable("var1"),
-            QuickCodeToken.IfCondition.And,
-            QuickCodeToken.IfCondition.BoolVariable("var2"),
-            QuickCodeToken.IfCondition.CloseBracket,
-            QuickCodeToken.IfCondition.Or,
-            QuickCodeToken.IfCondition.Not,
-            QuickCodeToken.IfCondition.BoolVariable("var3"),
+            QuickCodeToken.IfExpression.OpenBracket,
+            QuickCodeToken.IfExpression.BoolVariable("var1"),
+            QuickCodeToken.IfExpression.And,
+            QuickCodeToken.IfExpression.BoolVariable("var2"),
+            QuickCodeToken.IfExpression.CloseBracket,
+            QuickCodeToken.IfExpression.Or,
+            QuickCodeToken.IfExpression.Not,
+            QuickCodeToken.IfExpression.BoolVariable("var3"),
         )
     }
 

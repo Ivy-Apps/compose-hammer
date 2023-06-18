@@ -18,8 +18,8 @@ sealed interface QuickCodeToken {
         )
     }
 
-    sealed interface IfCondition {
-        data class BoolVariable(val name: String) : QuickCodeToken {
+    sealed interface IfExpression : QuickCodeToken {
+        data class BoolVariable(val name: String) : IfExpression {
             companion object {
                 val syntax = TokenSyntax(
                     starsWith = "{{",
@@ -28,36 +28,37 @@ sealed interface QuickCodeToken {
             }
         }
 
-        object Not : QuickCodeToken {
+        object Not : IfExpression {
             val syntax = TokenSyntax(
                 starsWith = "NOT",
             )
         }
 
-        object And : QuickCodeToken {
+        object And : IfExpression {
             val syntax = TokenSyntax(
                 starsWith = "AND",
             )
         }
 
-        object Or : QuickCodeToken {
+        object Or : IfExpression {
             val syntax = TokenSyntax(
                 starsWith = "OR",
             )
         }
 
-        object OpenBracket : QuickCodeToken {
+        object OpenBracket : IfExpression {
             val syntax = TokenSyntax(
                 starsWith = "(",
             )
         }
 
-        object CloseBracket : QuickCodeToken {
+        object CloseBracket : IfExpression {
             val syntax = TokenSyntax(
                 starsWith = ")",
             )
         }
     }
+
 
     object Then : QuickCodeToken {
         val syntax = TokenSyntax(

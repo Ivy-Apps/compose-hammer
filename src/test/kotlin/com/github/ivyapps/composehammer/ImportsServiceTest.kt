@@ -1,4 +1,4 @@
-package com.github.ivyapps.composematerial3helper
+package com.github.ivyapps.composehammer
 
 import com.intellij.testFramework.TestDataPath
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
