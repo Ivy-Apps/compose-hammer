@@ -18,7 +18,7 @@ data class Variable(
     override var next: QuickCodeAst? = null
 ) : QuickCodeAst
 
-data class IfCondition(
+data class IfStatement(
     val condition: Condition,
     val thenBranch: QuickCodeAst,
     val elseBranch: QuickCodeAst? = null,

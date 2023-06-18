@@ -36,16 +36,16 @@ class QuickCodeParserTest : BasePlatformTestCase() {
         val res = parser.parse(tokens)
 
         // then
-        res.print()
+        res.printResult()
         res shouldBe buildAst(
             QuickCodeAst.Begin,
             RawText("println(\"Hello, "),
             Variable("name"),
             RawText("!\""),
-            IfCondition(
-                condition = IfCondition.Condition.And(
-                    IfCondition.Condition.BoolVar("a"),
-                    IfCondition.Condition.Not(IfCondition.Condition.BoolVar("b"))
+            IfStatement(
+                condition = IfStatement.Condition.And(
+                    IfStatement.Condition.BoolVar("a"),
+                    IfStatement.Condition.Not(IfStatement.Condition.BoolVar("b"))
                 ),
                 thenBranch = buildAst(
                     RawText("test")
@@ -55,14 +55,16 @@ class QuickCodeParserTest : BasePlatformTestCase() {
     }
 
     // region utils
-    private fun ParseResult.print() {
+    private fun ParseResult.printResult() {
         when (this) {
             is ParseResult.Failure -> "Failed to parse AST: ${this.errorMsg}"
-            is ParseResult.Success -> ast.print(indent = 0)
+            is ParseResult.Success -> {
+                ast.printAst(indent = 0)
+            }
         }
     }
 
-    private fun QuickCodeAst.print(
+    private fun QuickCodeAst.printAst(
         indent: Int = 0,
     ) {
         when (this) {
@@ -70,10 +72,10 @@ class QuickCodeParserTest : BasePlatformTestCase() {
                 printI("Begin", indent)
             }
 
-            is IfCondition -> {
+            is IfStatement -> {
                 printI("If: $condition", indent)
-                thenBranch.print(indent = indent + 4)
-                elseBranch?.print(indent = indent + 4)
+                thenBranch.printAst(indent = indent + 4)
+                elseBranch?.printAst(indent = indent + 4)
             }
 
             is RawText -> {
@@ -84,7 +86,7 @@ class QuickCodeParserTest : BasePlatformTestCase() {
                 printI("Variable: $name", indent)
             }
         }
-        next?.print(indent)
+        next?.printAst(indent)
     }
 
     private fun printI(text: String, indent: Int) {

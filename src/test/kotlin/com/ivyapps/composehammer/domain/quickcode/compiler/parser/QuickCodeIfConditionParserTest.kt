@@ -2,7 +2,7 @@ package com.ivyapps.composehammer.domain.quickcode.compiler.parser
 
 import com.intellij.testFramework.TestDataPath
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
-import com.ivyapps.composehammer.domain.quickcode.compiler.data.IfCondition.*
+import com.ivyapps.composehammer.domain.quickcode.compiler.data.IfStatement.*
 import com.ivyapps.composehammer.domain.quickcode.compiler.data.QuickCodeToken
 import com.ivyapps.composehammer.domain.quickcode.compiler.data.QuickCodeToken.IfExpression
 import junit.framework.TestCase
@@ -21,7 +21,7 @@ class QuickCodeIfConditionParserTest : BasePlatformTestCase() {
         )
 
         // when
-        val res = parser.parse(position = 1)
+        val res = parser.parse(position = 2)
 
         // then
         res conditionShouldBe Condition.BoolVar("a")
@@ -41,7 +41,7 @@ class QuickCodeIfConditionParserTest : BasePlatformTestCase() {
         )
 
         // when
-        val res = parser.parse(position = 0)
+        val res = parser.parse(position = 1)
 
         // then
         res conditionShouldBe Condition.And(
@@ -65,7 +65,7 @@ class QuickCodeIfConditionParserTest : BasePlatformTestCase() {
         )
 
         // when
-        val res = parser.parse(position = 0)
+        val res = parser.parse(position = 1)
 
         // then
         res conditionShouldBe Condition.And(
@@ -95,7 +95,7 @@ class QuickCodeIfConditionParserTest : BasePlatformTestCase() {
         )
 
         // when
-        val res = parser.parse(position = 0)
+        val res = parser.parse(position = 1)
 
         // then
         res conditionShouldBe Condition.Or(

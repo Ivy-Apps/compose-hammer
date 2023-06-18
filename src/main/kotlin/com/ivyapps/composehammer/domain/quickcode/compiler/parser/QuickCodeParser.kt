@@ -1,7 +1,7 @@
 package com.ivyapps.composehammer.domain.quickcode.compiler.parser
 
 import com.ivyapps.composehammer.domain.quickcode.compiler.data.*
-import com.ivyapps.composehammer.domain.quickcode.compiler.data.IfCondition.Condition
+import com.ivyapps.composehammer.domain.quickcode.compiler.data.IfStatement.Condition
 
 class QuickCodeParser {
     fun parse(tokens: List<QuickCodeToken>): ParseResult {
@@ -15,115 +15,98 @@ class QuickCodeParser {
     private fun parseInternal(
         tokens: List<QuickCodeToken>,
     ): QuickCodeAst.Begin {
-        var position = 0
-        val begin = QuickCodeAst.Begin
-        var currentAst: QuickCodeAst = begin
+        val astBuilder = AstBuilder()
+        val parserScope = QCParserScope<QuickCodeAst>(tokens, initialPosition = 0)
 
-        while (position < tokens.size) {
-            when (val token = tokens[position]) {
-                is QuickCodeToken.RawText -> {
-                    val node = RawText(token.text)
-                    currentAst.next = node
-                    currentAst = node
-                    position++
-                }
-
-                is QuickCodeToken.Variable -> {
-                    val node = Variable(token.name)
-                    currentAst.next = node
-                    currentAst = node
-                    position++
-                }
-
-                is QuickCodeToken.If -> {
-                    val (node, nextPos) = parseIfCondition(tokens, position)
-                    currentAst.next = node
-                    currentAst = node
-                    position = nextPos
-                }
-
-                else -> error("Unknown token type: $token")
+        with(parserScope) {
+            var currentToken = consumeToken()
+            while (currentToken != null) {
+                parseToken(astBuilder, currentToken)
+                currentToken = consumeToken()
             }
         }
-
-        return begin
+        return astBuilder.begin
     }
 
-    private fun parseIfCondition(
-        tokens: List<QuickCodeToken>,
-        startPos: Int
-    ): Pair<IfCondition, Int> {
-        var pos = startPos
 
-        val (condition, newPos) = parseCondition(tokens, pos)
-        pos = newPos
+    private fun QCParserScope<QuickCodeAst>.parseToken(
+        astBuilder: AstBuilder,
+        token: QuickCodeToken,
+    ) {
+        when (token) {
+            QuickCodeToken.If -> {
+                parseIfStatement(astBuilder)
+            }
 
-        val thenBranch = parseUntil(tokens, pos, QuickCodeToken.Else, QuickCodeToken.EndIf)
-        pos += thenBranch.second
+            is QuickCodeToken.RawText -> {
+                astBuilder.addNode(RawText(token.text))
+            }
 
-        val elseBranch = if (tokens.getOrNull(pos) == QuickCodeToken.Else) {
-            val elseResult = parseUntil(tokens, pos + 1, QuickCodeToken.EndIf)
-            pos += elseResult.second
-            elseResult.first
-        } else {
-            null
-        }
+            is QuickCodeToken.Variable -> {
+                astBuilder.addNode(Variable(token.name))
+            }
 
-        return IfCondition(condition, thenBranch.first, elseBranch) to pos
-    }
-
-    private fun parseUntil(
-        tokens: List<QuickCodeToken>,
-        startPos: Int,
-        vararg endTokens: QuickCodeToken
-    ): Pair<QuickCodeAst, Int> {
-        val begin = QuickCodeAst.Begin
-        var currentAst: QuickCodeAst = begin
-        var pos = startPos
-
-        loop@ while (pos < tokens.size) {
-            when (val token = tokens[pos]) {
-                is QuickCodeToken.RawText -> {
-                    val node = RawText(token.text)
-                    currentAst.next = node
-                    currentAst = node
-                    pos++
-                }
-
-                is QuickCodeToken.Variable -> {
-                    val node = Variable(token.name)
-                    currentAst.next = node
-                    currentAst = node
-                    pos++
-                }
-
-                is QuickCodeToken.If -> {
-                    val (node, nextPos) = parseIfCondition(tokens, pos)
-                    currentAst.next = node
-                    currentAst = node
-                    pos = nextPos
-                }
-
-                else -> {
-                    if (token in endTokens) {
-                        break@loop
-                    } else {
-                        throw IllegalArgumentException("Unexpected token type: $token")
-                    }
-                }
+            else -> {
+                error("Unexpected token: $token")
             }
         }
-
-        return begin to (pos - startPos)
     }
 
-    private fun parseCondition(
-        tokens: List<QuickCodeToken>,
-        pos: Int
-    ): Pair<Condition, Int> {
+    private fun QCParserScope<QuickCodeAst>.parseIfStatement(
+        ast: AstBuilder
+    ) {
+        val condition = parseIfCondition()
+
+        val thenAst = AstBuilder()
+        val thenEnd = parseUntil(thenAst, QuickCodeToken.Else, QuickCodeToken.EndIf)
+
+        val elseAst = if (thenEnd == QuickCodeToken.Else) {
+            AstBuilder().apply {
+                parseUntil(this, QuickCodeToken.EndIf)
+            }
+        } else null
+
+        val ifStm = IfStatement(
+            condition = condition,
+            thenBranch = thenAst.begin,
+            elseBranch = elseAst?.begin,
+        )
+        ast.addNode(ifStm)
+    }
+
+    private fun QCParserScope<QuickCodeAst>.parseUntil(
+        astBuilder: AstBuilder,
+        vararg end: QuickCodeToken
+    ): QuickCodeToken {
+        while (true) {
+            val token = consumeToken()
+            requireNotNull(token) {
+                "Uncompleted if branch. It must end with $end."
+            }
+            if (token in end) {
+                return token
+            }
+            parseToken(astBuilder, token)
+        }
+    }
+
+    private fun QCParserScope<QuickCodeAst>.parseIfCondition(
+    ): Condition {
         val parser = QuickCodeIfConditionParser(tokens)
-        return requireNotNull(parser.parse(pos)) {
+        val (condition, newPos) = requireNotNull(parser.parse(position)) {
             "Invalid if condition!"
+        }
+        changePosition(newPos)
+        return condition
+    }
+
+    private data class AstBuilder(
+        val begin: QuickCodeAst.Begin = QuickCodeAst.Begin,
+        private var current: QuickCodeAst = begin
+    ) {
+        fun addNode(node: QuickCodeAst) {
+            current.next = node
+            current = node
         }
     }
 }

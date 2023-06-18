@@ -1,27 +1,26 @@
 package com.ivyapps.composehammer.domain.quickcode.compiler.parser
 
-import com.ivyapps.composehammer.domain.quickcode.compiler.data.IfCondition
 import com.ivyapps.composehammer.domain.quickcode.compiler.data.QuickCodeToken
 
-class QCParserScope(
-    private val tokens: List<QuickCodeToken>,
+class QCParserScope<T>(
+    val tokens: List<QuickCodeToken>,
     initialPosition: Int,
 ) {
     var position = initialPosition
         private set
 
     fun or(
-        a: QCParserScope.() -> IfCondition.Condition?,
-        b: QCParserScope.() -> IfCondition.Condition?,
-    ): IfCondition.Condition? {
-        val aScope = QCParserScope(tokens, position)
+        a: QCParserScope<T>.() -> T?,
+        b: QCParserScope<T>.() -> T?,
+    ): T? {
+        val aScope = QCParserScope<T>(tokens, position)
         val resA = aScope.a()
         if (resA != null) {
             position = aScope.position
             return resA
         }
 
-        val bScope = QCParserScope(tokens, position)
+        val bScope = QCParserScope<T>(tokens, position)
         val resB = bScope.b()
         if (resB != null) {
             position = bScope.position
@@ -40,4 +39,9 @@ class QCParserScope(
     fun currentToken(): QuickCodeToken? {
         return tokens.getOrNull(position)
     }
+
+    fun changePosition(position: Int) {
+        this.position = position
+    }
+
 }
