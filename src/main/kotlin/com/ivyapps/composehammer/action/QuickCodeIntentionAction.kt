@@ -10,6 +10,7 @@ import com.intellij.openapi.util.Iconable
 import com.intellij.psi.PsiFile
 import com.ivyapps.composehammer.action.component.showOptionsPopup
 import com.ivyapps.composehammer.domain.action.InsertCodeService
+import com.ivyapps.composehammer.domain.data.quickcode.CodeItem
 import com.ivyapps.composehammer.domain.quickcode.QuickCodeService
 import javax.swing.Icon
 
@@ -29,7 +30,6 @@ class QuickCodeIntentionAction : IntentionAction, HighPriorityAction, Iconable {
 
     override fun invoke(project: Project, editor: Editor, file: PsiFile) {
         val quickCodeService = project.service<QuickCodeService>()
-        val insertService = project.service<InsertCodeService>()
 
         editor.showOptionsPopup(
             title = "Choose an option",
@@ -50,10 +50,26 @@ class QuickCodeIntentionAction : IntentionAction, HighPriorityAction, Iconable {
                 },
                 items = group.codeItems.map { it.name }
             ) { componentName ->
-                val component = quickCodeService.findCodeItemByName(group, componentName)
-                insertService.addCode(editor, file, component)
+                val codeItem = quickCodeService.findCodeItemByName(group, componentName)
+                insertCodeItem(project, editor, file, codeItem)
             }
         }
+    }
+
+    private fun insertCodeItem(
+        project: Project,
+        editor: Editor,
+        file: PsiFile,
+        codeItem: CodeItem,
+    ) {
+        val insertService = project.service<InsertCodeService>()
+
+        if (codeItem.variables.isNotEmpty()) {
+            // prompt the user to input variables
+        } else {
+            insertService.addCode(editor, file, codeItem)
+        }
+
     }
 
     override fun startInWriteAction() = true

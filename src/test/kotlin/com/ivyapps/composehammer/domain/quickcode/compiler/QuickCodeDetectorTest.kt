@@ -18,7 +18,7 @@ class QuickCodeDetectorTest : BasePlatformTestCase() {
         val input = ""
 
         // when
-        val output = service.containsSpecialSyntax(input)
+        val output = service.detectQuickCode(input)
 
         // then
         assertFalse(output)
@@ -29,7 +29,7 @@ class QuickCodeDetectorTest : BasePlatformTestCase() {
         val input = "This is a test string with no special syntax."
 
         // when
-        val output = service.containsSpecialSyntax(input)
+        val output = service.detectQuickCode(input)
 
         // then
         assertFalse(output)
@@ -40,7 +40,7 @@ class QuickCodeDetectorTest : BasePlatformTestCase() {
         val input = "This string contains a {{variable}}."
 
         // when
-        val output = service.containsSpecialSyntax(input)
+        val output = service.detectQuickCode(input)
 
         // then
         assertTrue(output)
@@ -51,7 +51,7 @@ class QuickCodeDetectorTest : BasePlatformTestCase() {
         val input = "This string contains an #if {{condition}}."
 
         // when
-        val output = service.containsSpecialSyntax(input)
+        val output = service.detectQuickCode(input)
 
         // then
         assertTrue(output)
@@ -62,7 +62,7 @@ class QuickCodeDetectorTest : BasePlatformTestCase() {
         val input = "This string contains a {{variable}} and an #if {{condition}}."
 
         // when
-        val output = service.containsSpecialSyntax(input)
+        val output = service.detectQuickCode(input)
 
         // then
         assertTrue(output)
