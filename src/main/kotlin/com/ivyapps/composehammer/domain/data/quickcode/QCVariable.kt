@@ -6,6 +6,9 @@ import kotlinx.serialization.Serializable
 sealed interface QCVariable {
     val name: String
 
+    @Serializable
     data class Str(override val name: String) : QCVariable
+
+    @Serializable
     data class Bool(override val name: String) : QCVariable
 }

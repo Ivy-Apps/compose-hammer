@@ -3,7 +3,7 @@ package com.ivyapps.composehammer.domain.quickcode.compiler
 import com.ivyapps.composehammer.domain.quickcode.compiler.data.*
 
 class QuickCodeInterpreter(
-    private val variables: Map<String, VariableValue>,
+    private val variables: Map<String, QCVariableValue>,
 ) {
     fun evaluate(
         ast: QuickCodeAst,
@@ -37,8 +37,8 @@ class QuickCodeInterpreter(
                     variables[current.name]?.let {
                         append(
                             when (it) {
-                                is VariableValue.Bool -> it.value.toString()
-                                is VariableValue.Str -> it.value
+                                is QCVariableValue.Bool -> it.value.toString()
+                                is QCVariableValue.Str -> it.value
                             }
                         )
                     }
@@ -57,7 +57,7 @@ class QuickCodeInterpreter(
             }
 
             is IfStatement.Condition.BoolVar -> {
-                return (variables[condition.name] as? VariableValue.Bool)?.value ?: false
+                return (variables[condition.name] as? QCVariableValue.Bool)?.value ?: false
             }
 
             is IfStatement.Condition.Brackets -> {
