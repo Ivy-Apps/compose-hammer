@@ -51,7 +51,7 @@ class QuickCodeService(project: Project) {
     // region Project operations
     data class ProjectInput(
         val rawName: String,
-        val enabled: Boolean = true,
+        val enabled: Boolean,
     )
 
     inner class ProjectOps : BaseOperations<ProjectInput, QCProject>() {

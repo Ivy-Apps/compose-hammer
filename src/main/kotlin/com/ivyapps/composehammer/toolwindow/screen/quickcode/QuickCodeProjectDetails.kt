@@ -65,7 +65,8 @@ class QuickCodeProjectDetails(
                     ProjectOps().editItem(
                         item = project,
                         input = ProjectInput(
-                            rawName = inputField.text
+                            rawName = inputField.text,
+                            enabled = project.enabled,
                         )
                     ).toResultEither()
                 }

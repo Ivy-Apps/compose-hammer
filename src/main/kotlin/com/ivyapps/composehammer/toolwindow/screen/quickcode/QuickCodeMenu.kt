@@ -94,7 +94,8 @@ class QuickCodeMenu(
                     perform {
                         ProjectOps().addItem(
                             ProjectInput(
-                                rawName = projectName
+                                rawName = projectName,
+                                enabled = true,
                             )
                         ).toResultEither()
                     }

@@ -97,7 +97,8 @@ class ImportQuickCodeService(
 
     private fun ProjectOps.importProject(project: QCProject): List<Either<String, CodeItem>> {
         val input = ProjectInput(
-            rawName = project.name
+            rawName = project.name,
+            enabled = true,
         )
         return import(project, input).fold(
             mapLeft = {
