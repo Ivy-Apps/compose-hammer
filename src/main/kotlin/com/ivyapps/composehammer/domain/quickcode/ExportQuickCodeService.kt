@@ -5,10 +5,11 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.fileChooser.FileChooser
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFile
 import com.ivyapps.composehammer.domain.quickcode.service.QuickCodeService
 import com.ivyapps.composehammer.persistence.QuickCodeConfigurationJson
+import com.ivyapps.composehammer.showErrorToast
+import com.ivyapps.composehammer.showInfoToast
 import java.io.File
 
 
@@ -42,9 +43,12 @@ class ExportQuickCodeService(
         try {
             val file = File(chosenDir.path, OUTPUT_FILE_NAME)
             file.writeText(content)
-            Messages.showInfoMessage("File exported successfully.", "Success")
+            showInfoToast(
+                title = "Success",
+                message = "File exported successfully."
+            )
         } catch (e: Exception) {
-            Messages.showErrorDialog("Failed to export file: ${e.localizedMessage}", "Error")
+            showErrorToast(message = "Failed to export file: ${e.localizedMessage}")
         }
     }
 }

@@ -84,7 +84,11 @@ class QuickCodeMenu(
                 }.comment("Project name")
                 button("Add new") {
                     val projectName = inputField.text
-                    // TODO: Add project
+                    service.ProjectOperations().addItem(
+                        QuickCodeService.ProjectInput(
+                            rawName = projectName
+                        )
+                    )
                 }
             }
         }
@@ -148,4 +152,9 @@ class QuickCodeMenu(
     }
 
 
+    private fun perform(
+
+    ) {
+
+    }
 }
