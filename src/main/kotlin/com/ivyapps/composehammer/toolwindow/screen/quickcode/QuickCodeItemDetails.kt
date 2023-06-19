@@ -9,7 +9,7 @@ import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.builder.text
 import com.ivyapps.composehammer.domain.data.quickcode.CodeGroup
 import com.ivyapps.composehammer.domain.data.quickcode.CodeItem
-import com.ivyapps.composehammer.domain.quickcode.QuickCodeService
+import com.ivyapps.composehammer.domain.quickcode.service.QuickCodeService
 import com.ivyapps.composehammer.domain.ui.generateImportsCode
 import com.ivyapps.composehammer.toolwindow.component.DeleteButton
 import com.ivyapps.composehammer.toolwindow.component.codeArea

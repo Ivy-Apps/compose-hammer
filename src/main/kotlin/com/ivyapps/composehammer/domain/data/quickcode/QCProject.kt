@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class QCProject(
     override val name: String,
+    override val order: Double,
     val groups: List<CodeGroup> = emptyList(),
     override val enabled: Boolean = true,
-    override val order: Double,
 ) : Reorderable, Enableable

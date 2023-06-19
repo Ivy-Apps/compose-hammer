@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CodeGroup(
     override val name: String,
-    val codeItems: List<CodeItem>,
     override val order: Double,
+    val codeItems: List<CodeItem> = emptyList(),
     override val enabled: Boolean = true,
 ) : Reorderable, Enableable

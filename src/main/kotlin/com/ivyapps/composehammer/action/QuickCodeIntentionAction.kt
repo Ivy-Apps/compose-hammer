@@ -11,7 +11,7 @@ import com.intellij.psi.PsiFile
 import com.ivyapps.composehammer.action.component.showOptionsPopup
 import com.ivyapps.composehammer.domain.action.InsertCodeService
 import com.ivyapps.composehammer.domain.data.quickcode.CodeItem
-import com.ivyapps.composehammer.domain.quickcode.QuickCodeService
+import com.ivyapps.composehammer.domain.quickcode.service.QuickCodeService
 import javax.swing.Icon
 
 

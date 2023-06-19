@@ -8,7 +8,7 @@ import com.intellij.ui.dsl.builder.*
 import com.ivyapps.composehammer.domain.data.quickcode.QCProject
 import com.ivyapps.composehammer.domain.quickcode.ExportQuickCodeService
 import com.ivyapps.composehammer.domain.quickcode.ImportQuickCodeService
-import com.ivyapps.composehammer.domain.quickcode.QuickCodeService
+import com.ivyapps.composehammer.domain.quickcode.service.QuickCodeService
 import com.ivyapps.composehammer.toolwindow.screen.ToolWindowScreen
 import com.ivyapps.composehammer.toolwindow.screen.quickcode.component.itemControls
 

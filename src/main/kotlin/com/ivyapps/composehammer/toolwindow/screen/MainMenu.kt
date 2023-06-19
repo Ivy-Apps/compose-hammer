@@ -71,7 +71,7 @@ class MainMenu(
             }
             row {
                 label(
-                    "Create and manage custom code snippets\n" +
+                    "Create and manage your custom components\n" +
                             "for the \"⚡ Quick Code\" alt+enter action."
                 ).component.addOnClickListener(navigateToCustomCodeMenu)
             }
