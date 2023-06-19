@@ -3,8 +3,8 @@ package com.ivyapps.composehammer
 import com.intellij.openapi.ui.Messages
 
 fun showInfoToast(
-    title: String,
     message: String,
+    title: String = "Info",
 ) {
     Messages.showInfoMessage(message, title)
 }

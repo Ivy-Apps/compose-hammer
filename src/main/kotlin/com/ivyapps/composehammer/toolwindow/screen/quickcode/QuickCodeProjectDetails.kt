@@ -21,8 +21,8 @@ class QuickCodeProjectDetails(
     pluginProject: Project,
     private val project: QCProject,
     private val navigateToQuickCodeMenu: () -> Unit,
-    private val navigateToCodeItem: (CodeGroup, CodeItem?) -> Unit,
-    private val navigateToCodeGroup: (CodeGroup) -> Unit,
+    private val navigateToCodeItem: (QCProject, CodeGroup, CodeItem?) -> Unit,
+    private val navigateToCodeGroup: (QCProject, CodeGroup) -> Unit,
     private val refreshUi: (QCProject) -> Unit,
 ) : QuickCodeToolWindow<QCProject?>(pluginProject) {
 
@@ -124,7 +124,7 @@ class QuickCodeProjectDetails(
             codeGroupItems(group)
             row {
                 button("+ Add new code item") {
-                    navigateToCodeItem(group, null)
+                    navigateToCodeItem(project, group, null)
                 }
             }
         }
@@ -141,7 +141,9 @@ class QuickCodeProjectDetails(
             itemsCount = groupsCount,
             viewCta = "Rename",
             itemLabel = "group",
-            onNavigateToItemDetails = navigateToCodeGroup,
+            onNavigateToItemDetails = {
+                navigateToCodeGroup(project, it)
+            },
             onMoveUp = {
                 perform {
                     CodeGroupOps(project).moveItemUp(it)
@@ -201,11 +203,11 @@ class QuickCodeProjectDetails(
         row {
             text(item.name).also {
                 it.component.addOnClickListener {
-                    navigateToCodeItem(group, item)
+                    navigateToCodeItem(project, group, item)
                 }
             }.bold()
             button("View") {
-                navigateToCodeItem(group, item)
+                navigateToCodeItem(project, group, item)
             }
             if (index > 0) {
                 button("Move up") {

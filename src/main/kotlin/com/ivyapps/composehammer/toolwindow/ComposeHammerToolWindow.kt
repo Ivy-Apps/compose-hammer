@@ -89,12 +89,14 @@ class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
     }
 
     private fun navigateToCodeItem(
+        qcProject: QCProject,
         group: CodeGroup,
         item: CodeItem?
     ) {
         navigateTo(
             screen = QuickCodeItemDetails(
                 pluginProject = project,
+                project = qcProject,
                 codeGroup = group,
                 codeItem = item,
                 navigateToQuickCodeMenu = ::navigateToQuickCode,
@@ -103,10 +105,14 @@ class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
         )
     }
 
-    private fun navigateToCodeGroup(group: CodeGroup) {
+    private fun navigateToCodeGroup(
+        qcProject: QCProject,
+        group: CodeGroup
+    ) {
         navigateTo(
             screen = QuickCodeGroupDetails(
-                project = project,
+                pluginProject = project,
+                project = qcProject,
                 codeGroup = group,
                 navigateToQuickCodeMenu = ::navigateToQuickCode,
             ),

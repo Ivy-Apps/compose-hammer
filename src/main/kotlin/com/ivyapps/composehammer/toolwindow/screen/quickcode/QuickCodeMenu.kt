@@ -4,13 +4,17 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.components.JBTextField
-import com.intellij.ui.dsl.builder.*
+import com.intellij.ui.dsl.builder.BottomGap
+import com.intellij.ui.dsl.builder.Panel
+import com.intellij.ui.dsl.builder.TopGap
+import com.intellij.ui.dsl.builder.panel
 import com.ivyapps.composehammer.domain.data.quickcode.QCProject
 import com.ivyapps.composehammer.domain.quickcode.ExportQuickCodeService
 import com.ivyapps.composehammer.domain.quickcode.ImportQuickCodeService
-import com.ivyapps.composehammer.domain.quickcode.service.QuickCodeService
+import com.ivyapps.composehammer.domain.quickcode.service.QuickCodeService.ProjectInput
 import com.ivyapps.composehammer.domain.quickcode.service.toResultEither
 import com.ivyapps.composehammer.toolwindow.screen.quickcode.component.itemControls
+import java.awt.event.ItemEvent
 
 class QuickCodeMenu(
     private val pluginProject: Project,
@@ -89,7 +93,7 @@ class QuickCodeMenu(
                     val projectName = inputField.text
                     perform {
                         ProjectOps().addItem(
-                            QuickCodeService.ProjectInput(
+                            ProjectInput(
                                 rawName = projectName
                             )
                         ).toResultEither()
@@ -100,10 +104,7 @@ class QuickCodeMenu(
     }
 
     private fun Panel.projects() {
-        val projects = service.projects + listOf(
-            QCProject("Company 1", order = 1.0),
-            QCProject("Personal", order = 3.0)
-        )
+        val projects = service.projects
         projects.forEachIndexed { index, qcProject ->
             project(index, qcProject, projects.size)
         }
@@ -120,20 +121,28 @@ class QuickCodeMenu(
         ) {
             row {
                 checkBox("Enabled")
-                    .bindSelected(
-                        getter = { project.enabled },
-                        setter = { enabled ->
-                            perform {
-                                ProjectOps().editItem(
-                                    item = project,
-                                    input = QuickCodeService.ProjectInput(
-                                        rawName = project.name,
-                                        enabled = enabled
-                                    )
-                                ).toResultEither()
+                    .apply {
+                        // Get the underlying Swing component (JCheckBox)
+                        val jCheckBox = component
+                        // Add an ItemListener
+                        jCheckBox.addItemListener { event ->
+                            // Do something when the checkbox state changes
+                            val checked = event.stateChange == ItemEvent.SELECTED
+                            if (checked != project.enabled) {
+                                perform {
+                                    ProjectOps().editItem(
+                                        item = project,
+                                        input = ProjectInput(
+                                            rawName = project.name,
+                                            enabled = checked,
+                                        )
+                                    ).toResultEither()
+                                }
                             }
                         }
-                    )
+                        jCheckBox.isSelected = project.enabled
+
+                    }
                     .comment("Whether the project to appear in the quick action.")
             }
             itemControls(
