@@ -6,6 +6,7 @@ import com.intellij.openapi.project.Project
 import com.ivyapps.composehammer.domain.data.Reorderable
 import com.ivyapps.composehammer.domain.data.quickcode.CodeGroup
 import com.ivyapps.composehammer.domain.data.quickcode.CodeItem
+import com.ivyapps.composehammer.domain.data.quickcode.QCProject
 import com.ivyapps.composehammer.domain.data.quickcode.QuickCodeConfiguration
 import com.ivyapps.composehammer.persistence.QuickCodePersistence
 import com.ivyapps.composehammer.randomBetween
@@ -20,11 +21,11 @@ class QuickCodeService(project: Project) {
     val groups: List<CodeGroup>
         get() = configuration.groups.sortedBy { it.order }
 
-    fun hasDefinedComponents() = configuration.groups.isNotEmpty()
+    fun hasDefinedProjects() = configuration.projects.any { it.groups.isNotEmpty() }
 
-    fun findGroupByName(name: String): CodeGroup {
-        return requireNotNull(groups.find { it.name == name }) {
-            "CodeGroup with name '$name' doesn't exists in $groups."
+    fun findGroupByName(project: QCProject, name: String): CodeGroup {
+        return requireNotNull(project.groups.find { it.name == name }) {
+            "CodeGroup with name '$name' doesn't exists in project $project."
         }
     }
 
@@ -33,6 +34,10 @@ class QuickCodeService(project: Project) {
             "CodeItem with name '$name' doesn't exists in ${group.codeItems}."
         }
     }
+
+    // region Project operations
+
+    // endregion
 
     // region Group operations
     fun addGroup(rawName: String): CodeGroup? {

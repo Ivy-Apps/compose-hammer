@@ -13,7 +13,7 @@ data class QuickCodeState(
 
 @State(
     name = "com.ivyapps.composehammer.persistence.CustomComponentsPersistence",
-    storages = [Storage("ComposeHammerQuickCode_v2.xml")]
+    storages = [Storage("ComposeHammerQuickCode_v3.xml")]
 )
 class QuickCodePersistence : PersistentStateComponent<QuickCodeState> {
 
@@ -24,9 +24,14 @@ class QuickCodePersistence : PersistentStateComponent<QuickCodeState> {
     override fun loadState(state: QuickCodeState) {
         internalState = state.copy(
             configuration = state.configuration.copy(
-                groups = state.configuration.groups
+                projects = state.configuration.projects
+                    .map {
+                        it.copy(
+                            groups = it.groups.sortedBy { it.order }
+                        )
+                    }
                     .sortedBy { it.order }
-                    .toMutableList()
+                    .toMutableList(),
             ),
         )
     }

@@ -5,9 +5,9 @@ import com.ivyapps.composehammer.domain.data.Reorderable
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CodeGroup(
+data class QCProject(
     override val name: String,
-    val codeItems: List<CodeItem>,
-    override val order: Double,
+    val groups: List<CodeGroup> = emptyList(),
     override val enabled: Boolean = true,
+    override val order: Double,
 ) : Reorderable, Enableable
