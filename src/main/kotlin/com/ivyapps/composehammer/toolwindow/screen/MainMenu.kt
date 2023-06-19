@@ -72,7 +72,7 @@ class MainMenu(
             row {
                 label(
                     "Create and manage your custom components\n" +
-                            "for the \"⚡ Quick Code\" alt+enter action."
+                            "for the \"⚡ Quick Code\" Alt/Option+Enter action."
                 ).component.addOnClickListener(navigateToCustomCodeMenu)
             }
             row {
