@@ -4,9 +4,7 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.components.JBTextField
-import com.intellij.ui.dsl.builder.Panel
-import com.intellij.ui.dsl.builder.bindSelected
-import com.intellij.ui.dsl.builder.panel
+import com.intellij.ui.dsl.builder.*
 import com.ivyapps.composehammer.domain.data.quickcode.QCProject
 import com.ivyapps.composehammer.domain.quickcode.ExportQuickCodeService
 import com.ivyapps.composehammer.domain.quickcode.ImportQuickCodeService
@@ -40,12 +38,11 @@ class QuickCodeMenu(
     }
 
     private fun Panel.importExport(
-        indent: Boolean = false,
     ) {
-        group(indent = indent) {
-            row {
-                text("Configurations").bold()
-            }
+        group(
+            indent = false,
+            title = "Configurations"
+        ) {
             row {
                 label(
                     "Import an existing Quick Code configuration" +
@@ -69,17 +66,17 @@ class QuickCodeMenu(
     }
 
     private fun Panel.addProjectSection() {
-        row {
-            text("Projects").bold()
-        }
-        row {
-            label(
-                """
+        group(
+            title = "Projects",
+            indent = false,
+        ) {
+            row {
+                label(
+                    """
                     Projects contain your custom components and code snippets.
                 """.trimIndent()
-            )
-        }
-        group(indent = true) {
+                )
+            }
             row {
                 text("Add new project")
             }
@@ -149,7 +146,8 @@ class QuickCodeMenu(
                 label("${project.groups.size} groups")
                 label("${project.groups.sumOf { it.codeItems.size }} snippets")
             }
-        }
+        }.topGap(TopGap.SMALL)
+            .bottomGap(BottomGap.SMALL)
     }
 
 
