@@ -25,7 +25,7 @@ class QuickCodeIntentionAction : IntentionAction, HighPriorityAction, Iconable {
 
     override fun isAvailable(project: Project, editor: Editor, file: PsiFile): Boolean {
         val quickCodeService = project.service<QuickCodeService>()
-        return quickCodeService.hasDefinedProjects()
+        return quickCodeService.hasDefinedCustomTemplates()
     }
 
     override fun invoke(project: Project, editor: Editor, file: PsiFile) {
@@ -35,7 +35,7 @@ class QuickCodeIntentionAction : IntentionAction, HighPriorityAction, Iconable {
             title = "Choose an option",
             backItem = "❌ Close menu",
             backItemLast = true,
-            items = quickCodeService.allGroups.map { it.name },
+            items = quickCodeService.enabledGroups.map { it.name },
             onBack = {
                 it.closeOk(null)
             }
@@ -65,7 +65,12 @@ class QuickCodeIntentionAction : IntentionAction, HighPriorityAction, Iconable {
         val insertService = project.service<InsertCodeService>()
 
         if (codeItem.variables.isNotEmpty()) {
-            // prompt the user to input variables
+            QuickCodeVarsDialog(
+                pluginProject = project,
+                editor = editor,
+                file = file,
+                codeItem = codeItem,
+            ).show()
         } else {
             insertService.addCode(editor, file, codeItem)
         }

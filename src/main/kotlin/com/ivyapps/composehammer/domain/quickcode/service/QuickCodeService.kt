@@ -23,10 +23,13 @@ class QuickCodeService(project: Project) {
     val projects: List<QCProject>
         get() = configuration.projects.sortedByOrder()
 
-    val allGroups: List<CodeGroup>
-        get() = projects.flatMap { it.groups }.sortedByOrder()
+    val enabledGroups: List<CodeGroup>
+        get() = projects
+            .filter { it.enabled }
+            .flatMap { it.groups }
+            .sortedByOrder()
 
-    fun hasDefinedProjects() = configuration.projects.any { it.groups.isNotEmpty() }
+    fun hasDefinedCustomTemplates() = enabledGroups.any { it.codeItems.isNotEmpty() }
 
     fun findProjectByName(name: String): QCProject {
         return requireNotNull(projects.find { it.name == name }) {
