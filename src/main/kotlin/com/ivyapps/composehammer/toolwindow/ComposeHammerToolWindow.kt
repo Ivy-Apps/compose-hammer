@@ -61,7 +61,7 @@ class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
     private fun navigateToQuickCode() {
         navigateTo(
             screen = QuickCodeMenu(
-                project = project,
+                pluginProject = project,
                 navigateToMainMenu = ::navigateToMainMenu,
                 refreshUi = ::navigateToQuickCode,
             ),

@@ -11,13 +11,14 @@ import com.ivyapps.composehammer.domain.quickcode.ExportQuickCodeService
 import com.ivyapps.composehammer.domain.quickcode.ImportQuickCodeService
 import com.ivyapps.composehammer.domain.quickcode.QuickCodeService
 import com.ivyapps.composehammer.toolwindow.screen.ToolWindowScreen
+import com.ivyapps.composehammer.toolwindow.screen.quickcode.component.itemControls
 
 class QuickCodeMenu(
-    private val project: Project,
+    private val pluginProject: Project,
     private val navigateToMainMenu: () -> Unit,
     private val refreshUi: () -> Unit,
 ) : ToolWindowScreen {
-    private val service = project.service<QuickCodeService>()
+    private val service = pluginProject.service<QuickCodeService>()
 
     override val ui: DialogPanel = panel {
         header()
@@ -32,7 +33,7 @@ class QuickCodeMenu(
                 text("⚡ Quick Code").bold()
             }
             importExport()
-            addCodeGroupSection()
+            addProjectSection()
             projects()
         }
     }
@@ -56,17 +57,17 @@ class QuickCodeMenu(
             }
             row {
                 button("Import") {
-                    project.service<ImportQuickCodeService>().import()
+                    pluginProject.service<ImportQuickCodeService>().import()
                     refreshUi()
                 }
                 button("Export") {
-                    project.service<ExportQuickCodeService>().export()
+                    pluginProject.service<ExportQuickCodeService>().export()
                 }
             }
         }
     }
 
-    private fun Panel.addCodeGroupSection() {
+    private fun Panel.addProjectSection() {
         group(indent = true) {
             row {
                 text("Project").bold()
@@ -103,14 +104,40 @@ class QuickCodeMenu(
 
     private fun Panel.project(
         index: Int,
-        qcProject: QCProject,
+        project: QCProject,
         projectsCount: Int,
     ) {
         group(
-            title = qcProject.name,
+            title = "Project: ${project.name}",
             indent = true,
         ) {
-
+            row {
+                checkBox("Enabled")
+                    .comment("Whether the project to appear in the quick action.")
+            }
+            itemControls(
+                index = index,
+                item = project,
+                itemsCount = projectsCount,
+                label = "project",
+                onDelete = {
+                    // TODO:
+                },
+                onMoveUp = {
+                    // TODO:
+                },
+                onMoveDown = {
+                    // TODO:
+                },
+                onNavigateToItemDetails = {
+                    // TODO:
+                }
+            )
+            row {
+                text("${project.name}:").bold()
+                label("${project.groups.size} groups")
+                label("${project.groups.sumOf { it.codeItems.size }} snippets")
+            }
         }
     }
 
