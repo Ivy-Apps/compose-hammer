@@ -1,5 +1,6 @@
 package com.ivyapps.composehammer.domain.quickcode.service
 
+import com.ivyapps.composehammer.domain.data.Either
 import com.ivyapps.composehammer.domain.data.Reorderable
 import com.ivyapps.composehammer.randomBetween
 import com.ivyapps.composehammer.sortedByOrder
@@ -49,32 +50,38 @@ abstract class BaseOperations<Input, T : Reorderable> {
 
     fun moveItemUp(
         item: T
-    ): Boolean {
-        val newOrder = items.moveUp(item) ?: return false
-        moveItem(item, newOrder)
-        return true
+    ): MoveOperationResult<T> {
+        val newOrder = items.moveUp(item)
+            ?: return MoveOperationResult.Failed("Failed to move up: $item")
+        return MoveOperationResult.Moved(
+            moveItem(item, newOrder)
+        )
     }
 
-    fun moveItemDown(item: T): Boolean {
-        val newOrder = items.moveDown(item) ?: return false
-        moveItem(item, newOrder)
-        return true
+    fun moveItemDown(item: T): MoveOperationResult<T> {
+        val newOrder = items.moveDown(item)
+            ?: return MoveOperationResult.Failed("Failed to move down: $item")
+        return MoveOperationResult.Moved(
+            moveItem(item, newOrder)
+        )
     }
 
     private fun moveItem(
         item: T,
         newOrder: Double
-    ) {
+    ): T {
+        val updatedItem = copyWithNewOrder(item, newOrder)
         updateStateInternal(
-            updatedItems = items.withRemoved(item) + copyWithNewOrder(item, newOrder)
+            updatedItems = items.withRemoved(item) + updatedItem
         )
+        return updatedItem
     }
 
-    fun deleteItem(item: T): Boolean {
+    fun deleteItem(item: T): Either.Right<T?> {
         updateStateInternal(
             updatedItems = items.withRemoved(item)
         )
-        return true
+        return Either.Right(null)
     }
 
     private fun <T : Reorderable> List<T>.moveUp(target: Reorderable): Double? {
@@ -143,4 +150,30 @@ sealed interface EditOperationResult<out T> {
     data class Invalid<T>(val reason: String) : EditOperationResult<T>
 }
 
+sealed interface MoveOperationResult<out T> {
+    data class Moved<T>(val item: T) : MoveOperationResult<T>
+    data class Failed<T>(val errMsg: String) : MoveOperationResult<T>
+}
+
 fun <T : Reorderable> List<T>.withRemoved(item: T) = filter { it.name != item.name }
+
+fun <T> AddOperationResult<T>.toResultEither(): Either<String, T> = when (this) {
+    is AddOperationResult.Added -> Either.Right(item)
+    is AddOperationResult.AlreadyExists -> Either.Left("Already exists!")
+    is AddOperationResult.Invalid -> Either.Left("Invalid: $reason")
+}
+
+fun <T> EditOperationResult<T>.toResultEither(): Either<String, T> = when (this) {
+    is EditOperationResult.Invalid -> Either.Left("Invalid: $reason")
+    is EditOperationResult.Updated -> Either.Right(item)
+}
+
+fun <T> MoveOperationResult<T>.toResultEither(): Either<String, T> = when (this) {
+    is MoveOperationResult.Failed -> Either.Left("Move failed: $errMsg")
+    is MoveOperationResult.Moved -> Either.Right(item)
+}
+
+fun Boolean.toResultEither(): Either<String, Unit> = when (this) {
+    true -> Either.Right(Unit)
+    false -> Either.Left("Operation failed")
+}

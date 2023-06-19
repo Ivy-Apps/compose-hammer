@@ -9,7 +9,7 @@ import com.ivyapps.composehammer.domain.data.quickcode.QCProject
 import com.ivyapps.composehammer.domain.quickcode.ExportQuickCodeService
 import com.ivyapps.composehammer.domain.quickcode.ImportQuickCodeService
 import com.ivyapps.composehammer.domain.quickcode.service.QuickCodeService
-import com.ivyapps.composehammer.toolwindow.screen.ToolWindowScreen
+import com.ivyapps.composehammer.domain.quickcode.service.toResultEither
 import com.ivyapps.composehammer.toolwindow.screen.quickcode.component.itemControls
 
 class QuickCodeMenu(
@@ -17,8 +17,11 @@ class QuickCodeMenu(
     private val navigateToMainMenu: () -> Unit,
     private val refreshUi: () -> Unit,
     private val navigateToProjectDetails: (QCProject) -> Unit,
-) : ToolWindowScreen {
-    private val service = pluginProject.service<QuickCodeService>()
+) : QuickCodeToolWindow<QCProject?>(pluginProject) {
+
+    override fun onRefreshUi(updatedItem: QCProject?) {
+        refreshUi()
+    }
 
     override val ui: DialogPanel = panel {
         group(indent = true) {
@@ -84,11 +87,13 @@ class QuickCodeMenu(
                 }.comment("Project name")
                 button("Add new") {
                     val projectName = inputField.text
-                    service.ProjectOperations().addItem(
-                        QuickCodeService.ProjectInput(
-                            rawName = projectName
-                        )
-                    )
+                    perform {
+                        ProjectOps().addItem(
+                            QuickCodeService.ProjectInput(
+                                rawName = projectName
+                            )
+                        ).toResultEither()
+                    }
                 }
             }
         }
@@ -117,8 +122,16 @@ class QuickCodeMenu(
                 checkBox("Enabled")
                     .bindSelected(
                         getter = { project.enabled },
-                        setter = {
-                            // TODO: Update
+                        setter = { enabled ->
+                            perform {
+                                ProjectOps().editItem(
+                                    item = project,
+                                    input = QuickCodeService.ProjectInput(
+                                        rawName = project.name,
+                                        enabled = enabled
+                                    )
+                                ).toResultEither()
+                            }
                         }
                     )
                     .comment("Whether the project to appear in the quick action.")
@@ -130,13 +143,19 @@ class QuickCodeMenu(
                 viewCta = "View",
                 itemLabel = "project",
                 onDelete = {
-                    // TODO:
+                    perform {
+                        ProjectOps().deleteItem(it)
+                    }
                 },
                 onMoveUp = {
-                    // TODO:
+                    perform {
+                        ProjectOps().moveItemUp(it).toResultEither()
+                    }
                 },
                 onMoveDown = {
-                    // TODO:
+                    perform {
+                        ProjectOps().moveItemUp(it).toResultEither()
+                    }
                 },
                 onNavigateToItemDetails = {
                     navigateToProjectDetails(project)
@@ -149,12 +168,5 @@ class QuickCodeMenu(
             }
         }.topGap(TopGap.SMALL)
             .bottomGap(BottomGap.SMALL)
-    }
-
-
-    private fun perform(
-
-    ) {
-
     }
 }

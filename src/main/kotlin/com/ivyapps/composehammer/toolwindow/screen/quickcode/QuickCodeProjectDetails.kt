@@ -1,31 +1,39 @@
 package com.ivyapps.composehammer.toolwindow.screen.quickcode
 
-import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.Panel
+import com.intellij.ui.dsl.builder.bindText
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.builder.text
 import com.ivyapps.composehammer.addOnClickListener
+import com.ivyapps.composehammer.domain.data.mapRight
 import com.ivyapps.composehammer.domain.data.quickcode.CodeGroup
 import com.ivyapps.composehammer.domain.data.quickcode.CodeItem
 import com.ivyapps.composehammer.domain.data.quickcode.QCProject
-import com.ivyapps.composehammer.domain.quickcode.service.QuickCodeService
-import com.ivyapps.composehammer.toolwindow.screen.ToolWindowScreen
+import com.ivyapps.composehammer.domain.quickcode.service.QuickCodeService.CodeGroupInput
+import com.ivyapps.composehammer.domain.quickcode.service.QuickCodeService.ProjectInput
+import com.ivyapps.composehammer.domain.quickcode.service.toResultEither
 import com.ivyapps.composehammer.toolwindow.screen.quickcode.component.itemControls
 
 class QuickCodeProjectDetails(
     pluginProject: Project,
-    private val initialProject: QCProject,
+    private val project: QCProject,
     private val navigateToQuickCodeMenu: () -> Unit,
     private val navigateToCodeItem: (CodeGroup, CodeItem?) -> Unit,
     private val navigateToCodeGroup: (CodeGroup) -> Unit,
     private val refreshUi: (QCProject) -> Unit,
-) : ToolWindowScreen {
-    private val service = pluginProject.service<QuickCodeService>()
+) : QuickCodeToolWindow<QCProject?>(pluginProject) {
 
-    private var project = initialProject
+    override fun onRefreshUi(updatedItem: QCProject?) {
+        if (updatedItem != null) {
+            refreshUi(updatedItem)
+        } else {
+            // project deleted or something wrong happened
+            navigateToQuickCodeMenu()
+        }
+    }
 
     override val ui: DialogPanel = panel {
         group(indent = true) {
@@ -47,6 +55,19 @@ class QuickCodeProjectDetails(
         row {
             textField()
                 .text(project.name)
+                .bindText(
+                    getter = { project.name },
+                    setter = { newName ->
+                        perform {
+                            ProjectOps().editItem(
+                                item = project,
+                                input = ProjectInput(
+                                    rawName = newName,
+                                )
+                            ).toResultEither()
+                        }
+                    }
+                )
                 .comment("Project name")
         }
     }
@@ -70,7 +91,14 @@ class QuickCodeProjectDetails(
                     inputField = it.component
                 }.comment("Code group name")
                 button("Add new") {
-                    perform { addGroup(inputField.text) }
+                    perform {
+                        CodeGroupOps(project).addItem(
+                            CodeGroupInput(rawName = inputField.text)
+                        ).toResultEither()
+                            .mapRight {
+                                service.findProjectByName(project.name)
+                            }
+                    }
                 }
             }
         }
@@ -115,13 +143,30 @@ class QuickCodeProjectDetails(
             itemLabel = "group",
             onNavigateToItemDetails = navigateToCodeGroup,
             onMoveUp = {
-                perform { moveGroupUp(group) }
+                perform {
+                    CodeGroupOps(project).moveItemUp(it)
+                        .toResultEither()
+                        .mapRight {
+                            service.findProjectByName(project.name)
+                        }
+                }
             },
             onMoveDown = {
-                perform { moveGroupDown(group) }
+                perform {
+                    CodeGroupOps(project).moveItemDown(it)
+                        .toResultEither()
+                        .mapRight {
+                            service.findProjectByName(project.name)
+                        }
+                }
             },
             onDelete = {
-                perform { deleteGroup(group) }
+                perform {
+                    CodeGroupOps(project).deleteItem(it)
+                        .mapRight {
+                            service.findProjectByName(project.name)
+                        }
+                }
             }
         )
     }
@@ -164,19 +209,27 @@ class QuickCodeProjectDetails(
             }
             if (index > 0) {
                 button("Move up") {
-                    perform { moveCodeItemUp(group, item) }
+                    perform {
+                        CodeItemOps(project, group).moveItemUp(item)
+                            .toResultEither()
+                            .mapRight {
+                                service.findProjectByName(project.name)
+                            }
+                    }
                 }
             }
             if (index < itemsCount - 1) {
                 button("Move down") {
-                    perform { moveCodeItemDown(group, item) }
+                    perform {
+                        CodeItemOps(project, group).moveItemDown(item)
+                            .toResultEither()
+                            .mapRight {
+                                service.findProjectByName(project.name)
+                            }
+                    }
                 }
             }
         }
     }
 
-    private fun perform(action: QuickCodeService.() -> Unit) {
-        action(service)
-        refreshUi(project)
-    }
 }

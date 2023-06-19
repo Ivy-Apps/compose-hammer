@@ -50,10 +50,11 @@ class QuickCodeService(project: Project) {
 
     // region Project operations
     data class ProjectInput(
-        val rawName: String
+        val rawName: String,
+        val enabled: Boolean = true,
     )
 
-    inner class ProjectOperations : BaseOperations<ProjectInput, QCProject>() {
+    inner class ProjectOps : BaseOperations<ProjectInput, QCProject>() {
         override val items: List<QCProject>
             get() = projects
 
@@ -63,7 +64,8 @@ class QuickCodeService(project: Project) {
             return Valid(
                 QCProject(
                     name = name,
-                    order = order
+                    enabled = input.enabled,
+                    order = order,
                 )
             )
         }
@@ -79,13 +81,13 @@ class QuickCodeService(project: Project) {
     // endregion
 
     // region Group operations
-    data class GroupInput(
+    data class CodeGroupInput(
         val rawName: String,
     )
 
-    inner class GroupOperations(
+    inner class CodeGroupOps(
         private val project: QCProject,
-    ) : BaseOperations<GroupInput, CodeGroup>() {
+    ) : BaseOperations<CodeGroupInput, CodeGroup>() {
         override val items: List<CodeGroup>
             get() = project.groups
 
@@ -100,7 +102,7 @@ class QuickCodeService(project: Project) {
             return item.copy(order = newOrder)
         }
 
-        override fun createItem(input: GroupInput, order: Double): MaybeValid<CodeGroup> {
+        override fun createItem(input: CodeGroupInput, order: Double): MaybeValid<CodeGroup> {
             val name = input.rawName.notBlankAndTrimmed()
                 ?: return Invalid("Invalid project name: ${input.rawName}")
             return Valid(
@@ -122,7 +124,7 @@ class QuickCodeService(project: Project) {
 
     }
 
-    inner class CodeItemOperations(
+    inner class CodeItemOps(
         private val project: QCProject,
         private val group: CodeGroup,
     ) : BaseOperations<CodeItemInput, CodeItem>() {

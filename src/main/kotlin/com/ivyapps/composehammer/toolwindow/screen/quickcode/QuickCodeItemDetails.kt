@@ -1,27 +1,32 @@
 package com.ivyapps.composehammer.toolwindow.screen.quickcode
 
-import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.components.JBTextArea
 import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.builder.text
+import com.ivyapps.composehammer.domain.data.mapRight
 import com.ivyapps.composehammer.domain.data.quickcode.CodeGroup
 import com.ivyapps.composehammer.domain.data.quickcode.CodeItem
-import com.ivyapps.composehammer.domain.quickcode.service.QuickCodeService
+import com.ivyapps.composehammer.domain.data.quickcode.QCProject
+import com.ivyapps.composehammer.domain.quickcode.service.QuickCodeService.CodeItemInput
+import com.ivyapps.composehammer.domain.quickcode.service.toResultEither
 import com.ivyapps.composehammer.domain.ui.generateImportsCode
 import com.ivyapps.composehammer.toolwindow.component.DeleteButton
 import com.ivyapps.composehammer.toolwindow.component.codeArea
-import com.ivyapps.composehammer.toolwindow.screen.ToolWindowScreen
 
 class QuickCodeItemDetails(
-    project: Project,
+    pluginProject: Project,
+    private val project: QCProject,
     private val codeGroup: CodeGroup,
     private val codeItem: CodeItem?,
     private val navigateToQuickCodeMenu: () -> Unit,
-) : ToolWindowScreen {
-    private val service = project.service<QuickCodeService>()
+) : QuickCodeToolWindow<CodeItem?>(pluginProject) {
+
+    override fun onRefreshUi(updatedItem: CodeItem?) {
+        navigateToQuickCodeMenu()
+    }
 
     override val ui: DialogPanel = panel {
         group(
@@ -76,24 +81,24 @@ class QuickCodeItemDetails(
                     val name = nameInput?.text ?: error("CodeItem name cannot be null!")
                     val imports = importsInput.text
                     val code = codeInput.text
+
+                    val input = CodeItemInput(
+                        rawName = name,
+                        rawImports = imports,
+                        rawCode = code,
+                    )
                     if (codeItem != null) {
                         perform {
-                            editCodeItem(
-                                group = codeGroup,
+                            CodeItemOps(project, codeGroup).editItem(
                                 item = codeItem,
-                                rawName = name,
-                                rawImports = imports,
-                                rawCode = code,
-                            )
+                                input
+                            ).toResultEither()
                         }
                     } else {
                         perform {
-                            addCodeItem(
-                                group = codeGroup,
-                                rawName = name,
-                                rawImports = imports,
-                                rawCode = code,
-                            )
+                            CodeItemOps(project, codeGroup).addItem(
+                                input = input
+                            ).toResultEither()
                         }
                     }
                 }
@@ -101,19 +106,13 @@ class QuickCodeItemDetails(
                 if (codeItem != null) {
                     DeleteButton().ui(this) {
                         perform {
-                            deleteCodeItem(codeGroup, codeItem)
-                            true
+                            CodeItemOps(project, codeGroup).deleteItem(
+                                item = codeItem,
+                            ).mapRight { null }
                         }
                     }
                 }
             }
-        }
-
-    }
-
-    private fun perform(action: QuickCodeService.() -> Boolean) {
-        if (action(service)) {
-            navigateToQuickCodeMenu()
         }
     }
 }
