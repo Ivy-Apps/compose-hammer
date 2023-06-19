@@ -86,7 +86,7 @@ class QuickCodeService(project: Project) {
     )
 
     inner class CodeGroupOps(
-        private val project: QCProject,
+        val project: QCProject,
     ) : BaseOperations<CodeGroupInput, CodeGroup>() {
         override val items: List<CodeGroup>
             get() = project.groups
@@ -125,8 +125,8 @@ class QuickCodeService(project: Project) {
     }
 
     inner class CodeItemOps(
-        private val project: QCProject,
-        private val group: CodeGroup,
+        val project: QCProject,
+        val group: CodeGroup,
     ) : BaseOperations<CodeItemInput, CodeItem>() {
         override val items: List<CodeItem>
             get() = group.codeItems

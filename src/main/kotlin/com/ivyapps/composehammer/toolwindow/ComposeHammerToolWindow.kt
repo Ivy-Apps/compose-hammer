@@ -84,7 +84,7 @@ class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
                 navigateToCodeGroup = ::navigateToCodeGroup,
                 refreshUi = ::navigateToProjectDetails,
             ),
-            screenTitle = "Project ${project.name}"
+            screenTitle = "[Project] ${project.name}"
         )
     }
 
