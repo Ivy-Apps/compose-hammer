@@ -8,7 +8,6 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFile
 import com.ivyapps.composehammer.domain.data.quickcode.QuickCodeConfiguration
-import com.ivyapps.composehammer.domain.ui.generateImportsCode
 import com.ivyapps.composehammer.persistence.QuickCodeConfigurationJson
 import java.io.File
 
@@ -61,17 +60,18 @@ class ImportQuickCodeService(
     private fun importConfiguration(configuration: QuickCodeConfiguration) {
         val service = project.service<QuickCodeService>()
 
-        for (group in configuration.groups) {
-            val newGroup = service.addGroup(rawName = group.name)
-                ?: continue
-            group.codeItems.forEach { codeItem ->
-                service.addCodeItem(
-                    group = newGroup,
-                    rawName = codeItem.name,
-                    rawImports = generateImportsCode(codeItem.imports) ?: "",
-                    rawCode = codeItem.code
-                )
-            }
-        }
+        // TODO: Implement
+//        for (group in configuration.groups) {
+//            val newGroup = service.addGroup(rawName = group.name)
+//                ?: continue
+//            group.codeItems.forEach { codeItem ->
+//                service.addCodeItem(
+//                    group = newGroup,
+//                    rawName = codeItem.name,
+//                    rawImports = generateImportsCode(codeItem.imports) ?: "",
+//                    rawCode = codeItem.code
+//                )
+//            }
+//        }
     }
 }

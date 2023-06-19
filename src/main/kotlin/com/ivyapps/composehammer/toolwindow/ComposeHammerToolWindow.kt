@@ -14,8 +14,8 @@ import com.ivyapps.composehammer.domain.data.quickcode.CodeItem
 import com.ivyapps.composehammer.toolwindow.screen.MainMenu
 import com.ivyapps.composehammer.toolwindow.screen.MaterialComponentDetails
 import com.ivyapps.composehammer.toolwindow.screen.ToolWindowScreen
-import com.ivyapps.composehammer.toolwindow.screen.quickcode.CodeGroupDetails
-import com.ivyapps.composehammer.toolwindow.screen.quickcode.CodeItemDetails
+import com.ivyapps.composehammer.toolwindow.screen.quickcode.QuickCodeGroupDetails
+import com.ivyapps.composehammer.toolwindow.screen.quickcode.QuickCodeItemDetails
 import com.ivyapps.composehammer.toolwindow.screen.quickcode.QuickCodeMenu
 
 class ComposeHammerToolWindowFactory : ToolWindowFactory {
@@ -64,8 +64,6 @@ class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
                 project = project,
                 navigateToMainMenu = ::navigateToMainMenu,
                 refreshUi = ::navigateToQuickCode,
-                navigateToCodeItem = ::navigateToCodeItem,
-                navigateToCodeGroup = ::navigateToCodeGroup,
             ),
             screenTitle = "Quick Code",
         )
@@ -76,7 +74,7 @@ class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
         item: CodeItem?
     ) {
         navigateTo(
-            screen = CodeItemDetails(
+            screen = QuickCodeItemDetails(
                 project = project,
                 codeGroup = group,
                 codeItem = item,
@@ -88,7 +86,7 @@ class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
 
     private fun navigateToCodeGroup(group: CodeGroup) {
         navigateTo(
-            screen = CodeGroupDetails(
+            screen = QuickCodeGroupDetails(
                 project = project,
                 codeGroup = group,
                 navigateToQuickCodeMenu = ::navigateToQuickCode,

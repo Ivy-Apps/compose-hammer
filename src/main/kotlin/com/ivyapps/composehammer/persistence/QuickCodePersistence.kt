@@ -5,6 +5,7 @@ import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
 import com.intellij.util.xmlb.annotations.OptionTag
 import com.ivyapps.composehammer.domain.data.quickcode.QuickCodeConfiguration
+import com.ivyapps.composehammer.sortedByOrder
 
 data class QuickCodeState(
     @OptionTag(converter = QuickCodeConfigurationJson::class)
@@ -27,10 +28,10 @@ class QuickCodePersistence : PersistentStateComponent<QuickCodeState> {
                 projects = state.configuration.projects
                     .map {
                         it.copy(
-                            groups = it.groups.sortedBy { it.order }
+                            groups = it.groups.sortedByOrder()
                         )
                     }
-                    .sortedBy { it.order }
+                    .sortedByOrder()
                     .toMutableList(),
             ),
         )

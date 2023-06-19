@@ -1,11 +1,14 @@
 package com.ivyapps.composehammer
 
+import com.ivyapps.composehammer.domain.data.Reorderable
 import java.awt.Component
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
 import kotlin.random.Random
+
+fun <T : Reorderable> List<T>.sortedByOrder(): List<T> = sortedBy { it.order }
 
 fun copyToClipboard(content: String) {
     val selection = StringSelection(content)

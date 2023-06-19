@@ -10,7 +10,7 @@ import com.ivyapps.composehammer.domain.data.quickcode.CodeGroup
 import com.ivyapps.composehammer.domain.quickcode.QuickCodeService
 import com.ivyapps.composehammer.toolwindow.screen.ToolWindowScreen
 
-class CodeGroupDetails(
+class QuickCodeGroupDetails(
     project: Project,
     private val codeGroup: CodeGroup,
     private val navigateToQuickCodeMenu: () -> Unit,

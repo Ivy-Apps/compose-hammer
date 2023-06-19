@@ -15,7 +15,7 @@ import com.ivyapps.composehammer.toolwindow.component.DeleteButton
 import com.ivyapps.composehammer.toolwindow.component.codeArea
 import com.ivyapps.composehammer.toolwindow.screen.ToolWindowScreen
 
-class CodeItemDetails(
+class QuickCodeItemDetails(
     project: Project,
     private val codeGroup: CodeGroup,
     private val codeItem: CodeItem?,

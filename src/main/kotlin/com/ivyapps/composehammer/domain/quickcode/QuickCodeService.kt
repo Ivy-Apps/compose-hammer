@@ -10,6 +10,7 @@ import com.ivyapps.composehammer.domain.data.quickcode.QCProject
 import com.ivyapps.composehammer.domain.data.quickcode.QuickCodeConfiguration
 import com.ivyapps.composehammer.persistence.QuickCodePersistence
 import com.ivyapps.composehammer.randomBetween
+import com.ivyapps.composehammer.sortedByOrder
 
 @Service(Service.Level.PROJECT)
 class QuickCodeService(project: Project) {
@@ -18,14 +19,19 @@ class QuickCodeService(project: Project) {
     val configuration: QuickCodeConfiguration
         get() = persistence.state.configuration
 
+    val projects: List<QCProject>
+        get() = configuration.projects.sortedByOrder()
+
     val groups: List<CodeGroup>
-        get() = configuration.groups.sortedBy { it.order }
+        get() = emptyList() // TODO: configuration.groups.sortedByOrder()
 
     fun hasDefinedProjects() = configuration.projects.any { it.groups.isNotEmpty() }
 
-    fun findGroupByName(project: QCProject, name: String): CodeGroup {
-        return requireNotNull(project.groups.find { it.name == name }) {
-            "CodeGroup with name '$name' doesn't exists in project $project."
+    fun findGroupByName(name: String): CodeGroup {
+        return requireNotNull(projects.firstNotNullOfOrNull { project ->
+            project.groups.find { it.name == name }
+        }) {
+            "CodeGroup with name '$name' doesn't exists."
         }
     }
 
@@ -98,7 +104,8 @@ class QuickCodeService(project: Project) {
     }
 
     fun deleteGroup(group: CodeGroup) {
-        configuration.groups.remove(group)
+        // TODO:
+//        configuration.groups.remove(group)
     }
     // endregion
 
@@ -215,11 +222,12 @@ class QuickCodeService(project: Project) {
         new: CodeGroup,
         old: CodeGroup? = null,
     ) {
-        if (old != null) {
-            configuration.groups.remove(old)
-        }
-        configuration.groups.add(new)
-        configuration.groups.sortBy { it.order }
+        // TODO:
+//        if (old != null) {
+//            configuration.groups.remove(old)
+//        }
+//        configuration.groups.add(new)
+//        configuration.groups.sortBy { it.order }
     }
 
     private fun <T : Reorderable> List<T>.moveUp(target: Reorderable): Double? {
