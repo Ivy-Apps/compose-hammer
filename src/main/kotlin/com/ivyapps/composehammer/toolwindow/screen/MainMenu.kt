@@ -66,13 +66,14 @@ class MainMenu(
     private fun Panel.customSection() {
         group(indent = true) {
             row {
-                text("Custom code").bold()
+                text("Custom code snippets").bold()
+                    .component.addOnClickListener(navigateToCustomCodeMenu)
             }
             row {
                 label(
                     "Create and manage custom code snippets\n" +
                             "for the \"⚡ Quick Code\" alt+enter action."
-                )
+                ).component.addOnClickListener(navigateToCustomCodeMenu)
             }
             row {
                 button("⚡ Quick code") {

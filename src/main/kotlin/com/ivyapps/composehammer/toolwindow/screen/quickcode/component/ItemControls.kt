@@ -8,14 +8,15 @@ fun <T : Reorderable> Panel.itemControls(
     index: Int,
     item: T,
     itemsCount: Int,
-    label: String,
+    viewCta: String,
+    itemLabel: String,
     onNavigateToItemDetails: (T) -> Unit,
     onMoveUp: (T) -> Unit,
     onMoveDown: (T) -> Unit,
     onDelete: ((T) -> Unit)? = null,
 ) {
     row {
-        button("Rename") {
+        button(viewCta) {
             onNavigateToItemDetails(item)
         }
         if (index > 0) {
@@ -31,7 +32,7 @@ fun <T : Reorderable> Panel.itemControls(
         if (onDelete != null) {
             DeleteButton().ui(
                 row = this,
-                notConfirmedLabel = "Delete \"${item.name}\" $label"
+                notConfirmedLabel = "Delete \"${item.name}\" $itemLabel"
             ) {
                 onDelete(item)
             }

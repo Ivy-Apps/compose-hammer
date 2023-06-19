@@ -70,7 +70,8 @@ class QuickCodeProjectDetails(
             index = index,
             item = group,
             itemsCount = groupsCount,
-            label = "group",
+            viewCta = "Rename",
+            itemLabel = "group",
             onNavigateToItemDetails = navigateToCodeGroup,
             onMoveUp = {
                 perform { moveGroupUp(group) }

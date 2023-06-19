@@ -5,6 +5,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.Panel
+import com.intellij.ui.dsl.builder.bindSelected
 import com.intellij.ui.dsl.builder.panel
 import com.ivyapps.composehammer.domain.data.quickcode.QCProject
 import com.ivyapps.composehammer.domain.quickcode.ExportQuickCodeService
@@ -68,16 +69,19 @@ class QuickCodeMenu(
     }
 
     private fun Panel.addProjectSection() {
-        group(indent = true) {
-            row {
-                text("Project").bold()
-            }
-            row {
-                label(
-                    """
+        row {
+            text("Projects").bold()
+        }
+        row {
+            label(
+                """
                     Projects contain your custom components and code snippets.
                 """.trimIndent()
-                )
+            )
+        }
+        group(indent = true) {
+            row {
+                text("Add new project")
             }
             row {
                 val inputField: JBTextField
@@ -113,13 +117,20 @@ class QuickCodeMenu(
         ) {
             row {
                 checkBox("Enabled")
+                    .bindSelected(
+                        getter = { project.enabled },
+                        setter = {
+                            // TODO: Update
+                        }
+                    )
                     .comment("Whether the project to appear in the quick action.")
             }
             itemControls(
                 index = index,
                 item = project,
                 itemsCount = projectsCount,
-                label = "project",
+                viewCta = "View",
+                itemLabel = "project",
                 onDelete = {
                     // TODO:
                 },
