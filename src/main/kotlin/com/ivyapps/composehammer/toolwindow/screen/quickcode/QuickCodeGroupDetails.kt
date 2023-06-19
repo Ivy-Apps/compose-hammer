@@ -18,7 +18,7 @@ class QuickCodeGroupDetails(
 ) : QuickCodeToolWindow<CodeGroup?>(pluginProject) {
 
     override fun onRefreshUi(updatedItem: CodeGroup?) {
-        navigateToProjectDetails(project)
+        navigateToProjectDetails(service.findProjectByName(project.name))
     }
 
     override val ui: DialogPanel = panel {
