@@ -58,7 +58,11 @@ class QuickCodeService(project: Project) {
         override val items: List<QCProject>
             get() = projects
 
-        override fun createItem(input: ProjectInput, order: Double): MaybeValid<QCProject> {
+        override fun createItem(
+            input: ProjectInput,
+            order: Double,
+            existingItem: QCProject?,
+        ): MaybeValid<QCProject> {
             val name = input.rawName.notBlankAndTrimmed()
                 ?: return Invalid("Invalid project name: ${input.rawName}")
             return Valid(
@@ -66,6 +70,7 @@ class QuickCodeService(project: Project) {
                     name = name,
                     enabled = input.enabled,
                     order = order,
+                    groups = existingItem?.groups ?: emptyList(),
                 )
             )
         }
@@ -102,13 +107,19 @@ class QuickCodeService(project: Project) {
             return item.copy(order = newOrder)
         }
 
-        override fun createItem(input: CodeGroupInput, order: Double): MaybeValid<CodeGroup> {
+        override fun createItem(
+            input: CodeGroupInput,
+            order: Double,
+            existingItem: CodeGroup?,
+        ): MaybeValid<CodeGroup> {
             val name = input.rawName.notBlankAndTrimmed()
                 ?: return Invalid("Invalid project name: ${input.rawName}")
             return Valid(
                 CodeGroup(
                     name = name,
-                    order = order
+                    order = order,
+                    codeItems = existingItem?.codeItems ?: emptyList(),
+                    enabled = existingItem?.enabled ?: true,
                 )
             )
         }
@@ -141,7 +152,8 @@ class QuickCodeService(project: Project) {
 
         override fun createItem(
             input: CodeItemInput,
-            order: Double
+            order: Double,
+            existingItem: CodeItem?,
         ): MaybeValid<CodeItem> = with(input) {
             val name = rawName.notBlankAndTrimmed()
                 ?: return@with Invalid("Invalid name: '$rawName'")

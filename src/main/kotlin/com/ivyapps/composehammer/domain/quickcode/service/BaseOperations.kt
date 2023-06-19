@@ -11,7 +11,8 @@ abstract class BaseOperations<Input, T : Reorderable> {
 
     protected abstract fun createItem(
         input: Input,
-        order: Double
+        order: Double,
+        existingItem: T?,
     ): MaybeValid<T>
 
     protected abstract fun copyWithNewOrder(item: T, newOrder: Double): T
@@ -19,7 +20,7 @@ abstract class BaseOperations<Input, T : Reorderable> {
     protected abstract fun updateState(updatedItems: List<T>)
 
     fun addItem(input: Input): AddOperationResult<T> {
-        val newItem = when (val maybeValid = createItem(input, items.findNextOrderNum())) {
+        val newItem = when (val maybeValid = createItem(input, items.findNextOrderNum(), null)) {
             is MaybeValid.Invalid -> return AddOperationResult.Invalid(maybeValid.reason)
             is MaybeValid.Valid -> maybeValid.item
         }
@@ -38,7 +39,7 @@ abstract class BaseOperations<Input, T : Reorderable> {
         item: T,
         input: Input,
     ): EditOperationResult<T> {
-        val updatedItem = when (val maybeValid = createItem(input, item.order)) {
+        val updatedItem = when (val maybeValid = createItem(input, item.order, item)) {
             is MaybeValid.Invalid -> return EditOperationResult.Invalid(maybeValid.reason)
             is MaybeValid.Valid -> maybeValid.item
         }
