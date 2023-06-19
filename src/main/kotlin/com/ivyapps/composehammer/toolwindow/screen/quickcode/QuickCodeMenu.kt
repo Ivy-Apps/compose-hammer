@@ -163,7 +163,7 @@ class QuickCodeMenu(
                 },
                 onMoveDown = {
                     perform {
-                        ProjectOps().moveItemUp(it).toResultEither()
+                        ProjectOps().moveItemDown(it).toResultEither()
                     }
                 },
                 onNavigateToItemDetails = {

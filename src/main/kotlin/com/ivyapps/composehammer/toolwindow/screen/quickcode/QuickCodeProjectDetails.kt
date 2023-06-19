@@ -4,7 +4,6 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.Panel
-import com.intellij.ui.dsl.builder.bindText
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.builder.text
 import com.ivyapps.composehammer.addOnClickListener
@@ -53,22 +52,24 @@ class QuickCodeProjectDetails(
             text("Project name").bold()
         }
         row {
+            val inputField: JBTextField
             textField()
+                .also {
+                    inputField = it.component
+                }
                 .text(project.name)
-                .bindText(
-                    getter = { project.name },
-                    setter = { newName ->
-                        perform {
-                            ProjectOps().editItem(
-                                item = project,
-                                input = ProjectInput(
-                                    rawName = newName,
-                                )
-                            ).toResultEither()
-                        }
-                    }
-                )
                 .comment("Project name")
+
+            button("Save") {
+                perform {
+                    ProjectOps().editItem(
+                        item = project,
+                        input = ProjectInput(
+                            rawName = inputField.text
+                        )
+                    ).toResultEither()
+                }
+            }
         }
     }
 

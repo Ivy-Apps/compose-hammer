@@ -99,7 +99,7 @@ class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
                 project = qcProject,
                 codeGroup = group,
                 codeItem = item,
-                navigateToQuickCodeMenu = ::navigateToQuickCode,
+                navigateToProjectDetails = ::navigateToProjectDetails,
             ),
             screenTitle = "[${group.name}] ${item?.name ?: "New"}"
         )
@@ -114,7 +114,7 @@ class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
                 pluginProject = project,
                 project = qcProject,
                 codeGroup = group,
-                navigateToQuickCodeMenu = ::navigateToQuickCode,
+                navigateToProjectDetails = ::navigateToProjectDetails,
             ),
             screenTitle = group.name
         )

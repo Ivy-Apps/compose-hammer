@@ -21,11 +21,11 @@ class QuickCodeItemDetails(
     private val project: QCProject,
     private val codeGroup: CodeGroup,
     private val codeItem: CodeItem?,
-    private val navigateToQuickCodeMenu: () -> Unit,
+    private val navigateToProjectDetails: (QCProject) -> Unit,
 ) : QuickCodeToolWindow<CodeItem?>(pluginProject) {
 
     override fun onRefreshUi(updatedItem: CodeItem?) {
-        navigateToQuickCodeMenu()
+        navigateToProjectDetails(project)
     }
 
     override val ui: DialogPanel = panel {
@@ -36,7 +36,7 @@ class QuickCodeItemDetails(
 
             row {
                 button("Back") {
-                    navigateToQuickCodeMenu()
+                    navigateToProjectDetails(project)
                 }
             }
             row {
