@@ -16,14 +16,11 @@ class QuickCodeMenu(
     private val pluginProject: Project,
     private val navigateToMainMenu: () -> Unit,
     private val refreshUi: () -> Unit,
+    private val navigateToProjectDetails: (QCProject) -> Unit,
 ) : ToolWindowScreen {
     private val service = pluginProject.service<QuickCodeService>()
 
     override val ui: DialogPanel = panel {
-        header()
-    }
-
-    private fun Panel.header() {
         group(indent = true) {
             row {
                 button("Back") {
@@ -138,7 +135,7 @@ class QuickCodeMenu(
                     // TODO:
                 },
                 onNavigateToItemDetails = {
-                    // TODO:
+                    navigateToProjectDetails(project)
                 }
             )
             row {

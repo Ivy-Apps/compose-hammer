@@ -35,7 +35,7 @@ class QuickCodeIntentionAction : IntentionAction, HighPriorityAction, Iconable {
             title = "Choose an option",
             backItem = "❌ Close menu",
             backItemLast = true,
-            items = quickCodeService.groups.map { it.name },
+            items = quickCodeService.allGroups.map { it.name },
             onBack = {
                 it.closeOk(null)
             }

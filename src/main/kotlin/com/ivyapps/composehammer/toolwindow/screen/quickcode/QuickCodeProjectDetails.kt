@@ -2,26 +2,67 @@ package com.ivyapps.composehammer.toolwindow.screen.quickcode
 
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.Panel
+import com.intellij.ui.dsl.builder.panel
+import com.intellij.ui.dsl.builder.text
 import com.ivyapps.composehammer.addOnClickListener
 import com.ivyapps.composehammer.domain.data.quickcode.CodeGroup
 import com.ivyapps.composehammer.domain.data.quickcode.CodeItem
+import com.ivyapps.composehammer.domain.data.quickcode.QCProject
 import com.ivyapps.composehammer.domain.quickcode.QuickCodeService
+import com.ivyapps.composehammer.toolwindow.screen.ToolWindowScreen
 import com.ivyapps.composehammer.toolwindow.screen.quickcode.component.itemControls
 
 class QuickCodeProjectDetails(
-    private val project: Project,
+    pluginProject: Project,
+    private val initialProject: QCProject,
+    private val navigateToQuickCodeMenu: () -> Unit,
     private val navigateToCodeItem: (CodeGroup, CodeItem?) -> Unit,
     private val navigateToCodeGroup: (CodeGroup) -> Unit,
-    private val refreshUi: () -> Unit,
-) {
-    private val service = project.service<QuickCodeService>()
+    private val refreshUi: (QCProject) -> Unit,
+) : ToolWindowScreen {
+    private val service = pluginProject.service<QuickCodeService>()
 
-    private fun Panel.addCodeGroupSection() {
+    private var project = initialProject
+
+    override val ui: DialogPanel = panel {
         group(indent = true) {
             row {
+                button("Back") {
+                    navigateToQuickCodeMenu()
+                }
+            }
+            projectName()
+            addCodeGroupSection()
+        }
+        codeGroups()
+    }
+
+    private fun Panel.projectName() {
+        row {
+            text("Project name").bold()
+        }
+        row {
+            textField()
+                .text(project.name)
+                .comment("Project name")
+        }
+    }
+
+    private fun Panel.addCodeGroupSection() {
+        group(indent = false) {
+            row {
                 text("Code groups").bold()
+            }
+            row {
+                label(
+                    """
+                        Code groups are groups of code snippets.
+                        They appear in the "Quick Code" quick action.
+                    """.trimIndent()
+                )
             }
             row {
                 val inputField: JBTextField
@@ -36,7 +77,7 @@ class QuickCodeProjectDetails(
     }
 
     private fun Panel.codeGroups() {
-        val groups = service.groups
+        val groups = project.groups
         groups.forEachIndexed { index, group ->
             codeGroup(index, group, groups.size)
         }
@@ -136,6 +177,6 @@ class QuickCodeProjectDetails(
 
     private fun perform(action: QuickCodeService.() -> Unit) {
         action(service)
-        refreshUi()
+        refreshUi(project)
     }
 }

@@ -22,10 +22,17 @@ class QuickCodeService(project: Project) {
     val projects: List<QCProject>
         get() = configuration.projects.sortedByOrder()
 
-    val groups: List<CodeGroup>
-        get() = emptyList() // TODO: configuration.groups.sortedByOrder()
+    val allGroups: List<CodeGroup>
+        get() = projects.flatMap { it.groups }.sortedByOrder()
 
     fun hasDefinedProjects() = configuration.projects.any { it.groups.isNotEmpty() }
+
+    fun findProjectByName(name: String): QCProject {
+        return requireNotNull(projects.find { it.name == name }) {
+            "Project with name '$name' doesn't exists."
+        }
+    }
+
 
     fun findGroupByName(name: String): CodeGroup {
         return requireNotNull(projects.firstNotNullOfOrNull { project ->
@@ -48,7 +55,7 @@ class QuickCodeService(project: Project) {
     // region Group operations
     fun addGroup(rawName: String): CodeGroup? {
         val name = rawName.trim().takeIf { it.isNotBlank() } ?: return null
-        val groups = groups
+        val groups = allGroups
 
         val existingGroup = groups.find { it.name == name }
         if (existingGroup != null) {
@@ -79,7 +86,7 @@ class QuickCodeService(project: Project) {
     }
 
     fun moveGroupUp(group: CodeGroup): Boolean {
-        val newOrder = groups.moveUp(group) ?: return false
+        val newOrder = allGroups.moveUp(group) ?: return false
         moveGroup(
             targetGroup = group,
             newOrder = newOrder
@@ -88,7 +95,7 @@ class QuickCodeService(project: Project) {
     }
 
     fun moveGroupDown(group: CodeGroup): Boolean {
-        val newOrder = groups.moveDown(group) ?: return false
+        val newOrder = allGroups.moveDown(group) ?: return false
         moveGroup(
             targetGroup = group,
             newOrder = newOrder
