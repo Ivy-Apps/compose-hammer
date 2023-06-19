@@ -33,28 +33,30 @@ class QuickCodeVarsDialog(
     }
 
     private fun ui() = panel {
-        inputs = codeItem.variables.mapNotNull { variable ->
-            var res: Pair<String, () -> QCVariableValue>? = null
-            row {
-                val variableName = variable.name
-                res = when (variable) {
-                    is QCVariable.Bool -> {
-                        val checkbox = checkBox(variableName)
-                        variableName to {
-                            QCVariableValue.Bool(checkbox.component.isSelected)
+        group(indent = true) {
+            inputs = codeItem.variables.mapNotNull { variable ->
+                var res: Pair<String, () -> QCVariableValue>? = null
+                row {
+                    val variableName = variable.name
+                    res = when (variable) {
+                        is QCVariable.Bool -> {
+                            val checkbox = checkBox(variableName)
+                            variableName to {
+                                QCVariableValue.Bool(checkbox.component.isSelected)
+                            }
                         }
-                    }
 
-                    is QCVariable.Str -> {
-                        text(variableName)
-                        val component = textField().component
-                        variableName to {
-                            QCVariableValue.Str(component.text)
+                        is QCVariable.Str -> {
+                            text(variableName)
+                            val component = textField().component
+                            variableName to {
+                                QCVariableValue.Str(component.text)
+                            }
                         }
                     }
                 }
+                res
             }
-            res
         }
     }
 

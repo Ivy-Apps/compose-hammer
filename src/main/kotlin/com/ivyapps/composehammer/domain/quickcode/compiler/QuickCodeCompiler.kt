@@ -31,6 +31,7 @@ class QuickCodeCompiler {
                 CompilationResult.Valid(
                     ast = res.ast,
                     variables = res.ast.extractVars()
+                        .toSet().toList()
                 )
             }
         }
