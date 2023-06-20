@@ -81,7 +81,7 @@ class QuickCodeParser {
         while (true) {
             val token = consumeToken()
             requireNotNull(token) {
-                "Uncompleted if branch. It must end with $end."
+                "Uncompleted if branch. It must end with any ${end.joinToString(", ")}."
             }
             if (token in end) {
                 return token
