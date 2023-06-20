@@ -3,6 +3,7 @@ package com.ivyapps.composehammer.toolwindow.screen.quickcode
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.components.JBTextField
+import com.intellij.ui.dsl.builder.BottomGap
 import com.intellij.ui.dsl.builder.Panel
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.builder.text
@@ -181,8 +182,8 @@ class QuickCodeProjectDetails(
         val codeItems = group.codeItems
         group(indent = false) {
             row {
-                label("Code items").bold()
-            }
+                label("Code items:").bold()
+            }.bottomGap(BottomGap.MEDIUM)
             codeItems.sortedBy {
                 it.order
             }.forEachIndexed { index, codeItem ->
@@ -207,7 +208,7 @@ class QuickCodeProjectDetails(
                 it.component.addOnClickListener {
                     navigateToCodeItem(project, group, item)
                 }
-            }.bold()
+            }
             button("View") {
                 navigateToCodeItem(project, group, item)
             }
