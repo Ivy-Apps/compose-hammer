@@ -26,6 +26,14 @@ class QuickCodeCompilerTest : BaseFileTest() {
         )
     )
 
+    fun testVariable0() = fileTestCase(
+        folder = "variable",
+        case = "0",
+        vars = mapOf(
+            "name" to QCVariableValue.Str("QuickCode"),
+        )
+    )
+
     fun testIf0() = fileTestCase(
         folder = "if",
         case = "0",
