@@ -118,7 +118,8 @@ class QuickCodeCompilerTest : BaseFileTest() {
             "firstName" to QCVariableValue.Str("John"),
             "lastName" to QCVariableValue.Str("Wick"),
             "args" to QCVariableValue.Bool(true),
-            "logging" to QCVariableValue.Bool(false),
+            "logging" to QCVariableValue.Bool(true),
+            "likeDogs" to QCVariableValue.Bool(true),
         )
     )
 

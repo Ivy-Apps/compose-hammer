@@ -1,4 +1,4 @@
-fun main(#if {{args}} #then args: Array<String> #endif) {
+fun main(#if {{args}} #then args: Array<String>#endif) {
 #if {{logging}} AND NOT {{prod}} #then
   println("program started.")
 #endif
