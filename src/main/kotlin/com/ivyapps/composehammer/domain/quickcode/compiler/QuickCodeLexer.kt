@@ -19,6 +19,7 @@ class QuickCodeLexer {
         return scope.tokens.filter {
             it !is QuickCodeToken.RawText || it.text.isNotBlank()
         }.concatRawTexts()
+            .beautifyRawTexts()
     }
 
     private fun List<QuickCodeToken>.concatRawTexts(): List<QuickCodeToken> {
@@ -50,6 +51,19 @@ class QuickCodeLexer {
 
         return res
     }
+
+    private fun List<QuickCodeToken>.beautifyRawTexts(): List<QuickCodeToken> {
+        return mapIndexed { index, item ->
+            if (item is QuickCodeToken.RawText
+                && getOrNull(index - 1) in listOf(QuickCodeToken.Then, QuickCodeToken.Else)
+            ) {
+                item.copy(
+                    text = item.text.trimStart()
+                )
+            } else item
+        }
+    }
+
 
     private fun LexerScope.parserRules(): List<() -> Boolean> {
         return listOf(
