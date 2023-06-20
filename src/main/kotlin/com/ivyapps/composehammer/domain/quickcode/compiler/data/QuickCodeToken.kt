@@ -80,6 +80,14 @@ sealed interface QuickCodeToken {
         override fun toString() = syntax.starsWith
     }
 
+    object ElseIf : QuickCodeToken {
+        val syntax = TokenSyntax(
+            starsWith = "#elseif",
+        )
+
+        override fun toString() = syntax.starsWith
+    }
+
     object Else : QuickCodeToken {
         val syntax = TokenSyntax(
             starsWith = "#else",

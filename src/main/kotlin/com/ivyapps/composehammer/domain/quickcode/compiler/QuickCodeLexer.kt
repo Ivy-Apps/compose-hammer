@@ -104,6 +104,7 @@ class QuickCodeLexer {
             { ifAndCond() },
             { ifOrCond() },
             { thenCond() },
+            { elseIfCond() },
             { elseCond() },
             { endIfCond() },
         )
@@ -213,6 +214,14 @@ class QuickCodeLexer {
     ) {
         isInsideIfCondition = false
         QuickCodeToken.Then
+    }
+
+    private fun LexerScope.elseIfCond() = parseToken(
+        condition = !isInsideIfCondition,
+        syntax = QuickCodeToken.ElseIf.syntax
+    ) {
+        isInsideIfCondition = true
+        QuickCodeToken.ElseIf
     }
 
     private fun LexerScope.elseCond() = parseToken(

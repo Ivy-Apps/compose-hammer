@@ -17,20 +17,22 @@ class QuickCodeCompilerTest : BaseFileTest() {
         compiler = QuickCodeCompiler()
     }
 
-    fun testExample1() {
-        // given
-        val template = loadFile("example1.txt")
-        val vars = mapOf(
+    fun testExample1() = fileTestCase(
+        caseName = "example1",
+        vars = mapOf(
             "isViewModel" to QCVariableValue.Bool(true),
             "className" to QCVariableValue.Str("MyClass")
         )
+    )
 
-        // when
-        val result = compiler.execute(template, vars)
-
-        // then
-        result shouldBe loadFile("example1_expected.txt")
-    }
+    fun testElseif1() = fileTestCase(
+        caseName = "elseif1",
+        vars = mapOf(
+            "a" to QCVariableValue.Bool(false),
+            "b" to QCVariableValue.Bool(true),
+            "c" to QCVariableValue.Bool(true),
+        )
+    )
 
     fun testResolvesVariablesConflicts() {
         // given
@@ -49,5 +51,20 @@ class QuickCodeCompilerTest : BaseFileTest() {
         (result as CompilationResult.Valid).variables shouldBe listOf(
             QCVariable.Bool("name")
         )
+    }
+
+    private fun fileTestCase(
+        caseName: String,
+        vars: Map<String, QCVariableValue>
+    ) {
+        // given
+        val template = loadFile("$caseName.txt")
+
+        // when
+        println(compiler.compile(template))
+        val result = compiler.execute(template, vars)
+
+        // then
+        result shouldBe loadFile("${caseName}_expected.txt")
     }
 }

@@ -47,7 +47,7 @@ class QuickCodeParser {
             }
 
             else -> {
-                error("Unexpected token: $token")
+                error("Unexpected token: $token, next token is ${consumeToken()}")
             }
         }
     }
@@ -58,13 +58,25 @@ class QuickCodeParser {
         val condition = parseIfCondition()
 
         val thenAst = AstBuilder()
-        val thenEnd = parseUntil(thenAst, QuickCodeToken.Else, QuickCodeToken.EndIf)
+        val thenEnd = parseUntil(
+            ast = thenAst,
+            end = listOf(QuickCodeToken.ElseIf, QuickCodeToken.Else, QuickCodeToken.EndIf)
+        )
 
-        val elseAst = if (thenEnd == QuickCodeToken.Else) {
-            AstBuilder().apply {
-                parseUntil(this, QuickCodeToken.EndIf)
+        val elseAst = when (thenEnd) {
+            QuickCodeToken.ElseIf -> AstBuilder().apply {
+                parseIfStatement(this)
             }
-        } else null
+
+            QuickCodeToken.Else -> AstBuilder().apply {
+                parseUntil(
+                    ast = this,
+                    end = listOf(QuickCodeToken.EndIf)
+                )
+            }
+
+            else -> null
+        }
 
         val ifStm = IfStatement(
             condition = condition,
@@ -75,8 +87,8 @@ class QuickCodeParser {
     }
 
     private fun QCParserScope<QuickCodeAst>.parseUntil(
-        astBuilder: AstBuilder,
-        vararg end: QuickCodeToken
+        ast: AstBuilder,
+        end: List<QuickCodeToken>
     ): QuickCodeToken {
         while (true) {
             val token = consumeToken()
@@ -86,7 +98,7 @@ class QuickCodeParser {
             if (token in end) {
                 return token
             }
-            parseToken(astBuilder, token)
+            parseToken(ast, token)
         }
     }
 
