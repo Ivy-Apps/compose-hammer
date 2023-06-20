@@ -1,0 +1,9 @@
+fun main(args: Array<String>) {
+  println("program started.")
+
+  println("Hello, John Wick!")
+
+  println("Here's a dog.")
+
+  println("program finished.")
+}

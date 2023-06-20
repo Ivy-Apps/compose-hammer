@@ -106,7 +106,10 @@ class QuickCodeParser {
     ): Condition {
         val parser = QuickCodeIfConditionParser(tokens)
         val (condition, newPos) = requireNotNull(parser.parse(position)) {
-            "Invalid if condition!"
+            """
+                Invalid if condition! At '${locationDescription()}'.
+                Check for errors in the variables like '{' instead of '{{'.
+            """.trimIndent()
         }
         changePosition(newPos)
         return condition

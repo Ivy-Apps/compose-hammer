@@ -1,0 +1,19 @@
+fun main(#if {{args}} #then args: Array<String> #endif) {
+#if {{logging}} AND NOT {{prod}} #then
+  println("program started.")
+#endif
+
+  println("Hello, {{firstName}} {{lastName}}!")
+
+#if {{likeDogs}} #then
+  println("Here's a dog.")
+#elseif {{likeCats}} #then
+  println("Here's a cat.")
+#else
+  println("No animals for you, sir.")
+#endif
+
+#if ({{logging}} AND NOT {{prod}}) OR {{forcedDebug}} #then
+  println("program finished.")
+#endif
+}

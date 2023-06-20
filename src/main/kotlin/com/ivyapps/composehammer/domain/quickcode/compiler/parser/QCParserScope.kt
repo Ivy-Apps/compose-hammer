@@ -36,8 +36,33 @@ class QCParserScope<T>(
         }
     }
 
+    fun locationDescription(): String {
+        return buildString {
+            prevToken()?.let {
+                append(it.toString())
+                append(" ")
+            }
+            currentToken()?.let {
+                append(it.toString())
+                append(" ")
+            }
+            nextToken()?.let {
+                append(it.toString())
+                append(" ")
+            }
+        }
+    }
+
+    fun prevToken(): QuickCodeToken? {
+        return tokens.getOrNull(position - 1)
+    }
+
     fun currentToken(): QuickCodeToken? {
         return tokens.getOrNull(position)
+    }
+
+    fun nextToken(): QuickCodeToken? {
+        return tokens.getOrNull(position + 1)
     }
 
     fun changePosition(position: Int) {

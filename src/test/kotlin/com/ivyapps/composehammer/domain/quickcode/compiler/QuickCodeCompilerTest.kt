@@ -111,6 +111,17 @@ class QuickCodeCompilerTest : BaseFileTest() {
         )
     )
 
+    fun testReadmeExample0_case0() = fileTestCase(
+        folder = "readme",
+        case = "0_0",
+        vars = mapOf(
+            "firstName" to QCVariableValue.Str("John"),
+            "lastName" to QCVariableValue.Str("Wick"),
+            "args" to QCVariableValue.Bool(true),
+            "logging" to QCVariableValue.Bool(false),
+        )
+    )
+
     fun testResolvesVariablesConflicts() {
         // given
         val code = """
