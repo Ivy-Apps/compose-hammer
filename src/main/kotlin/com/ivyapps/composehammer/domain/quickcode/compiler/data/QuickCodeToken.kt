@@ -16,6 +16,8 @@ sealed interface QuickCodeToken {
         val syntax = TokenSyntax(
             starsWith = "#if",
         )
+
+        override fun toString() = syntax.starsWith
     }
 
     sealed interface IfExpression : QuickCodeToken {
@@ -32,30 +34,40 @@ sealed interface QuickCodeToken {
             val syntax = TokenSyntax(
                 starsWith = "NOT",
             )
+
+            override fun toString() = syntax.starsWith
         }
 
         object And : IfExpression {
             val syntax = TokenSyntax(
                 starsWith = "AND",
             )
+
+            override fun toString() = syntax.starsWith
         }
 
         object Or : IfExpression {
             val syntax = TokenSyntax(
                 starsWith = "OR",
             )
+
+            override fun toString() = syntax.starsWith
         }
 
         object OpenBracket : IfExpression {
             val syntax = TokenSyntax(
                 starsWith = "(",
             )
+
+            override fun toString() = syntax.starsWith
         }
 
         object CloseBracket : IfExpression {
             val syntax = TokenSyntax(
                 starsWith = ")",
             )
+
+            override fun toString() = syntax.starsWith
         }
     }
 
@@ -64,18 +76,24 @@ sealed interface QuickCodeToken {
         val syntax = TokenSyntax(
             starsWith = "#then",
         )
+
+        override fun toString() = syntax.starsWith
     }
 
     object Else : QuickCodeToken {
         val syntax = TokenSyntax(
             starsWith = "#else",
         )
+
+        override fun toString() = syntax.starsWith
     }
 
     object EndIf : QuickCodeToken {
         val syntax = TokenSyntax(
             starsWith = "#endif",
         )
+
+        override fun toString() = syntax.starsWith
     }
 }
 
