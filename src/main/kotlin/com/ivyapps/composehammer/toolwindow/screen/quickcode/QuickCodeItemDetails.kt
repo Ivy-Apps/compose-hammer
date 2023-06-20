@@ -64,16 +64,24 @@ class QuickCodeItemDetails(
             val codeInput: JBTextArea = codeArea(
                 title = "Code",
                 description = """
-                    Supports zero or many variables using {{VARIABLE_NAME}} syntax.
+                    Paste your code as it is. Don't worry about formatting.
                 """.trimIndent(),
                 code = codeItem?.code ?: "",
                 tip = """
-                    Paste your code here. Don't worry about formatting.
+                    Pro-tip: Use {{variableName}} to introduce variables.
                 """.trimIndent(),
                 editable = true,
                 hasCopy = false,
                 minLines = 6,
             )
+            row {
+                label("The code input supports")
+                browserLink(
+                    "QuickCode",
+                    "https://github.com/Ivy-Apps/quickcode/blob/main/README.md"
+                )
+                    .comment("Try it out! It's worth it.")
+            }
             row {
                 button(
                     if (codeItem != null) "Save changes" else "+ Add item"
