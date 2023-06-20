@@ -18,15 +18,42 @@ class QuickCodeCompilerTest : BaseFileTest() {
     }
 
     fun testExample1() = fileTestCase(
-        caseName = "example1",
+        folder = "sample",
+        case = "1",
         vars = mapOf(
             "isViewModel" to QCVariableValue.Bool(true),
             "className" to QCVariableValue.Str("MyClass")
         )
     )
 
+    fun testIf0() = fileTestCase(
+        folder = "if",
+        case = "0",
+        vars = mapOf(
+            "a" to QCVariableValue.Bool(true),
+        )
+    )
+
+    fun testIf1() = fileTestCase(
+        folder = "if",
+        case = "1",
+        vars = mapOf(
+            "a" to QCVariableValue.Bool(false),
+        )
+    )
+
+    fun testElseif0() = fileTestCase(
+        folder = "elseif",
+        case = "0",
+        vars = mapOf(
+            "a" to QCVariableValue.Bool(true),
+            "b" to QCVariableValue.Bool(true),
+        )
+    )
+
     fun testElseif1() = fileTestCase(
-        caseName = "elseif1",
+        folder = "elseif",
+        case = "1",
         vars = mapOf(
             "a" to QCVariableValue.Bool(false),
             "b" to QCVariableValue.Bool(true),
@@ -34,7 +61,8 @@ class QuickCodeCompilerTest : BaseFileTest() {
     )
 
     fun testElseif2() = fileTestCase(
-        caseName = "elseif2",
+        folder = "elseif",
+        case = "2",
         vars = mapOf(
             "a" to QCVariableValue.Bool(false),
             "b" to QCVariableValue.Bool(false),
@@ -42,7 +70,8 @@ class QuickCodeCompilerTest : BaseFileTest() {
     )
 
     fun testStackedIfs1() = fileTestCase(
-        caseName = "stacked_ifs1",
+        folder = "stacked_ifs",
+        case = "1",
         vars = mapOf(
             "a" to QCVariableValue.Bool(true),
             "b" to QCVariableValue.Bool(true),
@@ -50,7 +79,8 @@ class QuickCodeCompilerTest : BaseFileTest() {
     )
 
     fun testStackedIfs2() = fileTestCase(
-        caseName = "stacked_ifs2",
+        folder = "stacked_ifs",
+        case = "2",
         vars = mapOf(
             "a" to QCVariableValue.Bool(false),
             "b" to QCVariableValue.Bool(true),
@@ -77,17 +107,18 @@ class QuickCodeCompilerTest : BaseFileTest() {
     }
 
     private fun fileTestCase(
-        caseName: String,
+        folder: String,
+        case: String,
         vars: Map<String, QCVariableValue>
     ) {
         // given
-        val template = loadFile("$caseName.txt")
+        val template = loadFile("$folder/$case.txt")
 
         // when
         println(compiler.compile(template))
         val result = compiler.execute(template, vars)
 
         // then
-        result shouldBe loadFile("${caseName}_expected.txt")
+        result shouldBe loadFile("$folder/${case}_expected.txt")
     }
 }
