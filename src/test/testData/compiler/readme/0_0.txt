@@ -4,7 +4,6 @@ fun main(#if {{args}} #then args: Array<String>#endif) {
 #endif
 
   println("Hello, {{firstName}} {{lastName}}!")
-
 #if {{likeDogs}} #then
   println("Here's a dog.")
 #elseif {{likeCats}} #then
