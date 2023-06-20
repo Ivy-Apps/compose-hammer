@@ -1,0 +1,6 @@
+#if {{a}} #then
+#if {{b}} #then
+b
+#endif
+a
+#endif

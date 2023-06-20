@@ -30,7 +30,30 @@ class QuickCodeCompilerTest : BaseFileTest() {
         vars = mapOf(
             "a" to QCVariableValue.Bool(false),
             "b" to QCVariableValue.Bool(true),
-            "c" to QCVariableValue.Bool(true),
+        )
+    )
+
+    fun testElseif2() = fileTestCase(
+        caseName = "elseif2",
+        vars = mapOf(
+            "a" to QCVariableValue.Bool(false),
+            "b" to QCVariableValue.Bool(false),
+        )
+    )
+
+    fun testStackedIfs1() = fileTestCase(
+        caseName = "stacked_ifs1",
+        vars = mapOf(
+            "a" to QCVariableValue.Bool(true),
+            "b" to QCVariableValue.Bool(true),
+        )
+    )
+
+    fun testStackedIfs2() = fileTestCase(
+        caseName = "stacked_ifs2",
+        vars = mapOf(
+            "a" to QCVariableValue.Bool(false),
+            "b" to QCVariableValue.Bool(true),
         )
     )
 
