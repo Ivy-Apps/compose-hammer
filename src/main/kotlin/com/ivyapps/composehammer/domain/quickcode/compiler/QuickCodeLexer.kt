@@ -155,7 +155,7 @@ class QuickCodeLexer {
         condition = !isInsideIfCondition,
         syntax = QuickCodeToken.Variable.syntax,
     ) {
-        QuickCodeToken.Variable(name = it)
+        QuickCodeToken.Variable(name = it.trim())
     }
 
     private fun LexerScope.ifCond() = parseToken(
@@ -205,7 +205,7 @@ class QuickCodeLexer {
         condition = isInsideIfCondition,
         syntax = QuickCodeToken.IfExpression.BoolVariable.syntax,
     ) {
-        QuickCodeToken.IfExpression.BoolVariable(it)
+        QuickCodeToken.IfExpression.BoolVariable(name = it.trim())
     }
 
     private fun LexerScope.thenCond() = parseToken(
