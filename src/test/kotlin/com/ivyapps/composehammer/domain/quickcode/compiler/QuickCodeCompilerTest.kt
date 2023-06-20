@@ -42,6 +42,22 @@ class QuickCodeCompilerTest : BaseFileTest() {
         )
     )
 
+    fun testIfElse0() = fileTestCase(
+        folder = "if",
+        case = "ifelse0",
+        vars = mapOf(
+            "a" to QCVariableValue.Bool(true),
+        )
+    )
+
+    fun testIfElse1() = fileTestCase(
+        folder = "if",
+        case = "ifelse1",
+        vars = mapOf(
+            "a" to QCVariableValue.Bool(false),
+        )
+    )
+
     fun testElseif0() = fileTestCase(
         folder = "elseif",
         case = "0",
