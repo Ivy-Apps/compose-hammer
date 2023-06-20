@@ -1,0 +1,29 @@
+#if {{isViewModel}} #then
+@get:Rule
+val rule = CompositionViewModelTestRule()
+#endif
+#if {{coroutineTest}} #then
+@get:Rule
+val coroutineTestRule = CoroutineTestRule()
+#endif
+
+#if {{isViewModel}} #then
+private lateinit var viewModel: {{className}}
+#else
+private lateinit var sut: {{className}}
+#endif
+
+@Before
+fun setup() {
+#if {{isViewModel}} #then
+    viewModel = {{className}}(
+    )
+#else
+    sut = {{className}}(
+    )
+    sdfljsdf
+    sdjflsdj
+    fjsdl
+
+#endif
+}

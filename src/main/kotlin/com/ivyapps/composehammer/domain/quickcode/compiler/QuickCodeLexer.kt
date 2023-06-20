@@ -17,7 +17,8 @@ class QuickCodeLexer {
             scope.parse(rules)
         }
         return scope.tokens.filter {
-            it !is QuickCodeToken.RawText || it.text.isNotBlank()
+            // filter empty RawText tokens
+            it !is QuickCodeToken.RawText || it.text.isNotEmpty()
         }.concatRawTexts()
             .beautifyRawTexts()
     }
@@ -54,13 +55,40 @@ class QuickCodeLexer {
 
     private fun List<QuickCodeToken>.beautifyRawTexts(): List<QuickCodeToken> {
         return mapIndexed { index, item ->
-            if (item is QuickCodeToken.RawText
-                && getOrNull(index - 1) in listOf(QuickCodeToken.Then, QuickCodeToken.Else)
-            ) {
-                item.copy(
-                    text = item.text.trimStart()
-                )
+            if (item is QuickCodeToken.RawText) {
+                // previous item
+                when (getOrNull(index - 1)) {
+                    in listOf(QuickCodeToken.Then, QuickCodeToken.Else) -> {
+                        item.copy(
+                            text = item.text.trimStart()
+                        )
+                    }
+
+                    QuickCodeToken.EndIf -> {
+                        item.copy(
+                            text = item.text.dropUnnecessaryEmptySpace()
+                        )
+                    }
+
+                    else -> item
+                }
             } else item
+        }
+    }
+
+    private fun String.dropUnnecessaryEmptySpace(): String {
+        var spacesToDrop = 0
+        for (i in indices) {
+            if (get(i) == ' ') {
+                spacesToDrop++
+            } else {
+                break
+            }
+        }
+        val cleared = this.drop(spacesToDrop)
+        return when {
+            cleared.startsWith("\n") -> cleared.drop(1)
+            else -> cleared
         }
     }
 

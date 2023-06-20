@@ -1,0 +1,10 @@
+@get:Rule
+val rule = CompositionViewModelTestRule()
+
+private lateinit var viewModel: MyClass
+
+@Before
+fun setup() {
+viewModel = MyClass(
+    )
+}
