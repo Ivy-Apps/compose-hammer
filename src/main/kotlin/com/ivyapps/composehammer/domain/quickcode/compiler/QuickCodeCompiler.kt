@@ -30,27 +30,46 @@ class QuickCodeCompiler {
             is ParseResult.Success -> {
                 CompilationResult.Valid(
                     ast = res.ast,
-                    variables = res.ast.extractVars()
-                        .toSet().toList()
+                    variables = res.ast.extractAllVars()
+                        .fixVariableConflicts()
                 )
             }
         }
     }
 
-    private fun QuickCodeAst.extractVars(): List<QCVariable> {
+    private fun List<QCVariable>.fixVariableConflicts(): List<QCVariable> {
+        val namesSet = mutableSetOf<String>()
+        val res = mutableListOf<QCVariable>()
+        for (variable in this) {
+            if (variable.name in namesSet) {
+                // there's a conflict
+                if (variable is QCVariable.Bool) {
+                    // Bools have higher priority
+                    res.remove(res.find { it.name == variable.name })
+                    res.add(variable)
+                }
+            } else {
+                res.add(variable)
+            }
+            namesSet.add(variable.name)
+        }
+        return res
+    }
+
+    private fun QuickCodeAst.extractAllVars(): List<QCVariable> {
         return when (this) {
             is QuickCodeAst.Begin -> emptyList()
             is IfStatement -> {
                 condition.extractBoolVars() +
-                        thenBranch.extractVars() +
-                        (elseBranch?.extractVars() ?: emptyList())
+                        thenBranch.extractAllVars() +
+                        (elseBranch?.extractAllVars() ?: emptyList())
             }
 
             is RawText -> emptyList()
             is Variable -> {
                 listOf(QCVariable.Str(name))
             }
-        } + (next?.extractVars() ?: emptyList())
+        } + (next?.extractAllVars() ?: emptyList())
     }
 
     private fun IfStatement.Condition.extractBoolVars(): List<QCVariable.Bool> {
