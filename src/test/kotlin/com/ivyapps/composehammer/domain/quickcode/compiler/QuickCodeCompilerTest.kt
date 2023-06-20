@@ -1,13 +1,12 @@
 package com.ivyapps.composehammer.domain.quickcode.compiler
 
-import com.intellij.testFramework.TestDataPath
-import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import com.ivyapps.composehammer.domain.quickcode.compiler.data.QCVariableValue
-import com.ivyapps.composehammer.shouldBe
-import java.io.File
+import com.ivyapps.composehammer.util.BaseFileTest
+import com.ivyapps.composehammer.util.shouldBe
 
-@TestDataPath("\$CONTENT_ROOT/src/test/testData/compiler")
-class QuickCodeCompilerTest : BasePlatformTestCase() {
+class QuickCodeCompilerTest : BaseFileTest() {
+
+    override val folderName = "compiler"
 
     private lateinit var compiler: QuickCodeCompiler
 
@@ -30,10 +29,4 @@ class QuickCodeCompilerTest : BasePlatformTestCase() {
         // then
         result shouldBe loadFile("example1_expected.txt")
     }
-
-    private fun loadFile(fileName: String): String {
-        return File("$testDataPath/$fileName").readText()
-    }
-
-    override fun getTestDataPath() = "src/test/testData/compiler"
 }

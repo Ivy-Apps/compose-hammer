@@ -5,6 +5,6 @@ private lateinit var viewModel: MyClass
 
 @Before
 fun setup() {
-viewModel = MyClass(
+    viewModel = MyClass(
     )
 }

@@ -60,13 +60,13 @@ class QuickCodeLexer {
                 when (getOrNull(index - 1)) {
                     in listOf(QuickCodeToken.Then, QuickCodeToken.Else) -> {
                         item.copy(
-                            text = item.text.trimStart()
+                            text = item.text.dropUnnecessaryWhiteSpace()
                         )
                     }
 
                     QuickCodeToken.EndIf -> {
                         item.copy(
-                            text = item.text.dropUnnecessaryEmptySpace()
+                            text = item.text.dropUnnecessaryWhiteSpace()
                         )
                     }
 
@@ -76,7 +76,7 @@ class QuickCodeLexer {
         }
     }
 
-    private fun String.dropUnnecessaryEmptySpace(): String {
+    private fun String.dropUnnecessaryWhiteSpace(): String {
         var spacesToDrop = 0
         for (i in indices) {
             if (get(i) == ' ') {

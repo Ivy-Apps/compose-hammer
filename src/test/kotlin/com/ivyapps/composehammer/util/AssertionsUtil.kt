@@ -1,4 +1,4 @@
-package com.ivyapps.composehammer
+package com.ivyapps.composehammer.util
 
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 
