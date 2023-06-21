@@ -9,7 +9,7 @@ fun String.formatText(maxLineLength: Int = 35): String {
         var lineLength = 0
         for (word in words) {
             if (word.firstOrNull() in listOf('-', '+', '>')) {
-                append('\n')
+                append("<br>")
                 lineLength = 0
             }
             append(word.run {

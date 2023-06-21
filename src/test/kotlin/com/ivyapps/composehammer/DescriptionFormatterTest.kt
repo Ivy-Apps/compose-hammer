@@ -65,7 +65,7 @@ class DescriptionFormatterTest : BasePlatformTestCase() {
         val output = input.formatText(maxLineLength = 100)
 
         // then
-        assertTrue(output.split("\n").size == 5)
-        assertTrue('>' !in output)
+        assertTrue(output.split("<br>").size == 5)
+        assertTrue(output.split("<br>").all { it.firstOrNull() != '>' })
     }
 }
