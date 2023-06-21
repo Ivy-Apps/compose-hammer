@@ -10,7 +10,7 @@ fun ContentScope.animations() = group(
 ) {
     component {
         showInToolWindow = false
-        name = "Visibility: expand + fade"
+        name = "Visibility: expand/shrink"
         imports = listOf(
             "androidx.compose.animation.AnimatedVisibility",
             "androidx.compose.animation.expandVertically",
@@ -33,6 +33,47 @@ fun ContentScope.animations() = group(
                 exit = fadeOut() + shrinkVertically(),
             ) {
         
+            }
+        """.trimIndent()
+    }
+
+    component {
+        showInToolWindow = false
+        name = "Visibility: slide in/out"
+        imports = listOf(
+            "androidx.compose.animation.AnimatedVisibility",
+            "androidx.compose.animation.slideInVertically",
+            "androidx.compose.animation.slideOutVertically",
+            "androidx.compose.foundation.layout.Column",
+            "androidx.compose.runtime.Composable",
+            "androidx.compose.runtime.LaunchedEffect",
+            "androidx.compose.runtime.getValue",
+            "androidx.compose.runtime.mutableStateOf",
+            "androidx.compose.runtime.remember",
+            "androidx.compose.runtime.setValue",
+            "androidx.compose.ui.Modifier",
+            "kotlinx.coroutines.delay",
+        )
+        code = """
+            var visible by remember { mutableStateOf(false) }
+            LaunchedEffect(Unit) {
+                // [DELETE THIS] If not needed
+                delay(1_000L) // show after 1 second
+                visible = true
+            }
+        
+            AnimatedVisibility(
+                modifier = Modifier,
+                visible = visible,
+                enter = slideInVertically { fullHeight -> fullHeight },
+                exit = slideOutVertically { fullHeight -> fullHeight },
+            ) {
+                // The content below will be animated:
+                Column(
+                    modifier = Modifier,
+                ) {
+        
+                }
             }
         """.trimIndent()
     }
