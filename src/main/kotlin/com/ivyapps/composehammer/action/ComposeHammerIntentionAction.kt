@@ -2,6 +2,7 @@ package com.ivyapps.composehammer.action
 
 import com.intellij.codeInsight.intention.HighPriorityAction
 import com.intellij.codeInsight.intention.IntentionAction
+import com.intellij.codeInsight.intention.PriorityAction
 import com.intellij.openapi.components.service
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
@@ -22,6 +23,10 @@ class ComposeHammerIntentionAction : IntentionAction, HighPriorityAction, Iconab
         "/logo_small.svg",
         this@ComposeHammerIntentionAction::class.java.classLoader
     )
+
+    override fun getPriority(): PriorityAction.Priority {
+        return PriorityAction.Priority.TOP
+    }
 
     override fun isAvailable(project: Project, editor: Editor, file: PsiFile): Boolean {
         val service = project.service<RecognizerService>()

@@ -29,7 +29,7 @@ class QuickCodeService(project: Project) {
             .flatMap { it.groups }
             .sortedByOrder()
 
-    fun hasDefinedCustomTemplates() = enabledGroups.any { it.codeItems.isNotEmpty() }
+    fun hasDefinedCustomTemplates() = persistence.state.configuration.projects.isNotEmpty()
 
     fun findProjectByName(name: String): QCProject {
         return requireNotNull(projects.find { it.name == name }) {
