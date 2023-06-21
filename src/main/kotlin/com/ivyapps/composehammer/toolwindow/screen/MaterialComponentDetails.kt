@@ -5,10 +5,7 @@ import com.intellij.ui.dsl.builder.panel
 import com.ivyapps.composehammer.domain.data.material3.MaterialComponent
 import com.ivyapps.composehammer.domain.ui.formatText
 import com.ivyapps.composehammer.domain.ui.generateImportsCode
-import com.ivyapps.composehammer.toolwindow.component.altEnterTip
-import com.ivyapps.composehammer.toolwindow.component.codeArea
-import com.ivyapps.composehammer.toolwindow.component.image
-import com.ivyapps.composehammer.toolwindow.component.unresolvedImportsTip
+import com.ivyapps.composehammer.toolwindow.component.*
 
 class MaterialComponentDetails(
     private val component: MaterialComponent,
@@ -52,6 +49,7 @@ class MaterialComponentDetails(
                     tip = component.customImplementationTip,
                 )
             }
+            reviewAndTelegramPrompt(indent = false)
             unresolvedImportsTip(indent = false)
             altEnterTip(indent = false)
         }

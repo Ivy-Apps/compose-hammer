@@ -15,6 +15,7 @@ import com.ivyapps.composehammer.domain.quickcode.service.toResultEither
 import com.ivyapps.composehammer.domain.ui.generateImportsCode
 import com.ivyapps.composehammer.toolwindow.component.DeleteButton
 import com.ivyapps.composehammer.toolwindow.component.codeArea
+import com.ivyapps.composehammer.toolwindow.component.reviewAndTelegramPrompt
 
 class QuickCodeItemDetails(
     pluginProject: Project,
@@ -122,5 +123,6 @@ class QuickCodeItemDetails(
                 }
             }
         }
+        reviewAndTelegramPrompt(indent = true)
     }
 }

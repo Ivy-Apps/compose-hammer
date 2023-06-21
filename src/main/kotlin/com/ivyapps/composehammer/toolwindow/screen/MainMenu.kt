@@ -9,6 +9,7 @@ import com.ivyapps.composehammer.domain.data.material3.MaterialComponent
 import com.ivyapps.composehammer.domain.ui.formatText
 import com.ivyapps.composehammer.toolwindow.component.altEnterTip
 import com.ivyapps.composehammer.toolwindow.component.image
+import com.ivyapps.composehammer.toolwindow.component.reviewAndTelegramPrompt
 import com.ivyapps.composehammer.toolwindow.component.unresolvedImportsTip
 
 class MainMenu(
@@ -34,6 +35,7 @@ class MainMenu(
             }
         }
         altEnterTip(indent = true)
+        reviewAndTelegramPrompt(indent = true)
         unresolvedImportsTip(indent = true)
     }
 

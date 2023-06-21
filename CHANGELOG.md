@@ -16,6 +16,8 @@
 - **Quick Action:** Added in the "⚡ Compose runtime" section
   `derivedStateOf` and `produceState`.
 - **Components:** `Horizontal pager`, `Tabs with horizontal pager`
+- Created an **[invite-only Telegram chat](https://t.me/+U9Qn68cZxYIxNDA0)**
+  to discuss the plugin and provide support.
 
 ### Changed
 
