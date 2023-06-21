@@ -32,7 +32,7 @@ In a nutshell, Compose Hammer is so slick that even Thor’s Mjölnir will get e
 Our goal is to make Android UI development with **Jetpack Compose - easy, fun and fast.
 ⚡🔨**
 
-**Tool window features** _(Android Studio's right sidebar)_
+### Tool window features _(Android Studio's right sidebar)_
 - _Note:_ These are all **also supported** in the alt/option + enter quick action.
 - Buttons
     - [Elevated button](https://m3.material.io/components/buttons/specs#2a19e853-d5dc-46a2-8ef4-1d954c9dcefa)
@@ -122,8 +122,7 @@ Our goal is to make Android UI development with **Jetpack Compose - easy, fun an
 - Tooltips
     - [Plain tooltip](https://m3.material.io/components/tooltips/specs#92c84fef-92fe-4662-b837-f70eaa9b64f3)
 
-
-**Quick action only support** _(⌥ Option/Alt + ⤶ Enter)_
+### Quick action support _(⌥ Option/Alt + ⤶ Enter)_
 - ⚡ Quick UI
   - Text
   - Icon

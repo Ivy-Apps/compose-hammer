@@ -14,7 +14,6 @@ fun ContentScope.quickUi() = group(
         imports = listOf(
             "androidx.compose.material3.MaterialTheme",
             "androidx.compose.material3.Text",
-
             "androidx.compose.ui.Modifier",
             "androidx.compose.ui.text.style.TextAlign",
         )
@@ -98,28 +97,6 @@ fun ContentScope.quickUi() = group(
         )
         code = """
             Spacer(modifier = Modifier.weight(1f))
-        """.trimIndent()
-    }
-
-    component {
-        showInToolWindow = false
-        name = "MaterialTheme.typography"
-        imports = listOf(
-            "androidx.compose.material3.MaterialTheme"
-        )
-        code = """
-            MaterialTheme.typography.
-        """.trimIndent()
-    }
-
-    component {
-        showInToolWindow = false
-        name = "MaterialTheme.colorScheme"
-        imports = listOf(
-            "androidx.compose.material3.MaterialTheme",
-        )
-        code = """
-            MaterialTheme.colorScheme.
         """.trimIndent()
     }
 

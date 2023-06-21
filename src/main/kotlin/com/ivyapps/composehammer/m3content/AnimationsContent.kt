@@ -10,7 +10,7 @@ fun ContentScope.animations() = group(
 ) {
     component {
         showInToolWindow = false
-        name = "Visibility: fade-in/out + expand/collapse"
+        name = "Visibility: expand + fade"
         imports = listOf(
             "androidx.compose.animation.AnimatedVisibility",
             "androidx.compose.animation.expandVertically",

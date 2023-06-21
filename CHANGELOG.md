@@ -23,6 +23,11 @@
   "⚡ Layouts"
 - Improved the "Tabs" material components.
 
+### Removed
+
+- `MaterialTheme.typography`
+- `MaterialTheme.colorScheme`
+
 ### Fixed
 
 - Imports bug in the Quick Action

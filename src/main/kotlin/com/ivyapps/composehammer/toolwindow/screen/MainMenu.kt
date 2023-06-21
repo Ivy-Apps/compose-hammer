@@ -8,6 +8,7 @@ import com.ivyapps.composehammer.domain.MaterialComponentsService
 import com.ivyapps.composehammer.domain.data.material3.MaterialComponent
 import com.ivyapps.composehammer.domain.ui.formatText
 import com.ivyapps.composehammer.toolwindow.component.altEnterTip
+import com.ivyapps.composehammer.toolwindow.component.contentDebugInfo
 import com.ivyapps.composehammer.toolwindow.component.image
 import com.ivyapps.composehammer.toolwindow.component.unresolvedImportsTip
 
@@ -18,7 +19,7 @@ class MainMenu(
 ) : ToolWindowScreen {
     override val ui: DialogPanel = panel {
         customSection()
-//        contentDebugInfo(service)
+        contentDebugInfo(service)
         for (group in service.content.filter { it.showInToolWindow }) {
             collapsibleGroup(
                 title = group.title,
