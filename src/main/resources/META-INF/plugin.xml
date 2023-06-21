@@ -11,7 +11,7 @@
             code="PCOMPOSEHAMMER"
             release-date="20230621"
             release-version="20236"
-            optional="true"/>
+            optional="false"/>
 
     <depends>com.intellij.modules.platform</depends>
 
