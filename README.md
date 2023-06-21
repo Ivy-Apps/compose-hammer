@@ -175,5 +175,5 @@ your feedback and encouragement _(positive reviews)_ are highly appreciated!
 This will motivate us to work harder and make the plugin better._
 
 **P.S.** Feel free to report any bugs,
-missing components or your feedback at general at `iliyan.germanov971@gmail.com`.
+missing components or your feedback at our [Compose Hammer Telegram chat](https://t.me/+U9Qn68cZxYIxNDA0).
 <!-- Plugin description end -->
