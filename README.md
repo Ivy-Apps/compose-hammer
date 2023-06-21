@@ -20,6 +20,7 @@ that supports **59+ Material3 components** and
   generates and inserts the code for you with all the imports necessary.
 - **Full customization code** for the M3 components, so you can more
   easily make them match your design requirements.
+- **Custom templates**: create custom code snippets and components.
 - **Relevant links** to the [M3 Spec](https://m3.material.io/components/buttons/specs) _(anatomy)_,
   [M3 Guidelines](https://m3.material.io/components/buttons/guidelines) _(usage)_, and
   the [Official Jetpack Compose docs](https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary.html)
@@ -37,7 +38,7 @@ Our goal is to make Android UI development with **Jetpack Compose - easy, fun an
 ### ⚡ QuickCode _(custom code snippets)_
 
 Create custom components and code templates that will be
-available in our new "⚡ QuickCode" alt/option + enter shortcut.
+available in our new **⚡ QuickCode alt/option + enter shortcut**.
 
 ### Tool window features _(Android Studio's right sidebar)_
 
