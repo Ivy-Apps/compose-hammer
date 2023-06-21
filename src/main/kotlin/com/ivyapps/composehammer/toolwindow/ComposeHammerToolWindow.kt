@@ -32,7 +32,12 @@ class ComposeHammerToolWindowFactory : ToolWindowFactory {
 
 class ComposeHammerToolWindow(private val toolWindow: ToolWindow) {
     private val project = toolWindow.project
+
+    // TODO: Fix deprecation: (must updated dependencies first)
+    //  https://github.com/JetBrains/intellij-platform-plugin-template/blob/main/src/main/kotlin/org/jetbrains/plugins/template/toolWindow/MyToolWindowFactory.kt
     private val contentFactory = ContentFactory.SERVICE.getInstance()
+
+
     private val m3service = project.service<MaterialComponentsService>()
 
     private var contentCache = mutableMapOf<String, Content>()
