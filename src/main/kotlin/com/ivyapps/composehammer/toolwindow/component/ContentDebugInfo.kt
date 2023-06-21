@@ -11,7 +11,7 @@ fun Panel.contentDebugInfo(
         code = service.content.filter { it.showInToolWindow }
             .joinToString(separator = "") { group ->
                 buildString {
-                    append("- ${group.title}\n")
+                    append("- **${group.title}**\n")
                     group.components.forEach { component ->
                         append("\t- [${component.name}](${component.specUrl})\n")
                     }
