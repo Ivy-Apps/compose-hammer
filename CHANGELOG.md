@@ -22,6 +22,7 @@
 - **Quick Action:** Moved the layouts from "⚡ Quick UI" to
   "⚡ Layouts"
 - Improved the "Tabs" material components.
+- Improve "⚡ Animations" templates.
 
 ### Removed
 
