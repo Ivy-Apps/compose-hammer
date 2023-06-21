@@ -4,11 +4,11 @@
 
 ## [Unreleased]
 
-## [0.0.2] Level-up!
+## [1.0.0] Level-up!
 
 ### Added
 
-- **⚡ Quick Code 0.0.1:** a feature supporting the addition
+- **⚡ Quick Code MVP:** a feature supporting the addition
   of **custom code snippets** that will appear in the new "⚡ Quick Code"
   alt/option + enter action!
 - **Quick Action:** Added "⚡ Layouts" section that contains
