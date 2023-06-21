@@ -4,7 +4,9 @@
 
 ## [Unreleased]
 
-## [1.0.0] Level-up!
+- Minor bugfixes and improvements.
+
+## [2023.6.21] - Level-up!
 
 ### Added
 
@@ -37,7 +39,7 @@
   where imports were added above "package"
   caused by `@file:OptIn()` 🐛
 
-## [0.0.1] Initial release
+## [0.0.1] - Initial release
 
 ### Added
 
