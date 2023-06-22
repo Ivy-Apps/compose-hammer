@@ -1,7 +1,7 @@
 package com.ivyapps.composehammer.action
 
+import com.intellij.codeInsight.intention.HighPriorityAction
 import com.intellij.codeInsight.intention.IntentionAction
-import com.intellij.codeInsight.intention.PriorityAction
 import com.intellij.openapi.components.service
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
@@ -15,17 +15,13 @@ import com.ivyapps.composehammer.domain.quickcode.service.QuickCodeService
 import javax.swing.Icon
 
 
-class QuickCodeIntentionAction : IntentionAction, PriorityAction, Iconable {
+class QuickCodeIntentionAction : IntentionAction, HighPriorityAction, Iconable {
     override fun getText() = "Quick Code"
     override fun getFamilyName() = "Quick Code"
     override fun getIcon(flags: Int): Icon = IconLoader.getIcon(
         "/quick_code.svg",
         this@QuickCodeIntentionAction::class.java.classLoader
     )
-
-    override fun getPriority(): PriorityAction.Priority {
-        return PriorityAction.Priority.TOP
-    }
 
     override fun isAvailable(project: Project, editor: Editor, file: PsiFile): Boolean {
         val quickCodeService = project.service<QuickCodeService>()
