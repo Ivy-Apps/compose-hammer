@@ -7,11 +7,6 @@
             email="iliyan.germanov971@gmail.com">
         ivyapps
     </vendor>
-    <product-descriptor
-            code="PCOMPOSEHAMMER"
-            release-date="20230621"
-            release-version="20236"
-            optional="false"/>
 
     <depends>com.intellij.modules.platform</depends>
 
