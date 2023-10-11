@@ -1,17 +1,40 @@
-# Dependabot configuration:
-# https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/configuration-options-for-dependency-updates
+# Configuration options:
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#about-the-dependabotyml-file
 
 version: 2
+
 updates:
-  # Maintain dependencies for Gradle dependencies
   - package-ecosystem: "gradle"
     directory: "/"
-    target-branch: "next"
     schedule:
-      interval: "daily"
-  # Maintain dependencies for GitHub Actions
+      interval: "weekly"
+    registries:
+      - google
+      - jitpack
+      - maven-central
+    open-pull-requests-limit: 10
+    groups:
+      ivy-wallet:
+        patterns:
+          - "*"
+
   - package-ecosystem: "github-actions"
     directory: "/"
-    target-branch: "next"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+
+registries:
+  google:
+    type: maven-repository
+    url: "https://maven.google.com/"
+  jitpack:
+    type: maven-repository
+    url: "https://jitpack.io/"
+  maven-central:
+    type: maven-repository
+    url: "https://repo.maven.apache.org/maven2"
