@@ -1,8 +1,8 @@
 # Compose Hammer
 
 ![Build](https://github.com/Ivy-Apps/compose-hammer/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
+[![Version](https://img.shields.io/jetbrains/plugin/v/21912-compose-hammer.svg)](https://plugins.jetbrains.com/plugin/21912-compose-hammer)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/21912-compose-hammer.svg)](https://plugins.jetbrains.com/plugin/21912-compose-hammer)
 
 <!-- Plugin description -->
 Compose Hammer is **a premium Android Studio Jetpack Compose Material3 UI builder plugin**
