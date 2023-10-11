@@ -42,13 +42,13 @@ class DescriptionFormatterTest : BasePlatformTestCase() {
 
     fun testOneWordAboveMaxChars() {
         // given
-        val input = "IliyanGermanov"
+        val input = "JohnDoe"
 
         // when
         val output = input.formatText(maxLineLength = 5)
 
         // then
-        assertEquals("IliyanGermanov", output)
+        assertEquals("JohnDoe", output)
     }
 
     fun testFormatsBullets() {

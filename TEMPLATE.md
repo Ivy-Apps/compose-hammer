@@ -1,6 +1,6 @@
 # Compose Hammer
 
-![Build](https://github.com/ILIYANGERMANOV/compose-material3-helper-plugin/workflows/Build/badge.svg)
+![Build](https://github.com/Ivy-Apps/compose-hammer/workflows/Build/badge.svg)
 [![Version](https://img.shields.io/jetbrains/plugin/v/21912-compose-hammer.svg)](https://plugins.jetbrains.com/plugin/21912-compose-hammer)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/21912-compose-hammer.svg)](https://plugins.jetbrains.com/plugin/21912-compose-hammer)
 
@@ -33,7 +33,7 @@ To keep everything working, do not remove `<!-- ... -->` sections.
   
 - Manually:
 
-  Download the [latest release](https://github.com/ILIYANGERMANOV/compose-material3-helper-plugin/releases/latest) and install it manually using
+  Download the [latest release](https://github.com/Ivy-Apps/compose-hammer/releases/latest) and install it manually using
   <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
 
 
