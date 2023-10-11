@@ -6,6 +6,12 @@
 
 - Minor bugfixes and improvements.
 
+## [2023.10.11] - Open-source 🎉
+
+### Changes
+
+Compose Hammer is now free and open-source! 🎉
+
 ## [2023.6.21] - Level-up!
 
 ### Added
