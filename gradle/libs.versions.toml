@@ -4,12 +4,12 @@ annotations = "24.1.0"
 
 # plugins
 dokka = "1.9.10"
-kotlin = "1.9.20"
+kotlin = "1.9.21"
 changelog = "2.2.0"
-gradleIntelliJPlugin = "1.16.0"
+gradleIntelliJPlugin = "1.16.1"
 qodana = "0.1.13"
-kover = "0.7.4"
-kotlinxSerialization = "1.6.1"
+kover = "0.7.5"
+kotlinxSerialization = "1.6.2"
 
 [libraries]
 annotations = { group = "org.jetbrains", name = "annotations", version.ref = "annotations" }
