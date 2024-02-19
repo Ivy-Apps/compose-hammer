@@ -8,8 +8,8 @@ kotlin = "1.9.22"
 changelog = "2.2.0"
 gradleIntelliJPlugin = "1.17.1"
 qodana = "0.1.13"
-kover = "0.7.5"
-kotlinxSerialization = "1.6.2"
+kover = "0.7.6"
+kotlinxSerialization = "1.6.3"
 
 [libraries]
 annotations = { group = "org.jetbrains", name = "annotations", version.ref = "annotations" }
