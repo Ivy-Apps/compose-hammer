@@ -1,9 +1,9 @@
 package com.ivyapps.composehammer.toolwindow.component
 
 import com.intellij.ui.components.JBTextArea
+import com.intellij.ui.dsl.builder.AlignX
 import com.intellij.ui.dsl.builder.Panel
 import com.intellij.ui.dsl.builder.Row
-import com.intellij.ui.dsl.gridLayout.HorizontalAlign
 import com.ivyapps.composehammer.copyToClipboard
 import java.awt.Dimension
 import javax.swing.JLabel
@@ -41,7 +41,7 @@ fun Panel.codeArea(
             updateUI()
         }.also {
             inputField = it.component
-        }.horizontalAlign(HorizontalAlign.FILL) // TODO: Fix this FILL deprecation
+        }.align(AlignX.FILL) // TODO: Fix this FILL deprecation
             .comment(tip)
     }
     if (hasCopy) {
