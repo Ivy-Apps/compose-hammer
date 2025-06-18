@@ -26,6 +26,7 @@ repositories {
 dependencies {
 //    implementation(libs.annotations)
     implementation(libs.kotlinx.serializationJson)
+    testImplementation(kotlin("test"))
 }
 
 // Set the JVM language level used to build the project. Use Java 11 for 2020.3+, and Java 17 for 2022.2+.
@@ -56,16 +57,6 @@ qodana {
     saveReport = true
     showReport = environment("QODANA_SHOW_REPORT").map { it.toBoolean() }.getOrElse(false)
 }
-
-// Configure Gradle Kover Plugin - read more: https://github.com/Kotlin/kotlinx-kover#configuration
-koverReport {
-    defaults {
-        xml {
-            onCheck = true
-        }
-    }
-}
-
 
 tasks {
     wrapper {
